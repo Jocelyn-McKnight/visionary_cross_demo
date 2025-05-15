@@ -33,40 +33,56 @@
     z-index: 2;
 }
 
-/* Hide the actual checkbox */
+/* Hides the checkbox */
 .menu-toggle {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 
-/* Toggle menu on checkbox check */
+/* Makes the nav appear when checkbox is checked */
 .menu-toggle:checked + .hamburger-icon + .hamburger-menu {
   display: block;
 }
 
-/* Chapters dropdown using <details> */
-.chapter-menu {
+/* Submenu styling */
+.submenu-wrapper {
   margin-top: 0.5rem;
+}
+
+.submenu-title {
+  display: block;
+  color: white;
+  background-color: black;
+  padding: 0.5rem 1rem;
   border: 1px solid white;
   border-radius: 5px;
-  background: black;
-  color: white;
-  padding: 0.5rem;
-}
-
-.chapter-menu summary {
   cursor: pointer;
   font-size: 1rem;
-  font-weight: bold;
-  padding: 0.5rem;
 }
 
-.chapter-menu a {
-  display: block;
+.submenu {
+  display: none;
   margin-top: 0.3rem;
+}
+
+.submenu.show-submenu {
+  display: block;
+}
+
+.submenu a {
+  display: block;
   margin-left: 1rem;
-  font-size: 0.95rem;
+  background-color: black;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin-top: 0.3rem;
+  font-size: 1rem;
+}
+
+.submenu a:hover {
+  background-color: white;
+  color: black;
 }
 
 body {
