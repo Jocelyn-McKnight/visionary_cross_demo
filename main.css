@@ -35,37 +35,32 @@
     z-index: 2;
 }
 
-/* Hide the checkbox */
-#check {
+/* Completely hide checkbox */
+.menu-toggle {
   display: none;
 }
 
-/* Nav container lives inside .header */
-.mobile-nav {
-  position: absolute; /* So it sits on top of header image */
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
+/* Make header overlay clickable */
+.header::before {
+  pointer-events: none;
 }
 
-/* Hamburger icon */
-.checkbtn {
+/* Hamburger icon style */
+.hamburger-icon {
   font-size: 30px;
   color: white;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.6);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   border-radius: 5px;
   position: absolute;
   top: 1rem;
   left: 1rem;
   z-index: 1001;
-  font-family: 'Times New Roman', serif;
 }
 
-/* Dropdown menu (hidden by default) */
-.nav-mobile {
+/* Dropdown menu styling */
+.hamburger-menu {
   display: none;
   position: absolute;
   top: 3.5rem;
@@ -73,70 +68,32 @@
   background-color: black;
   padding: 1rem;
   border-radius: 8px;
-  width: 250px;
   z-index: 1000;
-  font-family: 'Times New Roman', serif;
-  transition: all 0.3s ease;
+  width: 250px;
 }
 
 /* Show menu when checkbox is checked */
-#check:checked + .checkbtn + .nav-mobile {
+.menu-toggle:checked + .hamburger-icon + .hamburger-menu {
   display: block;
 }
 
-/* Menu links */
-.nav-mobile a {
+/* Link styling */
+.hamburger-menu a {
+  display: block;
   color: white;
   text-decoration: none;
-  display: block;
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
-  background-color: black;
   border: 1px solid white;
   border-radius: 5px;
-  font-size: 1rem;
+  font-family: 'Times New Roman', serif;
+  background-color: black;
 }
 
-.nav-mobile a:hover {
+.hamburger-menu a:hover {
   background-color: white;
   color: black;
 }
-
-/* Submenu toggle */
-.submenu-wrapper {
-  margin-top: 0.5rem;
-}
-
-.submenu-toggle {
-  background-color: black;
-  color: white;
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-.submenu {
-  display: none;
-  margin-top: 0.3rem;
-}
-
-.submenu-toggle.open + .submenu {
-  display: block;
-}
-
-.submenu a {
-  margin-left: 1rem;
-}
-
-/* Optional: Hide menu and checkbox on wide screens */
-@media (min-width: 768px) {
-  .checkbtn,
-  #check,
-  .nav-mobile {
-    display: none;
-  }
 
 body {
     font-family: 'Times New Roman', serif;
