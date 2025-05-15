@@ -95,6 +95,53 @@
   color: black;
 }
 
+/* Hide the submenu checkbox */
+.submenu-toggle {
+  display: none;
+}
+
+/* Chapters ▾ label that toggles the submenu */
+.submenu-label {
+  display: block;
+  color: white;
+  background-color: black;
+  padding: 0.5rem 1rem;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-family: 'Times New Roman', serif;
+  cursor: pointer;
+  margin-bottom: 0.3rem;
+}
+
+/* The submenu itself is hidden by default */
+.submenu {
+  display: none;
+  margin-left: 1rem;
+}
+
+/* Show submenu when submenu checkbox is checked */
+.submenu-toggle:checked + .submenu-label + .submenu {
+  display: block;
+}
+
+/* Submenu link styling */
+.submenu a {
+  display: block;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.3rem;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-family: 'Times New Roman', serif;
+  text-decoration: none;
+}
+
+.submenu a:hover {
+  background-color: white;
+  color: black;
+}
+
 body {
     font-family: 'Times New Roman', serif;
     border: 5px solid black; /* Adds a black border around the whole webpage. Makes it look very nice in the mobile form */
