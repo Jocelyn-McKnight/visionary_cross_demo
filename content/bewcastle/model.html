@@ -6,8 +6,6 @@
     <title>Model</title>
     <link rel="stylesheet" href="../../main.css">
     <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
-          /* This page is was a test to show that it is possible to have an interactable 3D model on the site */
-          /* The play model displayed in this section has been decimated to a smaller version using meshlab */
 
      <!-- External CSS and 3DHOP Stylesheet -->
     <link type="text/css" rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css"/>
@@ -24,22 +22,37 @@
     <script type="text/javascript" src="../../3dhop/js/trackball_pantilt.js"></script>
     <script type="text/javascript" src="../../3dhop/js/init.js"></script>
 </head>
-<body>
-    
-   <div id="header"></div>
-<script>
-    fetch('../../header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading header:', error));
-</script>
+<body> 
+<header class="header">
+  <!-- Hamburger menu toggle -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-    <div class="page-navigation">
-  <a href="intro.html" class="page-nav-button">Previous</a>
-  <a href="panels.html" class="page-nav-button">Next</a>
+  <!-- Hidden dropdown menu -->
+  <div class="hamburger-menu">
+    <a href="../frontmatter/tp.html">Title Page</a>
+    <a href="../ruthwell/intro.html">Previous (Ruthwell)</a>
+    <a href="../brussels/intro.html">Next (Brussels)</a>
+
+<div class="submenu-wrapper">
+  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
+  <label for="submenu-toggle" class="submenu-label">Chapters</label>
+  <div class="submenu">
+    <a href="intro.html">Introduction</a>
+    <a href="ch1.html">Chapter 1</a>
+    <a href="ch2.html">Chapter 2</a>
+    <a href="model.html">Model</a>
+  </div>
 </div>
+
+    <a href="../backmatter/table.html">Table of Contents</a>
+  </div>
+    
+  <a href="../backmatter/table.html">
+    <img src="assests/img/head.jpg" alt="Project Image" title="The Bewcastle Cross">
+    <p class="header-text">Bewcastle</p>
+  </a>
+</header>
     
   
 <div id="3dhop" class="tdhop">
@@ -98,15 +111,14 @@
             </script>
 </div>
 
-    <div id="footer"></div>
-<script>
-    fetch('../../footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
-</script>
+<div class="footer">
+    <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
+    <nav>
+        <a href="../frontmatter/history.html">Us</a> |
+        <a href="../backmattercontact.html">Contact</a> |
+        <a href="privacy.html">Privacy Policy</a>
+    </nav>
+</div>
 
 </body>
 </html>
