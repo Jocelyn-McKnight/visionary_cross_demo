@@ -9,37 +9,28 @@
 </head>
     
 <body>
-<header class="header">
-  <!-- Logo / Title -->
-  <a href="../backmatter/table.html" class="header-link">
-    <img src="assests/img/head.jpg" alt="Project Image" title="The Ruthwell Cross">
-    <p class="header-text">Ruthwell</p>
-  </a>
+<!-- Hamburger Menu Toggle -->
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
+<label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-  <!-- Hamburger Toggle -->
-  <input type="checkbox" id="menu-toggle" class="menu-toggle">
-  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
+<!-- Hamburger Navigation Menu -->
+<nav class="hamburger-menu">
+  <a href="/index.html">Title Page</a>
+  <a href="/bewcastle.html">Previous Cross</a>
+  <a href="/brussels.html">Next Cross</a>
 
-  <!-- Circular Menu -->
-  <nav class="hamburger-menu">
-    <ul>
-      <li><a href="../frontmatter/tp.html">Title Page</a></li>
-      <li><a href="../bewcastle.html">Previous Cross</a></li>
-      <li><a href="../brussels.html">Next Cross</a></li>
-      <li class="has-submenu">
-        <span>Chapters ▾</span>
-        <ul class="submenu">
-          <li><a href="/ch1.html">Chapter 1</a></li>
-          <li><a href="/ch2.html">Chapter 2</a></li>
-          <li><a href="/ch3.html">Chapter 3</a></li>
-          <li><a href="/model.html">Chapter 3</a></li>
-          <!-- Add more as needed -->
-        </ul>
-      </li>
-      <li><a href="/backmatter.html">Backmatter</a></li>
-    </ul>
-  </nav>
-</header>
+  <!-- Chapters Submenu -->
+  <details class="chapter-menu">
+    <summary>Chapters</summary>
+    <a href="/chapters/ch1.html">Chapter 1</a>
+    <a href="/chapters/ch2.html">Chapter 2</a>
+    <a href="/chapters/ch3.html">Chapter 3</a>
+    <!-- Add more chapters as needed -->
+  </details>
+
+  <a href="/backmatter.html">Backmatter</a>
+</nav>
+
     
     <!-- Main Container for Left and Right Columns -->
     <div class="container"> 
