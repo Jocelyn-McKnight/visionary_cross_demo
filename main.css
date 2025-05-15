@@ -35,67 +35,64 @@
     z-index: 2;
 }
 
-/* Hide the checkbox itself */
+/* Hide the checkbox */
 #check {
   display: none;
 }
 
-/* Main nav bar area */
+/* Container for nav */
 .mobile-nav {
-  position: relative;
-  padding: 1.5rem 2rem;
-  background-color: #222831;
-  color: #fff;
+  position: absolute; /* So it's on top of the header */
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1000;
 }
 
-/* Hamburger icon */
+/* Hamburger icon styling */
 .checkbtn {
-  font-size: 1.5rem;
-  color: white;
+  font-size: 30px;
+  color: white; /* Makes the bars white and visible */
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6); /* Optional: dark background */
   padding: 0.5rem 1rem;
   border-radius: 5px;
   position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
+  top: 1rem;
+  left: 1rem;
   z-index: 1001;
+  font-family: 'Times New Roman', serif;
 }
 
-/* Hidden by default */
+/* Dropdown menu hidden by default */
 .nav-mobile {
   display: none;
-}
-
-/* Show when checkbox is checked */
-#check:checked ~ .nav-mobile {
-  display: block;
-}
-
-/* Dropdown menu */
-.nav-mobile {
   position: absolute;
   top: 3.5rem;
-  left: 0;
-  background: black;
-  z-index: 1000;
-  width: 250px;
+  left: 1rem;
+  background-color: black;
   padding: 1rem;
   border-radius: 8px;
+  width: 250px;
+  z-index: 1000;
   font-family: 'Times New Roman', serif;
+}
+
+/* Show the menu when checkbox is checked */
+#check:checked ~ .nav-mobile {
+  display: block;
 }
 
 /* Menu links */
 .nav-mobile a {
   color: white;
   text-decoration: none;
-  padding: 0.5rem 1rem;
   display: block;
-  border: 1px solid white;
+  padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
-  border-radius: 5px;
   background-color: black;
+  border: 1px solid white;
+  border-radius: 5px;
   font-size: 1rem;
 }
 
@@ -130,9 +127,7 @@
 
 .submenu a {
   margin-left: 1rem;
-  margin-top: 0.3rem;
 }
-
 
 body {
     font-family: 'Times New Roman', serif;
