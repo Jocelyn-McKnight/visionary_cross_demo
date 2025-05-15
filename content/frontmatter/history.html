@@ -1,53 +1,54 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History</title>
+    <title>Ruthwell</title>
     <link rel="stylesheet" href="../../main.css">
     <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
 </head>
-<body>
     
-   <div id="header"></div>
-<script>
-    fetch('../../header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading header:', error));
-</script>
+<body>
+<header class="header">
+  <!-- Hamburger menu toggle -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-    <div class="page-navigation">
-  <a href="preface.html" class="page-nav-button">Previous</a>
-  <a href="../ruthwell/intro.html" class="page-nav-button">Next</a>
+  <!-- Hidden dropdown menu -->
+  <div class="hamburger-menu">
+    <a href="../frontmatter/tp.html">Title Page</a>
+    <a href="../Brussels/intro">Previous (Brussels)</a>
+    <a href="../Ruthwell/intro.html">Next (Ruthwell)</a>
+
+<div class="submenu-wrapper">
+  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
+  <label for="submenu-toggle" class="submenu-label">Chapters</label>
+  <div class="submenu">
+    <a href="intro.html">Preface</a>
+    <a href="ch1.html">History</a>
+  </div>
 </div>
+
+    <a href="../backmatter/table.html">Table of Contents</a>
+  </div>
+    
+  <a href="../backmatter/table.html">
+    <img src="../../img/head_outside.jpg" alt="Project Image" title="The Visionary Cross Project">
+    <p class="header-text">Visionary Cross Project</p>
+  </a>
+</header>
     
     <!-- Main Container for Left and Right Columns -->
     <div class="container">
-        <!-- Left Column -->
         <div class="left">       
-            <!--https://www.flickr.com/photos/71629876@N08/6980069000/in/photostream/-->
-            <img src="../../img/ruth_team.jpg" alt="Project Image">
+            <!--https://www.flickr.com/photos/71629876@N08/7096195421/-->
+            <img src="../../img/book.jpg" alt="Project Image">
         </div>
         <p></p>
 
-        <!-- Right Column -->
+        <!-- Right Column always information -->
         <div class="right">
-            <!-- Navigation Bar -->
-            <nav class="navbar">
-                <button onclick="location.href='../frontmatter/preface.html'">Frontmatter</button>
-                <button onclick="location.href='../ruthwell/intro.html'">Ruthwell</button>
-                <button onclick="location.href='../bewcastle/intro.html'">Bewcastle</button>
-                <button onclick="location.href='../brussels/intro.html'">Brussels</button>
-                 <button onclick="location.href='../about/intro.html'">About</button>
-            </nav>
-            
-            <!-- Project Information Section -->
             <div class="info">
-                /* Information taken from the VCS main website https://vcg.isti.cnr.it/activities/visionarycross/ */
                 <h1>History of the Project</h1>
 <h2>2012: 3D acquisition of the Ruthwell cross</h2>
 <p> The Ruthwell Cross is a 17 foot high stone cross erected in the eighth century near a former military site (later probably a monastery) in Dumfriesshire. 
@@ -78,16 +79,14 @@ Prof. Roberto Rosselli Del Turco, University of Torino</p>
         </div>
     </div>
 
-<div id="footer"></div>
-<script>
-    fetch('../../footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
-</script>
-
+<div class="footer">
+    <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
+    <nav>
+        <a href="../frontmatter/history.html">Us</a> |
+        <a href="../backmattercontact.html">Contact</a> |
+        <a href="privacy.html">Privacy Policy</a>
+    </nav>
+</div>
+    
 </body>
 </html>
-
