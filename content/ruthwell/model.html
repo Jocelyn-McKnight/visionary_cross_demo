@@ -24,17 +24,37 @@
     <script type="text/javascript" src="../../3dhop/js/trackball_pantilt.js"></script>
     <script type="text/javascript" src="../../3dhop/js/init.js"></script>
 </head>
-<body>
+<body> 
+<header class="header">
+  <!-- Hamburger menu toggle -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
+
+  <!-- Hidden dropdown menu -->
+  <div class="hamburger-menu">
+    <a href="../frontmatter/tp.html">Title Page</a>
+    <a href="../frontmatter/preface.html">Previous (Preface)</a>
+    <a href="../bewcastle/intro.html">Next (Bewcastle)</a>
+
+<div class="submenu-wrapper">
+  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
+  <label for="submenu-toggle" class="submenu-label">Chapters</label>
+  <div class="submenu">
+    <a href="ch1.html">Chapter 1</a>
+    <a href="ch2.html">Chapter 2</a>
+    <a href="ch3.html">Chapter 3</a>
+    <a href="model.html">Model</a>
+  </div>
+</div>
+
+    <a href="../backmatter/table.html">Table of Contents</a>
+  </div>
     
-   <div id="header"></div>
-<script>
-    fetch('../../header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading header:', error));
-</script>
+  <a href="../backmatter/table.html">
+    <img src="assests/img/head.jpg" alt="Project Image" title="The Ruthwell Cross">
+    <p class="header-text">Ruthwell</p>
+  </a>
+</header>
 
     <div class="page-navigation">
   <a href="intro.html" class="page-nav-button">Previous</a>
@@ -98,15 +118,14 @@
             </script>
 </div>
 
-    <div id="footer"></div>
-<script>
-    fetch('../../footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
-</script>
+<div class="footer">
+    <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
+    <nav>
+        <a href="../frontmatter/history.html">Us</a> |
+        <a href="../backmattercontact.html">Contact</a> |
+        <a href="privacy.html">Privacy Policy</a>
+    </nav>
+</div>
 
 </body>
 </html>
