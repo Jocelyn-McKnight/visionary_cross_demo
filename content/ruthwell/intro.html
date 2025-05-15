@@ -9,29 +9,23 @@
 </head>
     
 <body>
-<nav class="mobile-nav">
-  <input type="checkbox" id="check">
-  <label for="check" class="checkbtn">&#9776;</label>
+<header class="header">
 
-  <div class="nav-mobile">
+  <!-- Hamburger Menu -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
+
+  <!-- Dropdown menu -->
+  <div class="hamburger-menu">
     <a href="/index.html">Title Page</a>
     <a href="/bewcastle.html">Previous Cross</a>
     <a href="/brussels.html">Next Cross</a>
-
-    <div class="submenu-wrapper">
-      <div class="submenu-toggle" onclick="this.classList.toggle('open')">Chapters ▾</div>
-      <div class="submenu">
-        <a href="/chapters/ch1.html">Chapter 1</a>
-        <a href="/chapters/ch2.html">Chapter 2</a>
-        <a href="/chapters/ch3.html">Chapter 3</a>
-      </div>
-    </div>
-
+    <a href="/chapters/ch1.html">Chapter 1</a>
+    <a href="/chapters/ch2.html">Chapter 2</a>
+    <a href="/chapters/ch3.html">Chapter 3</a>
     <a href="/backmatter.html">Backmatter</a>
   </div>
-</nav>
     
-<header class="header">
   <a href="../backmatter/table.html">
     <img src="assests/img/head.jpg" alt="Project Image" title="The Ruthwell Cross">
     <p class="header-text">Ruthwell</p>
