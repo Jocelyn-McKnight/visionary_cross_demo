@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More</title>
+    <link rel="stylesheet" href="../../main.css">
+    <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
+</head>
+<body>
+    
+   <div id="header"></div>
+<script>
+    fetch('../../header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading header:', error));
+</script>
+
+    <div class="page-navigation">
+  <a href="translation.html" class="page-nav-button">Previous</a>
+  <a href="../bewcastle/intro.html" class="page-nav-button">Next</a>
+</div>
+    
+    <!-- Main Container for Left and Right Columns -->
+    <div class="container"> 
+    <div class="left">
+        <a href="https://vcg.isti.cnr.it/activities/visionarycross/crosses/ruthwell.html" target="_blank" class="image-container">
+          <img src="../../img/raven_panel.png" alt="Project Image" class="hover-image">
+        <span class="hover-text">Visit 3D model</span>
+    </a>
+    </div>
+
+        <!-- Right Section for Navigation and Project Info -->
+        <div class="right">
+            <nav class="navbar">
+                 <button onclick="location.href='../frontmatter/preface.html'">Frontmatter</button>
+                <button onclick="location.href='../ruthwell/intro.html'">Ruthwell</button>
+                <button onclick="location.href='../bewcastle/intro.html'">Bewcastle</button>
+                <button onclick="location.href='../brussels/intro.html'">Brussels</button>
+                 <button onclick="location.href='../about/intro.html'">About</button>
+            </nav>
+            <div class="info">
+                <h1>Ruthwell Cross</h1>
+              <h3>More Information</h3>
+                <p>This is a beta version of 
+                    <a href="https://vcg.isti.cnr.it/activities/visionarycross/crosses/ruthwell.html" target="_blank">The Ruthwell Cross</a> edition published by the [ Visionary Cross project] by means of the [3DHOP viewer]. This edition is intended for use by students, teachers, and members of the public who are interested in exploring the cross and learning more about it. The final version will contain tools required for more advanced applications. Should you encounter any bugs, glitches, lack of functionality, or other problems on the website, please let us know immediately by writing an email to visionarycrossproject@gmail.com. Your help in this regard is greatly appreciated.</p>
+                
+                <p><strong>CREDITS</strong></p>
+                <p>Project direction<br>
+                Prof. Daniel Paul O'Donnell, University of Lethbridge<br>
+                Prof. Roberto Rosselli Del Turco, University of Torino</p>
+                
+                <p><strong>ISTI research support</strong><br>
+                Marco Callieri, CNR/ISTI</p>
+
+                <p><strong>3DHOP customization</strong><br>
+                Jurgen Memaj, University of Pisa</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+<script>
+    fetch('../../footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+</script>
+
+</body>
+</html>
+
+

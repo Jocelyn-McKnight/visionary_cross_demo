@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <link rel="stylesheet" href="../../main.css">
+    <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
+</head>
+<body>
+    
+   <div id="header"></div>
+<script>
+    fetch('../../header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading header:', error));
+</script>
+
+    <div class="page-navigation">
+  <a href="preface.html" class="page-nav-button">Previous</a>
+  <a href="../ruthwell/intro.html" class="page-nav-button">Next</a>
+</div>
+    
+    <!-- Main Container for Left and Right Columns -->
+    <div class="container">
+        <!-- Left Column -->
+        <div class="left">       
+            <!--https://www.flickr.com/photos/71629876@N08/6980069000/in/photostream/-->
+            <img src="../../img/ruth_team.jpg" alt="Project Image">
+        </div>
+        <p></p>
+
+        <!-- Right Column -->
+        <div class="right">
+            <!-- Navigation Bar -->
+            <nav class="navbar">
+                <button onclick="location.href='../frontmatter/preface.html'">Frontmatter</button>
+                <button onclick="location.href='../ruthwell/intro.html'">Ruthwell</button>
+                <button onclick="location.href='../bewcastle/intro.html'">Bewcastle</button>
+                <button onclick="location.href='../brussels/intro.html'">Brussels</button>
+                 <button onclick="location.href='../about/intro.html'">About</button>
+            </nav>
+            
+            <!-- Project Information Section -->
+            <div class="info">
+                /* Information taken from the VCS main website https://vcg.isti.cnr.it/activities/visionarycross/ */
+                <h1>History of the Project</h1>
+<h2>2012: 3D acquisition of the Ruthwell cross</h2>
+<p> The Ruthwell Cross is a 17 foot high stone cross erected in the eighth century near a former military site (later probably a monastery) in Dumfriesshire. 
+The cross was pulled down and broken in the seventeenth century and partially reconstructed in the nineteenth. It is now located in a small apse on the north side of the Ruthwell church. 
+The cross is carved with scriptural scenes surrounded by Latin inscriptions on its broad sides, there and with continuous vinescrolls surrounded by an Old English runic poem on its narrow sides. 
+The poem may be the oldest known record of Anglo-Saxon vernacular poetry..</p>
+<p> In 2012, a 3D scanning campaign took place in order to obtain a high quality 3D representation of the cross </p>
+<p> The whole data processing pipeline was completed using <a href="http://www.meshlab.net/" target="_blank"><b>MeshLab</b></a>, the open source mesh processing tool created by Visual Computing Lab.</p>
+
+<h2>2013-2015: Building a digital edition of the Ruthwell cross</h2>
+<p>The creation of a high quality 3D representation of the cross was only the first step.</p>
+<p>The members of the working groups took advantage of the newly available HTML5 framework to build a web-based visualization that could integrate 3D visualization and textual information [3]. </p>
+<p>The main result of the effort has been the release of a first version of a <a href="http://vcg.isti.cnr.it/cross/" target="_blank"><b>digital edition</b></a> of the cross and the experimentation 
+on several editions regarding the runes carved in some panels of the cross [1][2].
+</p>
+
+<h2>2017: 3D acquisition of the Bewcastle cross</h2>
+<p> The Bewcastle Cross is an eighth-century standing stone cross also found on a former Roman military site, medications in this case on the terrace just inside the gate. 
+Approximately the same size as Ruthwell, purchase the severely weathered Bewcastle Cross still stands in its original location. It has the remains of a sundial on its south side and may have 
+been painted and decorated with other metalwork or glass attachments. The west face is carved with three figural panels, of which two also appear on Ruthwell. </p>
+<p> ISTI-CNR acquired the entire cross in July 2017.</p>
+
+<p><strong>CREDITS</strong></p>
+<p>Project direction<br>
+Prof. Daniel Paul O'Donnell, University of Lethbridge<br>
+Prof. Roberto Rosselli Del Turco, University of Torino</p>
+            </div>
+        </div>
+    </div>
+
+<div id="footer"></div>
+<script>
+    fetch('../../footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
+</script>
+
+</body>
+</html>
+
