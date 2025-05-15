@@ -35,57 +35,43 @@
     z-index: 2;
 }
 
-/* Hides the checkbox */
-.menu-toggle {
-  display: none;
+nav {
+ padding: 1.5rem 2rem;
+ background-color: #222831;
+ color: #fff;
 }
 
-/* Makes the nav appear when checkbox is checked */
-.menu-toggle:checked + .hamburger-icon + .hamburger-menu {
-  display: block;
+.checkbtn {
+ font-size: 1.5rem;
+ color: white;
+ cursor: pointer;
 }
 
-/* Submenu styling */
-.submenu-wrapper {
-  margin-top: 0.5rem;
+.nav-mobile {
+ display: none;
 }
 
-.submenu-title {
-  display: block;
-  color: white;
-  background-color: black;
-  padding: 0.5rem 1rem;
-  border: 1px solid white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
+#check:checked ~ .nav-mobile {
+ display: block;
 }
 
-.submenu {
-  display: none;
-  margin-top: 0.3rem;
+.nav-mobile {
+ position: absolute;
+ top: 4.5rem;
+ left: 0;
+ background: #222831;
+ z-index: 1;
+ width: 200px;
+}
+.nav-mobile a {
+ color: #fff;
+ padding: 1rem 1.5rem;
+ display: block;
 }
 
-.submenu.show-submenu {
-  display: block;
-}
-
-.submenu a {
-  display: block;
-  margin-left: 1rem;
-  background-color: black;
-  color: white;
-  padding: 0.5rem 1rem;
-  border: 1px solid white;
-  border-radius: 5px;
-  margin-top: 0.3rem;
-  font-size: 1rem;
-}
-
-.submenu a:hover {
-  background-color: white;
-  color: black;
-}
+<div class="nav-mobile w3-animate-right">
+ <!-- Menu items -->
+</div>
 
 body {
     font-family: 'Times New Roman', serif;
@@ -307,4 +293,24 @@ h1 {
         white-space: nowrap; /* Allow text wrapping */
         padding: 0 10px; /* Add padding to prevent edge overflow */
     }
+
+@media only screen and (max-width: 992px) {
+ .checkbtn {
+ display: block;
+ font-size: 5rem;
+ position: absolute;
+ top: 30px;
+ left: 40px;
+ }
+    
+.nav-mobile {
+ top: 160px;
+ width: 100%;
+ }
+    
+.nav-mobile a {
+ font-size: 2rem;
+ padding: 2rem 3rem;
+ }
+    
 }
