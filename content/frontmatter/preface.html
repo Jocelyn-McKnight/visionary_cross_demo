@@ -3,49 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preface</title>
+    <title>Ruthwell</title>
     <link rel="stylesheet" href="../../main.css">
-    <link rel="icon" type="image/x-icon" href="../../img/cross.ico"> <!-- icon was taken from free icon website and should be changed to VCS logo later. (Please let me design it in Canva) -->
+    <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
 </head>
+    
 <body>
-    <!-- JavaScript that pulls the header.html from the root of the repository -->
-   <div id="header"></div>
-<script>
-    fetch('../../header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading header:', error));
-</script>
+<header class="header">
+  <!-- Hamburger menu toggle -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-<!-- These can never be a sharing page like the reader and the footer because they are different for every page -->
-<div class="page-navigation">
-  <a href="../../index.html" class="page-nav-button">Previous</a>
-  <a href="history.html" class="page-nav-button">Next</a>
+  <!-- Hidden dropdown menu -->
+  <div class="hamburger-menu">
+    <a href="../frontmatter/tp.html">Title Page</a>
+    <a href="../Brussels/intro">Previous (Brussels)</a>
+    <a href="../Ruthwell/intro.html">Next (Ruthwell)</a>
+
+<div class="submenu-wrapper">
+  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
+  <label for="submenu-toggle" class="submenu-label">Chapters</label>
+  <div class="submenu">
+    <a href="intro.html">Preface</a>
+    <a href="ch1.html">History</a>
+  </div>
 </div>
+
+    <a href="../backmatter/table.html">Table of Contents</a>
+  </div>
+    
+  <a href="../backmatter/table.html">
+    <img src="../../img/head_outside.jpg" alt="Project Image" title="The Visionary Cross Project">
+    <p class="header-text">Visionary Cross Project</p>
+  </a>
+</header>
     
     <!-- Main Container for Left and Right Columns -->
     <div class="container">
-        <!-- Left Column always an image of some sort -->
         <div class="left">       
             <!--https://www.flickr.com/photos/71629876@N08/7096195421/-->
-            <img src="../../img/d_and_r.jpg" alt="Project Image">
+            <img src="../../img/book.jpg" alt="Project Image">
         </div>
         <p></p>
 
         <!-- Right Column always information -->
         <div class="right">
-            <!-- Navigation Bar that could be communal like the header and footer. fix later -->
-            <nav class="navbar">
-                <button onclick="location.href='../frontmatter/preface.html'">Frontmatter</button>
-                <button onclick="location.href='../ruthwell/intro.html'">Ruthwell</button>
-                <button onclick="location.href='../bewcastle/intro.html'">Bewcastle</button>
-                <button onclick="location.href='../brussels/intro.html'">Brussels</button>
-                 <button onclick="location.href='../about/intro.html'">About</button>
-            </nav>
-            
-            <!-- Project Information Section -->
             <div class="info">
                 <h1>Preface</h1>
 <p>Visionary Cross: a multimedia edition and archive is a critical edition, scholarly study, and textual archive of the Old English Visionary Cross Tradition. The Visionary Cross project is an international, multidisciplinary research project whose principle objective is the development of a new kind of digital archive and edition of texts and objects associated with the Visionary Cross tradition in Anglo-Saxon England.</p>
@@ -55,17 +57,15 @@
         </div>
     </div>
 <p></p>
-    <!-- JavaScript that pulls the shared footer from the root of the repository -->
-<div id="footer"></div>
-<script>
-    fetch('../../footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
-</script>
 
+<div class="footer">
+    <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
+    <nav>
+        <a href="../frontmatter/history.html">Us</a> |
+        <a href="../backmattercontact.html">Contact</a> |
+        <a href="privacy.html">Privacy Policy</a>
+    </nav>
+</div>
     
 </body>
 </html>
