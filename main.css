@@ -35,43 +35,104 @@
     z-index: 2;
 }
 
-nav {
- padding: 1.5rem 2rem;
- background-color: #222831;
- color: #fff;
+/* Hide the checkbox itself */
+#check {
+  display: none;
 }
 
+/* Main nav bar area */
+.mobile-nav {
+  position: relative;
+  padding: 1.5rem 2rem;
+  background-color: #222831;
+  color: #fff;
+  z-index: 1000;
+}
+
+/* Hamburger icon */
 .checkbtn {
- font-size: 1.5rem;
- color: white;
- cursor: pointer;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1001;
 }
 
+/* Hidden by default */
 .nav-mobile {
- display: none;
+  display: none;
 }
 
+/* Show when checkbox is checked */
 #check:checked ~ .nav-mobile {
- display: block;
+  display: block;
 }
 
+/* Dropdown menu */
 .nav-mobile {
- position: absolute;
- top: 4.5rem;
- left: 0;
- background: #222831;
- z-index: 1;
- width: 200px;
-}
-.nav-mobile a {
- color: #fff;
- padding: 1rem 1.5rem;
- display: block;
+  position: absolute;
+  top: 3.5rem;
+  left: 0;
+  background: black;
+  z-index: 1000;
+  width: 250px;
+  padding: 1rem;
+  border-radius: 8px;
+  font-family: 'Times New Roman', serif;
 }
 
-<div class="nav-mobile w3-animate-right">
- <!-- Menu items -->
-</div>
+/* Menu links */
+.nav-mobile a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  display: block;
+  border: 1px solid white;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  background-color: black;
+  font-size: 1rem;
+}
+
+.nav-mobile a:hover {
+  background-color: white;
+  color: black;
+}
+
+/* Submenu toggle */
+.submenu-wrapper {
+  margin-top: 0.5rem;
+}
+
+.submenu-toggle {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.submenu {
+  display: none;
+  margin-top: 0.3rem;
+}
+
+.submenu-toggle.open + .submenu {
+  display: block;
+}
+
+.submenu a {
+  margin-left: 1rem;
+  margin-top: 0.3rem;
+}
+
 
 body {
     font-family: 'Times New Roman', serif;
