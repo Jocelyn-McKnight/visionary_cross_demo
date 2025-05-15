@@ -9,28 +9,35 @@
 </head>
     
 <body>
-<!-- Hamburger Menu Toggle -->
+<header class="header">
+  <a href="../backmatter/table.html">
+    <img src="assests/img/head.jpg" alt="Project Image" title="The Ruthwell Cross">
+    <p class="header-text">Ruthwell</p>
+  </a>
+
+<!-- Hamburger Toggle -->
 <input type="checkbox" id="menu-toggle" class="menu-toggle">
 <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-<!-- Hamburger Navigation Menu -->
+<!-- Hamburger Menu -->
 <nav class="hamburger-menu">
   <a href="/index.html">Title Page</a>
   <a href="/bewcastle.html">Previous Cross</a>
   <a href="/brussels.html">Next Cross</a>
 
-  <!-- Chapters Submenu -->
-  <details class="chapter-menu">
-    <summary>Chapters</summary>
-    <a href="/chapters/ch1.html">Chapter 1</a>
-    <a href="/chapters/ch2.html">Chapter 2</a>
-    <a href="/chapters/ch3.html">Chapter 3</a>
-    <!-- Add more chapters as needed -->
-  </details>
+  <!-- Chapters Dropdown -->
+  <div class="submenu-wrapper">
+    <span class="submenu-title" onclick="this.nextElementSibling.classList.toggle('show-submenu')">Chapters ▾</span>
+    <div class="submenu">
+      <a href="/chapters/ch1.html">Chapter 1</a>
+      <a href="/chapters/ch2.html">Chapter 2</a>
+      <a href="/chapters/ch3.html">Chapter 3</a>
+    </div>
+  </div>
 
   <a href="/backmatter.html">Backmatter</a>
 </nav>
-
+</header>
     
     <!-- Main Container for Left and Right Columns -->
     <div class="container"> 
