@@ -1,29 +1,47 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table of Content</title>
+    <title>Table</title>
     <link rel="stylesheet" href="../../main.css">
     <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
 </head>
+    
 <body>
-      
-   <div id="header"></div>
-<script>
-    fetch('../../header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading header:', error));
-</script>
+<header class="header">
+  <!-- Hamburger menu toggle -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-    <div class="page-navigation">
-  <a href="../about/more.html" class="page-nav-button">Previous</a>
-  <a href="glossary.html" class="page-nav-button">Next</a>
+  <!-- Hidden dropdown menu -->
+  <div class="hamburger-menu">
+    <a href="../frontmatter/tp.html">Title Page</a>
+    <a href="../Brussels/intro">Previous (Brussels)</a>
+
+<div class="submenu-wrapper">
+  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
+  <label for="submenu-toggle" class="submenu-label">Chapters</label>
+  <div class="submenu">
+    <a href="table.html">Table of Contents</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="works_cited.html">Work Cited</a>
+    <a href="index.html">Index</a>
+  </div>
 </div>
-
+      
+    <a href="../frontmatter/preface.html">Next (Preface)</a>
+    <a href="../backmatter/table.html">Table of Contents</a>
+  </div>
+    
+  <a href="../backmatter/table.html">
+    <img src="../../img/head_outside.jpg" alt="Project Image" title="The Visionary Cross Project">
+    <p class="header-text">Visionary Cross Project</p>
+  </a>
+</header>
+    
 <div class="table-of-contents">
       <!--This order mirrors the order of the next and previous buttons -->
     <h1>Table of Contents</h1>
@@ -67,13 +85,6 @@
                 <li><a href="../brussels/more.html">More Information</a></li>
             </ul>
          </li>
-          <li>
-            About all the Crosses
-            <ul>
-                <li><a href="../about/intro.html">Introduction</a></li>
-                <li><a href="../about/more.html">More Information</a></li>
-            </ul>
-        </li>
         <li>
             Back matter
             <ul>
@@ -86,15 +97,14 @@
     </ul>
 </div>
 
-        <div id="footer"></div>
-<script>
-    fetch('../../footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
-</script>
+    <div class="footer">
+    <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
+    <nav>
+        <a href="../frontmatter/history.html">Us</a> |
+        <a href="../backmattercontact.html">Contact</a> |
+        <a href="privacy.html">Privacy Policy</a>
+    </nav>
+</div>
     
 </body>
 </html>
