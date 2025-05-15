@@ -33,47 +33,40 @@
     z-index: 2;
 }
 
-/* Hamburger icon */
-.hamburger-icon {
+/* Hide the actual checkbox */
+.menu-toggle {
   position: absolute;
-  top: 1rem;
-  left: 1rem; /* now on the left side */
-  font-size: 2rem;
-  cursor: pointer;
-  color: white;
-  z-index: 1001; /* ensures it's above overlays */
-  background: rgba(0, 0, 0, 0.6);
-  padding: 0.5rem;
-  border-radius: 5px;
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* Dropdown menu */
-.hamburger-menu {
-  display: none;
-  position: absolute;
-  top: 4rem;
-  left: 1rem; /* aligns with the hamburger on the left */
-  background-color: rgba(0, 0, 0, 0.9);
-  padding: 1rem;
-  border-radius: 8px;
-  z-index: 1000; /* high enough to float above hero image */
-}
-
-.hamburger-menu a {
+/* Toggle menu on checkbox check */
+.menu-toggle:checked + .hamburger-icon + .hamburger-menu {
   display: block;
-  color: white;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  margin: 0.3rem 0;
+}
+
+/* Chapters dropdown using <details> */
+.chapter-menu {
+  margin-top: 0.5rem;
   border: 1px solid white;
   border-radius: 5px;
   background: black;
-  font-size: 1rem;
+  color: white;
+  padding: 0.5rem;
 }
 
-.hamburger-menu a:hover {
-  background-color: white;
-  color: black;
+.chapter-menu summary {
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.chapter-menu a {
+  display: block;
+  margin-top: 0.3rem;
+  margin-left: 1rem;
+  font-size: 0.95rem;
 }
 
 body {
