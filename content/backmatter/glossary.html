@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,34 +8,87 @@
     <link rel="stylesheet" href="../../main.css">
     <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
 </head>
+    
 <body>
-      
-   <div id="header"></div>
-<script>
-    fetch('../../header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading header:', error));
-</script>
+<header class="header">
+  <!-- Hamburger menu toggle -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-    <div class="page-navigation">
-  <a href="table.html" class="page-nav-button">Previous</a>
-  <a href="works_cited.html" class="page-nav-button">Next</a>
+  <!-- Hidden dropdown menu -->
+  <div class="hamburger-menu">
+    <a href="../frontmatter/tp.html">Title Page</a>
+    <a href="../Brussels/intro">Previous (Brussels)</a>
+
+<div class="submenu-wrapper">
+  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
+  <label for="submenu-toggle" class="submenu-label">Chapters</label>
+  <div class="submenu">
+    <a href="table.html">Table of Contents</a>
+    <a href="glossary.html">GLossary</a>
+    <a href="work_cited.html">Work Cited</a>
+    <a href="Index.html">Index</a>
+  </div>
 </div>
-
+      
+    <a href="../frontmatter/preface.html">Next (Preface)</a>
+    <a href="../backmatter/table.html">Table of Contents</a>
+  </div>
+    
+  <a href="../backmatter/table.html">
+    <img src="../../img/head_outside.jpg" alt="Project Image" title="The Visionary Cross Project">
+    <p class="header-text">Visionary Cross Project</p>
+  </a>
+</header>
+    
 <h1>Glossary</h1>
 
-        <div id="footer"></div>
-<script>
-    fetch('../../footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer').innerHTML = data;
-        })
-        .catch(error => console.error('Error loading footer:', error));
-</script>
+    <h1>Chapter 1</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor nisl ut orci pharetra facilisis. Integer sit amet vehicula nisi, ut condimentum metus. Praesent pulvinar sapien sed turpis sagittis, sit amet lacinia sapien tempor. Duis in mi tempus, pellentesque erat nec, vestibulum nunc. Nunc at velit dignissim, cursus arcu non, venenatis nisl. Donec eu tempor sem. Phasellus ut nulla consectetur, congue urna ut, ultricies ex. Donec semper enim id lacus hendrerit, vel scelerisque tortor sagittis. Nunc vel augue a dui eleifend facilisis id at tellus.</p>
+
+<p>Donec facilisis, arcu venenatis tristique interdum, sem velit hendrerit justo, volutpat faucibus tellus elit vitae mauris. Mauris elit ex, volutpat eget nibh et, gravida vehicula sapien. Nullam a vestibulum est. Vestibulum in purus eu sapien varius iaculis eu ac erat. Pellentesque a odio pharetra, volutpat orci vel, accumsan justo. Sed eu feugiat lorem. Maecenas tristique suscipit interdum. Nunc nec nisl euismod magna commodo ullamcorper. Donec dignissim enim malesuada mauris suscipit varius. Aliquam erat volutpat. Duis pellentesque sem finibus purus faucibus auctor. Integer mi nisi, feugiat sed nulla feugiat, volutpat placerat neque. Suspendisse id erat vel libero aliquet mattis.</p>
+
+<p>Nunc suscipit orci sed felis finibus finibus. Mauris accumsan imperdiet tellus at lacinia. Duis eleifend sapien cursus enim scelerisque, eu semper mi consectetur. Pellentesque eleifend ornare neque, eu rhoncus metus semper eu. Curabitur a pretium dui, sit amet rutrum mi. Donec tortor est, lacinia pretium porttitor vitae, tempus quis nisi. Ut sed lacinia nisl. Maecenas dictum ultrices tellus, non volutpat sapien sodales egestas. Praesent id tincidunt nisi. Phasellus mattis maximus metus, vitae congue eros. Sed dictum pellentesque interdum. Pellentesque gravida suscipit mi, tincidunt condimentum odio auctor et. In tincidunt mauris eu fringilla tempus. Aliquam erat volutpat.</p>
+
+<!-- Glossary Section -->
+<h2>Glossary</h2>
+<dl>
+  <dt>Accumsan</dt>
+  <dd>From Latin "accumulare", meaning accumulation or buildup, often used to describe a buildup of pressure or growth in a system.</dd>
+
+  <dt>Condimentum</dt>
+  <dd>Latin for seasoning or spice; here metaphorically refers to added interest or variety.</dd>
+
+  <dt>Facilisis</dt>
+  <dd>Derived from Latin "facilis", meaning easy; refers to ease or smoothness of a process.</dd>
+
+  <dt>Gravida</dt>
+  <dd>Latin for heavy or pregnant; in medical or poetic usage, refers to weight or importance.</dd>
+
+  <dt>Lacinia</dt>
+  <dd>Means fringe or border; in anatomy, can mean a lacy part of tissue; metaphorically here for complexity or detail.</dd>
+
+  <dt>Pellentesque</dt>
+  <dd>From Latin "pellere", meaning to drive or push; used in CSS frameworks but here just filler Latin.</dd>
+
+  <dt>Phasellus</dt>
+  <dd>Latin for a type of bean plant; commonly used as a placeholder word in Lorem Ipsum text.</dd>
+
+  <dt>Ultricies</dt>
+  <dd>From Latin "ultricies", meaning beyond or extreme; implies high intensity or strength.</dd>
+
+  <dt>Vehicula</dt>
+  <dd>From Latin "vehiculum", meaning vehicle; refers metaphorically to a medium of transport or movement.</dd>
+</dl>
+
+    <div class="footer">
+    <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
+    <nav>
+        <a href="../frontmatter/history.html">Us</a> |
+        <a href="../backmattercontact.html">Contact</a> |
+        <a href="privacy.html">Privacy Policy</a>
+    </nav>
+</div>
     
 </body>
 </html>
