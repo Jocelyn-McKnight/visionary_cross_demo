@@ -167,31 +167,13 @@ h1 {
     text-align: center;
 }
 
-/* Page Navigation Buttons (so only for the next and previous buttons not the other ones)*/
-.page-navigation {
-    display: flex;
-    justify-content: space-between; /* Space buttons to the edges */
-    margin: 20px 0; /* Add spacing around navigation */
-    padding: 0 20px; /* Add horizontal padding for spacing */
+.content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 2rem;
+  box-sizing: border-box;
 }
 
-/* Many issues with making these buttons look like smaller versions of the main nav bar. It should be fixed now*/
-.page-nav-button {
-    display: inline-flex; /* Use inline-flex for inline alignment */
-    width: 75px; /* Fixed width for consistent size */
-    height: 20px; /* Fixed height for consistent size */
-    background-color: white; /* Default button background color */
-    color: black; /* Button text color */
-    border: 2px solid black; /* Button border */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 10px; /* Text size */
-   justify-content: center; /* Center text horizontally */
-    text-decoration: none; /* Remove underline from links */
-    transition: background-color 0.3s ease; /* Smooth hover transition (not in use)*/
-     line-height: normal; /* Ensure text height doesn’t interfere */
-}
-
-/* Needs to be fixed. The container always feels so short and stunted*/
 .3dhop-container {
     position: relative; /* Ensures it positions correctly */
     width: 100%; /* Consider making this smaller*/
