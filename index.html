@@ -1,17 +1,117 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Visionary Cross Edition page</title>
-    </head>
-    <body>
-        <h1>Visionary Cross Project</h1>
-      <p>This is the beta framework for the VCE</p>
-      <p>Here lies all the main pages</p>
-          <ul><li><a href="content/frontmatter/tp.html">Title Page</a></li></ul>
-          <ul><li><a href="content/frontmatter/preface.html">Preface</a></li></ul>
-          <ul><li><a href="content/ruthwell/intro.html">Ruthwell</a></li></ul>
-          <ul><li><a href="content/bewcastle/intro.html">Bewcastle</a></li></ul>
-          <ul><li><a href="content/brussels/intro.html">Brussels</a></li></ul>
-          <ul><li><a href="content/backmatter/table.html">Table of Contents</a></li></ul>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visionary Cross</title>
+  <link rel="stylesheet" href="main.css" />
+  <link rel="icon" type="image/x-icon" href="img/cross.ico" />
+  <style>
+    .fullscreen-hero {
+      background-image: url('img/tp.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 0;
+    }
+
+.fullscreen-overlay {
+  background-color: rgba(0, 0, 0, 0.3); /* lighter overlay */
+  padding: 4rem 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 90%;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+
+    .fullscreen-hero h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: white;
+      font-family: 'Times New Roman', serif;
+      letter-spacing: 2px;
+    }
+
+    .fullscreen-hero p {
+      color: #ccc;
+      font-size: 1.2rem;
+      font-family: 'Times New Roman', serif;
+      margin-bottom: 2rem;
+    }
+
+    .hero-button {
+      background-color: white;
+      color: black;
+      font-family: 'Times New Roman', serif;
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .hero-button:hover {
+      background-color: black;
+      color: white;
+      border: 1px solid white;
+    }
+
+    @media (max-width: 600px) {
+      .fullscreen-hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .fullscreen-hero p {
+        font-size: 1rem;
+      }
+
+      .hero-button {
+        font-size: 1rem;
+        padding: 0.6rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+  
+<body>
+  <!-- Hamburger menu toggle -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
+
+  <div class="hamburger-menu">
+    <a href="tp.html">Title Page</a>
+    <a href="content/backmatter/glossary.html">Previous (glossary)</a>
+    <div class="submenu-wrapper">
+      <input type="checkbox" id="submenu-toggle" class="submenu-toggle" />
+      <label for="submenu-toggle" class="submenu-label">Chapters</label>
+      <div class="submenu">
+        <a href="content/frontmatter/preface.html">Preface</a>
+        <a href="content/frontmatter/history.html">History</a>
+      </div>
+    </div>
+    <a href="content/ruthwell/intro.html">Next (Ruthwell)</a>
+    <a href="content/backmatter/table.html">Table of Contents</a>
+  </div>
+
+  <div class="fullscreen-hero">
+    <div class="fullscreen-overlay">
+      <h1>The Visionary Cross</h1>
+      <p>
+        A collaborative digital edition by people
+      </p>
+      <a href="preface.html" class="hero-button">Enter the Preface</a>
+    </div>
+  </div>
+
+</body>
 </html>
