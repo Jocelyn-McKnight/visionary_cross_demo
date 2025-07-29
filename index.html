@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Visionary Cross</title>
-  <link rel="stylesheet" href="../../main.css" />
-  <link rel="icon" type="image/x-icon" href="../../img/cross.ico" />
+  <link rel="stylesheet" href="main.css" />
+  <link rel="icon" type="image/x-icon" href="img/cross.ico" />
   <style>
     .fullscreen-hero {
-      background-image: url('../../img/tp.jpg');
+      background-image: url('img/tp.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -84,30 +84,24 @@
 </head>
   
 <body>
-<header class="header">
   <!-- Hamburger menu toggle -->
-  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <input type="checkbox" id="menu-toggle" class="menu-toggle" />
   <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-  <!-- Hidden dropdown menu -->
   <div class="hamburger-menu">
-    <a href="content/frontmatter/home.html">Home</a>
-
-<div class="submenu-wrapper">
-  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
-  <label for="submenu-toggle" class="submenu-label">Chapters</label>
-  <div class="submenu">
-    <a href="content/frontmatter/home.html">Home</a>
-    <a href="content.frontmatter/history.html">History</a>
-  </div>
-</div>
-      
-    <a href="content/ruthwell/intro.html">Ruthwell</a>
-    <a href="content/bewcastle/intro.html">Bewcastle</a>
-    <a href="content/brussels/intro.html">Brussels</a>
+    <a href="tp.html">Title Page</a>
+    <a href="content/backmatter/glossary.html">Previous (glossary)</a>
+    <div class="submenu-wrapper">
+      <input type="checkbox" id="submenu-toggle" class="submenu-toggle" />
+      <label for="submenu-toggle" class="submenu-label">Chapters</label>
+      <div class="submenu">
+        <a href="content/frontmatter/preface.html">Preface</a>
+        <a href="content/frontmatter/history.html">History</a>
+      </div>
+    </div>
+    <a href="content/ruthwell/intro.html">Next (Ruthwell)</a>
     <a href="content/backmatter/table.html">Table of Contents</a>
   </div>
-
 
   <div class="fullscreen-hero">
     <div class="fullscreen-overlay">
@@ -115,7 +109,7 @@
       <p>
         A collaborative digital edition by people
       </p>
-      <a href="home.html" class="hero-button">Home</a>
+      <a href="content/frontmatter/preface.html" class="hero-button">Enter the Preface</a>
     </div>
   </div>
 
