@@ -73,49 +73,54 @@
 </div>
 
 <script type="text/javascript">
-    var presenter = null;
+  var presenter = null;
 
-    function setup3dhop() {
-        presenter = new Presenter("draw-canvas");
-        presenter.setScene({
-            meshes: {
-"mesh_1": {
-  url: "https://ruthraven.jossymcknight6.workers.dev/Raven_Ruthwell_Cross_small.nxs"
-}
+  function setup3dhop() {
+    presenter = new Presenter("draw-canvas");
 
-            },
-            modelInstances: {
-                "model_1": {
-                    mesh: "mesh_1",
-                    color : [1.0, 1.0, 1.0]
-                }
-            },
-            trackball: {
-                type: TurnTableTrackball,
-                trackOptions: {
-                    startDistance: 3.0,
-                    minMaxDist: [1.0, 5.0],
-                    minMaxPhi: [-180, 180],
-                    minMaxTheta: [-30.0, 70.0]
-                }
-            }
-        });
-    }
-
-    function actionsToolbar(action) {
-        if(action === 'home') presenter.resetTrackball();
-        else if(action === 'zoomin') presenter.zoomIn();
-        else if(action === 'zoomout') presenter.zoomOut();
-        else if(action === 'light') presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
-        else if(action === 'screenshot') presenter.saveScreenshot();
-        else if(action === 'full') presenter.fullscreen();
-    }
-
-    $(document).ready(function(){
-        init3dhop();
-        setup3dhop();
+    presenter.setScene({
+      meshes: {
+        "mesh_1": {
+          url: "https://ruthraven.jossymcknight6.workers.dev/Raven_Ruthwell_Cross_small.nxs"
+        }
+      },
+      modelInstances: {
+        "model_1": {
+          mesh: "mesh_1",
+          color: [1.0, 1.0, 1.0]
+        }
+      },
+      trackball: {
+        type: TurnTableTrackball,
+        trackOptions: {
+          startDistance: 3.0,
+          minMaxDist: [1.0, 5.0],
+          minMaxPhi: [-180, 180],
+          minMaxTheta: [-30.0, 70.0]
+        }
+      }
     });
+
+    // Start with light control enabled so you can move the light
+    presenter.enableLightTrackball(true);
+    presenter.resetTrackball();
+  }
+
+  function actionsToolbar(action) {
+    if(action == 'home') presenter.resetTrackball();
+    else if(action == 'zoomin') presenter.zoomIn();
+    else if(action == 'zoomout') presenter.zoomOut();
+    else if(action == 'light') { presenter.enableLightTrackball(!presenter.isLightTrackballEnabled()); }
+    else if(action == 'screenshot') presenter.saveScreenshot();
+    else if(action == 'full') presenter.fullscreen();
+  }
+
+  $(document).ready(function(){
+    init3dhop();
+    setup3dhop();
+  });
 </script>
+
 
 <div class="footer">
     <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
