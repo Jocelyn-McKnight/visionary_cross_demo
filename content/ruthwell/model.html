@@ -75,36 +75,41 @@
 <script type="text/javascript">
   var presenter = null;
 
-  function setup3dhop() {
-    presenter = new Presenter("draw-canvas");
+  async function setup3dhop() {
+  presenter = new Presenter("draw-canvas");
 
-    presenter.setScene({
-      meshes: {
-        "mesh_1": {
-          url: "https://ruthraven.jossymcknight6.workers.dev/Raven_Ruthwell_Cross_small.nxs"
-        }
-      },
-      modelInstances: {
-        "model_1": {
-          mesh: "mesh_1",
-          color: [1.0, 1.0, 1.0]
-        }
-      },
-      trackball: {
-        type: TurnTableTrackball,
-        trackOptions: {
-          startDistance: 3.0,
-          minMaxDist: [1.0, 5.0],
-          minMaxPhi: [-180, 180],
-          minMaxTheta: [-30.0, 70.0]
-        }
+  const zenodoUrl = "https://zenodo.org/records/17794756/files/Raven_Ruthwell_Cross_small.nxs";
+
+  const response = await fetch(zenodoUrl, { mode: "no-cors" });
+  const blob = await response.blob();
+
+  const localUrl = URL.createObjectURL(blob);
+
+  presenter.setScene({
+    meshes: {
+      "mesh_1": { url: localUrl }
+    },
+    modelInstances: {
+      "model_1": {
+        mesh: "mesh_1",
+        color: [1.0, 1.0, 1.0]
       }
-    });
+    },
+    trackball: {
+      type: TurnTableTrackball,
+      trackOptions: {
+        startDistance: 3.0,
+        minMaxDist: [1.0, 5.0],
+        minMaxPhi: [-180, 180],
+        minMaxTheta: [-30.0, 70.0]
+      }
+    }
+  });
 
-    // Start with light control enabled so you can move the light
-    presenter.enableLightTrackball(true);
-    presenter.resetTrackball();
-  }
+  presenter.enableLightTrackball(true);
+  presenter.resetTrackball();
+}
+
 
   function actionsToolbar(action) {
     if(action == 'home') presenter.resetTrackball();
