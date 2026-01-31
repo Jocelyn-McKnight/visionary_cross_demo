@@ -76,35 +76,33 @@
   var presenter = null;
 
 async function setup3dhop() {
-
   presenter = new Presenter("draw-canvas");
 
-  const zenodoUrl = "https://zenodo.org/records/17794756/files/Raven_Ruthwell_Cross_small.nxs";
+  const zenodoUrl =
+    "https://zenodo.org/record/17794756/files/Raven_Ruthwell_Cross_small.nxs?download=1";
 
-  const response = await fetch(zenodoUrl, { mode: "no-cors" });
-  const blob = await response.blob();
+  const res = await fetch(zenodoUrl, { mode: "no-cors" });
+  console.log("fetch type:", res.type, "status:", res.status);
+
+  const blob = await res.blob();
+  console.log("blob size:", blob.size);
+
+  if (!blob || blob.size < 1000) {
+    throw new Error("Blob is empty — Zenodo response is opaque");
+  }
 
   const localUrl = URL.createObjectURL(blob);
-
-const response = await fetch(zenodoUrl, { mode: "no-cors" });
-console.log("fetch response:", response.type, response.status);
-
-const blob = await response.blob();
-console.log("blob size:", blob.size, "blob type:", blob.type);
-
 
   presenter.setScene({
     meshes: {
       "mesh_1": { url: localUrl }
     },
-
     modelInstances: {
       "model_1": {
         mesh: "mesh_1",
         color: [1.0, 1.0, 1.0]
       }
     },
-
     trackball: {
       type: TurnTableTrackball,
       trackOptions: {
