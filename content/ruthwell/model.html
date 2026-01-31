@@ -99,12 +99,22 @@
           minMaxTheta: [-30.0, 70.0]
         }
       }
-    });
+    },
+    trackball: {
+      type: TurnTableTrackball,
+      trackOptions: {
+        startDistance: 3.0,
+        minMaxDist: [1.0, 5.0],
+        minMaxPhi: [-180, 180],
+        minMaxTheta: [-30.0, 70.0]
+      }
+    }
+  });
 
-    // Start with light control enabled so you can move the light
-    presenter.enableLightTrackball(true);
-    presenter.resetTrackball();
-  }
+  presenter.enableLightTrackball(true);
+  presenter.resetTrackball();
+}
+
 
   function actionsToolbar(action) {
     if(action == 'home') presenter.resetTrackball();
