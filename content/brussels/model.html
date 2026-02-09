@@ -3,15 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Model</title>
+  <title>Ruthwell Model</title>
 
   <link rel="stylesheet" href="../../main.css" />
   <link rel="icon" type="image/x-icon" href="../../img/cross.ico" />
-
-  <!-- 3DHOP stylesheet -->
   <link rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css" />
 
-  <!-- 3DHOP scripts -->
   <script src="../../3dhop/js/spidergl.js"></script>
   <script src="../../3dhop/js/jquery.js"></script>
   <script src="../../3dhop/js/presenter.js"></script>
@@ -22,164 +19,256 @@
   <script src="../../3dhop/js/trackball_turntable_pan.js"></script>
   <script src="../../3dhop/js/trackball_pantilt.js"></script>
   <script src="../../3dhop/js/init.js"></script>
+
+  <style>
+    /* Minimal layout: viewer left, info panel right */
+    .viewer-layout{
+      display:flex;
+      gap:16px;
+      align-items:stretch;
+      width:100%;
+      min-height:70vh;
+      padding:16px;
+    }
+    #viewerWrap{
+      flex: 1 1 auto;
+      min-width: 0;
+      position:relative;
+      height:70vh;
+      border-radius:12px;
+      overflow:hidden;
+    }
+    #infoPanel{
+      flex: 0 0 320px;
+      max-width: 420px;
+      height:70vh;
+      overflow:auto;
+      padding:16px;
+      border-radius:12px;
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.08);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    #infoPanel h2{ margin:0 0 8px 0; font-size:18px; }
+    #infoPanel p{ margin:0 0 10px 0; line-height:1.4; }
+    #infoPanel .hint{
+      font-size: 13px;
+      opacity: .8;
+    }
+
+    /* Make sure canvas fills container */
+    #draw-canvas{ width:100%; height:100%; display:block; }
+  </style>
 </head>
 
 <body>
-  <header class="header">
-    <!-- Hamburger menu toggle -->
-    <input type="checkbox" id="menu-toggle" class="menu-toggle" />
-    <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
+    <header class="header">
+  <!-- Hamburger menu toggle -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-    <!-- Hidden dropdown menu -->
-    <div class="hamburger-menu">
-      <a href="../frontmatter/home.html">Home</a>
-      <a href="../ruthwell/intro.html">Ruthwell</a>
-      <a href="../bewcastle/intro.html">Bewcastle</a>
+  <!-- Hidden dropdown menu -->
+  <div class="hamburger-menu">
+    <a href="../frontmatter/home.html">Home</a>
+    <a href="../ruthwell/intro.html">Ruthwell</a>
+    <a href="../bewcastle/intro.html">Bewcastle</a>
+    <a href="../brussels/intro.html">Brussels</a>
 
-      <div class="submenu-wrapper">
-        <input type="checkbox" id="submenu-toggle" class="submenu-toggle" />
-        <label for="submenu-toggle" class="submenu-label">Brussels</label>
-        <div class="submenu">
-          <a href="intro.html">Introduction</a>
-          <a href="model.html">Model</a>
-          <a href="ch1.html">About the Cross</a>
-          <a href="ch2.html">About the Scan</a>
+<div class="submenu-wrapper">
+  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
+  <label for="submenu-toggle" class="submenu-label">Chapters</label>
+  <div class="submenu">
+    <a href="intro.html">Introduction</a>
+    <a href="model.html">Model</a>
+    <a href="ch1.html">About the Cross</a>
+    <a href="ch2.html">About the Scan</a>
+  </div>
+</div>
+      
+    <a href="../backmatter/table.html">Table of Contents</a>
+  </div>
+    
+  <a href="../backmatter/table.html">
+    <img src="assets/img/head.jpg" alt="Project Image" title="The Brussels Cross">
+    <p class="header-text">Brussels</p>
+  </a>
+
+</header>
+
+<main>
+
+  <div class="viewer-layout">
+
+    <!-- Viewer -->
+    <div id="viewerWrap">
+      <div id="3dhop" class="tdhop" style="width:100%; height:100%;">
+        <div id="tdhlg"></div>
+
+        <div id="toolbar" style="position:absolute; z-index:5;">
+          <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
+          <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
+          <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
+          <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
+          <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
+          <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
         </div>
-      </div>
 
-      <a href="../backmatter/table.html">Table of Contents</a>
-    </div>
-
-    <a href="../backmatter/table.html">
-      <img src="assets/img/head.jpg" alt="Project Image" title="The Brussels Cross" />
-      <p class="header-text">Brussels</p>
-    </a>
-  </header>
-
-  <main>
-    <div id="3dhop" class="tdhop" style="position:relative; width:100%; height:70vh;">
-      <div id="tdhlg"></div>
-
-      <div id="toolbar">
-        <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
-        <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
-        <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
-        <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
-        <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
-        <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
-      </div>
-
-      <canvas id="draw-canvas"
-  style="width:100%; height:100%; display:block; background-image:url(../../3dhop/skins/backgrounds/light.jpg);">
-      </canvas>
-
-      <!-- Simple UI to test swapping -->
-      <div style="position:absolute; right:12px; top:12px; z-index:10; display:flex; flex-direction:column; gap:8px;">
-        <button type="button" onclick="showCrossOnly()">Full cross</button>
-        <button type="button" onclick="showPanel('archer')">archer</button>
-        <button type="button" onclick="showPanel('bottom')">bottom</button>
-        <button type="button" onclick="showPanel('east_runes')">east_runes</button>
-        <button type="button" onclick="showPanel('lamb')">lamb</button>
-        <button type="button" onclick="showPanel('magdalene')">magdalene</button>
-        <button type="button" onclick="showPanel('raven')">raven</button>
+        <canvas id="draw-canvas"
+          style="background-image:url(../../3dhop/skins/backgrounds/light.jpg);">
+        </canvas>
       </div>
     </div>
 
-    <script>
-      var presenter = null;
+    <!-- Info panel -->
+    <aside id="infoPanel" aria-live="polite">
+      <h2>Explore the Ruthwell Cross</h2>
+      <p>Click highlighted areas on the cross to learn more.</p>
+      <p class="hint">Tip: If you don’t see clickable zones yet, I can help you place them precisely.</p>
+    </aside>
 
-      // Your panel instance names (these must match modelInstances keys)
-      const PANELS = ["raven", "magdalene", "archer", "lamb", "east_runes", "bottom"];
-      const CROSS_INSTANCE = "model_1";
+  </div>
 
-      function setup3dhop() {
-        presenter = new Presenter("draw-canvas");
+  <script>
+    var presenter = null;
 
-        presenter.setScene({
-          meshes: {
-            "mesh_1":      { url: "../ruthwell/assets/models/ruthwell.ply" },
-            "raven":       { url: "../ruthwell/assets/models/raven.ply" },
-            "magdalene":   { url: "../ruthwell/assets/models/magdalene.ply" },
-            "archer":      { url: "../ruthwell/assets/models/archer.ply" },
-            "lamb":        { url: "../ruthwell/assets/models/lamb.ply" },
-            "east_runes":  { url: "../ruthwell/assets/models/east_runes.ply" },
-            "bottom":      { url: "../ruthwell/assets/models/bottom.ply" }
-          },
+    // 1) Content for the side panel, keyed by hotspot ID
+    const INFO = {
+      "archer": {
+        title: "Archer Panel",
+        html: `<p><strong>Archer:</strong> Add your description here (iconography, carving details, bibliography, etc.).</p>`
+      },
+      "raven": {
+        title: "Raven Panel",
+        html: `<p><strong>Raven:</strong> Add your description here.</p>`
+      },
+      "magdalene": {
+        title: "Magdalene Panel",
+        html: `<p><strong>Magdalene:</strong> Add your description here.</p>`
+      },
+      "lamb": {
+        title: "Lamb Panel",
+        html: `<p><strong>Lamb:</strong> Add your description here.</p>`
+      },
+      "east_runes": {
+        title: "East Runes",
+        html: `<p><strong>East runes:</strong> Add your description here.</p>`
+      },
+      "bottom": {
+        title: "Bottom Section",
+        html: `<p><strong>Bottom:</strong> Add your description here.</p>`
+      }
+    };
 
-          modelInstances: {
-            // Full cross (context)
-            "model_1": {
-              mesh: "mesh_1",
-              color: [0.8, 0.7, 0.75],
-              visible: true
-            },
+    function setInfoPanel(title, html) {
+      const panel = document.getElementById("infoPanel");
+      panel.innerHTML = `<h2>${title}</h2>${html}<p class="hint">Click another highlighted area to keep exploring.</p>`;
+    }
 
-            // Panels (start hidden)
-            "raven":      { mesh: "raven",      visible: false },
-            "magdalene":  { mesh: "magdalene",  visible: false },
-            "archer":     { mesh: "archer",     visible: false },
-            "lamb":       { mesh: "lamb",       visible: false },
-            "east_runes": { mesh: "east_runes", visible: false },
-            "bottom":     { mesh: "bottom",     visible: false }
-          },
+    // 2) Helper for creating invisible sphere hotspots
+    //    You will edit x,y,z and radius for each hotspot.
+    function makeSphereSpot(x, y, z, r) {
+      return {
+        mesh: "hs_sphere",
+        transform: {
+          matrix: SglMat4.mul(
+            SglMat4.translation([x, y, z]),
+            SglMat4.scaling([r, r, r])
+          )
+        },
+        color: [0.0, 0.5, 1.0],
+        alpha: 0.0,     // invisible hitbox (set to 0.25 while positioning)
+        visible: true
+      };
+    }
 
-          trackball: {
-            type: TurnTableTrackball,
-            trackOptions: {
-              startDistance: 3.0,
-              minMaxDist: [1.0, 5.0],
-              minMaxPhi: [-180, 180],
-              minMaxTheta: [-30.0, 70.0]
-            }
+    function setup3dhop() {
+      presenter = new Presenter("draw-canvas");
+
+      presenter.setScene({
+        meshes: {
+          // Full cross mesh
+          "ruthwell":    { url: "../ruthwell/assets/models/ruthwell.ply" },
+
+          // Hotspot helper mesh (3DHOP provides a sphere in its models folder)
+          // If this path doesn’t work in your project, change it to where your 3DHOP "models/sphere.ply" is.
+          "hs_sphere":   { url: "../../3dhop/models/sphere.ply" }
+        },
+
+        modelInstances: {
+          "ruthwell": { mesh: "ruthwell", visible: true }
+        },
+
+        // 3) Hotspots you click (spots)
+        //    IMPORTANT: These coordinates are placeholders.
+        //    Replace them with coordinates that sit on your panel locations.
+        spots: {
+          "archer":     makeSphereSpot( 0,  0,  0, 10),
+          "raven":      makeSphereSpot( 0, 20,  0, 10),
+          "magdalene":  makeSphereSpot( 0, 40,  0, 10),
+          "lamb":       makeSphereSpot( 0, 60,  0, 10),
+          "east_runes": makeSphereSpot(20, 40,  0, 10),
+          "bottom":     makeSphereSpot( 0,-20,  0, 12)
+        },
+
+        trackball: {
+          type: TurnTableTrackball,
+          trackOptions: {
+            startDistance: 3.0,
+            minMaxDist: [1.0, 5.0],
+            minMaxPhi: [-180, 180],
+            minMaxTheta: [-30.0, 70.0]
           }
-        });
-
-        // Make sure we begin in "full cross" mode
-        showCrossOnly();
-      }
-
-      function hideAllPanels(redraw) {
-        for (const p of PANELS) {
-          presenter.setInstanceVisibilityByName(p, false, false);
         }
-        if (redraw) presenter.repaint();
-      }
-
-      // Recommended: swap mode (hide cross, show ONE high-res panel)
-      function showPanel(panelName) {
-        hideAllPanels(false);
-        presenter.setInstanceVisibilityByName(panelName, true, false);
-        presenter.setInstanceVisibilityByName(CROSS_INSTANCE, false, true); // redraw
-      }
-
-      function showCrossOnly() {
-        hideAllPanels(false);
-        presenter.setInstanceVisibilityByName(CROSS_INSTANCE, true, true); // redraw
-      }
-
-      function actionsToolbar(action) {
-        if (action === 'home') presenter.resetTrackball();
-        else if (action === 'zoomin') presenter.zoomIn();
-        else if (action === 'zoomout') presenter.zoomOut();
-        else if (action === 'light') presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
-        else if (action === 'screenshot') presenter.saveScreenshot();
-        else if (action === 'full') presenter.fullscreen();
-      }
-
-      $(document).ready(function () {
-        init3dhop();
-        setup3dhop();
       });
-    </script>
 
-    <div class="footer">
-      <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
-      <nav>
-        <a href="../frontmatter/history.html">Us</a> |
-        <a href="../backmattercontact.html">Contact</a> |
-        <a href="privacy.html">Privacy Policy</a>
-      </nav>
-    </div>
-  </main>
+      // 4) Enable hover detection (optional but nice)
+      presenter.enableOnHover(true);
+
+      // 5) Register click handler for hotspots
+      presenter._onPickedSpot = onPickedSpot;
+
+      // Optional: on-hover feedback (only works if onHover enabled)
+      presenter._onEnterSpot = onEnterSpot;
+      presenter._onLeaveSpot = onLeaveSpot;
+
+      // If you want to temporarily SEE your hotspot spheres while placing them:
+      // presenter.setSpotVisibility(HOP_ALL, true, true);
+      // Then set alpha above from 0.0 to 0.25 while positioning.
+    }
+
+    function onPickedSpot(id) {
+      if (INFO[id]) {
+        setInfoPanel(INFO[id].title, INFO[id].html);
+      } else {
+        setInfoPanel("Info", `<p>Clicked: <code>${id}</code></p>`);
+      }
+    }
+
+    function onEnterSpot(id) {
+      // Optional: show a tiny hint on hover without replacing main text
+      // Uncomment if you want hover previews:
+      // if(INFO[id]) setInfoPanel(INFO[id].title, `<p class="hint">Hovering. Click to open.</p>` + INFO[id].html);
+    }
+
+    function onLeaveSpot(id) {
+      // Optional: do nothing, or restore default message
+    }
+
+    function actionsToolbar(action) {
+      if (action === 'home') presenter.resetTrackball();
+      else if (action === 'zoomin') presenter.zoomIn();
+      else if (action === 'zoomout') presenter.zoomOut();
+      else if (action === 'light') presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+      else if (action === 'screenshot') presenter.saveScreenshot();
+      else if (action === 'full') presenter.fullscreen();
+    }
+
+    $(document).ready(function () {
+      init3dhop();
+      setup3dhop();
+    });
+  </script>
+
+</main>
 </body>
 </html>
