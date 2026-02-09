@@ -143,65 +143,126 @@
       </aside>
     </div>
 
-   <script>
+ <script>
   var presenter = null;
 
-  // tiny status box inside the side panel
-  function setStatus(msg) {
+  // Side panel content keyed by hotspot ID
+  const INFO = {
+    archer: {
+      title: "Archer Panel",
+      html: `<p><strong>Archer:</strong> Add your description here.</p>`
+    },
+    raven: {
+      title: "Raven Panel",
+      html: `<p><strong>Raven:</strong> Add your description here.</p>`
+    },
+    magdalene: {
+      title: "Magdalene Panel",
+      html: `<p><strong>Magdalene:</strong> Add your description here.</p>`
+    },
+    lamb: {
+      title: "Lamb Panel",
+      html: `<p><strong>Lamb:</strong> Add your description here.</p>`
+    },
+    east_runes: {
+      title: "East Runes",
+      html: `<p><strong>East runes:</strong> Add your description here.</p>`
+    },
+    bottom: {
+      title: "Bottom Section",
+      html: `<p><strong>Bottom:</strong> Add your description here.</p>`
+    }
+  };
+
+  function setInfoPanel(title, html) {
     const panel = document.getElementById("infoPanel");
     panel.innerHTML = `
-      <h2>Explore the Ruthwell Cross</h2>
-      <p>${msg}</p>
-      <p class="hint">If it says "still loading", your .ply path is probably wrong (404).</p>
+      <h2>${title}</h2>
+      ${html}
+      <p class="hint">Click another area on the cross to keep exploring.</p>
     `;
   }
 
-  // Catch JS errors visibly
-  window.addEventListener("error", (e) => {
-    console.log("JS error:", e.message);
-    setStatus("JS error: " + e.message);
-  });
-
   function setup3dhop() {
-    setStatus("Loading model…");
-
     presenter = new Presenter("draw-canvas");
 
     presenter.setScene({
       meshes: {
-        "ruthwell": { url: "../ruthwell/assets/models/ruthwell.ply" }
+        // ✅ REPLACE THESE URLS WITH THE ONES THAT WORK FOR YOU
+        ruthwell:    { url: "PUT-YOUR-WORKING-RUTHWELL-URL-HERE" },
+
+        // Panel meshes used as clickable hotspot geometry
+        archer:      { url: "PUT-YOUR-WORKING-ARCHER-URL-HERE" },
+        raven:       { url: "PUT-YOUR-WORKING-RAVEN-URL-HERE" },
+        magdalene:   { url: "PUT-YOUR-WORKING-MAGDALENE-URL-HERE" },
+        lamb:        { url: "PUT-YOUR-WORKING-LAMB-URL-HERE" },
+        east_runes:  { url: "PUT-YOUR-WORKING-EAST_RUNES-URL-HERE" },
+        bottom:      { url: "PUT-YOUR-WORKING-BOTTOM-URL-HERE" }
       },
+
       modelInstances: {
-        "ruthwell": { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true }
+        // ✅ Full cross ALWAYS visible
+        ruthwell: {
+          mesh: "ruthwell",
+          color: [0.8, 0.7, 0.75],
+          visible: true
+        }
       },
+
+      // ✅ Click targets (invisible by default)
+      spots: {
+        archer:     { mesh: "archer",     visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+        raven:      { mesh: "raven",      visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+        magdalene:  { mesh: "magdalene",  visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+        lamb:       { mesh: "lamb",       visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+        east_runes: { mesh: "east_runes", visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+        bottom:     { mesh: "bottom",     visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] }
+      },
+
       trackball: {
         type: TurnTableTrackball,
         trackOptions: {
           startDistance: 12.0,
-          minMaxDist: [2.0, 120.0],
+          minMaxDist: [2.0, 140.0],
           minMaxPhi: [-180, 180],
           minMaxTheta: [-85.0, 85.0]
         }
       }
     });
 
-    presenter.resetTrackball();
-    setTimeout(() => presenter.repaint(), 200);
+    // Hover detection is optional (turn off if it slows down)
+    presenter.enableOnHover(true);
 
-    // If nothing is visible after a couple seconds, it's usually a 404 on the PLY
-    setTimeout(() => {
-      setStatus("If you still only see the background, the model file probably didn't load. Check DevTools → Network → filter 'ply' for a 404.");
-    }, 2000);
+    // Click handler for hotspots
+    presenter._onPickedSpot = onPickedSpot;
+
+    // Optional hover handlers (do nothing by default)
+    presenter._onEnterSpot = function(id) {};
+    presenter._onLeaveSpot = function(id) {};
+
+    presenter.resetTrackball();
+    setTimeout(() => presenter.repaint(), 120);
+
+    // Default side panel text
+    setInfoPanel(
+      "Explore the Ruthwell Cross",
+      `<p>Click a panel on the cross to learn more.</p>`
+    );
+  }
+
+  function onPickedSpot(id) {
+    if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
+    else setInfoPanel("Info", `<p>Clicked: <code>${id}</code></p>`);
   }
 
   function actionsToolbar(action) {
     if (!presenter) return;
-    if (action === 'home') presenter.resetTrackball();
-    else if (action === 'zoomin') presenter.zoomIn();
-    else if (action === 'zoomout') presenter.zoomOut();
-    else if (action === 'light') presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
-    else if (action === 'screenshot') presenter.saveScreenshot();
-    else if (action === 'full') presenter.fullscreen();
+    if (action === "home") presenter.resetTrackball();
+    else if (action === "zoomin") presenter.zoomIn();
+    else if (action === "zoomout") presenter.zoomOut();
+    else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+    else if (action === "screenshot") presenter.saveScreenshot();
+    else if (action === "full") presenter.fullscreen();
   }
 
   $(document).ready(function () {
@@ -213,6 +274,7 @@
     if (presenter) presenter.repaint();
   });
 </script>
+
   </main>
 </body>
 </html>
