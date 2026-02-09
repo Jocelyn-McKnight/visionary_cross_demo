@@ -1,125 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Model</title>
-    <link rel="stylesheet" href="../../main.css">
-    <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Model</title>
 
-     <!-- External CSS and 3DHOP Stylesheet -->
-    <link type="text/css" rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css"/>
+  <link rel="stylesheet" href="../../main.css" />
+  <link rel="icon" type="image/x-icon" href="../../img/cross.ico" />
 
-    <!-- External 3DHOP Scripts -->
-    <script type="text/javascript" src="../../3dhop/js/spidergl.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/jquery.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/presenter.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/nexus.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/ply.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/trackball_sphere.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/trackball_turntable.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/trackball_turntable_pan.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/trackball_pantilt.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/init.js"></script>
+  <!-- 3DHOP stylesheet -->
+  <link rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css" />
+
+  <!-- 3DHOP scripts -->
+  <script src="../../3dhop/js/spidergl.js"></script>
+  <script src="../../3dhop/js/jquery.js"></script>
+  <script src="../../3dhop/js/presenter.js"></script>
+  <script src="../../3dhop/js/nexus.js"></script>
+  <script src="../../3dhop/js/ply.js"></script>
+  <script src="../../3dhop/js/trackball_sphere.js"></script>
+  <script src="../../3dhop/js/trackball_turntable.js"></script>
+  <script src="../../3dhop/js/trackball_turntable_pan.js"></script>
+  <script src="../../3dhop/js/trackball_pantilt.js"></script>
+  <script src="../../3dhop/js/init.js"></script>
 </head>
-<body> 
-<header class="header">
-  <!-- Hamburger menu toggle -->
-  <input type="checkbox" id="menu-toggle" class="menu-toggle">
-  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-  <!-- Hidden dropdown menu -->
-  <div class="hamburger-menu">
-    <a href="../frontmatter/home.html">Home</a>
-    <a href="../ruthwell/intro.html">Ruthwell</a>
-    <a href="../bewcastle/intro.html">Bewcastle</a>
+<body>
+  <header class="header">
+    <!-- Hamburger menu toggle -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+    <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-<div class="submenu-wrapper">
-  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
-  <label for="submenu-toggle" class="submenu-label">Brussels</label>
-  <div class="submenu">
-    <a href="intro.html">Introduction</a>
-    <a href="model.html">Model</a>
-    <a href="ch1.html">About the Cross</a>
-    <a href="ch2.html">About the Scan</a>
-  </div>
-</div>
+    <!-- Hidden dropdown menu -->
+    <div class="hamburger-menu">
+      <a href="../frontmatter/home.html">Home</a>
+      <a href="../ruthwell/intro.html">Ruthwell</a>
+      <a href="../bewcastle/intro.html">Bewcastle</a>
 
-    <a href="../backmatter/table.html">Table of Contents</a>
-  </div>
-    
-  <a href="../backmatter/table.html">
-    <img src="assets/img/head.jpg" alt="Project Image" title="The Brussels Cross">
-    <p class="header-text">Brussels</p>
-  </a>
+      <div class="submenu-wrapper">
+        <input type="checkbox" id="submenu-toggle" class="submenu-toggle" />
+        <label for="submenu-toggle" class="submenu-label">Brussels</label>
+        <div class="submenu">
+          <a href="intro.html">Introduction</a>
+          <a href="model.html">Model</a>
+          <a href="ch1.html">About the Cross</a>
+          <a href="ch2.html">About the Scan</a>
+        </div>
+      </div>
 
-</header>
-    
-<main> 
-<div id="3dhop" class="tdhop">
-                <div id="tdhlg"></div>
-                <div id="toolbar">
-                    <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
-                    <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
-                    <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
-                    <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
-                    <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
-                    <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
-                </div>
-                <canvas id="draw-canvas" style="width: 100%; height: 100%; background-image: url(../../3dhop/skins/backgrounds/light.jpg)"></canvas>
-            </div>
+      <a href="../backmatter/table.html">Table of Contents</a>
+    </div>
 
-            <script type="text/javascript">
-                var presenter = null;
+    <a href="../backmatter/table.html">
+      <img src="assets/img/head.jpg" alt="Project Image" title="The Brussels Cross" />
+      <p class="header-text">Brussels</p>
+    </a>
+  </header>
 
-                function setup3dhop() { 
-                    presenter = new Presenter("draw-canvas");
-                    presenter.setScene({
-                        meshes: {
-                            "mesh_1" : { url: "../ruthwell/assets/models/ruthwell.ply" } 
-                        },
-                        modelInstances : {
-                            "model_1" : { 
-                                mesh  : "mesh_1",
-                                color : [0.8, 0.7, 0.75]
-                            }
-                        },
-                        trackball: {
-                            type : TurnTableTrackball,
-                            trackOptions : {
-                                startDistance: 3.0,
-                                minMaxDist: [1.0, 5.0],
-                                minMaxPhi: [-180, 180],
-                                minMaxTheta: [-30.0, 70.0]
-                            }
-                        }
-                    });
-                }
+  <main>
+    <div id="3dhop" class="tdhop" style="position:relative; width:100%; height:70vh;">
+      <div id="tdhlg"></div>
 
-                function actionsToolbar(action) {
-                    if(action == 'home') presenter.resetTrackball();
-                    else if(action == 'zoomin') presenter.zoomIn();
-                    else if(action == 'zoomout') presenter.zoomOut();
-                    else if(action == 'light') { presenter.enableLightTrackball(!presenter.isLightTrackballEnabled()); }
-                    else if(action == 'screenshot') presenter.saveScreenshot();
-                    else if(action == 'full') presenter.fullscreen();
-                }
+      <div id="toolbar">
+        <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
+        <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
+        <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
+        <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
+        <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
+        <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
+      </div>
 
-                $(document).ready(function(){
-                    init3dhop();
-                    setup3dhop();
-                });
-            </script>
-</div>
+      <canvas id="draw-canvas"
+  style="width:100%; height:100%; display:block; background-image:url(../../3dhop/skins/backgrounds/light.jpg);">
+      </canvas>
 
-<div class="footer">
-    <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
-    <nav>
+      <!-- Simple UI to test swapping -->
+      <div style="position:absolute; right:12px; top:12px; z-index:10; display:flex; flex-direction:column; gap:8px;">
+        <button type="button" onclick="showCrossOnly()">Full cross</button>
+        <button type="button" onclick="showPanel('archer')">archer</button>
+        <button type="button" onclick="showPanel('bottom')">bottom</button>
+        <button type="button" onclick="showPanel('east_runes')">east_runes</button>
+        <button type="button" onclick="showPanel('lamb')">lamb</button>
+        <button type="button" onclick="showPanel('magdalene')">magdalene</button>
+        <button type="button" onclick="showPanel('raven')">raven</button>
+      </div>
+    </div>
+
+    <script>
+      var presenter = null;
+
+      // Your panel instance names (these must match modelInstances keys)
+      const PANELS = ["raven", "magdalene", "archer", "lamb", "east_runes", "bottom"];
+      const CROSS_INSTANCE = "model_1";
+
+      function setup3dhop() {
+        presenter = new Presenter("draw-canvas");
+
+        presenter.setScene({
+          meshes: {
+            "mesh_1":      { url: "../ruthwell/assets/models/ruthwell.ply" },
+            "raven":       { url: "../ruthwell/assets/models/raven.ply" },
+            "magdalene":   { url: "../ruthwell/assets/models/magdalene.ply" },
+            "archer":      { url: "../ruthwell/assets/models/archer.ply" },
+            "lamb":        { url: "../ruthwell/assets/models/lamb.ply" },
+            "east_runes":  { url: "../ruthwell/assets/models/east_runes.ply" },
+            "bottom":      { url: "../ruthwell/assets/models/bottom.ply" }
+          },
+
+          modelInstances: {
+            // Full cross (context)
+            "model_1": {
+              mesh: "mesh_1",
+              color: [0.8, 0.7, 0.75],
+              visible: true
+            },
+
+            // Panels (start hidden)
+            "raven":      { mesh: "raven",      visible: false },
+            "magdalene":  { mesh: "magdalene",  visible: false },
+            "archer":     { mesh: "archer",     visible: false },
+            "lamb":       { mesh: "lamb",       visible: false },
+            "east_runes": { mesh: "east_runes", visible: false },
+            "bottom":     { mesh: "bottom",     visible: false }
+          },
+
+          trackball: {
+            type: TurnTableTrackball,
+            trackOptions: {
+              startDistance: 3.0,
+              minMaxDist: [1.0, 5.0],
+              minMaxPhi: [-180, 180],
+              minMaxTheta: [-30.0, 70.0]
+            }
+          }
+        });
+
+        // Make sure we begin in "full cross" mode
+        showCrossOnly();
+      }
+
+      function hideAllPanels(redraw) {
+        for (const p of PANELS) {
+          presenter.setInstanceVisibilityByName(p, false, false);
+        }
+        if (redraw) presenter.repaint();
+      }
+
+      // Recommended: swap mode (hide cross, show ONE high-res panel)
+      function showPanel(panelName) {
+        hideAllPanels(false);
+        presenter.setInstanceVisibilityByName(panelName, true, false);
+        presenter.setInstanceVisibilityByName(CROSS_INSTANCE, false, true); // redraw
+      }
+
+      function showCrossOnly() {
+        hideAllPanels(false);
+        presenter.setInstanceVisibilityByName(CROSS_INSTANCE, true, true); // redraw
+      }
+
+      function actionsToolbar(action) {
+        if (action === 'home') presenter.resetTrackball();
+        else if (action === 'zoomin') presenter.zoomIn();
+        else if (action === 'zoomout') presenter.zoomOut();
+        else if (action === 'light') presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+        else if (action === 'screenshot') presenter.saveScreenshot();
+        else if (action === 'full') presenter.fullscreen();
+      }
+
+      $(document).ready(function () {
+        init3dhop();
+        setup3dhop();
+      });
+    </script>
+
+    <div class="footer">
+      <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
+      <nav>
         <a href="../frontmatter/history.html">Us</a> |
         <a href="../backmattercontact.html">Contact</a> |
         <a href="privacy.html">Privacy Policy</a>
-    </nav>
-</div>
-</main>
+      </nav>
+    </div>
+  </main>
 </body>
 </html>
