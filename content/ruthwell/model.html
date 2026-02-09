@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,8 +77,7 @@
 <script type="text/javascript">
   var presenter = null;
 
-async function setup3dhop() {
-
+ async function setup3dhop() {
   presenter = new Presenter("draw-canvas");
 
   const zenodoUrl = "https://zenodo.org/records/17794756/files/Raven_Ruthwell_Cross_small.nxs";
@@ -91,14 +91,12 @@ async function setup3dhop() {
     meshes: {
       "mesh_1": { url: localUrl }
     },
-
     modelInstances: {
       "model_1": {
         mesh: "mesh_1",
         color: [1.0, 1.0, 1.0]
       }
-    },
-
+  },
     trackball: {
       type: TurnTableTrackball,
       trackOptions: {
@@ -108,11 +106,12 @@ async function setup3dhop() {
         minMaxTheta: [-30.0, 70.0]
       }
     }
+  });
 
   presenter.enableLightTrackball(true);
   presenter.resetTrackball();
 }
-
+    
   function actionsToolbar(action) {
     if(action == 'home') presenter.resetTrackball();
     else if(action == 'zoomin') presenter.zoomIn();
