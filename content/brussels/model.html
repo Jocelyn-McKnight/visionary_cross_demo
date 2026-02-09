@@ -20,255 +20,199 @@
   <script src="../../3dhop/js/trackball_pantilt.js"></script>
   <script src="../../3dhop/js/init.js"></script>
 
+  <!-- BULLETPROOF layout CSS (overrides anything broken in main.css) -->
   <style>
-    /* Minimal layout: viewer left, info panel right */
+    /* prevent flex children from collapsing */
+    main { display:block; }
+
     .viewer-layout{
       display:flex;
       gap:16px;
       align-items:stretch;
       width:100%;
-      min-height:70vh;
       padding:16px;
     }
+
+    /* LEFT: viewer area gets a guaranteed height */
     #viewerWrap{
       flex: 1 1 auto;
       min-width: 0;
+      height: 70vh;
+      min-height: 520px;
+      position: relative;
+    }
+
+    #3dhop.tdhop{
+      width:100%;
+      height:100%;
       position:relative;
-      height:70vh;
       border-radius:12px;
       overflow:hidden;
+      background:#ddd;
     }
+
+    #draw-canvas{
+      width:100% !important;
+      height:100% !important;
+      display:block;
+      background-image:url(../../3dhop/skins/backgrounds/light.jpg);
+      background-size:cover;
+      background-position:center;
+    }
+
+    /* RIGHT: info panel */
     #infoPanel{
-      flex: 0 0 320px;
-      max-width: 420px;
-      height:70vh;
+      flex: 0 0 360px;
+      max-width: 460px;
+      height: 70vh;
+      min-height: 520px;
       overflow:auto;
       padding:16px;
       border-radius:12px;
+      border: 1px solid rgba(0,0,0,0.15);
       background: rgba(0,0,0,0.04);
-      border: 1px solid rgba(0,0,0,0.08);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
-    #infoPanel h2{ margin:0 0 8px 0; font-size:18px; }
-    #infoPanel p{ margin:0 0 10px 0; line-height:1.4; }
-    #infoPanel .hint{
-      font-size: 13px;
-      opacity: .8;
-    }
+    #infoPanel h2{ margin:0 0 10px 0; }
+    #infoPanel p{ margin:0 0 10px 0; line-height:1.45; }
+    #infoPanel .hint{ font-size: 13px; opacity: .8; }
 
-    /* Make sure canvas fills container */
-    #draw-canvas{ width:100%; height:100%; display:block; }
+    /* Mobile: stack */
+    @media (max-width: 900px){
+      .viewer-layout{ flex-direction:column; }
+      #viewerWrap{ height: 60vh; min-height: 360px; }
+      #infoPanel{ height:auto; min-height:0; flex: 1 1 auto; }
+    }
   </style>
 </head>
 
 <body>
-    <header class="header">
-  <!-- Hamburger menu toggle -->
-  <input type="checkbox" id="menu-toggle" class="menu-toggle">
-  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
+  <header class="header">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-  <!-- Hidden dropdown menu -->
-  <div class="hamburger-menu">
-    <a href="../frontmatter/home.html">Home</a>
-    <a href="../ruthwell/intro.html">Ruthwell</a>
-    <a href="../bewcastle/intro.html">Bewcastle</a>
-    <a href="../brussels/intro.html">Brussels</a>
+    <div class="hamburger-menu">
+      <a href="../frontmatter/home.html">Home</a>
+      <a href="../ruthwell/intro.html">Ruthwell</a>
+      <a href="../bewcastle/intro.html">Bewcastle</a>
+      <a href="../brussels/intro.html">Brussels</a>
 
-<div class="submenu-wrapper">
-  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
-  <label for="submenu-toggle" class="submenu-label">Chapters</label>
-  <div class="submenu">
-    <a href="intro.html">Introduction</a>
-    <a href="model.html">Model</a>
-    <a href="ch1.html">About the Cross</a>
-    <a href="ch2.html">About the Scan</a>
-  </div>
-</div>
-      
-    <a href="../backmatter/table.html">Table of Contents</a>
-  </div>
-    
-  <a href="../backmatter/table.html">
-    <img src="assets/img/head.jpg" alt="Project Image" title="The Brussels Cross">
-    <p class="header-text">Brussels</p>
-  </a>
-
-</header>
-
-<main>
-
-  <div class="viewer-layout">
-
-    <!-- Viewer -->
-    <div id="viewerWrap">
-      <div id="3dhop" class="tdhop" style="width:100%; height:100%;">
-        <div id="tdhlg"></div>
-
-        <div id="toolbar" style="position:absolute; z-index:5;">
-          <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
-          <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
-          <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
-          <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
-          <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
-          <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
+      <div class="submenu-wrapper">
+        <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
+        <label for="submenu-toggle" class="submenu-label">Chapters</label>
+        <div class="submenu">
+          <a href="intro.html">Introduction</a>
+          <a href="model.html">Model</a>
+          <a href="ch1.html">About the Cross</a>
+          <a href="ch2.html">About the Scan</a>
         </div>
-
-        <canvas id="draw-canvas"
-          style="background-image:url(../../3dhop/skins/backgrounds/light.jpg);">
-        </canvas>
       </div>
+
+      <a href="../backmatter/table.html">Table of Contents</a>
     </div>
 
-    <!-- Info panel -->
-    <aside id="infoPanel" aria-live="polite">
+    <a href="../backmatter/table.html">
+      <img src="assets/img/head.jpg" alt="Project Image" title="The Brussels Cross">
+      <p class="header-text">Brussels</p>
+    </a>
+  </header>
+
+  <main>
+    <div class="viewer-layout">
+      <div id="viewerWrap">
+        <div id="3dhop" class="tdhop">
+          <div id="tdhlg"></div>
+
+          <div id="toolbar">
+            <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
+            <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
+            <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
+            <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
+            <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
+            <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
+          </div>
+
+          <canvas id="draw-canvas"></canvas>
+        </div>
+      </div>
+
+      <aside id="infoPanel" aria-live="polite">
+        <h2>Explore the Ruthwell Cross</h2>
+        <p>First goal: make sure the model renders reliably.</p>
+        <p class="hint">Once you can see it, we’ll add clickable hotspots that update this panel.</p>
+      </aside>
+    </div>
+
+   <script>
+  var presenter = null;
+
+  // tiny status box inside the side panel
+  function setStatus(msg) {
+    const panel = document.getElementById("infoPanel");
+    panel.innerHTML = `
       <h2>Explore the Ruthwell Cross</h2>
-      <p>Click highlighted areas on the cross to learn more.</p>
-      <p class="hint">Tip: If you don’t see clickable zones yet, I can help you place them precisely.</p>
-    </aside>
+      <p>${msg}</p>
+      <p class="hint">If it says "still loading", your .ply path is probably wrong (404).</p>
+    `;
+  }
 
-  </div>
+  // Catch JS errors visibly
+  window.addEventListener("error", (e) => {
+    console.log("JS error:", e.message);
+    setStatus("JS error: " + e.message);
+  });
 
-  <script>
-    var presenter = null;
+  function setup3dhop() {
+    setStatus("Loading model…");
 
-    // 1) Content for the side panel, keyed by hotspot ID
-    const INFO = {
-      "archer": {
-        title: "Archer Panel",
-        html: `<p><strong>Archer:</strong> Add your description here (iconography, carving details, bibliography, etc.).</p>`
+    presenter = new Presenter("draw-canvas");
+
+    presenter.setScene({
+      meshes: {
+        "ruthwell": { url: "../ruthwell/assets/models/ruthwell.ply" }
       },
-      "raven": {
-        title: "Raven Panel",
-        html: `<p><strong>Raven:</strong> Add your description here.</p>`
+      modelInstances: {
+        "ruthwell": { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true }
       },
-      "magdalene": {
-        title: "Magdalene Panel",
-        html: `<p><strong>Magdalene:</strong> Add your description here.</p>`
-      },
-      "lamb": {
-        title: "Lamb Panel",
-        html: `<p><strong>Lamb:</strong> Add your description here.</p>`
-      },
-      "east_runes": {
-        title: "East Runes",
-        html: `<p><strong>East runes:</strong> Add your description here.</p>`
-      },
-      "bottom": {
-        title: "Bottom Section",
-        html: `<p><strong>Bottom:</strong> Add your description here.</p>`
-      }
-    };
-
-    function setInfoPanel(title, html) {
-      const panel = document.getElementById("infoPanel");
-      panel.innerHTML = `<h2>${title}</h2>${html}<p class="hint">Click another highlighted area to keep exploring.</p>`;
-    }
-
-    // 2) Helper for creating invisible sphere hotspots
-    //    You will edit x,y,z and radius for each hotspot.
-    function makeSphereSpot(x, y, z, r) {
-      return {
-        mesh: "hs_sphere",
-        transform: {
-          matrix: SglMat4.mul(
-            SglMat4.translation([x, y, z]),
-            SglMat4.scaling([r, r, r])
-          )
-        },
-        color: [0.0, 0.5, 1.0],
-        alpha: 0.0,     // invisible hitbox (set to 0.25 while positioning)
-        visible: true
-      };
-    }
-
-    function setup3dhop() {
-      presenter = new Presenter("draw-canvas");
-
-      presenter.setScene({
-        meshes: {
-          // Full cross mesh
-          "ruthwell":    { url: "../ruthwell/assets/models/ruthwell.ply" },
-
-          // Hotspot helper mesh (3DHOP provides a sphere in its models folder)
-          // If this path doesn’t work in your project, change it to where your 3DHOP "models/sphere.ply" is.
-          "hs_sphere":   { url: "../../3dhop/models/sphere.ply" }
-        },
-
-        modelInstances: {
-          "ruthwell": { mesh: "ruthwell", visible: true }
-        },
-
-        // 3) Hotspots you click (spots)
-        //    IMPORTANT: These coordinates are placeholders.
-        //    Replace them with coordinates that sit on your panel locations.
-        spots: {
-          "archer":     makeSphereSpot( 0,  0,  0, 10),
-          "raven":      makeSphereSpot( 0, 20,  0, 10),
-          "magdalene":  makeSphereSpot( 0, 40,  0, 10),
-          "lamb":       makeSphereSpot( 0, 60,  0, 10),
-          "east_runes": makeSphereSpot(20, 40,  0, 10),
-          "bottom":     makeSphereSpot( 0,-20,  0, 12)
-        },
-
-        trackball: {
-          type: TurnTableTrackball,
-          trackOptions: {
-            startDistance: 3.0,
-            minMaxDist: [1.0, 5.0],
-            minMaxPhi: [-180, 180],
-            minMaxTheta: [-30.0, 70.0]
-          }
+      trackball: {
+        type: TurnTableTrackball,
+        trackOptions: {
+          startDistance: 12.0,
+          minMaxDist: [2.0, 120.0],
+          minMaxPhi: [-180, 180],
+          minMaxTheta: [-85.0, 85.0]
         }
-      });
-
-      // 4) Enable hover detection (optional but nice)
-      presenter.enableOnHover(true);
-
-      // 5) Register click handler for hotspots
-      presenter._onPickedSpot = onPickedSpot;
-
-      // Optional: on-hover feedback (only works if onHover enabled)
-      presenter._onEnterSpot = onEnterSpot;
-      presenter._onLeaveSpot = onLeaveSpot;
-
-      // If you want to temporarily SEE your hotspot spheres while placing them:
-      // presenter.setSpotVisibility(HOP_ALL, true, true);
-      // Then set alpha above from 0.0 to 0.25 while positioning.
-    }
-
-    function onPickedSpot(id) {
-      if (INFO[id]) {
-        setInfoPanel(INFO[id].title, INFO[id].html);
-      } else {
-        setInfoPanel("Info", `<p>Clicked: <code>${id}</code></p>`);
       }
-    }
-
-    function onEnterSpot(id) {
-      // Optional: show a tiny hint on hover without replacing main text
-      // Uncomment if you want hover previews:
-      // if(INFO[id]) setInfoPanel(INFO[id].title, `<p class="hint">Hovering. Click to open.</p>` + INFO[id].html);
-    }
-
-    function onLeaveSpot(id) {
-      // Optional: do nothing, or restore default message
-    }
-
-    function actionsToolbar(action) {
-      if (action === 'home') presenter.resetTrackball();
-      else if (action === 'zoomin') presenter.zoomIn();
-      else if (action === 'zoomout') presenter.zoomOut();
-      else if (action === 'light') presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
-      else if (action === 'screenshot') presenter.saveScreenshot();
-      else if (action === 'full') presenter.fullscreen();
-    }
-
-    $(document).ready(function () {
-      init3dhop();
-      setup3dhop();
     });
-  </script>
 
-</main>
+    presenter.resetTrackball();
+    setTimeout(() => presenter.repaint(), 200);
+
+    // If nothing is visible after a couple seconds, it's usually a 404 on the PLY
+    setTimeout(() => {
+      setStatus("If you still only see the background, the model file probably didn't load. Check DevTools → Network → filter 'ply' for a 404.");
+    }, 2000);
+  }
+
+  function actionsToolbar(action) {
+    if (!presenter) return;
+    if (action === 'home') presenter.resetTrackball();
+    else if (action === 'zoomin') presenter.zoomIn();
+    else if (action === 'zoomout') presenter.zoomOut();
+    else if (action === 'light') presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+    else if (action === 'screenshot') presenter.saveScreenshot();
+    else if (action === 'full') presenter.fullscreen();
+  }
+
+  $(document).ready(function () {
+    init3dhop();
+    setup3dhop();
+  });
+
+  window.addEventListener("resize", function () {
+    if (presenter) presenter.repaint();
+  });
+</script>
+  </main>
 </body>
 </html>
