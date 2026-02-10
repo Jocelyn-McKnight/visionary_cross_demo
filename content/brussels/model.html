@@ -143,32 +143,36 @@
 
 <script>
   var presenter = null;
-  var hotspotsVisible = true;
 
   const INFO = {
-    angels:          { title: "Angels", html: `<p><strong>Angels:</strong> Add your description here.</p>` },
-    archer:          { title: "Archer", html: `<p><strong>Archer:</strong> Add your description here.</p>` },
-    bottom:          { title: "Bottom", html: `<p><strong>Bottom:</strong> Add your description here.</p>` },
-    bottom_back:     { title: "Bottom (Back)", html: `<p><strong>Bottom (Back):</strong> Add your description here.</p>` },
-    centre:          { title: "Centre", html: `<p><strong>Centre:</strong> Add your description here.</p>` },
-    giving:          { title: "Giving", html: `<p><strong>Giving:</strong> Add your description here.</p>` },
-    jesus:           { title: "Jesus", html: `<p><strong>Jesus:</strong> Add your description here.</p>` },
-    jesus_and_guy:   { title: "Jesus and Figure", html: `<p><strong>Jesus and figure:</strong> Add your description here.</p>` },
-    lamb:            { title: "Lamb", html: `<p><strong>Lamb:</strong> Add your description here.</p>` },
-    left_cross_bar:  { title: "Left Cross-Bar", html: `<p><strong>Left cross-bar:</strong> Add your description here.</p>` },
-    left_side:       { title: "Left Side", html: `<p><strong>Left side:</strong> Add your description here.</p>` },
-    magdelene:       { title: "Magdelene", html: `<p><strong>Magdelene:</strong> Add your description here.</p>` },
-    raven:           { title: "Raven", html: `<p><strong>Raven:</strong> Add your description here.</p>` },
-    two_people:      { title: "Two People", html: `<p><strong>Two people:</strong> Add your description here.</p>` },
-    two_people_back: { title: "Two People (Back)", html: `<p><strong>Two people (back):</strong> Add your description here.</p>` }
+    angels:          { title: "Angels",          html: `<p><strong>Angels:</strong> Add your description here.</p>` },
+    archer:          { title: "Archer",          html: `<p><strong>Archer:</strong> Add your description here.</p>` },
+    bottom:          { title: "Bottom",          html: `<p><strong>Bottom:</strong> Add your description here.</p>` },
+    bottom_back:     { title: "Bottom (Back)",   html: `<p><strong>Bottom (Back):</strong> Add your description here.</p>` },
+    centre:          { title: "Centre",          html: `<p><strong>Centre:</strong> Add your description here.</p>` },
+    giving:          { title: "Giving",          html: `<p><strong>Giving:</strong> Add your description here.</p>` },
+    jesus:           { title: "Jesus",           html: `<p><strong>Jesus:</strong> Add your description here.</p>` },
+    jesus_and_guy:   { title: "Jesus and Figure",html: `<p><strong>Jesus and figure:</strong> Add your description here.</p>` },
+    lamb:            { title: "Lamb",            html: `<p><strong>Lamb:</strong> Add your description here.</p>` },
+    left_cross_bar:  { title: "Left Cross-Bar",  html: `<p><strong>Left cross-bar:</strong> Add your description here.</p>` },
+    left_side:       { title: "Left Side",       html: `<p><strong>Left side:</strong> Add your description here.</p>` },
+    magdelene:       { title: "Magdelene",       html: `<p><strong>Magdelene:</strong> Add your description here.</p>` },
+    raven:           { title: "Raven",           html: `<p><strong>Raven:</strong> Add your description here.</p>` },
+    two_people:      { title: "Two People",      html: `<p><strong>Two people:</strong> Add your description here.</p>` },
+    two_people_back: { title: "Two People (Back)",html:`<p><strong>Two people (back):</strong> Add your description here.</p>` }
   };
 
   function setInfoPanel(title, html) {
     const panel = document.getElementById("infoPanel");
-    panel.innerHTML = `<h2>${title}</h2>${html}<p class="hint">Click another area on the cross to keep exploring.</p>`;
+    panel.innerHTML = `
+      <h2>${title}</h2>
+      ${html}
+      <p class="hint">Click another area on the cross to keep exploring.</p>
+    `;
   }
 
   function onPickedSpot(id) {
+    // If this logs, hotspot picking is working.
     console.log("PICKED SPOT:", id);
     if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
     else setInfoPanel("Info", `<p>Clicked hotspot: <code>${id}</code></p>`);
@@ -179,10 +183,10 @@
 
     presenter.setScene({
       meshes: {
-        // ✅ FULL MODEL (MAKE SURE THIS FILENAME EXISTS IN assets/models/)
+        // FULL CROSS:
         ruthwell:        { url: "assets/models/ruthwell.ply" },
 
-        // ✅ HOTSPOT CUTS
+        // HOTSPOT CUTS:
         angels:          { url: "assets/models/angels.ply" },
         archer:          { url: "assets/models/archer.ply" },
         bottom:          { url: "assets/models/bottom.ply" },
@@ -201,37 +205,35 @@
       },
 
       modelInstances: {
-        // Main cross
-        main: { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true },
-
-        // 🔥 DEBUG: ALSO render angels as a normal model instance.
-        // If you do NOT see this (in bright-ish tint), angels.ply is NOT loading OR is not aligned with the cross.
-        test_angels: { mesh: "angels", color: [0.2, 0.6, 1.0], visible: true }
+        main: {
+          mesh: "ruthwell",
+          color: [0.8, 0.7, 0.75],
+          visible: true
+        }
       },
 
+      // IMPORTANT: alpha=0 means invisible, alphaHigh makes it appear on hover
       spots: {
-        // Visible overlays so you can confirm they exist
-        angels:          { mesh: "angels",          color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        archer:          { mesh: "archer",          color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        bottom:          { mesh: "bottom",          color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        bottom_back:     { mesh: "bottom_back",     color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        centre:          { mesh: "centre",          color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        giving:          { mesh: "giving",          color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        jesus:           { mesh: "jesus",           color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        jesus_and_guy:   { mesh: "jesus_and_guy",   color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        lamb:            { mesh: "lamb",            color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        left_cross_bar:  { mesh: "left_cross_bar",  color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        left_side:       { mesh: "left_side",       color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        magdelene:       { mesh: "magdelene",       color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        raven:           { mesh: "raven",           color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        two_people:      { mesh: "two_people",      color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 },
-        two_people_back: { mesh: "two_people_back", color:[0,0.5,1], alpha:0.35, alphaHigh:0.75 }
+        angels:          { mesh:"angels",          color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        archer:          { mesh:"archer",          color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        bottom:          { mesh:"bottom",          color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        bottom_back:     { mesh:"bottom_back",     color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        centre:          { mesh:"centre",          color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        giving:          { mesh:"giving",          color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        jesus:           { mesh:"jesus",           color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        jesus_and_guy:   { mesh:"jesus_and_guy",   color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        lamb:            { mesh:"lamb",            color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        left_cross_bar:  { mesh:"left_cross_bar",  color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        left_side:       { mesh:"left_side",       color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        magdelene:       { mesh:"magdelene",       color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        raven:           { mesh:"raven",           color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        two_people:      { mesh:"two_people",      color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
+        two_people_back: { mesh:"two_people_back", color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 }
       },
 
       trackball: {
         type: TurnTableTrackball,
         trackOptions: {
-          // “Home” returns here — lower number = closer.
           startDistance: 2.0,
           minMaxDist: [0.005, 140.0],
           minMaxPhi: [-180, 180],
@@ -240,29 +242,24 @@
       }
     });
 
-    // ✅ Picking
-    presenter.enableOnHover(true);
+    // KEY LINES:
+    presenter.enableOnHover(true);              // enables hover highlighting
+    presenter._onPickedSpot = onPickedSpot;     // click handler
 
-    // Spot click
-    presenter._onPickedSpot = onPickedSpot;
-
-    // DEBUG: click on the main model (if this logs, picking is working)
-    presenter._onPickedInstance = function(id){
-      console.log("PICKED INSTANCE:", id);
-      setInfoPanel("Model Click", `<p>You clicked model instance: <code>${id}</code></p>`);
-    };
-
-    // ✅ show hotspots
-    presenter.setSpotVisibility(HOP_ALL, true, true);
+    // Hide overlays but keep them pickable:
+    // (3rd param = pickable even when invisible)
+    presenter.setSpotVisibility(HOP_ALL, false, true);
 
     presenter.resetTrackball();
     presenter.repaint();
 
-    setInfoPanel("Explore the rRthwell Cross", `<p>Hotspots are ON (visible). Try clicking the blue areas.</p>`);
+    setInfoPanel("Explore the Ruthwell Cross", `<p>Click a panel on the cross to learn more.</p>`);
   }
 
+  // 3DHOP init.js calls actionsToolbar(...) by itself, so keep this name.
   function actionsToolbar(action) {
     if (!presenter) return;
+
     if (action === "home") presenter.resetTrackball();
     else if (action === "zoomin") presenter.zoomIn();
     else if (action === "zoomout") presenter.zoomOut();
@@ -270,8 +267,8 @@
     else if (action === "screenshot") presenter.saveScreenshot();
     else if (action === "full") presenter.fullscreen();
     else if (action === "hotspot") {
-      hotspotsVisible = !hotspotsVisible;
-      presenter.setSpotVisibility(HOP_ALL, hotspotsVisible, true);
+      // toggle visibility of overlays (optional)
+      presenter.toggleSpotVisibility(HOP_ALL, true);
       presenter.enableOnHover(true);
     }
   }
@@ -279,6 +276,14 @@
   $(document).ready(function () {
     init3dhop();
     setup3dhop();
+
+    // Re-apply after init in case init.js overwrote anything
+    setTimeout(() => {
+      if (!presenter) return;
+      presenter.enableOnHover(true);
+      presenter._onPickedSpot = onPickedSpot;
+      presenter.setSpotVisibility(HOP_ALL, false, true);
+    }, 200);
   });
 
   window.addEventListener("resize", function () {
