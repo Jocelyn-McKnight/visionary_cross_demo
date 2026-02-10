@@ -1,3 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model</title>
+
+    <link rel="stylesheet" href="../../main.css">
+    <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
+
+    <!-- 3DHOP stylesheet -->
+    <link type="text/css" rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css"/>
+
+    <!-- 3DHOP scripts -->
+    <script type="text/javascript" src="../../3dhop/js/spidergl.js"></script>
+    <script type="text/javascript" src="../../3dhop/js/jquery.js"></script>
+    <script type="text/javascript" src="../../3dhop/js/presenter.js"></script>
+    <script type="text/javascript" src="../../3dhop/js/nexus.js"></script>
+    <script type="text/javascript" src="../../3dhop/js/ply.js"></script>
+    <script type="text/javascript" src="../../3dhop/js/trackball_sphere.js"></script>
+    <script type="text/javascript" src="../../3dhop/js/trackball_turntable.js"></script>
+    <script type="text/javascript" src="../../3dhop/js/trackball_turntable_pan.js"></script>
+    <script type="text/javascript" src="../../3dhop/js/trackball_pantilt.js"></script>
+    <script type="text/javascript" src="../../3dhop/js/init.js"></script>
+</head>
+
+<body>
+
+<header class="header">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
+
+    <div class="hamburger-menu">
+        <a href="../frontmatter/home.html">Home</a>
+
+        <div class="submenu-wrapper">
+            <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
+            <label for="submenu-toggle" class="submenu-label">Ruthwell</label>
+            <div class="submenu">
+                <a href="intro.html">Introduction</a>
+                <a href="model.html">Model</a>
+                <a href="ch1.html">About the Cross</a>
+                <a href="ch2.html">About the Scan</a>
+            </div>
+        </div>
+
+        <a href="../bewcastle/intro.html">Bewcastle</a>
+        <a href="../brussels/intro.html">Brussels</a>
+        <a href="../backmatter/table.html">Table of Contents</a>
+    </div>
+
+    <a href="../backmatter/table.html">
+        <img src="assests/img/head.jpg" alt="Project Image" title="The Ruthwell Cross">
+        <p class="header-text">Ruthwell</p>
+    </a>
+</header>
+
+<div id="3dhop" class="tdhop">
+    <div id="tdhlg"></div>
+
+    <div id="toolbar">
+        <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
+        <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
+        <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
+        <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
+        <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
+        <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
+    </div>
+
+    <canvas id="draw-canvas"
+        style="width: 100%; height: 100%; background-image: url(../../3dhop/skins/backgrounds/light.jpg)">
+    </canvas>
+</div>
+
 <script type="text/javascript">
   var presenter = null;
 
@@ -49,3 +123,14 @@
     setup3dhop();
   });
 </script>
+<div class="footer">
+    <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
+    <nav>
+        <a href="../frontmatter/history.html">Us</a> |
+        <a href="../backmattercontact.html">Contact</a> |
+        <a href="privacy.html">Privacy Policy</a>
+    </nav>
+</div>
+
+</body>
+</html>
