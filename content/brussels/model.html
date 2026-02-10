@@ -141,26 +141,13 @@
     </div>
 
 <script>
-  // IMPORTANT: global, because init.js expects it
   var presenter = null;
-  var _setupDone = false; // <- prevents double Presenter init
 
+  // Your hotspot panel content (keys MUST match your spot IDs)
   const INFO = {
-    angels:          { title: "Angels",           html: `<p><strong>Angels:</strong> Add your description here.</p>` },
-    archer:          { title: "Archer",           html: `<p><strong>Archer:</strong> Add your description here.</p>` },
-    bottom:          { title: "Bottom",           html: `<p><strong>Bottom:</strong> Add your description here.</p>` },
-    bottom_back:     { title: "Bottom (Back)",    html: `<p><strong>Bottom (Back):</strong> Add your description here.</p>` },
-    centre:          { title: "Centre",           html: `<p><strong>Centre:</strong> Add your description here.</p>` },
-    giving:          { title: "Giving",           html: `<p><strong>Giving:</strong> Add your description here.</p>` },
-    jesus:           { title: "Jesus",            html: `<p><strong>Jesus:</strong> Add your description here.</p>` },
-    jesus_and_guy:   { title: "Jesus and Figure", html: `<p><strong>Jesus and figure:</strong> Add your description here.</p>` },
-    lamb:            { title: "Lamb",             html: `<p><strong>Lamb:</strong> Add your description here.</p>` },
-    left_cross_bar:  { title: "Left Cross-Bar",   html: `<p><strong>Left cross-bar:</strong> Add your description here.</p>` },
-    left_side:       { title: "Left Side",        html: `<p><strong>Left side:</strong> Add your description here.</p>` },
-    magdelene:       { title: "Magdelene",        html: `<p><strong>Magdelene:</strong> Add your description here.</p>` },
-    raven:           { title: "Raven",            html: `<p><strong>Raven:</strong> Add your description here.</p>` },
-    two_people:      { title: "Two People",       html: `<p><strong>Two people:</strong> Add your description here.</p>` },
-    two_people_back: { title: "Two People (Back)",html: `<p><strong>Two people (back):</strong> Add your description here.</p>` }
+    angels_cut: { title: "Angels", html: `<p><strong>Angels:</strong> Add your description here.</p>` },
+    archer_cut: { title: "Archer", html: `<p><strong>Archer:</strong> Add your description here.</p>` },
+    // add the rest...
   };
 
   function setInfoPanel(title, html) {
@@ -168,69 +155,60 @@
     panel.innerHTML = `
       <h2>${title}</h2>
       ${html}
-      <p class="hint">Click another area on the cross to keep exploring.</p>
+      <p class="hint">Hover or click another area to keep exploring.</p>
     `;
   }
 
-  function onPickedSpot(id) {
-    console.log("PICKED SPOT:", id);
-    if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
-    else setInfoPanel("Hotspot", `<p>You clicked: <code>${id}</code></p>`);
+  function bindHotspots() {
+    if (!presenter) return;
+
+    // Ensure hover/picking is on
+    presenter.enableOnHover(true);
+
+    // Hover highlight + live panel update (optional)
+    presenter._onEnterSpot = function (id) {
+      // console.log("ENTER SPOT:", id);
+      if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
+    };
+
+    presenter._onLeaveSpot = function (id) {
+      // optional: do nothing
+    };
+
+    // Click handler
+    presenter._onPickedSpot = function (id) {
+      console.log("PICKED SPOT:", id);
+      if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
+      else setInfoPanel("Spot", `<p>Clicked: <code>${id}</code></p>`);
+    };
+
+    // IMPORTANT: hide overlays but KEEP pickable
+    presenter.setSpotVisibility(HOP_ALL, false, true);
   }
 
-  // init.js calls setup3dhop() in many 3DHOP setups, so we MUST keep this name.
   function setup3dhop() {
-    // ✅ prevents the “two presenters fighting” problem
-    if (_setupDone) return;
-    _setupDone = true;
-
     presenter = new Presenter("draw-canvas");
 
     presenter.setScene({
       meshes: {
-        // Full model
+        // FULL CROSS (your main model)
         ruthwell: { url: "assets/models/ruthwell.ply" },
 
-        // Hotspot cuts (must exist)
-        angels_cut:          { url: "assets/models/angels_cut.ply" },
-        archer_cut:          { url: "assets/models/archer_cut.ply" },
-        bottom_cut:          { url: "assets/models/bottom_cut.ply" },
-        bottom_back_cut:     { url: "assets/models/bottom_back_cut.ply" },
-        centre_cut:          { url: "assets/models/centre_cut.ply" },
-        giving_cut:          { url: "assets/models/giving_cut.ply" },
-        jesus_cut:           { url: "assets/models/jesus_cut.ply" },
-        jesus_and_guy_cut:   { url: "assets/models/jesus_and_guy_cut.ply" },
-        lamb_cut:            { url: "assets/models/lamb_cut.ply" },
-        left_cross_bar_cut:  { url: "assets/models/left_cross_bar_cut.ply" },
-        left_side_cut:       { url: "assets/models/left_side_cut.ply" },
-        magdelene_cut:       { url: "assets/models/magdelene_cut.ply" },
-        raven_cut:           { url: "assets/models/raven_cut.ply" },
-        two_people_cut:      { url: "assets/models/two_people_cut.ply" },
-        two_people_back_cut: { url: "assets/models/two_people_back_cut.ply" }
+        // HOTSPOT CUTS (EXAMPLES — change to your real filenames)
+        angels_cut: { url: "assets/models/angels_cut.ply" },
+        archer_cut: { url: "assets/models/archer_cut.ply" }
+        // add the rest...
       },
 
       modelInstances: {
         main: { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true }
       },
 
-      // Spot IDs match INFO keys; spot meshes point to *_cut meshes
-      // Make them very faint but VISIBLE so hover has something to brighten.
       spots: {
-        angels:          { mesh: "angels_cut",          color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        archer:          { mesh: "archer_cut",          color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        bottom:          { mesh: "bottom_cut",          color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        bottom_back:     { mesh: "bottom_back_cut",     color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        centre:          { mesh: "centre_cut",          color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        giving:          { mesh: "giving_cut",          color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        jesus:           { mesh: "jesus_cut",           color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        jesus_and_guy:   { mesh: "jesus_and_guy_cut",   color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        lamb:            { mesh: "lamb_cut",            color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        left_cross_bar:  { mesh: "left_cross_bar_cut",  color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        left_side:       { mesh: "left_side_cut",       color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        magdelene:       { mesh: "magdelene_cut",       color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        raven:           { mesh: "raven_cut",           color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        two_people:      { mesh: "two_people_cut",      color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
-        two_people_back: { mesh: "two_people_back_cut", color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 }
+        // IDs here MUST match INFO keys and mesh keys
+        angels_cut: { mesh: "angels_cut", color: [0.0, 0.5, 1.0], alpha: 0.20, alphaHigh: 0.55 },
+        archer_cut: { mesh: "archer_cut", color: [0.0, 0.5, 1.0], alpha: 0.20, alphaHigh: 0.55 }
+        // add the rest...
       },
 
       trackball: {
@@ -244,44 +222,30 @@
       }
     });
 
-    // Enable hover + click hotspots
-    presenter.enableOnHover(true);
-    presenter._onPickedSpot = onPickedSpot;
-
-    // Ensure spots are considered visible/pickable
-    presenter.setSpotVisibility(HOP_ALL, true, true);
-
     presenter.resetTrackball();
     presenter.repaint();
 
-    setInfoPanel("Explore the Ruthwell Cross", `<p>Hover a panel to highlight it. Click to learn more.</p>`);
-  }
+    // Bind once now (works on many setups)
+    bindHotspots();
 
-  // init.js expects this function name for toolbar icons
-  function actionsToolbar(action) {
-    if (!presenter) return;
-    if (action === "home") presenter.resetTrackball();
-    else if (action === "zoomin") presenter.zoomIn();
-    else if (action === "zoomout") presenter.zoomOut();
-    else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
-    else if (action === "screenshot") presenter.saveScreenshot();
-    else if (action === "full") presenter.fullscreen();
+    setInfoPanel("Explore the Ruthwell Cross", `<p>Hover or click a panel on the cross to learn more.</p>`);
   }
 
   $(document).ready(function () {
-    // Keep this — you said removing breaks other stuff.
+    // 1) init sets up default 3DHOP handlers/UI
     init3dhop();
 
-    // Also keep this — but safe because setup3dhop() is guarded.
+    // 2) create our scene
     setup3dhop();
 
-    // Re-apply once after init3dhop in case it toggled something.
-    setTimeout(() => {
-      if (!presenter) return;
-      presenter.enableOnHover(true);
-      presenter._onPickedSpot = onPickedSpot;
-      presenter.setSpotVisibility(HOP_ALL, true, true);
-    }, 200);
+    // 3) SAFETY RE-BIND: init3dhop (or other scripts) sometimes overwrite handlers AFTER load.
+    // Re-apply bindings a moment later, after everything settles.
+    setTimeout(bindHotspots, 250);
+    setTimeout(bindHotspots, 1000);
+  });
+
+  window.addEventListener("resize", function () {
+    if (presenter) presenter.repaint();
   });
 </script>
 
