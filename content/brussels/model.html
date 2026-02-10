@@ -236,7 +236,7 @@
             type: TurnTableTrackball,
             trackOptions: {
               startDistance: 2.0,
-              minMaxDist: [0.005, 140.0],
+              minMaxDist: [4.0, 140.0],
               minMaxPhi: [-180, 180],
               minMaxTheta: [-85.0, 85.0]
             }
@@ -252,6 +252,19 @@
         presenter.toggleSpotVisibility(HOP_ALL, true); // ensures internal state is set
         presenter.setSpotVisibility(HOP_ALL, false, true);
         hotspotsVisible = false;
+
+        // Make sure hotspots are actually pickable (init3dhop can disable this)
+        presenter.enableOnHover(true);
+
+        // Start with spots visible for testing (you can hide later)
+        presenter.setSpotVisibility(HOP_ALL, true, true);
+
+        // Bind click handler
+        presenter._onPickedSpot = function(id) {
+          console.log("PICKED SPOT:", id);
+          onPickedSpot(id);
+        };
+
 
         presenter.resetTrackball();
         setTimeout(() => presenter.repaint(), 120);
@@ -272,11 +285,12 @@
         else if (action === "screenshot") presenter.saveScreenshot();
         else if (action === "full") presenter.fullscreen();
         else if (action === "hotspot") {
-          hotspotsVisible = !hotspotsVisible;
-          presenter.setSpotVisibility(HOP_ALL, hotspotsVisible, true);
+          // demo-style toggle (more reliable than setSpotVisibility alone)
+          presenter.toggleSpotVisibility(HOP_ALL, true);
           presenter.enableOnHover(true);
         }
       }
+
 
       $(document).ready(function () {
         // Keep both, as you requested
