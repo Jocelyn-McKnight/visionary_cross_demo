@@ -186,7 +186,6 @@
 
         presenter.setScene({
           meshes: {
-            ruthwell:         { url: "assets/models/ruthwell.ply" }, 
 
             angels:           { url: "assets/models/angels.ply" },
             archer:           { url: "assets/models/archer.ply" },
@@ -207,7 +206,7 @@
 
           modelInstances: {
             main: {
-              mesh: "ruthwell",            // <-- must match the mesh name above
+              mesh: "angels",            // <-- must match the mesh name above
               color: [0.8, 0.7, 0.75],
               visible: true
             }
@@ -233,15 +232,21 @@
           },
 
           trackball: {
-            type: TurnTableTrackball,
+            type: TurnTablePanTrackball,
             trackOptions: {
               startDistance: 2.0,
-              minMaxDist: [4.0, 140.0],
+              minMaxDist: [0.005, 140.0],
               minMaxPhi: [-180, 180],
               minMaxTheta: [-85.0, 85.0]
             }
           }
         });
+
+        setTimeout(() => {
+  console.log("Hover enabled:", presenter.isOnHoverEnabled && presenter.isOnHoverEnabled());
+  presenter.setSpotVisibility(HOP_ALL, true, true);
+  presenter.enableOnHover(true);
+}, 800);
 
         presenter.enableOnHover(true);
         presenter._onPickedSpot = onPickedSpot;
