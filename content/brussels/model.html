@@ -201,6 +201,15 @@
               visible: true
             }
           },
+          
+          // DEBUG: force hotspots ON and visible so we can confirm picking works
+          presenter.setSpotVisibility(HOP_ALL, true, true);
+          presenter.enableOnHover(true);
+
+          presenter._onPickedSpot = function(id){
+            console.log("PICKED SPOT:", id);
+            onPickedSpot(id);
+          };
 
           // Spots: defined normally (no alpha=0 needed). We'll hide them with setSpotVisibility.
           spots: {
