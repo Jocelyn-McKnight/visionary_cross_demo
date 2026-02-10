@@ -136,8 +136,8 @@
 
       <aside id="infoPanel" aria-live="polite">
         <h2>Explore the Brussels Cross</h2>
-        <p>Hotspot debug mode: hotspots are visible.</p>
-        <p class="hint">If you see no blue overlays, the hotspot PLYs aren’t loading or aren’t aligned.</p>
+        <p><strong>Debug mode:</strong> hotspots should be visible (blue).</p>
+        <p class="hint">If you see the blue overlays but clicking does nothing, we’ll fix picking. If you see NO blue overlays, the hotspot PLYs aren’t loading or aren’t aligned.</p>
       </aside>
     </div>
 
@@ -172,7 +172,6 @@
   }
 
   function onPickedSpot(id) {
-    // If this logs, hotspot picking is working.
     console.log("PICKED SPOT:", id);
     if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
     else setInfoPanel("Info", `<p>Clicked hotspot: <code>${id}</code></p>`);
@@ -205,30 +204,29 @@
       },
 
       modelInstances: {
-        main: {
-          mesh: "ruthwell",
-          color: [0.8, 0.7, 0.75],
-          visible: true
-        }
+        main: { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true },
+
+        // DIAGNOSTIC: force-render one cut so you can confirm it loads + aligns
+        angels_debug: { mesh: "angels", color: [0.0, 0.6, 1.0], visible: false }
       },
 
-      // IMPORTANT: alpha=0 means invisible, alphaHigh makes it appear on hover
+      // ✅ IMPORTANT: spots MUST exist to be clickable
       spots: {
-        angels:          { mesh:"angels",          color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        archer:          { mesh:"archer",          color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        bottom:          { mesh:"bottom",          color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        bottom_back:     { mesh:"bottom_back",     color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        centre:          { mesh:"centre",          color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        giving:          { mesh:"giving",          color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        jesus:           { mesh:"jesus",           color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        jesus_and_guy:   { mesh:"jesus_and_guy",   color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        lamb:            { mesh:"lamb",            color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        left_cross_bar:  { mesh:"left_cross_bar",  color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        left_side:       { mesh:"left_side",       color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        magdelene:       { mesh:"magdelene",       color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        raven:           { mesh:"raven",           color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        two_people:      { mesh:"two_people",      color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 },
-        two_people_back: { mesh:"two_people_back", color:[0.0,0.5,1.0], alpha:0.0, alphaHigh:0.55 }
+        angels:          { mesh: "angels",          color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        archer:          { mesh: "archer",          color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        bottom:          { mesh: "bottom",          color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        bottom_back:     { mesh: "bottom_back",     color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        centre:          { mesh: "centre",          color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        giving:          { mesh: "giving",          color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        jesus:           { mesh: "jesus",           color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        jesus_and_guy:   { mesh: "jesus_and_guy",   color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        lamb:            { mesh: "lamb",            color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        left_cross_bar:  { mesh: "left_cross_bar",  color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        left_side:       { mesh: "left_side",       color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        magdelene:       { mesh: "magdelene",       color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        raven:           { mesh: "raven",           color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        two_people:      { mesh: "two_people",      color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 },
+        two_people_back: { mesh: "two_people_back", color:[0.0,0.5,1.0], alpha:0.25, alphaHigh:0.60 }
       },
 
       trackball: {
@@ -242,21 +240,19 @@
       }
     });
 
-    // KEY LINES:
-    presenter.enableOnHover(true);              // enables hover highlighting
-    presenter._onPickedSpot = onPickedSpot;     // click handler
+    // Enable hover + click picking
+    presenter.enableOnHover(true);
+    presenter._onPickedSpot = onPickedSpot;
 
-    // Hide overlays but keep them pickable:
-    // (3rd param = pickable even when invisible)
-    presenter.setSpotVisibility(HOP_ALL, false, true);
+    // DEBUG: show hotspot overlays so you can see them + click them
+    presenter.setSpotVisibility(HOP_ALL, true, true);
 
     presenter.resetTrackball();
     presenter.repaint();
 
-    setInfoPanel("Explore the Ruthwell Cross", `<p>Click a panel on the cross to learn more.</p>`);
+    setInfoPanel("Explore the Brussels Cross", `<p>Click a blue panel to test hotspots. Open Console to see PICKED SPOT logs.</p>`);
   }
 
-  // 3DHOP init.js calls actionsToolbar(...) by itself, so keep this name.
   function actionsToolbar(action) {
     if (!presenter) return;
 
@@ -267,7 +263,6 @@
     else if (action === "screenshot") presenter.saveScreenshot();
     else if (action === "full") presenter.fullscreen();
     else if (action === "hotspot") {
-      // toggle visibility of overlays (optional)
       presenter.toggleSpotVisibility(HOP_ALL, true);
       presenter.enableOnHover(true);
     }
