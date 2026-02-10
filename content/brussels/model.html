@@ -130,6 +130,57 @@
             <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
           </div>
 
+                    <!-- Right tools -->
+          <div id="right_tolbar" style="position: fixed; right: 1%; top:0%; z-index:2;">
+
+            <!-- Start COMPASS -->
+            <br>
+            <div style=" border-radius: 5px; font-family:verdana; font-size:15px; padding:3px;">
+              <div id="compassC">
+                <canvas id="compassCanvas"
+                  style="background:#555555; width:145; height:145; border:2px solid #000000;"
+                  onclick="compassClick(event);" width="145" height="145">
+                </canvas>
+              </div>
+              <br>
+              <table id="mvc_table">
+                <tbody>
+
+                  <!----***************** Start manager MOVE ******************-->
+                  <br />
+                  <tr>
+                    <td></td>
+                    <td>
+                      <img class="move_ up" id="move_up" title="Move Up" src="img/Arrow.png" />
+                    </td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><img class="move_ left" id="move_left" title="Move Leftt" src="img/Arrow.png" />
+                    </td>
+
+                    <td>
+                      <img id="Top" title="Top" src="img/Top_m.png" />
+                    </td>
+
+                    <td><img class="move_ right" id="move_right" title="Move Right" src="img/Arrow.png" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>
+                      <img class="move_ down" id="move_down" title="Move Down" src="img/Arrow.png" />
+                    </td>
+                    <td></td>
+                  </tr>
+                  <!----***************** End manager MOVE ******************-->
+
+                </tbody>
+              </table>
+            </div>
+            <!-- End COMPASS -->
+          </div>
+
           <canvas id="draw-canvas"></canvas>
         </div>
       </div>
@@ -184,7 +235,7 @@
     presenter.setScene({
       meshes: {
         // FULL CROSS MODEL (change filename if needed)
-        brussels:        { url: "assets/models/brussels.ply" },
+        ruthwell:        { url: "assets/models/ruthwell.ply" },
 
         // HOTSPOT CUTS (must align with the full model)
         angels_cut:          { url: "assets/models/angels_cut.ply" },
@@ -206,7 +257,7 @@
 
       modelInstances: {
         main: {
-          mesh: "brussels",
+          mesh: "ruthwell",
           color: [0.8, 0.7, 0.75],
           visible: true
         }
