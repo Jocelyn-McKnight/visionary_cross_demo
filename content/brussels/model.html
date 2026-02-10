@@ -144,176 +144,127 @@
       </aside>
     </div>
 
-    <script>
-      var presenter = null;
-      var hotspotsVisible = false;
+<script>
+  var presenter = null;
 
-      const INFO = {
-        angels:          { title: "Angels",           html: `<p><strong>Angels:</strong> Add your description here.</p>` },
-        archer:          { title: "Archer",           html: `<p><strong>Archer:</strong> Add your description here.</p>` },
-        bottom:          { title: "Bottom",           html: `<p><strong>Bottom:</strong> Add your description here.</p>` },
-        bottom_back:     { title: "Bottom (Back)",    html: `<p><strong>Bottom (Back):</strong> Add your description here.</p>` },
-        centre:          { title: "Centre",           html: `<p><strong>Centre:</strong> Add your description here.</p>` },
-        giving:          { title: "Giving",           html: `<p><strong>Giving:</strong> Add your description here.</p>` },
-        jesus:           { title: "Jesus",            html: `<p><strong>Jesus:</strong> Add your description here.</p>` },
-        jesus_and_guy:   { title: "Jesus and Figure", html: `<p><strong>Jesus and figure:</strong> Add your description here.</p>` },
-        lamb:            { title: "Lamb",             html: `<p><strong>Lamb:</strong> Add your description here.</p>` },
-        left_cross_bar:  { title: "Left Cross-Bar",   html: `<p><strong>Left cross-bar:</strong> Add your description here.</p>` },
-        left_side:       { title: "Left Side",        html: `<p><strong>Left side:</strong> Add your description here.</p>` },
-        magdelene:       { title: "Magdelene",        html: `<p><strong>Magdelene:</strong> Add your description here.</p>` },
-        raven:           { title: "Raven",            html: `<p><strong>Raven:</strong> Add your description here.</p>` },
-        two_people:      { title: "Two People",       html: `<p><strong>Two people:</strong> Add your description here.</p>` },
-        two_people_back: { title: "Two People (Back)",html: `<p><strong>Two people (back):</strong> Add your description here.</p>` }
-      };
+  const INFO = {
+    angels:          { title: "Angels", html: `<p><strong>Angels:</strong> Add your description here.</p>` },
+    archer:          { title: "Archer", html: `<p><strong>Archer:</strong> Add your description here.</p>` },
+    bottom:          { title: "Bottom", html: `<p><strong>Bottom:</strong> Add your description here.</p>` },
+    bottom_back:     { title: "Bottom (Back)", html: `<p><strong>Bottom (Back):</strong> Add your description here.</p>` },
+    centre:          { title: "Centre", html: `<p><strong>Centre:</strong> Add your description here.</p>` },
+    giving:          { title: "Giving", html: `<p><strong>Giving:</strong> Add your description here.</p>` },
+    jesus:           { title: "Jesus", html: `<p><strong>Jesus:</strong> Add your description here.</p>` },
+    jesus_and_guy:   { title: "Jesus and Figure", html: `<p><strong>Jesus and figure:</strong> Add your description here.</p>` },
+    lamb:            { title: "Lamb", html: `<p><strong>Lamb:</strong> Add your description here.</p>` },
+    left_cross_bar:  { title: "Left Cross-Bar", html: `<p><strong>Left cross-bar:</strong> Add your description here.</p>` },
+    left_side:       { title: "Left Side", html: `<p><strong>Left side:</strong> Add your description here.</p>` },
+    magdelene:       { title: "Magdelene", html: `<p><strong>Magdelene:</strong> Add your description here.</p>` },
+    raven:           { title: "Raven", html: `<p><strong>Raven:</strong> Add your description here.</p>` },
+    two_people:      { title: "Two People", html: `<p><strong>Two people:</strong> Add your description here.</p>` },
+    two_people_back: { title: "Two People (Back)", html: `<p><strong>Two people (back):</strong> Add your description here.</p>` }
+  };
 
-      function setInfoPanel(title, html) {
-        const panel = document.getElementById("infoPanel");
-        panel.innerHTML = `
-          <h2>${title}</h2>
-          ${html}
-          <p class="hint">Click another area on the cross to keep exploring.</p>
-        `;
-      }
+  function setInfoPanel(title, html) {
+    const panel = document.getElementById("infoPanel");
+    panel.innerHTML = `<h2>${title}</h2>${html}<p class="hint">Click another area on the cross to keep exploring.</p>`;
+  }
 
-      function onPickedSpot(id) {
-        console.log("PICKED SPOT:", id);
-        if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
-        else setInfoPanel("Info", `<p>Clicked: <code>${id}</code></p>`);
-      }
+  function onPickedSpot(id) {
+    console.log("PICKED SPOT:", id);
+    if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
+    else setInfoPanel("Info", `<p>Clicked: <code>${id}</code></p>`);
+  }
 
-      function setup3dhop() {
-        presenter = new Presenter("draw-canvas");
+  function setup3dhop() {
+    presenter = new Presenter("draw-canvas");
 
-        presenter.setScene({
-          meshes: {
+    presenter.setScene({
+      meshes: {
+        // IMPORTANT: this must be your FULL cross model file
+        // Change brussels.ply to whatever your full model file is named
+        brussels:        { url: "assets/models/ruthwell.ply" },
 
-            angels:           { url: "assets/models/angels.ply" },
-            archer:           { url: "assets/models/archer.ply" },
-            bottom:           { url: "assets/models/bottom.ply" },
-            bottom_back:      { url: "assets/models/bottom_back.ply" },
-            centre:           { url: "assets/models/centre.ply" },
-            giving:           { url: "assets/models/giving.ply" },
-            jesus:            { url: "assets/models/jesus.ply" },
-            jesus_and_guy:    { url: "assets/models/jesus_and_guy.ply" },
-            lamb:             { url: "assets/models/lamb.ply" },
-            left_cross_bar:   { url: "assets/models/left_cross_bar.ply" },
-            left_side:        { url: "assets/models/left_side.ply" },
-            magdelene:        { url: "assets/models/magdelene.ply" },
-            raven:            { url: "assets/models/raven.ply" },
-            two_people:       { url: "assets/models/two_people.ply" },
-            two_people_back:  { url: "assets/models/two_people_back.ply" }
-          },
+        angels:          { url: "assets/models/angels.ply" },
+        archer:          { url: "assets/models/archer.ply" },
+        bottom:          { url: "assets/models/bottom.ply" },
+        bottom_back:     { url: "assets/models/bottom_back.ply" },
+        centre:          { url: "assets/models/centre.ply" },
+        giving:          { url: "assets/models/giving.ply" },
+        jesus:           { url: "assets/models/jesus.ply" },
+        jesus_and_guy:   { url: "assets/models/jesus_and_guy.ply" },
+        lamb:            { url: "assets/models/lamb.ply" },
+        left_cross_bar:  { url: "assets/models/left_cross_bar.ply" },
+        left_side:       { url: "assets/models/left_side.ply" },
+        magdelene:       { url: "assets/models/magdelene.ply" },
+        raven:           { url: "assets/models/raven.ply" },
+        two_people:      { url: "assets/models/two_people.ply" },
+        two_people_back: { url: "assets/models/two_people_back.ply" }
+      },
 
-          modelInstances: {
-            main: {
-              mesh: "angels",            // <-- must match the mesh name above
-              color: [0.8, 0.7, 0.75],
-              visible: true
-            }
-          },
+      modelInstances: {
+        main: { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true }
+      },
 
-          // KEY CHANGE: define spots as actual spot instances (like the demo)
-          spots: {
-            angels:          { mesh: "angels",          color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            archer:          { mesh: "archer",          color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            bottom:          { mesh: "bottom",          color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            bottom_back:     { mesh: "bottom_back",     color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            centre:          { mesh: "centre",          color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            giving:          { mesh: "giving",          color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            jesus:           { mesh: "jesus",           color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            jesus_and_guy:   { mesh: "jesus_and_guy",   color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            lamb:            { mesh: "lamb",            color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            left_cross_bar:  { mesh: "left_cross_bar",  color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            left_side:       { mesh: "left_side",       color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            magdelene:       { mesh: "magdelene",       color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            raven:           { mesh: "raven",           color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            two_people:      { mesh: "two_people",      color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 },
-            two_people_back: { mesh: "two_people_back", color: [0.0, 0.5, 1.0], alpha: 0.35, alphaHigh: 0.75 }
-          },
+      spots: {
+        angels:          { mesh: "angels",          color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        archer:          { mesh: "archer",          color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        bottom:          { mesh: "bottom",          color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        bottom_back:     { mesh: "bottom_back",     color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        centre:          { mesh: "centre",          color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        giving:          { mesh: "giving",          color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        jesus:           { mesh: "jesus",           color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        jesus_and_guy:   { mesh: "jesus_and_guy",   color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        lamb:            { mesh: "lamb",            color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        left_cross_bar:  { mesh: "left_cross_bar",  color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        left_side:       { mesh: "left_side",       color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        magdelene:       { mesh: "magdelene",       color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        raven:           { mesh: "raven",           color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        two_people:      { mesh: "two_people",      color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
+        two_people_back: { mesh: "two_people_back", color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 }
+      },
 
-          trackball: {
-            type: TurnTablePanTrackball,
-            trackOptions: {
-              startDistance: 2.0,
-              minMaxDist: [0.005, 140.0],
-              minMaxPhi: [-180, 180],
-              minMaxTheta: [-85.0, 85.0]
-            }
-          }
-        });
-
-        setTimeout(() => {
-  console.log("Hover enabled:", presenter.isOnHoverEnabled && presenter.isOnHoverEnabled());
-  presenter.setSpotVisibility(HOP_ALL, true, true);
-  presenter.enableOnHover(true);
-}, 800);
-
-        presenter.enableOnHover(true);
-        presenter._onPickedSpot = onPickedSpot;
-
-        // Start with hotspots hidden but still pickable:
-        // Some builds treat "hidden" as non-pickable; so we do this:
-        presenter.setSpotVisibility(HOP_ALL, true, true);
-        presenter.toggleSpotVisibility(HOP_ALL, true); // ensures internal state is set
-        presenter.setSpotVisibility(HOP_ALL, false, true);
-        hotspotsVisible = false;
-
-        // Make sure hotspots are actually pickable (init3dhop can disable this)
-        presenter.enableOnHover(true);
-
-        // Start with spots visible for testing (you can hide later)
-        presenter.setSpotVisibility(HOP_ALL, true, true);
-
-        // Bind click handler
-        presenter._onPickedSpot = function(id) {
-          console.log("PICKED SPOT:", id);
-          onPickedSpot(id);
-        };
-
-
-        presenter.resetTrackball();
-        setTimeout(() => presenter.repaint(), 120);
-
-        setInfoPanel(
-          "Explore the Brussels Cross",
-          `<p>Click a panel on the cross to learn more.</p>`
-        );
-      }
-
-      function actionsToolbar(action) {
-        if (!presenter) return;
-
-        if (action === "home") presenter.resetTrackball();
-        else if (action === "zoomin") presenter.zoomIn();
-        else if (action === "zoomout") presenter.zoomOut();
-        else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
-        else if (action === "screenshot") presenter.saveScreenshot();
-        else if (action === "full") presenter.fullscreen();
-        else if (action === "hotspot") {
-          // demo-style toggle (more reliable than setSpotVisibility alone)
-          presenter.toggleSpotVisibility(HOP_ALL, true);
-          presenter.enableOnHover(true);
+      trackball: {
+        // ✅ correct name for the pan turntable in your build:
+        type: TurnTablePanTrackball,
+        trackOptions: {
+          startDistance: 2.0,
+          minMaxDist: [0.005, 140.0],
+          minMaxPhi: [-180, 180],
+          minMaxTheta: [-85.0, 85.0]
         }
       }
+    });
 
+    // Bind picking
+    presenter.enableOnHover(true);
+    presenter._onPickedSpot = onPickedSpot;
 
-      $(document).ready(function () {
-        // Keep both, as you requested
-        init3dhop();
-        setup3dhop();
+    // SHOW hotspots while testing so you can see + click them
+    presenter.setSpotVisibility(HOP_ALL, true, true);
 
-        // Re-bind in case init3dhop overwrites handlers
-        setTimeout(() => {
-          if (!presenter) return;
-          presenter.enableOnHover(true);
-          presenter._onPickedSpot = onPickedSpot;
-        }, 400);
-      });
+    presenter.resetTrackball();
+    presenter.repaint();
 
-      window.addEventListener("resize", function () {
-        if (presenter) presenter.repaint();
-      });
-    </script>
+    setInfoPanel("Explore the Brussels Cross", `<p>Click a panel on the cross to learn more.</p>`);
+  }
+
+  function actionsToolbar(action) {
+    if (!presenter) return;
+    if (action === "home") presenter.resetTrackball();
+    else if (action === "zoomin") presenter.zoomIn();
+    else if (action === "zoomout") presenter.zoomOut();
+    else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+    else if (action === "screenshot") presenter.saveScreenshot();
+    else if (action === "full") presenter.fullscreen();
+    else if (action === "hotspot") presenter.toggleSpotVisibility(HOP_ALL, true);
+  }
+
+  $(document).ready(function () {
+    init3dhop();
+    setup3dhop();
+  });
+</script>
 
   </main>
 </body>
