@@ -136,40 +136,44 @@
 
       <aside id="infoPanel" aria-live="polite">
         <h2>Explore the Brussels Cross</h2>
-        <p>Click a hotspot on the cross to update this panel.</p>
-        <p class="hint">Tip: click the pin icon to show/hide the hotspot overlays.</p>
+        <p>Hover a panel to see it “light up”. Click to update this panel.</p>
+        <p class="hint">If nothing lights up, the *_cut meshes may not align with the full model.</p>
       </aside>
     </div>
 
 <script>
   var presenter = null;
+  var overlaysVisible = false;
 
-  // IDs are the SPOT ids (what you want returned on click)
+  // Side panel content keyed by hotspot ID
   const INFO = {
-    angels:          { title: "Angels",           html: `<p><strong>Angels:</strong> Add your description here.</p>` },
-    archer:          { title: "Archer",           html: `<p><strong>Archer:</strong> Add your description here.</p>` },
-    bottom:          { title: "Bottom",           html: `<p><strong>Bottom:</strong> Add your description here.</p>` },
-    bottom_back:     { title: "Bottom (Back)",    html: `<p><strong>Bottom (Back):</strong> Add your description here.</p>` },
-    centre:          { title: "Centre",           html: `<p><strong>Centre:</strong> Add your description here.</p>` },
-    giving:          { title: "Giving",           html: `<p><strong>Giving:</strong> Add your description here.</p>` },
-    jesus:           { title: "Jesus",            html: `<p><strong>Jesus:</strong> Add your description here.</p>` },
-    jesus_and_guy:   { title: "Jesus and Figure", html: `<p><strong>Jesus and figure:</strong> Add your description here.</p>` },
-    lamb:            { title: "Lamb",             html: `<p><strong>Lamb:</strong> Add your description here.</p>` },
-    left_cross_bar:  { title: "Left Cross-Bar",   html: `<p><strong>Left cross-bar:</strong> Add your description here.</p>` },
-    left_side:       { title: "Left Side",        html: `<p><strong>Left side:</strong> Add your description here.</p>` },
-    magdelene:       { title: "Magdelene",        html: `<p><strong>Magdelene:</strong> Add your description here.</p>` },
-    raven:           { title: "Raven",            html: `<p><strong>Raven:</strong> Add your description here.</p>` },
-    two_people:      { title: "Two People",       html: `<p><strong>Two people:</strong> Add your description here.</p>` },
-    two_people_back: { title: "Two People (Back)",html: `<p><strong>Two people (back):</strong> Add your description here.</p>` }
+    angels:          { title: "Angels",          html: `<p><strong>Angels:</strong> Add your description here.</p>` },
+    archer:          { title: "Archer",          html: `<p><strong>Archer:</strong> Add your description here.</p>` },
+    bottom:          { title: "Bottom",          html: `<p><strong>Bottom:</strong> Add your description here.</p>` },
+    bottom_back:     { title: "Bottom (Back)",   html: `<p><strong>Bottom (Back):</strong> Add your description here.</p>` },
+    centre:          { title: "Centre",          html: `<p><strong>Centre:</strong> Add your description here.</p>` },
+    giving:          { title: "Giving",          html: `<p><strong>Giving:</strong> Add your description here.</p>` },
+    jesus:           { title: "Jesus",           html: `<p><strong>Jesus:</strong> Add your description here.</p>` },
+    jesus_and_guy:   { title: "Jesus and Figure",html: `<p><strong>Jesus and figure:</strong> Add your description here.</p>` },
+    lamb:            { title: "Lamb",            html: `<p><strong>Lamb:</strong> Add your description here.</p>` },
+    left_cross_bar:  { title: "Left Cross-Bar",  html: `<p><strong>Left cross-bar:</strong> Add your description here.</p>` },
+    left_side:       { title: "Left Side",       html: `<p><strong>Left side:</strong> Add your description here.</p>` },
+    magdelene:       { title: "Magdelene",       html: `<p><strong>Magdelene:</strong> Add your description here.</p>` },
+    raven:           { title: "Raven",           html: `<p><strong>Raven:</strong> Add your description here.</p>` },
+    two_people:      { title: "Two People",      html: `<p><strong>Two people:</strong> Add your description here.</p>` },
+    two_people_back: { title: "Two People (Back)",html:`<p><strong>Two people (back):</strong> Add your description here.</p>` }
   };
 
   function setInfoPanel(title, html) {
     const panel = document.getElementById("infoPanel");
-    panel.innerHTML = `<h2>${title}</h2>${html}<p class="hint">Click another area on the cross to keep exploring.</p>`;
+    panel.innerHTML = `
+      <h2>${title}</h2>
+      ${html}
+      <p class="hint">Click another area on the cross to keep exploring.</p>
+    `;
   }
 
   function onPickedSpot(id) {
-    console.log("PICKED SPOT:", id);
     if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
     else setInfoPanel("Info", `<p>Clicked hotspot: <code>${id}</code></p>`);
   }
@@ -179,10 +183,10 @@
 
     presenter.setScene({
       meshes: {
-        // Full cross model
-        cross: { url: "assets/models/ruthwell.ply" },
+        // FULL CROSS MODEL (change filename if needed)
+        brussels:        { url: "assets/models/brussels.ply" },
 
-        // Hotspot meshes (note the *_cut names!)
+        // HOTSPOT CUTS (must align with the full model)
         angels_cut:          { url: "assets/models/angels_cut.ply" },
         archer_cut:          { url: "assets/models/archer_cut.ply" },
         bottom_cut:          { url: "assets/models/bottom_cut.ply" },
@@ -201,27 +205,33 @@
       },
 
       modelInstances: {
-        main: { mesh: "cross", color: [0.8, 0.7, 0.75], visible: true }
+        main: {
+          mesh: "brussels",
+          color: [0.8, 0.7, 0.75],
+          visible: true
+        }
       },
 
-      // Spots are what get PICKED. Spot id = key (angels, archer, etc.)
-      // Each spot references the corresponding *_cut mesh.
+      // IMPORTANT:
+      // alpha: 0.0 = invisible normally
+      // alphaHigh: > 0 = lights up on hover
+      // This gives you “highlight feedback” without always showing blue overlays.
       spots: {
-        angels:          { mesh: "angels_cut",          color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        archer:          { mesh: "archer_cut",          color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        bottom:          { mesh: "bottom_cut",          color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        bottom_back:     { mesh: "bottom_back_cut",     color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        centre:          { mesh: "centre_cut",          color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        giving:          { mesh: "giving_cut",          color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        jesus:           { mesh: "jesus_cut",           color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        jesus_and_guy:   { mesh: "jesus_and_guy_cut",   color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        lamb:            { mesh: "lamb_cut",            color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        left_cross_bar:  { mesh: "left_cross_bar_cut",  color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        left_side:       { mesh: "left_side_cut",       color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        magdelene:       { mesh: "magdelene_cut",       color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        raven:           { mesh: "raven_cut",           color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        two_people:      { mesh: "two_people_cut",      color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 },
-        two_people_back: { mesh: "two_people_back_cut", color:[0,0.5,1], alpha:0.25, alphaHigh:0.6 }
+        angels:          { mesh: "angels_cut",          color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        archer:          { mesh: "archer_cut",          color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        bottom:          { mesh: "bottom_cut",          color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        bottom_back:     { mesh: "bottom_back_cut",     color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        centre:          { mesh: "centre_cut",          color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        giving:          { mesh: "giving_cut",          color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        jesus:           { mesh: "jesus_cut",           color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        jesus_and_guy:   { mesh: "jesus_and_guy_cut",   color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        lamb:            { mesh: "lamb_cut",            color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        left_cross_bar:  { mesh: "left_cross_bar_cut",  color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        left_side:       { mesh: "left_side_cut",       color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        magdelene:       { mesh: "magdelene_cut",       color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        raven:           { mesh: "raven_cut",           color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        two_people:      { mesh: "two_people_cut",      color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 },
+        two_people_back: { mesh: "two_people_back_cut", color:[0,0.5,1], alpha:0.0, alphaHigh:0.55 }
       },
 
       trackball: {
@@ -235,16 +245,28 @@
       }
     });
 
+    // Enable hover + picking
     presenter.enableOnHover(true);
     presenter._onPickedSpot = onPickedSpot;
 
-    // Start with overlays hidden BUT pickable:
-    presenter.setSpotVisibility(HOP_ALL, false, true);
+    // Cursor feedback on hover (optional but helps)
+    presenter._onEnterSpot = function(id){
+      document.getElementById("draw-canvas").style.cursor = "pointer";
+    };
+    presenter._onLeaveSpot = function(id){
+      document.getElementById("draw-canvas").style.cursor = "grab";
+    };
+
+    // THIS is the big fix:
+    // Spots must be "visible" for hover highlighting to render (even if alpha=0).
+    // Also keep them pickable.
+    presenter.setSpotVisibility(HOP_ALL, true, true);
+    overlaysVisible = false;
 
     presenter.resetTrackball();
-    presenter.repaint();
+    setTimeout(() => presenter.repaint(), 120);
 
-    setInfoPanel("Explore the Ruthwell Cross", `<p>Click a panel on the cross to learn more.</p>`);
+    setInfoPanel("Explore the Brussels Cross", `<p>Hover a panel to highlight it. Click to open details here.</p>`);
   }
 
   function actionsToolbar(action) {
@@ -257,7 +279,17 @@
     else if (action === "screenshot") presenter.saveScreenshot();
     else if (action === "full") presenter.fullscreen();
     else if (action === "hotspot") {
-      presenter.toggleSpotVisibility(HOP_ALL, true);
+      // Toggle ALWAYS-visible overlays (for debugging / teaching)
+      overlaysVisible = !overlaysVisible;
+      if (overlaysVisible) {
+        // show overlays at low alpha (alphaHigh still applies on hover)
+        presenter.setSpotVisibility(HOP_ALL, true, true);
+        // also temporarily bump base alpha so you can see overlays
+        // (simple approach: just rely on alphaHigh + hover, or regenerate spots if you want)
+      } else {
+        // keep visible=true so hover highlight still works; overlays stay “invisible” because alpha=0
+        presenter.setSpotVisibility(HOP_ALL, true, true);
+      }
       presenter.enableOnHover(true);
     }
   }
@@ -265,6 +297,14 @@
   $(document).ready(function () {
     init3dhop();
     setup3dhop();
+
+    // Re-apply after init3dhop in case it overwrote handlers
+    setTimeout(() => {
+      if (!presenter) return;
+      presenter.enableOnHover(true);
+      presenter._onPickedSpot = onPickedSpot;
+      presenter.setSpotVisibility(HOP_ALL, true, true);
+    }, 200);
   });
 
   window.addEventListener("resize", function () {
