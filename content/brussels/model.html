@@ -148,31 +148,23 @@
 
   // Side panel content keyed by hotspot ID
   const INFO = {
-    archer: {
-      title: "Archer Panel",
-      html: `<p><strong>Archer:</strong> Add your description here.</p>`
-    },
-    raven: {
-      title: "Raven Panel",
-      html: `<p><strong>Raven:</strong> Add your description here.</p>`
-    },
-    magdalene: {
-      title: "Magdalene Panel",
-      html: `<p><strong>Magdalene:</strong> Add your description here.</p>`
-    },
-    lamb: {
-      title: "Lamb Panel",
-      html: `<p><strong>Lamb:</strong> Add your description here.</p>`
-    },
-    east_runes: {
-      title: "East Runes",
-      html: `<p><strong>East runes:</strong> Add your description here.</p>`
-    },
-    bottom: {
-      title: "Bottom Section",
-      html: `<p><strong>Bottom:</strong> Add your description here.</p>`
-    }
+    angels:          { title: "Angels",          html: `<p><strong>Angels:</strong> Add your description here.</p>` },
+    archer:          { title: "Archer",          html: `<p><strong>Archer:</strong> Add your description here.</p>` },
+    bottom:          { title: "Bottom",          html: `<p><strong>Bottom:</strong> Add your description here.</p>` },
+    bottom_back:     { title: "Bottom (Back)",   html: `<p><strong>Bottom (Back):</strong> Add your description here.</p>` },
+    centre:          { title: "Centre",          html: `<p><strong>Centre:</strong> Add your description here.</p>` },
+    giving:          { title: "Giving",          html: `<p><strong>Giving:</strong> Add your description here.</p>` },
+    jesus:           { title: "Jesus",           html: `<p><strong>Jesus:</strong> Add your description here.</p>` },
+    jesus_and_guy:   { title: "Jesus and Figure",html: `<p><strong>Jesus and figure:</strong> Add your description here.</p>` },
+    lamb:            { title: "Lamb",            html: `<p><strong>Lamb:</strong> Add your description here.</p>` },
+    left_cross_bar:  { title: "Left Cross-Bar",  html: `<p><strong>Left cross-bar:</strong> Add your description here.</p>` },
+    left_side:       { title: "Left Side",       html: `<p><strong>Left side:</strong> Add your description here.</p>` },
+    magdelene:       { title: "Magdelene",       html: `<p><strong>Magdelene:</strong> Add your description here.</p>` },
+    raven:           { title: "Raven",           html: `<p><strong>Raven:</strong> Add your description here.</p>` },
+    two_people:      { title: "Two People",      html: `<p><strong>Two people:</strong> Add your description here.</p>` },
+    two_people_back: { title: "Two People (Back)",html:`<p><strong>Two people (back):</strong> Add your description here.</p>` }
   };
+
 
   function setInfoPanel(title, html) {
     const panel = document.getElementById("infoPanel");
@@ -188,17 +180,26 @@
 
     presenter.setScene({
       meshes: {
-        // ✅ REPLACE THESE URLS WITH THE ONES THAT WORK FOR YOU
-        ruthwell:    { url: "../ruthwell/assets/models/ruthwell.ply" },
+        ruthwell:         { url: "assets/models/ruthwell.ply" },
 
-        // Panel meshes used as clickable hotspot geometry
-        archer:      { url: "../ruthwell/assets/models/archer.ply" },
-        raven:       { url: "../ruthwell/assets/models/raven.ply" },
-        magdalene:   { url: "../ruthwell/assets/models/magdalene.ply" },
-        lamb:        { url: "../ruthwell/assets/models/lamb.ply" },
-        east_runes:  { url: "../ruthwell/assets/models/east_runes.ply" },
-        bottom:      { url: "../ruthwell/assets/models/bottom.ply" }
+        angels:           { url: "assets/models/angels.ply" },
+        archer:           { url: "assets/models/archer.ply" },
+        bottom:           { url: "assets/models/bottom.ply" },
+        bottom_back:      { url: "assets/models/bottom_back.ply" },
+        centre:           { url: "assets/models/centre.ply" },
+        giving:           { url: "assets/models/giving.ply" },
+        jesus:            { url: "assets/models/jesus.ply" },
+        jesus_and_guy:    { url: "assets/models/jesus_and_guy.ply" },
+        lamb:             { url: "assets/models/lamb.ply" },
+        left_cross_bar:   { url: "assets/models/left_cross_bar.ply" },
+        left_side:        { url: "assets/models/left_side.ply" },
+        magdelene:        { url: "assets/models/magdelene.ply" },
+        raven:            { url: "assets/models/raven.ply" },
+        two_people:       { url: "assets/models/two_people.ply" },
+        two_people_back:  { url: "assets/models/two_people_back.ply" }
       },
+
+
 
       modelInstances: {
         // ✅ Full cross ALWAYS visible
@@ -210,14 +211,23 @@
       },
 
       // ✅ Click targets (invisible by default)
-      spots: {
-        archer:     { mesh: "archer",     visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-        raven:      { mesh: "raven",      visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-        magdalene:  { mesh: "magdalene",  visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-        lamb:       { mesh: "lamb",       visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-        east_runes: { mesh: "east_runes", visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-        bottom:     { mesh: "bottom",     visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] }
-      },
+        spots: {
+          angels:           { mesh: "angels",           visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          archer:           { mesh: "archer",           visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          bottom:           { mesh: "bottom",           visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          bottom_back:      { mesh: "bottom_back",      visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          centre:           { mesh: "centre",           visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          giving:           { mesh: "giving",           visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          jesus:            { mesh: "jesus",            visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          jesus_and_guy:    { mesh: "jesus_and_guy",    visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          lamb:             { mesh: "lamb",             visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          left_cross_bar:   { mesh: "left_cross_bar",   visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          left_side:        { mesh: "left_side",        visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          magdelene:        { mesh: "magdelene",        visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          raven:            { mesh: "raven",            visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          two_people:       { mesh: "two_people",       visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          two_people_back:  { mesh: "two_people_back",  visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] }
+        },
 
       trackball: {
         type: TurnTableTrackball,
