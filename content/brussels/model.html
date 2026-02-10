@@ -135,119 +135,152 @@
 
       <aside id="infoPanel" aria-live="polite">
         <h2>Explore the Ruthwell Cross</h2>
-        <p>Hover a panel to highlight it. Click to learn more.</p>
-        <p class="hint">If hover doesn’t “glow” much, it’s because the overlay is faint by design.</p>
+        <p>Hover or click a panel on the cross to learn more.</p>
+        <p class="hint">If nothing happens, the ID names don’t match the _cut files.</p>
       </aside>
     </div>
 
-<script>
-  var presenter = null;
+    <script>
+      var presenter = null;
 
-  // Your hotspot panel content (keys MUST match your spot IDs)
-  const INFO = {
-    angels_cut: { title: "Angels", html: `<p><strong>Angels:</strong> Add your description here.</p>` },
-    archer_cut: { title: "Archer", html: `<p><strong>Archer:</strong> Add your description here.</p>` },
-    // add the rest...
-  };
+      // YOUR naming system: *_cut
+      const INFO = {
+        angels_cut:          { title: "Angels",            html: `<p><strong>Angels:</strong> Add your description here.</p>` },
+        archer_cut:          { title: "Archer",            html: `<p><strong>Archer:</strong> Add your description here.</p>` },
+        bottom_cut:          { title: "Bottom",            html: `<p><strong>Bottom:</strong> Add your description here.</p>` },
+        bottom_back_cut:     { title: "Bottom (Back)",     html: `<p><strong>Bottom (Back):</strong> Add your description here.</p>` },
+        centre_cut:          { title: "Centre",            html: `<p><strong>Centre:</strong> Add your description here.</p>` },
+        giving_cut:          { title: "Giving",            html: `<p><strong>Giving:</strong> Add your description here.</p>` },
+        jesus_cut:           { title: "Jesus",             html: `<p><strong>Jesus:</strong> Add your description here.</p>` },
+        jesus_and_guy_cut:   { title: "Jesus and Figure",  html: `<p><strong>Jesus and figure:</strong> Add your description here.</p>` },
+        lamb_cut:            { title: "Lamb",              html: `<p><strong>Lamb:</strong> Add your description here.</p>` },
+        left_cross_bar_cut:  { title: "Left Cross-Bar",    html: `<p><strong>Left cross-bar:</strong> Add your description here.</p>` },
+        left_side_cut:       { title: "Left Side",         html: `<p><strong>Left side:</strong> Add your description here.</p>` },
+        magdelene_cut:       { title: "Magdelene",         html: `<p><strong>Magdelene:</strong> Add your description here.</p>` },
+        raven_cut:           { title: "Raven",             html: `<p><strong>Raven:</strong> Add your description here.</p>` },
+        two_people_cut:      { title: "Two People",        html: `<p><strong>Two people:</strong> Add your description here.</p>` },
+        two_people_back_cut: { title: "Two People (Back)", html: `<p><strong>Two people (back):</strong> Add your description here.</p>` }
+      };
 
-  function setInfoPanel(title, html) {
-    const panel = document.getElementById("infoPanel");
-    panel.innerHTML = `
-      <h2>${title}</h2>
-      ${html}
-      <p class="hint">Hover or click another area to keep exploring.</p>
-    `;
-  }
-
-  function bindHotspots() {
-    if (!presenter) return;
-
-    // Ensure hover/picking is on
-    presenter.enableOnHover(true);
-
-    // Hover highlight + live panel update (optional)
-    presenter._onEnterSpot = function (id) {
-      // console.log("ENTER SPOT:", id);
-      if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
-    };
-
-    presenter._onLeaveSpot = function (id) {
-      // optional: do nothing
-    };
-
-    // Click handler
-    presenter._onPickedSpot = function (id) {
-      console.log("PICKED SPOT:", id);
-      if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
-      else setInfoPanel("Spot", `<p>Clicked: <code>${id}</code></p>`);
-    };
-
-    // IMPORTANT: hide overlays but KEEP pickable
-    presenter.setSpotVisibility(HOP_ALL, false, true);
-  }
-
-  function setup3dhop() {
-    presenter = new Presenter("draw-canvas");
-
-    presenter.setScene({
-      meshes: {
-        // FULL CROSS (your main model)
-        ruthwell: { url: "assets/models/ruthwell.ply" },
-
-        // HOTSPOT CUTS (EXAMPLES — change to your real filenames)
-        angels_cut: { url: "assets/models/angels_cut.ply" },
-        archer_cut: { url: "assets/models/archer_cut.ply" }
-        // add the rest...
-      },
-
-      modelInstances: {
-        main: { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true }
-      },
-
-      spots: {
-        // IDs here MUST match INFO keys and mesh keys
-        angels_cut: { mesh: "angels_cut", color: [0.0, 0.5, 1.0], alpha: 0.20, alphaHigh: 0.55 },
-        archer_cut: { mesh: "archer_cut", color: [0.0, 0.5, 1.0], alpha: 0.20, alphaHigh: 0.55 }
-        // add the rest...
-      },
-
-      trackball: {
-        type: TurnTableTrackball,
-        trackOptions: {
-          startDistance: 2.0,
-          minMaxDist: [0.005, 140.0],
-          minMaxPhi: [-180, 180],
-          minMaxTheta: [-85.0, 85.0]
-        }
+      function setInfoPanel(title, html) {
+        const panel = document.getElementById("infoPanel");
+        panel.innerHTML = `
+          <h2>${title}</h2>
+          ${html}
+          <p class="hint">Hover or click another area to keep exploring.</p>
+        `;
       }
-    });
 
-    presenter.resetTrackball();
-    presenter.repaint();
+      function bindHotspots() {
+        if (!presenter) return;
 
-    // Bind once now (works on many setups)
-    bindHotspots();
+        presenter.enableOnHover(true);
 
-    setInfoPanel("Explore the Ruthwell Cross", `<p>Hover or click a panel on the cross to learn more.</p>`);
-  }
+        presenter._onEnterSpot = function(id) {
+          // console.log("ENTER:", id);
+          if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
+        };
 
-  $(document).ready(function () {
-    // 1) init sets up default 3DHOP handlers/UI
-    init3dhop();
+        presenter._onPickedSpot = function(id) {
+          console.log("PICKED SPOT:", id);
+          if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
+          else setInfoPanel("Spot", `<p>Clicked: <code>${id}</code></p>`);
+        };
 
-    // 2) create our scene
-    setup3dhop();
+        // invisible overlays but pickable
+        presenter.setSpotVisibility(HOP_ALL, false, true);
+      }
 
-    // 3) SAFETY RE-BIND: init3dhop (or other scripts) sometimes overwrite handlers AFTER load.
-    // Re-apply bindings a moment later, after everything settles.
-    setTimeout(bindHotspots, 250);
-    setTimeout(bindHotspots, 1000);
-  });
+      function setup3dhop() {
+        presenter = new Presenter("draw-canvas");
 
-  window.addEventListener("resize", function () {
-    if (presenter) presenter.repaint();
-  });
-</script>
+        presenter.setScene({
+          meshes: {
+            // Full model
+            ruthwell: { url: "assets/models/ruthwell.ply" },
+
+            // Hotspot cuts (must exist as files)
+            angels_cut:          { url: "assets/models/angels_cut.ply" },
+            archer_cut:          { url: "assets/models/archer_cut.ply" },
+            bottom_cut:          { url: "assets/models/bottom_cut.ply" },
+            bottom_back_cut:     { url: "assets/models/bottom_back_cut.ply" },
+            centre_cut:          { url: "assets/models/centre_cut.ply" },
+            giving_cut:          { url: "assets/models/giving_cut.ply" },
+            jesus_cut:           { url: "assets/models/jesus_cut.ply" },
+            jesus_and_guy_cut:   { url: "assets/models/jesus_and_guy_cut.ply" },
+            lamb_cut:            { url: "assets/models/lamb_cut.ply" },
+            left_cross_bar_cut:  { url: "assets/models/left_cross_bar_cut.ply" },
+            left_side_cut:       { url: "assets/models/left_side_cut.ply" },
+            magdelene_cut:       { url: "assets/models/magdelene_cut.ply" },
+            raven_cut:           { url: "assets/models/raven_cut.ply" },
+            two_people_cut:      { url: "assets/models/two_people_cut.ply" },
+            two_people_back_cut: { url: "assets/models/two_people_back_cut.ply" }
+          },
+
+          modelInstances: {
+            main: { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true }
+          },
+
+          spots: {
+            angels_cut:          { mesh: "angels_cut",          color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            archer_cut:          { mesh: "archer_cut",          color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            bottom_cut:          { mesh: "bottom_cut",          color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            bottom_back_cut:     { mesh: "bottom_back_cut",     color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            centre_cut:          { mesh: "centre_cut",          color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            giving_cut:          { mesh: "giving_cut",          color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            jesus_cut:           { mesh: "jesus_cut",           color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            jesus_and_guy_cut:   { mesh: "jesus_and_guy_cut",   color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            lamb_cut:            { mesh: "lamb_cut",            color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            left_cross_bar_cut:  { mesh: "left_cross_bar_cut",  color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            left_side_cut:       { mesh: "left_side_cut",       color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            magdelene_cut:       { mesh: "magdelene_cut",       color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            raven_cut:           { mesh: "raven_cut",           color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            two_people_cut:      { mesh: "two_people_cut",      color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 },
+            two_people_back_cut: { mesh: "two_people_back_cut", color:[0,0.5,1], alpha:0.20, alphaHigh:0.55 }
+          },
+
+          trackball: {
+            type: TurnTableTrackball,
+            trackOptions: {
+              startDistance: 2.0,
+              minMaxDist: [0.005, 140.0],
+              minMaxPhi: [-180, 180],
+              minMaxTheta: [-85.0, 85.0]
+            }
+          }
+        });
+
+        presenter.resetTrackball();
+        presenter.repaint();
+
+        bindHotspots();
+        setInfoPanel("Explore the Ruthwell Cross", `<p>Hover or click a panel on the cross to learn more.</p>`);
+      }
+
+      // init.js calls actionsToolbar(), so keep it
+      function actionsToolbar(action) {
+        if (!presenter) return;
+        if (action === "home") presenter.resetTrackball();
+        else if (action === "zoomin") presenter.zoomIn();
+        else if (action === "zoomout") presenter.zoomOut();
+        else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+        else if (action === "screenshot") presenter.saveScreenshot();
+        else if (action === "full") presenter.fullscreen();
+      }
+
+      $(document).ready(function () {
+        init3dhop();
+        setup3dhop();
+
+        // Option 4 fix: re-bind after init settles (init can overwrite handlers)
+        setTimeout(bindHotspots, 250);
+        setTimeout(bindHotspots, 1000);
+      });
+
+      window.addEventListener("resize", function () {
+        if (presenter) presenter.repaint();
+      });
+    </script>
 
   </main>
 </body>
