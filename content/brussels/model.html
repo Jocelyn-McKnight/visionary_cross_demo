@@ -136,11 +136,12 @@
       <aside id="infoPanel" aria-live="polite">
         <h2>Explore the Ruthwell Cross</h2>
         <p>Hover or click a panel on the cross to learn more.</p>
-        <p class="hint">If nothing happens, the ID names don’t match the _cut files.</p>
+        <p class="hint">If nothing happens, a filename or ID doesn’t match the <code>_cut</code> meshes.</p>
       </aside>
     </div>
 
     <script>
+      // Must be global for init.js toolbar + events
       var presenter = null;
 
       // YOUR naming system: *_cut
@@ -174,21 +175,28 @@
       function bindHotspots() {
         if (!presenter) return;
 
+        // IMPORTANT: do NOT allow instance picking to steal the click.
+        // This is the main "compare to demo" fix for your cut-mesh approach.
+        if (typeof presenter.setInstanceVisibility === "function") {
+          presenter.setInstanceVisibility(HOP_ALL, true, false); // visible, NOT pickable
+        }
+
+        // Spots: invisible overlay but still pickable (demo-style)
+        presenter.setSpotVisibility(HOP_ALL, false, true);
+
         presenter.enableOnHover(true);
 
         presenter._onEnterSpot = function(id) {
-          // console.log("ENTER:", id);
           if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
         };
 
         presenter._onPickedSpot = function(id) {
-          console.log("PICKED SPOT:", id);
           if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
           else setInfoPanel("Spot", `<p>Clicked: <code>${id}</code></p>`);
         };
 
-        // invisible overlays but pickable
-        presenter.setSpotVisibility(HOP_ALL, false, true);
+        // Don’t do anything on instance pick (belt + suspenders)
+        presenter._onPickedInstance = function(id) {};
       }
 
       function setup3dhop() {
@@ -199,7 +207,7 @@
             // Full model
             ruthwell: { url: "assets/models/ruthwell.ply" },
 
-            // Hotspot cuts (must exist as files)
+            // Hotspot cuts
             angels_cut:          { url: "assets/models/angels_cut.ply" },
             archer_cut:          { url: "assets/models/archer_cut.ply" },
             bottom_cut:          { url: "assets/models/bottom_cut.ply" },
@@ -253,11 +261,13 @@
         presenter.resetTrackball();
         presenter.repaint();
 
+        // Bind AFTER setScene
         bindHotspots();
+
         setInfoPanel("Explore the Ruthwell Cross", `<p>Hover or click a panel on the cross to learn more.</p>`);
       }
 
-      // init.js calls actionsToolbar(), so keep it
+      // init.js calls actionsToolbar(), so keep this name
       function actionsToolbar(action) {
         if (!presenter) return;
         if (action === "home") presenter.resetTrackball();
@@ -269,10 +279,11 @@
       }
 
       $(document).ready(function () {
+        // Demo order: init first, then setup
         init3dhop();
         setup3dhop();
 
-        // Option 4 fix: re-bind after init settles (init can overwrite handlers)
+        // Option-4 style: re-bind after init settles
         setTimeout(bindHotspots, 250);
         setTimeout(bindHotspots, 1000);
       });
