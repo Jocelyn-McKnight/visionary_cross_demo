@@ -192,7 +192,7 @@ archer:      { url: "assets/models/archer.ply" },
 raven:       { url: "assets/models/raven.ply" },
 magdalene:   { url: "assets/models/magdalene.ply" },
 lamb:        { url: "assets/models/lamb.ply" },
-bottom:      { url: "assets/models/buttom.ply" }
+bottom:      { url: "assets/models/bottom.ply" }
 },
 
 modelInstances: {
@@ -217,8 +217,8 @@ bottom:     { mesh: "bottom",     visible: true, alpha: 0.0, color: [0.0, 0.5, 1
 trackball: {
 type: TurnTableTrackball,
 trackOptions: {
-startDistance: 12.0,
-minMaxDist: [2.0, 140.0],
+startDistance: 2.0,
+minMaxDist: [0.005, 140.0],
 minMaxPhi: [-180, 180],
 minMaxTheta: [-85.0, 85.0]
 }
