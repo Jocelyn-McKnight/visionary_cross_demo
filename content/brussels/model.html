@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Brussels Model</title>
+  <title>Ruthwell Model</title>
 
   <link rel="stylesheet" href="../../main.css" />
   <link rel="icon" type="image/x-icon" href="../../img/cross.ico" />
@@ -109,15 +109,14 @@
     </div>
 
     <a href="../backmatter/table.html">
-      <img src="assets/img/head.jpg" alt="Project Image" title="The Brussels Cross">
-      <p class="header-text">Brussels</p>
+      <img src="assets/img/head.jpg" alt="Project Image" title="The Ruthwell Cross">
+      <p class="header-text">Ruthwell</p>
     </a>
   </header>
 
   <main>
     <div class="viewer-layout">
       <div id="viewerWrap">
-        <!-- keep this like the 3DHOP demo -->
         <div id="3dhop" class="tdhop" onmousedown="if (event.preventDefault) event.preventDefault()">
           <div id="tdhlg"></div>
 
@@ -137,12 +136,14 @@
       <aside id="infoPanel" aria-live="polite">
         <h2>Explore the Ruthwell Cross</h2>
         <p>Hover a panel to highlight it. Click to learn more.</p>
-        <p class="hint">If clicking works but hover doesn’t highlight, that’s normal if overlays are hidden—clicking is the real test.</p>
+        <p class="hint">If hover doesn’t “glow” much, it’s because the overlay is faint by design.</p>
       </aside>
     </div>
 
 <script>
+  // IMPORTANT: global, because init.js expects it
   var presenter = null;
+  var _setupDone = false; // <- prevents double Presenter init
 
   const INFO = {
     angels:          { title: "Angels",           html: `<p><strong>Angels:</strong> Add your description here.</p>` },
@@ -167,7 +168,7 @@
     panel.innerHTML = `
       <h2>${title}</h2>
       ${html}
-      <p class="hint">Hover another panel to highlight it. Click to update this text.</p>
+      <p class="hint">Click another area on the cross to keep exploring.</p>
     `;
   }
 
@@ -177,15 +178,20 @@
     else setInfoPanel("Hotspot", `<p>You clicked: <code>${id}</code></p>`);
   }
 
+  // init.js calls setup3dhop() in many 3DHOP setups, so we MUST keep this name.
   function setup3dhop() {
+    // ✅ prevents the “two presenters fighting” problem
+    if (_setupDone) return;
+    _setupDone = true;
+
     presenter = new Presenter("draw-canvas");
 
     presenter.setScene({
       meshes: {
-        // FULL CROSS:
+        // Full model
         ruthwell: { url: "assets/models/ruthwell.ply" },
 
-        // HOTSPOT CUTS (must exist with _cut):
+        // Hotspot cuts (must exist)
         angels_cut:          { url: "assets/models/angels_cut.ply" },
         archer_cut:          { url: "assets/models/archer_cut.ply" },
         bottom_cut:          { url: "assets/models/bottom_cut.ply" },
@@ -207,23 +213,24 @@
         main: { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true }
       },
 
-      // Spot IDs match INFO keys; spot meshes point to *_cut
+      // Spot IDs match INFO keys; spot meshes point to *_cut meshes
+      // Make them very faint but VISIBLE so hover has something to brighten.
       spots: {
-        angels:          { mesh: "angels_cut",          color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        archer:          { mesh: "archer_cut",          color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        bottom:          { mesh: "bottom_cut",          color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        bottom_back:     { mesh: "bottom_back_cut",     color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        centre:          { mesh: "centre_cut",          color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        giving:          { mesh: "giving_cut",          color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        jesus:           { mesh: "jesus_cut",           color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        jesus_and_guy:   { mesh: "jesus_and_guy_cut",   color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        lamb:            { mesh: "lamb_cut",            color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        left_cross_bar:  { mesh: "left_cross_bar_cut",  color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        left_side:       { mesh: "left_side_cut",       color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        magdelene:       { mesh: "magdelene_cut",       color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        raven:           { mesh: "raven_cut",           color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        two_people:      { mesh: "two_people_cut",      color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 },
-        two_people_back: { mesh: "two_people_back_cut", color:[0.0,0.5,1.0], alpha:0.15, alphaHigh:0.45 }
+        angels:          { mesh: "angels_cut",          color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        archer:          { mesh: "archer_cut",          color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        bottom:          { mesh: "bottom_cut",          color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        bottom_back:     { mesh: "bottom_back_cut",     color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        centre:          { mesh: "centre_cut",          color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        giving:          { mesh: "giving_cut",          color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        jesus:           { mesh: "jesus_cut",           color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        jesus_and_guy:   { mesh: "jesus_and_guy_cut",   color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        lamb:            { mesh: "lamb_cut",            color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        left_cross_bar:  { mesh: "left_cross_bar_cut",  color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        left_side:       { mesh: "left_side_cut",       color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        magdelene:       { mesh: "magdelene_cut",       color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        raven:           { mesh: "raven_cut",           color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        two_people:      { mesh: "two_people_cut",      color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 },
+        two_people_back: { mesh: "two_people_back_cut", color:[0.0,0.5,1.0], alpha:0.05, alphaHigh:0.35 }
       },
 
       trackball: {
@@ -237,12 +244,12 @@
       }
     });
 
-    // This is the important part:
+    // Enable hover + click hotspots
     presenter.enableOnHover(true);
     presenter._onPickedSpot = onPickedSpot;
 
-    // Keep overlays invisible but still pickable:
-    presenter.setSpotVisibility(HOP_ALL, false, true);
+    // Ensure spots are considered visible/pickable
+    presenter.setSpotVisibility(HOP_ALL, true, true);
 
     presenter.resetTrackball();
     presenter.repaint();
@@ -250,7 +257,7 @@
     setInfoPanel("Explore the Ruthwell Cross", `<p>Hover a panel to highlight it. Click to learn more.</p>`);
   }
 
-  // Keep this because init.js expects actionsToolbar to exist
+  // init.js expects this function name for toolbar icons
   function actionsToolbar(action) {
     if (!presenter) return;
     if (action === "home") presenter.resetTrackball();
@@ -262,15 +269,18 @@
   }
 
   $(document).ready(function () {
+    // Keep this — you said removing breaks other stuff.
     init3dhop();
+
+    // Also keep this — but safe because setup3dhop() is guarded.
     setup3dhop();
 
-    // Re-apply in case init3dhop overwrote handlers
+    // Re-apply once after init3dhop in case it toggled something.
     setTimeout(() => {
       if (!presenter) return;
       presenter.enableOnHover(true);
       presenter._onPickedSpot = onPickedSpot;
-      presenter.setSpotVisibility(HOP_ALL, false, true);
+      presenter.setSpotVisibility(HOP_ALL, true, true);
     }, 200);
   });
 </script>
