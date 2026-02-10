@@ -232,8 +232,8 @@
       trackball: {
         type: TurnTableTrackball,
         trackOptions: {
-          startDistance: 8.0,       // start a bit closer (optional)
-          minMaxDist: [0.05, 140.0],// <-- allow WAY closer zoom
+          startDistance: 4.0,
+          minMaxDist: [0.005, 140.0],
           minMaxPhi: [-180, 180],
           minMaxTheta: [-85.0, 85.0]
         }
@@ -277,6 +277,7 @@
 
   $(document).ready(function () {
     init3dhop();
+    setup3dhop();
   });
 
   window.addEventListener("resize", function () {
