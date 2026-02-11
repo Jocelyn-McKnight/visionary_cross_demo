@@ -257,6 +257,42 @@ h1{ text-align: center; }
 #infoPanel h2{ margin: 0 0 10px 0; }
 #infoPanel p{ margin: 0 0 10px 0; line-height: 1.45; }
 
+#movePad{
+  position:absolute;
+  right:14px;
+  top:14px;
+  z-index:5;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding:10px;
+  border-radius:12px;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+}
+
+#movePad .row{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+}
+
+#movePad .mv{
+  width:38px;
+  height:38px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.35);
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+}
+
+#movePad .mv:active{
+  transform: translateY(1px);
+}
+
+
 /* =========================================================
    FOOTER
    ========================================================= */

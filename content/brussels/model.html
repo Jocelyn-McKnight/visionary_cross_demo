@@ -132,6 +132,17 @@ font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
 </div>
 
+<!-- Mini move pad (up/down travel) -->
+<div id="movePad" aria-label="Move view">
+  <button type="button" class="mv" data-mv="up" title="Move Up">▲</button>
+  <div class="row">
+    <button type="button" class="mv" data-mv="left" title="Move Left">◀</button>
+    <button type="button" class="mv" data-mv="home" title="Re-center">◎</button>
+    <button type="button" class="mv" data-mv="right" title="Move Right">▶</button>
+  </div>
+  <button type="button" class="mv" data-mv="down" title="Move Down">▼</button>
+</div>
+
 <canvas id="draw-canvas"></canvas>
 </div>
 </div>
@@ -250,6 +261,73 @@ else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTr
 else if (action === "screenshot") presenter.saveScreenshot();
 else if (action === "full") presenter.fullscreen();
 }
+
+function panView(dx, dy) {
+  if (!presenter) return;
+
+  // Small step; tweak to taste
+  const step = 0.06;
+
+  // If the presenter exposes a direct pan API, use it.
+  // Otherwise, fall back to nudging the trackball target (most builds support one of these).
+  const tb = presenter._trackball;
+
+  // Best-case: pan method exists
+  if (tb && typeof tb.pan === "function") {
+    tb.pan(dx * step, dy * step);
+    presenter.repaint();
+    return;
+  }
+
+  // Common alt: translate method exists
+  if (tb && typeof tb.translate === "function") {
+    tb.translate(dx * step, dy * step, 0);
+    presenter.repaint();
+    return;
+  }
+
+  // Worst-case: no pan available in this build
+  console.warn("No pan/translate method found on trackball in this 3DHOP build.");
+}
+
+function hookMovePad() {
+  const pad = document.getElementById("movePad");
+  if (!pad) return;
+
+  // Click controls
+  pad.addEventListener("click", (e) => {
+    const btn = e.target.closest(".mv");
+    if (!btn) return;
+
+    const mv = btn.dataset.mv;
+    if (mv === "home") return presenter && presenter.resetTrackball();
+
+    if (mv === "up") panView(0, +1);
+    if (mv === "down") panView(0, -1);
+    if (mv === "left") panView(-1, 0);
+    if (mv === "right") panView(+1, 0);
+  });
+
+  // Hold-to-move (optional but feels nice)
+  let holdTimer = null;
+  pad.addEventListener("mousedown", (e) => {
+    const btn = e.target.closest(".mv");
+    if (!btn) return;
+    const mv = btn.dataset.mv;
+    if (mv === "home") return;
+
+    const dir = { up:[0,1], down:[0,-1], left:[-1,0], right:[1,0] }[mv];
+    if (!dir) return;
+
+    holdTimer = setInterval(() => panView(dir[0], dir[1]), 35);
+  });
+
+  window.addEventListener("mouseup", () => {
+    if (holdTimer) clearInterval(holdTimer);
+    holdTimer = null;
+  });
+}
+
 
 $(document).ready(function () {
 init3dhop();
