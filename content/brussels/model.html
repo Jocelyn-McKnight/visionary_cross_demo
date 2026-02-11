@@ -22,34 +22,109 @@
 
   <script src="../../3dhop/js/init.js"></script>
 
-  <!-- Only move-pad CSS lives here; layout stays in main.css -->
   <style>
-    /* Move controls (top-right inside viewer) */
-    #right_tolbar{
+    main { display:block; }
+
+    .viewer-layout{
+      display:flex;
+      gap:16px;
+      align-items:stretch;
+      width:100%;
+      padding:16px;
+    }
+
+    #viewerWrap{
+      flex: 1 1 auto;
+      min-width: 0;
+      height: 70vh;
+      min-height: 520px;
+      position: relative;
+    }
+
+    #3dhop.tdhop{
+      width:100%;
+      height:100%;
+      position:relative;
+      border-radius:12px;
+      overflow:hidden;
+      background:#ddd;
+    }
+
+    #draw-canvas{
+      width:100% !important;
+      height:100% !important;
+      display:block;
+      background-image:url(../../3dhop/skins/backgrounds/light.jpg);
+      background-size:cover;
+      background-position:center;
+    }
+
+    #infoPanel{
+      flex: 0 0 360px;
+      max-width: 460px;
+      height: 70vh;
+      min-height: 520px;
+      overflow:auto;
+      padding:16px;
+      border-radius:12px;
+      border: 1px solid rgba(0,0,0,0.15);
+      background: rgba(0,0,0,0.04);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    #infoPanel h2{ margin:0 0 10px 0; }
+    #infoPanel p{ margin:0 0 10px 0; line-height:1.45; }
+    #infoPanel .hint{ font-size: 13px; opacity: .8; }
+
+    @media (max-width: 900px){
+      .viewer-layout{ flex-direction:column; }
+      #viewerWrap{ height: 60vh; min-height: 360px; }
+      #infoPanel{ height:auto; min-height:0; flex: 1 1 auto; }
+    }
+
+    /* ===== Movement pad (Bruxelles-style, small, not giant) ===== */
+    #movePad{
       position:absolute;
       right:14px;
       top:14px;
-      z-index:9999;
+      z-index:50;
       background: rgba(0,0,0,0.35);
-      padding:10px;
-      border-radius:12px;
+      border-radius: 12px;
+      padding: 10px;
       backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       user-select:none;
       -webkit-user-select:none;
     }
 
-    #mvc_table{ text-align:center; border-collapse:collapse; }
-    #mvc_table img{ margin:0; cursor:pointer; display:block; }
-
-    .move_{
-      width:50px !important;
-      height:50px !important;
+    #mvc_table{
+      border-collapse: collapse;
+      text-align: center;
+    }
+    #mvc_table td{
+      padding: 6px;
     }
 
+    /* Your arrow image (rotated like Bruxelles) */
+    .move_{
+      width: 44px !important;
+      height: 44px !important;
+      cursor: pointer;
+      display:block;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+    }
     .up{ transform: rotate(270deg); }
     .down{ transform: rotate(90deg); }
     .left{ transform: rotate(180deg); }
-    /* right = no rotation */
+    .right{ transform: rotate(0deg); }
+
+    /* TOP button image */
+    #Top{
+      width: 52px !important;
+      height: 52px !important;
+      cursor: pointer;
+      display:block;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+    }
   </style>
 </head>
 
@@ -87,7 +162,8 @@
 <main>
   <div class="viewer-layout">
     <div id="viewerWrap">
-      <div id="3dhop" class="tdhop">
+      <!-- prevent browser drag-select issues like the Bruxelles example -->
+      <div id="3dhop" class="tdhop" onmousedown="if (event.preventDefault) event.preventDefault()">
         <div id="tdhlg"></div>
 
         <div id="toolbar">
@@ -99,33 +175,23 @@
           <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
         </div>
 
-        <!-- ✅ WORKING movement pad (3DHOP-style) -->
-        <div id="right_tolbar" aria-label="Move controls">
+        <!-- ✅ Small, working movement pad (image-based like Bruxelles) -->
+        <div id="movePad" aria-label="Move view">
           <table id="mvc_table">
             <tbody>
               <tr>
                 <td></td>
-                <td>
-                  <img class="move_ up" id="move_up" title="Move Up" src="assets/img/Arrow.png" />
-                </td>
+                <td><img class="move_ up" id="move_up" title="Move Up" src="assets/img/Arrow.png" /></td>
                 <td></td>
               </tr>
               <tr>
-                <td>
-                  <img class="move_ left" id="move_left" title="Move Left" src="assets/img/Arrow.png" />
-                </td>
-                <td>
-                  <img id="move_home" title="Re-center" src="assets/img/Top_m.png" />
-                </td>
-                <td>
-                  <img class="move_ right" id="move_right" title="Move Right" src="assets/img/Arrow.png" />
-                </td>
+                <td><img class="move_ left" id="move_left" title="Move Left" src="assets/img/Arrow.png" /></td>
+                <td><img id="Top" title="Top" src="assets/img/Top_m.png" /></td>
+                <td><img class="move_ right" id="move_right" title="Move Right" src="assets/img/Arrow.png" /></td>
               </tr>
               <tr>
                 <td></td>
-                <td>
-                  <img class="move_ down" id="move_down" title="Move Down" src="assets/img/Arrow.png" />
-                </td>
+                <td><img class="move_ down" id="move_down" title="Move Down" src="assets/img/Arrow.png" /></td>
                 <td></td>
               </tr>
             </tbody>
@@ -138,14 +204,15 @@
 
     <aside id="infoPanel" aria-live="polite">
       <h2>Explore the Ruthwell Cross</h2>
-      <p>First goal: make sure the model renders reliably.</p>
-      <p class="hint">Once you can see it, we’ll add clickable hotspots that update this panel.</p>
+      <p>Click a panel on the cross to learn more.</p>
+      <p class="hint">Once everything is stable, we’ll add clickable hotspots that update this panel.</p>
     </aside>
   </div>
 
   <script>
     var presenter = null;
 
+    // Side panel content keyed by hotspot ID
     const INFO = {
       archer:    { title: "Archer Panel",    html: `<p><strong>Archer:</strong> Add your description here.</p>` },
       raven:     { title: "Raven Panel",     html: `<p><strong>Raven:</strong> Add your description here.</p>` },
@@ -191,12 +258,15 @@
         trackball: {
           type: TurntablePanTrackball,
           trackOptions: {
+            startPhi: 0.0,
+            startTheta: 0.0,
             startDistance: 2.0,
-            minMaxDist: [0.005, 140.0],
             minMaxPhi: [-180, 180],
             minMaxTheta: [-85.0, 85.0],
-
-            /* travel range — tweak after you test */
+            minMaxDist: [0.005, 140.0],
+            startPanX: 0.0,
+            startPanY: 0.0,
+            startPanZ: 0.0,
             minMaxPanX: [-5.0, 5.0],
             minMaxPanY: [-20.0, 20.0],
             minMaxPanZ: [-5.0, 5.0]
@@ -220,69 +290,80 @@
 
     function actionsToolbar(action) {
       if (!presenter) return;
-      if (action === "home") presenter.resetTrackball();
-      else if (action === "zoomin") presenter.zoomIn();
-      else if (action === "zoomout") presenter.zoomOut();
-      else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
-      else if (action === "screenshot") presenter.saveScreenshot();
-      else if (action === "full") presenter.fullscreen();
+
+      if (action === 'home') presenter.resetTrackball();
+      else if (action === 'zoomin') presenter.zoomIn();
+      else if (action === 'zoomout') presenter.zoomOut();
+      else if (action === 'light') presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+      else if (action === 'screenshot') presenter.saveScreenshot();
+      else if (action === 'full') presenter.fullscreen();
+
+      // movement pad
+      else if (action === 'move_up' || action === 'move_down' || action === 'move_left' || action === 'move_right') step(action);
+      else if (action === 'Top') presenter.resetTrackball(); // simple, stable
     }
 
-    function getTrackballSafe(){
-      // Works across many 3DHOP builds
-      return (presenter && (presenter._scene?.trackball || presenter._trackball || presenter._interactor || presenter.trackball)) || null;
-    }
-
-    // ✅ Move by adjusting trackball state directly:
-    // state = [phi, theta, panX, panY, panZ, distance]
-    function panBy(dx, dy){
+    // ✅ Bruxelles-style movement: edit trackball position, then animate to it
+    function step(action) {
       if (!presenter) return;
 
-      const tb = getTrackballSafe();
-      if (!tb || typeof tb.getState !== "function" || typeof tb.setState !== "function") {
-        console.warn("No usable trackball getState/setState found.");
-        return;
+      var my_pos = presenter.getTrackballPosition();
+
+      var vstep = 0.10;
+      var hstep = 0.10;
+
+      switch (action) {
+        case 'move_up':
+          my_pos[3] -= vstep;
+          presenter.animateToTrackballPosition(my_pos);
+          break;
+
+        case 'move_down':
+          my_pos[3] += vstep;
+          presenter.animateToTrackballPosition(my_pos);
+          break;
+
+        case 'move_right': {
+          var gr = Math.PI * my_pos[0] / 180; // phi deg -> rad
+          my_pos[2] -= hstep * Math.cos(gr);
+          my_pos[4] += hstep * Math.sin(gr);
+          presenter.animateToTrackballPosition(my_pos);
+          break;
+        }
+
+        case 'move_left': {
+          var gr = Math.PI * my_pos[0] / 180;
+          my_pos[2] += hstep * Math.cos(gr);
+          my_pos[4] -= hstep * Math.sin(gr);
+          presenter.animateToTrackballPosition(my_pos);
+          break;
+        }
       }
-
-      const s = tb.getState();
-
-      // Bigger = faster travel. Adjust to taste.
-      const step = 0.6;
-
-      s[2] += dx * step; // panX
-      s[3] += dy * step; // panY
-
-      tb.setState(s);
-      presenter.repaint();
     }
 
-    function hookMoveArrows(){
-      const up    = document.getElementById("move_up");
-      const down  = document.getElementById("move_down");
-      const left  = document.getElementById("move_left");
-      const right = document.getElementById("move_right");
-      const home  = document.getElementById("move_home");
+    function hookMovePad() {
+      // IMPORTANT: we attach handlers in JS (no inline onclick needed)
+      const bind = (id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          actionsToolbar(id);
+        });
+      };
 
-      if (!up || !down || !left || !right || !home) {
-        console.warn("Move arrow elements not found.");
-        return;
-      }
-
-      up.addEventListener("click",   (e)=>{ e.preventDefault(); e.stopPropagation(); panBy(0, -1); });
-      down.addEventListener("click", (e)=>{ e.preventDefault(); e.stopPropagation(); panBy(0,  1); });
-      left.addEventListener("click", (e)=>{ e.preventDefault(); e.stopPropagation(); panBy(-1, 0); });
-      right.addEventListener("click",(e)=>{ e.preventDefault(); e.stopPropagation(); panBy( 1, 0); });
-
-      home.addEventListener("click", (e)=>{
-        e.preventDefault(); e.stopPropagation();
-        presenter.resetTrackball();
-      });
+      bind("move_up");
+      bind("move_down");
+      bind("move_left");
+      bind("move_right");
+      bind("Top");
     }
 
     $(document).ready(function () {
       init3dhop();
       setup3dhop();
-      hookMoveArrows();
+      hookMovePad();
     });
 
     window.addEventListener("resize", function () {
