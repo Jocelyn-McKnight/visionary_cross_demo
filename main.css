@@ -301,12 +301,24 @@ main{ display:block; }
 
 /* rotations — assuming Arrow.png points RIGHT by default */
 .up    { --r: -90deg; }
-.right { --r: 0deg; }
 .down  { --r: 90deg; }
-.left  { --r: 180deg; }
 
 /* remove TOP button entirely (safe even if it isn't in HTML) */
 #Top{ display:none !important; }
+
+#movePad{
+  width: auto;
+  height: auto;
+}
+
+#movePad #mvc_table{
+  width: auto;
+}
+
+#movePad #mvc_table td{
+  padding: 6px;
+}
+
 
 /* =========================================================
    FOOTER

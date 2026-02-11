@@ -73,23 +73,19 @@
           <table id="mvc_table">
             <tbody>
               <tr>
-                <td></td>
-                <td><img class="move_ up" id="move_up" title="Move Up" src="assets/img/Arrow.png" /></td>
-                <td></td>
+                <td>
+                  <img class="move_ up" id="move_up" title="Move Up" src="assets/img/Arrow.png" />
+                </td>
               </tr>
               <tr>
-                <td><img class="move_ left" id="move_left" title="Move Left" src="assets/img/Arrow.png" /></td>
-                <td></td>
-                <td><img class="move_ right" id="move_right" title="Move Right" src="assets/img/Arrow.png" /></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><img class="move_ down" id="move_down" title="Move Down" src="assets/img/Arrow.png" /></td>
-                <td></td>
+                <td>
+                  <img class="move_ down" id="move_down" title="Move Down" src="assets/img/Arrow.png" />
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
+
 
         <canvas id="draw-canvas"></canvas>
       </div>
@@ -243,8 +239,6 @@
 
       bind("move_up");
       bind("move_down");
-      bind("move_left");
-      bind("move_right");
     }
 
     $(document).ready(function () {
