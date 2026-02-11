@@ -22,106 +22,34 @@
 
   <script src="../../3dhop/js/init.js"></script>
 
+  <!-- Only move-pad CSS lives here; layout stays in main.css -->
   <style>
-    main { display:block; }
-
-    .viewer-layout{
-      display:flex;
-      gap:16px;
-      align-items:stretch;
-      width:100%;
-      padding:16px;
-    }
-
-    #viewerWrap{
-      flex: 1 1 auto;
-      min-width: 0;
-      height: 70vh;
-      min-height: 520px;
-      position: relative;
-    }
-
-    #3dhop.tdhop{
-      width:100%;
-      height:100%;
-      position:relative;
-      border-radius:12px;
-      overflow:hidden;
-      background:#ddd;
-    }
-
-    #draw-canvas{
-      width:100% !important;
-      height:100% !important;
-      display:block;
-      background-image:url(../../3dhop/skins/backgrounds/light.jpg);
-      background-size:cover;
-      background-position:center;
-    }
-
-    #infoPanel{
-      flex: 0 0 360px;
-      max-width: 460px;
-      height: 70vh;
-      min-height: 520px;
-      overflow:auto;
-      padding:16px;
-      border-radius:12px;
-      border: 1px solid rgba(0,0,0,0.15);
-      background: rgba(0,0,0,0.04);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    }
-    #infoPanel h2{ margin:0 0 10px 0; }
-    #infoPanel p{ margin:0 0 10px 0; line-height:1.45; }
-    #infoPanel .hint{ font-size: 13px; opacity: .8; }
-
-    @media (max-width: 900px){
-      .viewer-layout{ flex-direction:column; }
-      #viewerWrap{ height: 60vh; min-height: 360px; }
-      #infoPanel{ height:auto; min-height:0; flex: 1 1 auto; }
-    }
-
-    /* ✅ Move pad styling */
-    #movePad{
+    /* Move controls (top-right inside viewer) */
+    #right_tolbar{
       position:absolute;
       right:14px;
       top:14px;
       z-index:9999;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
+      background: rgba(0,0,0,0.35);
       padding:10px;
       border-radius:12px;
-      background: rgba(0,0,0,0.35);
       backdrop-filter: blur(6px);
-    }
-
-    #movePad .row{
-      display:flex;
-      gap:8px;
-      justify-content:center;
-    }
-
-    #movePad .mv{
-      width:42px;
-      height:42px;
-      border-radius:10px;
-      border:1px solid rgba(255,255,255,0.25);
-      background: rgba(0,0,0,0.35);
-      color:#fff;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      line-height:1;
-      font-size:18px;
-      padding:0;
-
-      cursor:pointer;
       user-select:none;
       -webkit-user-select:none;
     }
-    #movePad .mv:active{ transform: translateY(1px); }
+
+    #mvc_table{ text-align:center; border-collapse:collapse; }
+    #mvc_table img{ margin:0; cursor:pointer; display:block; }
+
+    .move_{
+      width:50px !important;
+      height:50px !important;
+    }
+
+    .up{ transform: rotate(270deg); }
+    .down{ transform: rotate(90deg); }
+    .left{ transform: rotate(180deg); }
+    /* right = no rotation */
   </style>
 </head>
 
@@ -171,17 +99,37 @@
           <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
         </div>
 
-        <!-- Mini move pad (up/down travel) -->
-        <div id="movePad" aria-label="Move view">
-          <button type="button" class="mv" title="Move Up" onclick="movePadClick(event, 0, -1)"><span>▲</span></button>
-
-          <div class="row">
-            <button type="button" class="mv" title="Move Left" onclick="movePadClick(event, 1, 0)"><span>◀</span></button>
-            <button type="button" class="mv" title="Re-center" onclick="movePadHome(event)"><span>◎</span></button>
-            <button type="button" class="mv" title="Move Right" onclick="movePadClick(event, -1, 0)"><span>▶</span></button>
-          </div>
-
-          <button type="button" class="mv" title="Move Down" onclick="movePadClick(event, 0, 1)"><span>▼</span></button>
+        <!-- ✅ WORKING movement pad (3DHOP-style) -->
+        <div id="right_tolbar" aria-label="Move controls">
+          <table id="mvc_table">
+            <tbody>
+              <tr>
+                <td></td>
+                <td>
+                  <img class="move_ up" id="move_up" title="Move Up" src="assets/img/Arrow.png" />
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>
+                  <img class="move_ left" id="move_left" title="Move Left" src="assets/img/Arrow.png" />
+                </td>
+                <td>
+                  <img id="move_home" title="Re-center" src="assets/img/Top_m.png" />
+                </td>
+                <td>
+                  <img class="move_ right" id="move_right" title="Move Right" src="assets/img/Arrow.png" />
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <img class="move_ down" id="move_down" title="Move Down" src="assets/img/Arrow.png" />
+                </td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <canvas id="draw-canvas"></canvas>
@@ -198,7 +146,6 @@
   <script>
     var presenter = null;
 
-    // Side panel content keyed by hotspot ID
     const INFO = {
       archer:    { title: "Archer Panel",    html: `<p><strong>Archer:</strong> Add your description here.</p>` },
       raven:     { title: "Raven Panel",     html: `<p><strong>Raven:</strong> Add your description here.</p>` },
@@ -241,7 +188,6 @@
           bottom:    { mesh: "bottom",    visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] }
         },
 
-        // ✅ IMPORTANT: Use the pan trackball
         trackball: {
           type: TurntablePanTrackball,
           trackOptions: {
@@ -249,6 +195,8 @@
             minMaxDist: [0.005, 140.0],
             minMaxPhi: [-180, 180],
             minMaxTheta: [-85.0, 85.0],
+
+            /* travel range — tweak after you test */
             minMaxPanX: [-5.0, 5.0],
             minMaxPanY: [-20.0, 20.0],
             minMaxPanZ: [-5.0, 5.0]
@@ -257,10 +205,7 @@
       });
 
       presenter.enableOnHover(true);
-
       presenter._onPickedSpot = onPickedSpot;
-      presenter._onEnterSpot = function(id) {};
-      presenter._onLeaveSpot = function(id) {};
 
       presenter.resetTrackball();
       setTimeout(() => presenter.repaint(), 120);
@@ -283,51 +228,61 @@
       else if (action === "full") presenter.fullscreen();
     }
 
-   function movePadHome(e){
-  e.stopPropagation();
-  e.preventDefault();
-  if (presenter) presenter.resetTrackball();
-}
+    function getTrackballSafe(){
+      // Works across many 3DHOP builds
+      return (presenter && (presenter._scene?.trackball || presenter._trackball || presenter._interactor || presenter.trackball)) || null;
+    }
 
-function movePadClick(e, dx, dy){
-  console.log("clicked", dx, dy); // ✅ temporary
-  e.stopPropagation();
-  e.preventDefault();
-  nudgePan(dx, dy);
-}
+    // ✅ Move by adjusting trackball state directly:
+    // state = [phi, theta, panX, panY, panZ, distance]
+    function panBy(dx, dy){
+      if (!presenter) return;
 
+      const tb = getTrackballSafe();
+      if (!tb || typeof tb.getState !== "function" || typeof tb.setState !== "function") {
+        console.warn("No usable trackball getState/setState found.");
+        return;
+      }
 
-function nudgePan(dx, dy) {
-  if (!presenter) return;
+      const s = tb.getState();
 
-  // 3DHOP 4.3: trackball is usually stored here
-  const tb =
-    (presenter._scene && presenter._scene.trackball) ||
-    presenter._trackball ||
-    presenter._interactor ||
-    presenter.trackball;
+      // Bigger = faster travel. Adjust to taste.
+      const step = 0.6;
 
-  if (!tb) {
-    console.warn("No trackball found on presenter.", presenter);
-    return;
-  }
+      s[2] += dx * step; // panX
+      s[3] += dy * step; // panY
 
-  // Your TurntablePanTrackball implements pan(m, dx, dy)
-  if (typeof tb.pan !== "function") {
-    console.warn("Trackball found, but no pan() method. Trackball is:", tb);
-    return;
-  }
+      tb.setState(s);
+      presenter.repaint();
+    }
 
-  const m = tb.matrix;
-  const step = 0.35; // speed
+    function hookMoveArrows(){
+      const up    = document.getElementById("move_up");
+      const down  = document.getElementById("move_down");
+      const left  = document.getElementById("move_left");
+      const right = document.getElementById("move_right");
+      const home  = document.getElementById("move_home");
 
-  tb.pan(m, dx * step, dy * step);
-  presenter.repaint();
-}
+      if (!up || !down || !left || !right || !home) {
+        console.warn("Move arrow elements not found.");
+        return;
+      }
+
+      up.addEventListener("click",   (e)=>{ e.preventDefault(); e.stopPropagation(); panBy(0, -1); });
+      down.addEventListener("click", (e)=>{ e.preventDefault(); e.stopPropagation(); panBy(0,  1); });
+      left.addEventListener("click", (e)=>{ e.preventDefault(); e.stopPropagation(); panBy(-1, 0); });
+      right.addEventListener("click",(e)=>{ e.preventDefault(); e.stopPropagation(); panBy( 1, 0); });
+
+      home.addEventListener("click", (e)=>{
+        e.preventDefault(); e.stopPropagation();
+        presenter.resetTrackball();
+      });
+    }
 
     $(document).ready(function () {
       init3dhop();
       setup3dhop();
+      hookMoveArrows();
     });
 
     window.addEventListener("resize", function () {
