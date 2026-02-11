@@ -171,15 +171,17 @@
           <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
         </div>
 
-        <!-- ✅ Mini move pad (up/down travel) -->
+        <!-- Mini move pad (up/down travel) -->
         <div id="movePad" aria-label="Move view">
-          <button type="button" class="mv" data-mv="up" title="Move Up">▲</button>
+          <button type="button" class="mv" title="Move Up" onclick="movePadClick(event, 0, -1)"><span>▲</span></button>
+
           <div class="row">
-            <button type="button" class="mv" data-mv="left" title="Move Left">◀</button>
-            <button type="button" class="mv" data-mv="home" title="Re-center">◎</button>
-            <button type="button" class="mv" data-mv="right" title="Move Right">▶</button>
+            <button type="button" class="mv" title="Move Left" onclick="movePadClick(event, 1, 0)"><span>◀</span></button>
+            <button type="button" class="mv" title="Re-center" onclick="movePadHome(event)"><span>◎</span></button>
+            <button type="button" class="mv" title="Move Right" onclick="movePadClick(event, -1, 0)"><span>▶</span></button>
           </div>
-          <button type="button" class="mv" data-mv="down" title="Move Down">▼</button>
+
+          <button type="button" class="mv" title="Move Down" onclick="movePadClick(event, 0, 1)"><span>▼</span></button>
         </div>
 
         <canvas id="draw-canvas"></canvas>
@@ -281,66 +283,42 @@
       else if (action === "full") presenter.fullscreen();
     }
 
-    // ✅ Correct pan for this 3DHOP build: tb.pan(m, dx, dy)
-    function nudgePan(dx, dy) {
-      if (!presenter) return;
-      const tb = presenter._trackball;
-      if (!tb || typeof tb.pan !== "function") return;
+   function movePadHome(e){
+  e.stopPropagation();
+  e.preventDefault();
+  if (presenter) presenter.resetTrackball();
+}
 
-      const m = tb.matrix;      // current matrix
-      const step = 0.015;       // speed (tweak if needed)
+function movePadClick(e, dx, dy){
+  console.log("clicked", dx, dy); // ✅ temporary
+  e.stopPropagation();
+  e.preventDefault();
+  nudgePan(dx, dy);
+}
 
-      tb.pan(m, dx * step, dy * step);
-      presenter.repaint();
-    }
 
-    function hookMovePad() {
-      const pad = document.getElementById("movePad");
-      if (!pad) return;
+// ✅ Correct for TurntablePanTrackball in your file: pan(m, dx, dy)
+function nudgePan(dx, dy) {
+  if (!presenter) return;
 
-      // prevent the viewer from eating clicks
-      pad.addEventListener("pointerdown", e => e.stopPropagation(), true);
-      pad.addEventListener("click", e => e.stopPropagation(), true);
+  const tb = presenter._trackball;
+  if (!tb || typeof tb.pan !== "function") {
+    console.warn("Trackball pan() not available. Is TurntablePanTrackball active?");
+    return;
+  }
 
-      pad.addEventListener("click", (e) => {
-        const btn = e.target.closest(".mv");
-        if (!btn) return;
+  const m = tb.matrix;
 
-        const mv = btn.dataset.mv;
-        if (mv === "home") return presenter && presenter.resetTrackball();
+  // BIGGER step so you can actually see movement
+  const step = 0.35;
 
-        // If directions feel inverted, swap signs here.
-        if (mv === "up") nudgePan(0, -1);
-        if (mv === "down") nudgePan(0, +1);
-        if (mv === "left") nudgePan(+1, 0);
-        if (mv === "right") nudgePan(-1, 0);
-      });
-
-      // hold-to-move
-      let holdTimer = null;
-      pad.addEventListener("pointerdown", (e) => {
-        const btn = e.target.closest(".mv");
-        if (!btn) return;
-
-        const mv = btn.dataset.mv;
-        if (mv === "home") return;
-
-        const dir = { up:[0,-1], down:[0,1], left:[1,0], right:[-1,0] }[mv];
-        if (!dir) return;
-
-        holdTimer = setInterval(() => nudgePan(dir[0], dir[1]), 35);
-      });
-
-      window.addEventListener("pointerup", () => {
-        if (holdTimer) clearInterval(holdTimer);
-        holdTimer = null;
-      });
-    }
+  tb.pan(m, dx * step, dy * step);
+  presenter.repaint();
+}
 
     $(document).ready(function () {
       init3dhop();
       setup3dhop();
-      hookMovePad();
     });
 
     window.addEventListener("resize", function () {
