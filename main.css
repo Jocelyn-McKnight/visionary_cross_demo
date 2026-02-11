@@ -257,6 +257,7 @@ h1{ text-align: center; }
 #infoPanel h2{ margin: 0 0 10px 0; }
 #infoPanel p{ margin: 0 0 10px 0; line-height: 1.45; }
 
+/* Move pad */
 #movePad{
   position:absolute;
   right:14px;
@@ -271,8 +272,15 @@ h1{ text-align: center; }
   backdrop-filter: blur(6px);
 }
 
+#movePad .row{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+}
+
+/* IMPORTANT: reset button styling */
 #movePad .mv{
-  all: unset;                 /* wipes weird default button styles */
+  all: unset;
   width:42px;
   height:42px;
   border-radius:10px;
@@ -293,16 +301,9 @@ h1{ text-align: center; }
   transform: translateY(-1px);
 }
 
-#movePad .row{
-  display:flex;
-  gap:8px;
-  justify-content:center;
-}
-
 #movePad .mv:active{
   transform: translateY(1px);
 }
-
 
 
 /* =========================================================

@@ -297,20 +297,29 @@ function movePadClick(e, dx, dy){
 }
 
 
-// ✅ Correct for TurntablePanTrackball in your file: pan(m, dx, dy)
 function nudgePan(dx, dy) {
   if (!presenter) return;
 
-  const tb = presenter._trackball;
-  if (!tb || typeof tb.pan !== "function") {
-    console.warn("Trackball pan() not available. Is TurntablePanTrackball active?");
+  // 3DHOP 4.3: trackball is usually stored here
+  const tb =
+    (presenter._scene && presenter._scene.trackball) ||
+    presenter._trackball ||
+    presenter._interactor ||
+    presenter.trackball;
+
+  if (!tb) {
+    console.warn("No trackball found on presenter.", presenter);
+    return;
+  }
+
+  // Your TurntablePanTrackball implements pan(m, dx, dy)
+  if (typeof tb.pan !== "function") {
+    console.warn("Trackball found, but no pan() method. Trackball is:", tb);
     return;
   }
 
   const m = tb.matrix;
-
-  // BIGGER step so you can actually see movement
-  const step = 0.35;
+  const step = 0.35; // speed
 
   tb.pan(m, dx * step, dy * step);
   presenter.repaint();
