@@ -281,13 +281,6 @@ main{ display:block; }
 .left{ transform: rotate(180deg); }
 .right{ transform: rotate(0deg); }
 
-#Top{
-  width:52px !important;
-  height:52px !important;
-  cursor:pointer;
-  display:block;
-}
-
 /* =========================================================
    FOOTER
    ========================================================= */
