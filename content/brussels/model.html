@@ -1,344 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ruthwell Model</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruthwell Model</title>
 
-<link rel="stylesheet" href="../../main.css" />
-<link rel="icon" type="image/x-icon" href="../../img/cross.ico" />
-<link rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css" />
+  <link rel="stylesheet" href="../../main.css" />
+  <link rel="icon" type="image/x-icon" href="../../img/cross.ico" />
+  <link rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css" />
 
-<script src="../../3dhop/js/spidergl.js"></script>
-<script src="../../3dhop/js/jquery.js"></script>
-<script src="../../3dhop/js/presenter.js"></script>
-<script src="../../3dhop/js/nexus.js"></script>
-<script src="../../3dhop/js/ply.js"></script>
-<script src="../../3dhop/js/trackball_sphere.js"></script>
-<script src="../../3dhop/js/trackball_turntable.js"></script>
-<script src="../../3dhop/js/trackball_turntable_pan.js"></script>
-<script src="../../3dhop/js/trackball_pantilt.js"></script>
-<script src="../../3dhop/js/init.js"></script>
+  <script src="../../3dhop/js/spidergl.js"></script>
+  <script src="../../3dhop/js/jquery.js"></script>
+  <script src="../../3dhop/js/presenter.js"></script>
+  <script src="../../3dhop/js/nexus.js"></script>
+  <script src="../../3dhop/js/ply.js"></script>
 
-<!-- BULLETPROOF layout CSS (overrides anything broken in main.css) -->
-<style>
-/* prevent flex children from collapsing */
-main { display:block; }
+  <script src="../../3dhop/js/trackball_sphere.js"></script>
+  <script src="../../3dhop/js/trackball_turntable.js"></script>
+  <script src="../../3dhop/js/trackball_turntable_pan.js"></script>
+  <script src="../../3dhop/js/trackball_pantilt.js"></script>
 
-.viewer-layout{
-display:flex;
-gap:16px;
-align-items:stretch;
-width:100%;
-padding:16px;
-}
+  <script src="../../3dhop/js/init.js"></script>
 
-/* LEFT: viewer area gets a guaranteed height */
-#viewerWrap{
-flex: 1 1 auto;
-min-width: 0;
-height: 70vh;
-min-height: 520px;
-position: relative;
-}
+  <style>
+    main { display:block; }
 
-#3dhop.tdhop{
-width:100%;
-height:100%;
-position:relative;
-border-radius:12px;
-overflow:hidden;
-background:#ddd;
-}
+    .viewer-layout{
+      display:flex;
+      gap:16px;
+      align-items:stretch;
+      width:100%;
+      padding:16px;
+    }
 
-#draw-canvas{
-width:100% !important;
-height:100% !important;
-display:block;
-background-image:url(../../3dhop/skins/backgrounds/light.jpg);
-background-size:cover;
-background-position:center;
-}
+    #viewerWrap{
+      flex: 1 1 auto;
+      min-width: 0;
+      height: 70vh;
+      min-height: 520px;
+      position: relative;
+    }
 
-/* RIGHT: info panel */
-#infoPanel{
-flex: 0 0 360px;
-max-width: 460px;
-height: 70vh;
-min-height: 520px;
-overflow:auto;
-padding:16px;
-border-radius:12px;
-border: 1px solid rgba(0,0,0,0.15);
-background: rgba(0,0,0,0.04);
-font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-}
-#infoPanel h2{ margin:0 0 10px 0; }
-#infoPanel p{ margin:0 0 10px 0; line-height:1.45; }
-#infoPanel .hint{ font-size: 13px; opacity: .8; }
+    #3dhop.tdhop{
+      width:100%;
+      height:100%;
+      position:relative;
+      border-radius:12px;
+      overflow:hidden;
+      background:#ddd;
+    }
 
-/* Mobile: stack */
-@media (max-width: 900px){
-.viewer-layout{ flex-direction:column; }
-#viewerWrap{ height: 60vh; min-height: 360px; }
-#infoPanel{ height:auto; min-height:0; flex: 1 1 auto; }
-}
-</style>
+    #draw-canvas{
+      width:100% !important;
+      height:100% !important;
+      display:block;
+      background-image:url(../../3dhop/skins/backgrounds/light.jpg);
+      background-size:cover;
+      background-position:center;
+    }
+
+    #infoPanel{
+      flex: 0 0 360px;
+      max-width: 460px;
+      height: 70vh;
+      min-height: 520px;
+      overflow:auto;
+      padding:16px;
+      border-radius:12px;
+      border: 1px solid rgba(0,0,0,0.15);
+      background: rgba(0,0,0,0.04);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    #infoPanel h2{ margin:0 0 10px 0; }
+    #infoPanel p{ margin:0 0 10px 0; line-height:1.45; }
+    #infoPanel .hint{ font-size: 13px; opacity: .8; }
+
+    @media (max-width: 900px){
+      .viewer-layout{ flex-direction:column; }
+      #viewerWrap{ height: 60vh; min-height: 360px; }
+      #infoPanel{ height:auto; min-height:0; flex: 1 1 auto; }
+    }
+
+    /* ✅ Move pad styling */
+    #movePad{
+      position:absolute;
+      right:14px;
+      top:14px;
+      z-index:9999;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      padding:10px;
+      border-radius:12px;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+    }
+
+    #movePad .row{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+    }
+
+    #movePad .mv{
+      width:42px;
+      height:42px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.25);
+      background: rgba(0,0,0,0.35);
+      color:#fff;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      line-height:1;
+      font-size:18px;
+      padding:0;
+
+      cursor:pointer;
+      user-select:none;
+      -webkit-user-select:none;
+    }
+    #movePad .mv:active{ transform: translateY(1px); }
+  </style>
 </head>
 
 <body>
 <header class="header">
-<input type="checkbox" id="menu-toggle" class="menu-toggle">
-<label for="menu-toggle" class="hamburger-icon">&#9776;</label>
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-<div class="hamburger-menu">
-<a href="../frontmatter/home.html">Home</a>
-<a href="../ruthwell/intro.html">Ruthwell</a>
-<a href="../bewcastle/intro.html">Bewcastle</a>
-<a href="../brussels/intro.html">Brussels</a>
+  <div class="hamburger-menu">
+    <a href="../frontmatter/home.html">Home</a>
+    <a href="../ruthwell/intro.html">Ruthwell</a>
+    <a href="../bewcastle/intro.html">Bewcastle</a>
+    <a href="../brussels/intro.html">Brussels</a>
 
-<div class="submenu-wrapper">
-<input type="checkbox" id="submenu-toggle" class="submenu-toggle">
-<label for="submenu-toggle" class="submenu-label">Chapters</label>
-<div class="submenu">
-<a href="intro.html">Introduction</a>
-<a href="model.html">Model</a>
-<a href="ch1.html">About the Cross</a>
-<a href="ch2.html">About the Scan</a>
-</div>
-</div>
+    <div class="submenu-wrapper">
+      <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
+      <label for="submenu-toggle" class="submenu-label">Chapters</label>
+      <div class="submenu">
+        <a href="intro.html">Introduction</a>
+        <a href="model.html">Model</a>
+        <a href="ch1.html">About the Cross</a>
+        <a href="ch2.html">About the Scan</a>
+      </div>
+    </div>
 
-<a href="../backmatter/table.html">Table of Contents</a>
-</div>
+    <a href="../backmatter/table.html">Table of Contents</a>
+  </div>
 
-<a href="../backmatter/table.html">
-<img src="assets/img/head.jpg" alt="Project Image" title="The Brussels Cross">
-<p class="header-text">Brussels</p>
-</a>
+  <a href="../backmatter/table.html">
+    <img src="assets/img/head.jpg" alt="Project Image" title="The Brussels Cross">
+    <p class="header-text">Brussels</p>
+  </a>
 </header>
 
 <main>
-<div class="viewer-layout">
-<div id="viewerWrap">
-<div id="3dhop" class="tdhop">
-<div id="tdhlg"></div>
+  <div class="viewer-layout">
+    <div id="viewerWrap">
+      <div id="3dhop" class="tdhop">
+        <div id="tdhlg"></div>
 
-<div id="toolbar">
-<img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
-<img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
-<img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
-<img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
-<img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
-<img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
-</div>
+        <div id="toolbar">
+          <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
+          <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
+          <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
+          <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
+          <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
+          <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
+        </div>
 
-<!-- Mini move pad (up/down travel) -->
-<div id="movePad" aria-label="Move view">
-  <button type="button" class="mv" data-mv="up" title="Move Up">▲</button>
-  <div class="row">
-    <button type="button" class="mv" data-mv="left" title="Move Left">◀</button>
-    <button type="button" class="mv" data-mv="home" title="Re-center">◎</button>
-    <button type="button" class="mv" data-mv="right" title="Move Right">▶</button>
+        <!-- ✅ Mini move pad (up/down travel) -->
+        <div id="movePad" aria-label="Move view">
+          <button type="button" class="mv" data-mv="up" title="Move Up">▲</button>
+          <div class="row">
+            <button type="button" class="mv" data-mv="left" title="Move Left">◀</button>
+            <button type="button" class="mv" data-mv="home" title="Re-center">◎</button>
+            <button type="button" class="mv" data-mv="right" title="Move Right">▶</button>
+          </div>
+          <button type="button" class="mv" data-mv="down" title="Move Down">▼</button>
+        </div>
+
+        <canvas id="draw-canvas"></canvas>
+      </div>
+    </div>
+
+    <aside id="infoPanel" aria-live="polite">
+      <h2>Explore the Ruthwell Cross</h2>
+      <p>First goal: make sure the model renders reliably.</p>
+      <p class="hint">Once you can see it, we’ll add clickable hotspots that update this panel.</p>
+    </aside>
   </div>
-  <button type="button" class="mv" data-mv="down" title="Move Down">▼</button>
-</div>
 
-<canvas id="draw-canvas"></canvas>
-</div>
-</div>
+  <script>
+    var presenter = null;
 
-<aside id="infoPanel" aria-live="polite">
-<h2>Explore the Ruthwell Cross</h2>
-<p>First goal: make sure the model renders reliably.</p>
-<p class="hint">Once you can see it, we’ll add clickable hotspots that update this panel.</p>
-</aside>
-</div>
+    // Side panel content keyed by hotspot ID
+    const INFO = {
+      archer:    { title: "Archer Panel",    html: `<p><strong>Archer:</strong> Add your description here.</p>` },
+      raven:     { title: "Raven Panel",     html: `<p><strong>Raven:</strong> Add your description here.</p>` },
+      magdalene: { title: "Magdalene Panel", html: `<p><strong>Magdalene:</strong> Add your description here.</p>` },
+      lamb:      { title: "Lamb Panel",      html: `<p><strong>Lamb:</strong> Add your description here.</p>` },
+      bottom:    { title: "Bottom Section",  html: `<p><strong>Bottom:</strong> Add your description here.</p>` }
+    };
 
-<script>
-var presenter = null;
+    function setInfoPanel(title, html) {
+      const panel = document.getElementById("infoPanel");
+      panel.innerHTML = `
+        <h2>${title}</h2>
+        ${html}
+        <p class="hint">Click another area on the cross to keep exploring.</p>
+      `;
+    }
 
-// Side panel content keyed by hotspot ID
-const INFO = {
-archer: {
-title: "Archer Panel",
-html: `<p><strong>Archer:</strong> Add your description here.</p>`
-},
-raven: {
-title: "Raven Panel",
-html: `<p><strong>Raven:</strong> Add your description here.</p>`
-},
-magdalene: {
-title: "Magdalene Panel",
-html: `<p><strong>Magdalene:</strong> Add your description here.</p>`
-},
-lamb: {
-title: "lamb Panel",
-html: `<p><strong>Lamb:</strong> Add your description here.</p>`
-},
-bottom: {
-title: "Bottom Section",
-html: `<p><strong>Bottom:</strong> Add your description here.</p>`
-}
-};
+    function setup3dhop() {
+      presenter = new Presenter("draw-canvas");
 
-function setInfoPanel(title, html) {
-const panel = document.getElementById("infoPanel");
-panel.innerHTML = `
-     <h2>${title}</h2>
-     ${html}
-     <p class="hint">Click another area on the cross to keep exploring.</p>
-   `;
-}
+      presenter.setScene({
+        meshes: {
+          ruthwell:  { url: "assets/models/Ruthwell_15M.nxz" },
+          archer:    { url: "../ruthwell/assets/models/archer.ply" },
+          raven:     { url: "../ruthwell/assets/models/raven.ply" },
+          magdalene: { url: "../ruthwell/assets/models/magdalene.ply" },
+          lamb:      { url: "../ruthwell/assets/models/lamb.ply" },
+          bottom:    { url: "../ruthwell/assets/models/bottom.ply" }
+        },
 
-function setup3dhop() {
-presenter = new Presenter("draw-canvas");
+        modelInstances: {
+          ruthwell: { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true }
+        },
 
-presenter.setScene({
-  meshes: {
-    ruthwell: { url: "assets/models/Ruthwell_15M.nxz" },
+        spots: {
+          archer:    { mesh: "archer",    visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          raven:     { mesh: "raven",     visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          magdalene: { mesh: "magdalene", visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          lamb:      { mesh: "lamb",      visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          bottom:    { mesh: "bottom",    visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] }
+        },
 
-    archer:    { url: "../ruthwell/assets/models/archer.ply" },
-    raven:     { url: "../ruthwell/assets/models/raven.ply" },
-    magdalene: { url: "../ruthwell/assets/models/magdalene.ply" },
-    lamb:      { url: "../ruthwell/assets/models/lamb.ply" },
-    bottom:    { url: "../ruthwell/assets/models/bottom.ply" },
-  },
+        // ✅ IMPORTANT: Use the pan trackball
+        trackball: {
+          type: TurntablePanTrackball,
+          trackOptions: {
+            startDistance: 2.0,
+            minMaxDist: [0.005, 140.0],
+            minMaxPhi: [-180, 180],
+            minMaxTheta: [-85.0, 85.0],
+            minMaxPanX: [-5.0, 5.0],
+            minMaxPanY: [-20.0, 20.0],
+            minMaxPanZ: [-5.0, 5.0]
+          }
+        }
+      });
 
-  modelInstances: {
-    ruthwell: { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true }
-  },
+      presenter.enableOnHover(true);
 
-  spots: {
-    archer:    { mesh: "archer",    visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-    raven:     { mesh: "raven",     visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-    magdalene: { mesh: "magdalene", visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-    lamb:      { mesh: "lamb",      visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-    bottom:    { mesh: "bottom",    visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-  }, 
+      presenter._onPickedSpot = onPickedSpot;
+      presenter._onEnterSpot = function(id) {};
+      presenter._onLeaveSpot = function(id) {};
 
-trackball: {
-type: TurnTableTrackball,
-trackOptions: {
-startDistance: 2.0,
-minMaxDist: [0.005, 140.0],
-minMaxPhi: [-180, 180],
-minMaxTheta: [-85.0, 85.0]
-}
-}
-});
+      presenter.resetTrackball();
+      setTimeout(() => presenter.repaint(), 120);
 
-// Hover detection is optional (turn off if it slows down)
-presenter.enableOnHover(true);
+      setInfoPanel("Explore the Ruthwell Cross", `<p>Click a panel on the cross to learn more.</p>`);
+    }
 
-// Click handler for hotspots
-presenter._onPickedSpot = onPickedSpot;
+    function onPickedSpot(id) {
+      if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
+      else setInfoPanel("Info", `<p>Clicked: <code>${id}</code></p>`);
+    }
 
-// Optional hover handlers (do nothing by default)
-presenter._onEnterSpot = function(id) {};
-presenter._onLeaveSpot = function(id) {};
+    function actionsToolbar(action) {
+      if (!presenter) return;
+      if (action === "home") presenter.resetTrackball();
+      else if (action === "zoomin") presenter.zoomIn();
+      else if (action === "zoomout") presenter.zoomOut();
+      else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+      else if (action === "screenshot") presenter.saveScreenshot();
+      else if (action === "full") presenter.fullscreen();
+    }
 
-presenter.resetTrackball();
-setTimeout(() => presenter.repaint(), 120);
+    // ✅ Correct pan for this 3DHOP build: tb.pan(m, dx, dy)
+    function nudgePan(dx, dy) {
+      if (!presenter) return;
+      const tb = presenter._trackball;
+      if (!tb || typeof tb.pan !== "function") return;
 
-// Default side panel text
-setInfoPanel(
-"Explore the Ruthwell Cross",
-`<p>Click a panel on the cross to learn more.</p>`
-);
-}
+      const m = tb.matrix;      // current matrix
+      const step = 0.015;       // speed (tweak if needed)
 
-function onPickedSpot(id) {
-if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
-else setInfoPanel("Info", `<p>Clicked: <code>${id}</code></p>`);
-}
+      tb.pan(m, dx * step, dy * step);
+      presenter.repaint();
+    }
 
-function actionsToolbar(action) {
-if (!presenter) return;
-if (action === "home") presenter.resetTrackball();
-else if (action === "zoomin") presenter.zoomIn();
-else if (action === "zoomout") presenter.zoomOut();
-else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
-else if (action === "screenshot") presenter.saveScreenshot();
-else if (action === "full") presenter.fullscreen();
-}
+    function hookMovePad() {
+      const pad = document.getElementById("movePad");
+      if (!pad) return;
 
-function panView(dx, dy) {
-  if (!presenter) return;
+      // prevent the viewer from eating clicks
+      pad.addEventListener("pointerdown", e => e.stopPropagation(), true);
+      pad.addEventListener("click", e => e.stopPropagation(), true);
 
-  // Small step; tweak to taste
-  const step = 0.06;
+      pad.addEventListener("click", (e) => {
+        const btn = e.target.closest(".mv");
+        if (!btn) return;
 
-  // If the presenter exposes a direct pan API, use it.
-  // Otherwise, fall back to nudging the trackball target (most builds support one of these).
-  const tb = presenter._trackball;
+        const mv = btn.dataset.mv;
+        if (mv === "home") return presenter && presenter.resetTrackball();
 
-  // Best-case: pan method exists
-  if (tb && typeof tb.pan === "function") {
-    tb.pan(dx * step, dy * step);
-    presenter.repaint();
-    return;
-  }
+        // If directions feel inverted, swap signs here.
+        if (mv === "up") nudgePan(0, -1);
+        if (mv === "down") nudgePan(0, +1);
+        if (mv === "left") nudgePan(+1, 0);
+        if (mv === "right") nudgePan(-1, 0);
+      });
 
-  // Common alt: translate method exists
-  if (tb && typeof tb.translate === "function") {
-    tb.translate(dx * step, dy * step, 0);
-    presenter.repaint();
-    return;
-  }
+      // hold-to-move
+      let holdTimer = null;
+      pad.addEventListener("pointerdown", (e) => {
+        const btn = e.target.closest(".mv");
+        if (!btn) return;
 
-  // Worst-case: no pan available in this build
-  console.warn("No pan/translate method found on trackball in this 3DHOP build.");
-}
+        const mv = btn.dataset.mv;
+        if (mv === "home") return;
 
-function hookMovePad() {
-  const pad = document.getElementById("movePad");
-  if (!pad) return;
+        const dir = { up:[0,-1], down:[0,1], left:[1,0], right:[-1,0] }[mv];
+        if (!dir) return;
 
-  // Click controls
-  pad.addEventListener("click", (e) => {
-    const btn = e.target.closest(".mv");
-    if (!btn) return;
+        holdTimer = setInterval(() => nudgePan(dir[0], dir[1]), 35);
+      });
 
-    const mv = btn.dataset.mv;
-    if (mv === "home") return presenter && presenter.resetTrackball();
+      window.addEventListener("pointerup", () => {
+        if (holdTimer) clearInterval(holdTimer);
+        holdTimer = null;
+      });
+    }
 
-    if (mv === "up") panView(0, +1);
-    if (mv === "down") panView(0, -1);
-    if (mv === "left") panView(-1, 0);
-    if (mv === "right") panView(+1, 0);
-  });
+    $(document).ready(function () {
+      init3dhop();
+      setup3dhop();
+      hookMovePad();
+    });
 
-  // Hold-to-move (optional but feels nice)
-  let holdTimer = null;
-  pad.addEventListener("mousedown", (e) => {
-    const btn = e.target.closest(".mv");
-    if (!btn) return;
-    const mv = btn.dataset.mv;
-    if (mv === "home") return;
-
-    const dir = { up:[0,1], down:[0,-1], left:[-1,0], right:[1,0] }[mv];
-    if (!dir) return;
-
-    holdTimer = setInterval(() => panView(dir[0], dir[1]), 35);
-  });
-
-  window.addEventListener("mouseup", () => {
-    if (holdTimer) clearInterval(holdTimer);
-    holdTimer = null;
-  });
-}
-
-
-$(document).ready(function () {
-init3dhop();
-setup3dhop();
-});
-
-window.addEventListener("resize", function () {
-if (presenter) presenter.repaint();
-});
-</script>
-
+    window.addEventListener("resize", function () {
+      if (presenter) presenter.repaint();
+    });
+  </script>
 </main>
 </body>
 </html>
