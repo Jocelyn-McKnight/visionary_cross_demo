@@ -183,36 +183,27 @@ function setup3dhop() {
 presenter = new Presenter("draw-canvas");
 
 presenter.setScene({
-meshes: {
-// ✅ REPLACE THESE URLS WITH THE ONES THAT WORK FOR YOU
-ruthwell:    { url: "/assets/models/Ruthwell_15M.nxz" },
+  meshes: {
+    ruthwell: { url: "assets/models/Ruthwell_15M.nxz" },
 
-// Panel meshes used as clickable hotspot geometry
-archer:      { url: "../ruthwell/assets/models/archer.ply" },
-raven:       { url: "../ruthwell/assets/models/raven.ply" },
-magdalene:   { url: "../ruthwell/assets/models/magdalene.ply" },
-lamb:        { url: "../ruthwell/assets/models/lamb.ply" },
-bottom:      { url: "../ruthwell/assets/models/bottom.ply" }
-},
+    archer:    { url: "../ruthwell/assets/models/archer.ply" },
+    raven:     { url: "../ruthwell/assets/models/raven.ply" },
+    magdalene: { url: "../ruthwell/assets/models/magdalene.ply" },
+    lamb:      { url: "../ruthwell/assets/models/lamb.ply" },
+    bottom:    { url: "../ruthwell/assets/models/bottom.ply" },
+  },
 
-modelInstances: {
-// ✅ Full cross ALWAYS visible
-ruthwell: {
-mesh: "ruthwell",
-color: [0.8, 0.7, 0.75],
-visible: true
-}
-},
+  modelInstances: {
+    ruthwell: { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true }
+  },
 
-// ✅ Click targets (invisible by default)
-spots: {
-archer:     { mesh: "archer",     visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-raven:      { mesh: "raven",      visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-magdalene:  { mesh: "magdalene",  visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-lamb:       { mesh: "lamb",       visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-east_runes: { mesh: "east_runes", visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-bottom:     { mesh: "bottom",     visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] }
-},
+  spots: {
+    archer:    { mesh: "archer",    visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+    raven:     { mesh: "raven",     visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+    magdalene: { mesh: "magdalene", visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+    lamb:      { mesh: "lamb",      visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+    bottom:    { mesh: "bottom",    visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+  }, 
 
 trackball: {
 type: TurnTableTrackball,
