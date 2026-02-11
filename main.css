@@ -253,53 +253,40 @@ main{ display:block; }
 }
 
 /* -------- Move pad -------- */
+/* movement pad arrows (image version) */
 #movePad{
   position:absolute;
   right:14px;
   top:14px;
-  z-index:9999;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  padding:10px;
+  z-index:50;
+  background: rgba(0,0,0,0.35);
   border-radius:12px;
-  background: rgba(0,0,0,0.35);
+  padding:10px;
   backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
-#movePad .row{
-  display:flex;
-  gap:8px;
-  justify-content:center;
-}
+#mvc_table{ border-collapse:collapse; text-align:center; }
+#mvc_table td{ padding:6px; }
 
-/* IMPORTANT: reset button styling */
-#movePad .mv{
-  all: unset;
-  width:42px;
-  height:42px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.25);
-  background: rgba(0,0,0,0.35);
+.move_{
+  width:44px !important;
+  height:44px !important;
   cursor:pointer;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-#movePad .mv span{
   display:block;
-  color:#fff;
-  font-size:18px;
-  line-height:1;
-  transform: translateY(-1px);
 }
 
-#movePad .mv:active{
-  transform: translateY(1px);
-}
+.up{ transform: rotate(270deg); }
+.down{ transform: rotate(90deg); }
+.left{ transform: rotate(180deg); }
+.right{ transform: rotate(0deg); }
 
+#Top{
+  width:52px !important;
+  height:52px !important;
+  cursor:pointer;
+  display:block;
+}
 
 /* =========================================================
    FOOTER
