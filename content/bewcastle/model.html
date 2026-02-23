@@ -25,102 +25,217 @@
 </head>
 
 <body>
-
 <header class="header">
-    <input type="checkbox" id="menu-toggle" class="menu-toggle">
-    <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
+  <!-- Hamburger menu toggle -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-    <div class="hamburger-menu">
-        <a href="../frontmatter/home.html">Home</a>
+  <!-- Hidden dropdown menu -->
+  <div class="hamburger-menu">
+    <a href="../frontmatter/home.html">Home</a>
+    <a href="../ruthwell/intro.html">Ruthwell</a>
 
-        <div class="submenu-wrapper">
-            <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
-            <label for="submenu-toggle" class="submenu-label">Ruthwell</label>
-            <div class="submenu">
-                <a href="intro.html">Introduction</a>
-                <a href="model.html">Model</a>
-                <a href="ch1.html">About the Cross</a>
-                <a href="ch2.html">About the Scan</a>
-            </div>
-        </div>
+<div class="submenu-wrapper">
+  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
+  <label for="submenu-toggle" class="submenu-label">Bewcastle</label>
+  <div class="submenu">
+    <a href="intro.html">Introduction</a>
+    <a href="model.html">Model</a>
+    <a href="ch1.html">About the Cross</a>
+    <a href="ch2.html">About the Scan</a>
+  </div>
+</div>
 
-        <a href="../bewcastle/intro.html">Bewcastle</a>
-        <a href="../brussels/intro.html">Brussels</a>
-        <a href="../backmatter/table.html">Table of Contents</a>
-    </div>
-
-    <a href="../backmatter/table.html">
-        <img src="assets/img/head.jpg" alt="Project Image" title="The Bewcastle Cross">
-        <p class="header-text">Bewcastle</p>
-    </a>
+    <a href="../brussels/intro.html">Brussels</a>
+    <a href="../backmatter/table.html">Table of Contents</a>
+  </div>
+    
+  <a href="intro.html">
+    <img src="assets/img/head.jpg" alt="Project Image" title="The Bewcastle Cross">
+    <p class="header-text">Bewcastle</p>
+  </a>
 </header>
 
 <main>
-<div id="3dhop" class="tdhop">
-                <div id="tdhlg"></div>
-                <div id="toolbar">
-                    <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
-                    <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
-                    <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
-                    <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
-                    <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
-                    <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
-                </div>
-                <canvas id="draw-canvas" style="width: 100%; height: 100%; background-image: url(../../3dhop/skins/backgrounds/light.jpg)"></canvas>
-            </div>
+  <div class="viewer-layout">
+    <div id="viewerWrap">
+      <div id="3dhop" class="tdhop" onmousedown="if (event.preventDefault) event.preventDefault()">
+        <div id="tdhlg"></div>
 
-            <script type="text/javascript">
-                var presenter = null;
+        <div id="toolbar">
+          <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
+          <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
+          <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
+          <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
+          <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
+          <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
+        </div>
 
-                function setup3dhop() { 
-                    presenter = new Presenter("draw-canvas");
-                    presenter.setScene({
-                        meshes: {
-                            "mesh_1" : { url: "assets/models/bewcastle.ply" } 
-                        },
-                        modelInstances : {
-                            "model_1" : { 
-                                mesh  : "mesh_1",
-                                color : [0.8, 0.7, 0.75]
-                            }
-                        },
-                        trackball: {
-                            type : TurnTableTrackball,
-                            trackOptions : {
-                                startDistance: 3.0,
-                                minMaxDist: [1.0, 5.0],
-                                minMaxPhi: [-180, 180],
-                                minMaxTheta: [-30.0, 70.0]
-                            }
-                        }
-                    });
-                }
-
-                function actionsToolbar(action) {
-                    if(action == 'home') presenter.resetTrackball();
-                    else if(action == 'zoomin') presenter.zoomIn();
-                    else if(action == 'zoomout') presenter.zoomOut();
-                    else if(action == 'light') { presenter.enableLightTrackball(!presenter.isLightTrackballEnabled()); }
-                    else if(action == 'screenshot') presenter.saveScreenshot();
-                    else if(action == 'full') presenter.fullscreen();
-                }
-
-                $(document).ready(function(){
-                    init3dhop();
-                    setup3dhop();
-                });
-            </script>
-</div>
+        <div id="movePad" aria-label="Move view">
+          <table id="mvc_table">
+            <tbody>
+              <tr>
+                <td>
+                  <img class="move_ up" id="move_up" title="Move Up" src="assets/img/Arrow.png" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img class="move_ down" id="move_down" title="Move Down" src="assets/img/Arrow.png" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
 
-<div class="footer">
-    <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
-    <nav>
-        <a href="../frontmatter/history.html">Us</a> |
-        <a href="../backmattercontact.html">Contact</a> |
-        <a href="privacy.html">Privacy Policy</a>
-    </nav>
-</div>
+        <canvas id="draw-canvas"></canvas>
+      </div>
+    </div>
+
+    <aside id="infoPanel" aria-live="polite">
+      <h2>Explore the Bewcastle Cross</h2>
+      <p>Click a panel on the cross to learn more.</p>
+      <p class="hint">Double click to focus in on a spot.</p>
+    </aside>
+  </div>
+
+  <script>
+    var presenter = null;
+
+    const INFO = {
+      TBD:             { title: "TBD ",  html: `<p><strong>TBD:</strong> Add your description here.</p>` },
+    };
+
+    function setInfoPanel(title, html) {
+      const panel = document.getElementById("infoPanel");
+      panel.innerHTML = `
+        <h2>${title}</h2>
+        ${html}
+        <p class="hint">Click another area on the cross to keep exploring.</p>
+      `;
+    }
+
+    function setup3dhop() {
+      presenter = new Presenter("draw-canvas");
+
+      presenter.setScene({
+        meshes: {
+          bewcastle:           { url: "assets/models/bewcastle_15m_comp.nxz" },
+        },
+
+        modelInstances: {
+          ruthwell: { mesh: "bewcastle", color: [0.8, 0.7, 0.75], visible: true }
+        },
+
+        trackball: {
+          type: TurntablePanTrackball,
+          trackOptions: {
+            startPhi: 0.0,
+            startTheta: 0.0,
+            startDistance: 2.0,
+            minMaxPhi: [-180, 180],
+            minMaxTheta: [-85.0, 85.0],
+            minMaxDist: [0.005, 140.0],
+            startPanX: 0.0,
+            startPanY: 0.0,
+            startPanZ: 0.0,
+            minMaxPanX: [-5.0, 5.0],
+            minMaxPanY: [-20.0, 20.0],
+            minMaxPanZ: [-5.0, 5.0]
+          }
+        }
+      });
+
+      presenter.enableOnHover(true);
+      presenter._onPickedSpot = onPickedSpot;
+
+      presenter.resetTrackball();
+      setTimeout(() => presenter.repaint(), 120);
+
+      setInfoPanel("Explore the Bewcastle Cross", `<p>Click a panel on the cross to learn more.</p>`);
+    }
+
+    function onPickedSpot(id) {
+      if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
+      else setInfoPanel("Info", `<p>Clicked: <code>${id}</code></p>`);
+    }
+
+    function actionsToolbar(action) {
+      if (!presenter) return;
+
+      if (action === 'home') presenter.resetTrackball();
+      else if (action === 'zoomin') presenter.zoomIn();
+      else if (action === 'zoomout') presenter.zoomOut();
+      else if (action === 'light') presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+      else if (action === 'screenshot') presenter.saveScreenshot();
+      else if (action === 'full') presenter.fullscreen();
+
+      else if (action === 'move_up' || action === 'move_down' || action === 'move_left' || action === 'move_right') step(action);
+    }
+
+    // ✅ Up/down fixed
+    function step(action) {
+      if (!presenter) return;
+
+      var my_pos = presenter.getTrackballPosition();
+      var vstep = 0.10;
+      var hstep = 0.10;
+
+      switch (action) {
+        case 'move_up':
+          my_pos[3] += vstep;
+          presenter.animateToTrackballPosition(my_pos);
+          break;
+
+        case 'move_down':
+          my_pos[3] -= vstep;
+          presenter.animateToTrackballPosition(my_pos);
+          break;
+
+        case 'move_right': {
+          var gr = Math.PI * my_pos[0] / 180;
+          my_pos[2] -= hstep * Math.cos(gr);
+          my_pos[4] += hstep * Math.sin(gr);
+          presenter.animateToTrackballPosition(my_pos);
+          break;
+        }
+
+        case 'move_left': {
+          var gr = Math.PI * my_pos[0] / 180;
+          my_pos[2] += hstep * Math.cos(gr);
+          my_pos[4] -= hstep * Math.sin(gr);
+          presenter.animateToTrackballPosition(my_pos);
+          break;
+        }
+      }
+    }
+
+    function hookMovePad() {
+      const bind = (id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          actionsToolbar(id);
+        });
+      };
+
+      bind("move_up");
+      bind("move_down");
+    }
+
+    $(document).ready(function () {
+      init3dhop();
+      setup3dhop();
+      hookMovePad();
+    });
+
+    window.addEventListener("resize", function () {
+      if (presenter) presenter.repaint();
+    });
+  </script>
 </main>
 </body>
 </html>

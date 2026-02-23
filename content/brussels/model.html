@@ -92,7 +92,7 @@
     </div>
 
     <aside id="infoPanel" aria-live="polite">
-      <h2>Explore the Ruthwell Cross</h2>
+      <h2>Explore the Brussels Cross</h2>
       <p>Click a panel on the cross to learn more.</p>
       <p class="hint">Once everything is stable, we’ll add clickable hotspots that update this panel.</p>
     </aside>
@@ -102,23 +102,7 @@
     var presenter = null;
 
     const INFO = {
-      angels:             { title: "Angels Section",  html: `<p><strong>Angels:</strong> Add your description here.</p>` },
-      archer:             { title: "Archer Panel",    html: `<p><strong>Archer:</strong> Add your description here.</p>` },
-      bottom:             { title: "Bottom Section",  html: `<p><strong>Bottom:</strong> Add your description here.</p>` },
-      bottom_back:        { title: "bottom back Section",  html: `<p><strong>Bottom Back:</strong> Add your description here.</p>` },
-      centre:             { title: "Centre Section",  html: `<p><strong>Centre:</strong> Add your description here.</p>` },
-      giving:             { title: "Giving Panel",    html: `<p><strong>Giving:</strong> Add your description here.</p>` },
-      jesus:              { title: "Jesus Section",  html: `<p><strong>Jesus:</strong> Add your description here.</p>` },
-      jesus_and_guy:      { title: "Jesus and Guy Section",  html: `<p><strong>Jesus and Guy:</strong> Add your description here.</p>` },
-      lamb:               { title: "lamb Section",  html: `<p><strong>lamb:</strong> Add your description here.</p>` },
-      left_cross_bar:     { title: "Left Cross Bar Section",  html: `<p><strong>Left Cross Bar:</strong> Add your description here.</p>` },
-      left_side:          { title: "Left Side Section",  html: `<p><strong>Left Side:</strong> Add your description here.</p>` },
-      magdalene:          { title: "magdalene Section",  html: `<p><strong>magdalene:</strong> Add your description here.</p>` },
-      raven:              { title: "raven Section",  html: `<p><strong>raven:</strong> Add your description here.</p>` },
-      right_cross_bar:    { title: "Right Cross Bar Section",  html: `<p><strong>Right Cross Bar:</strong> Add your description here.</p>` },
-      right_side:         { title: "Right Side Section",  html: `<p><strong>Right Side :</strong> Add your description here.</p>` },
-      two_people:         { title: "Two People Section",  html: `<p><strong>Two People:</strong> Add your description here.</p>` },
-      two_people_back:    { title: "Two people Back Section",  html: `<p><strong>Two People Back:</strong> Add your description here.</p>` }
+      TBD:             { title: "TBD",  html: `<p><strong>Angels:</strong> Add your description here.</p>` },
     };
 
     function setInfoPanel(title, html) {
@@ -135,29 +119,11 @@
 
       presenter.setScene({
         meshes: {
-          ruthwell:           { url: "assets/models/Ruthwell_15M.nxz" },
-          angels:             { url: "assets/models/angels_cut.ply" },
-          archer:             { url: "assets/models/archer_cut.ply" },
-          bottom:             { url: "assets/models/bottom_cut.ply" },
-          lamb:               { url: "assets/models/lamb_cut.ply" },
-          left_side:          { url: "assets/models/left_side_cut.ply" },
-          magdalene:          { url: "assets/models/magdalene_cut.ply" },
-          raven:              { url: "assets/models/raven_cut.ply" },
-          right_cross_bar:    { url: "assets/models/right_cross_bar_cut.ply" },
+          brussels:           { url: "assets/models/brussels.nxz" },
         },
 
         modelInstances: {
-          ruthwell: { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true }
-        },
-
-        spots: {
-          angels:          { mesh: "angels",          visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-          archer:          { mesh: "archer",          visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-          bottom:          { mesh: "bottom",          visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-          lamb:            { mesh: "lamb",            visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-          left_side:       { mesh: "left_side",       visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-          magdalene:       { mesh: "magdalene",       visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-          raven:           { mesh: "raven",           visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          ruthwell: { mesh: "brussels", color: [0.8, 0.7, 0.75], visible: true }
         },
 
         trackball: {
@@ -185,7 +151,7 @@
       presenter.resetTrackball();
       setTimeout(() => presenter.repaint(), 120);
 
-      setInfoPanel("Explore the Ruthwell Cross", `<p>Click a panel on the cross to learn more.</p>`);
+      setInfoPanel("Explore the Brussels Cross", `<p>Click a panel on the cross to learn more.</p>`);
     }
 
     function onPickedSpot(id) {
