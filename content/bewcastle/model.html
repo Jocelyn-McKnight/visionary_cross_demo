@@ -1,39 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bewcastle</title>
-    <link rel="stylesheet" href="../../main.css">
-    <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bewcastle</title>
+
+  <link rel="stylesheet" href="../../main.css" />
+  <link rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css" />
+  <link rel="icon" type="image/x-icon" href="../../img/cross.ico" />
+
+  <script src="../../3dhop/js/spidergl.js"></script>
+  <script src="../../3dhop/js/jquery.js"></script>
+  <script src="../../3dhop/js/presenter.js"></script>
+  <script src="../../3dhop/js/nexus.js"></script>
+  <script src="../../3dhop/js/ply.js"></script>
+
+  <script src="../../3dhop/js/trackball_sphere.js"></script>
+  <script src="../../3dhop/js/trackball_turntable.js"></script>
+  <script src="../../3dhop/js/trackball_turntable_pan.js"></script>
+  <script src="../../3dhop/js/trackball_pantilt.js"></script>
+
+  <script src="../../3dhop/js/init.js"></script>
 </head>
-    
+
 <body>
 <header class="header">
-  <!-- Hamburger menu toggle -->
   <input type="checkbox" id="menu-toggle" class="menu-toggle">
   <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-  <!-- Hidden dropdown menu -->
   <div class="hamburger-menu">
     <a href="../frontmatter/home.html">Home</a>
     <a href="../ruthwell/intro.html">Ruthwell</a>
 
-<div class="submenu-wrapper">
-  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
-  <label for="submenu-toggle" class="submenu-label">Bewcastle</label>
-  <div class="submenu">
-    <a href="intro.html">Introduction</a>
-    <a href="model.html">Model</a>
-    <a href="ch1.html">About the Cross</a>
-    <a href="ch2.html">About the Scan</a>
-  </div>
-</div>
+    <div class="submenu-wrapper">
+      <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
+      <label for="submenu-toggle" class="submenu-label">Bewcastle</label>
+      <div class="submenu">
+        <a href="intro.html">Introduction</a>
+        <a href="model.html">Model</a>
+        <a href="ch1.html">About the Cross</a>
+        <a href="ch2.html">About the Scan</a>
+      </div>
+    </div>
 
     <a href="../brussels/intro.html">Brussels</a>
     <a href="../backmatter/table.html">Table of Contents</a>
   </div>
-    
+
   <a href="intro.html">
     <img src="assets/img/head.jpg" alt="Project Image" title="The Bewcastle Cross">
     <p class="header-text">Bewcastle</p>
@@ -99,13 +112,13 @@
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">jesus</button>
-            <a href="panels/archer.html">Learn more</a>
+            <button type="button" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">Jesus</button>
+            <a href="panels/jesus.html">Learn more</a>
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">raven</button>
-            <a href="panels/bottom.html">Learn more</a>
+            <button type="button" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">Raven</button>
+            <a href="panels/raven.html">Learn more</a>
           </div>
 
         </div>
@@ -120,7 +133,7 @@
     var spotIds = [
       "baby",
       "jesus",
-      "raven",
+      "raven"
     ];
 
     function setup3dhop() {
@@ -128,14 +141,14 @@
 
       presenter.setScene({
         meshes: {
-          bewcastle:        { url: "assets/models/bewcastle.nxz" },
-          baby:          { url: "assets/models/baby.nxz" },
-          jesus:          { url: "assets/models/jesus.nxz" },
-          raven:          { url: "assets/models/raven.nxz" }
+          bewcastle: { url: "assets/models/bewcastle.nxz" },
+          baby:      { url: "assets/models/baby.nxz" },
+          jesus:     { url: "assets/models/jesus.nxz" },
+          raven:     { url: "assets/models/raven.nxz" }
         },
 
         modelInstances: {
-          ruthwell: {
+          bewcastle: {
             mesh: "bewcastle",
             color: [0.8, 0.7, 0.75],
             visible: true
@@ -143,24 +156,24 @@
         },
 
         spots: {
-          angels: {
+          baby: {
             mesh: "baby",
             visible: true,
             alpha: 0.0,
             color: [0.0, 0.5, 1.0]
           },
-          archer: {
+          jesus: {
             mesh: "jesus",
             visible: true,
             alpha: 0.0,
             color: [0.0, 0.5, 1.0]
           },
-          bottom: {
+          raven: {
             mesh: "raven",
             visible: true,
             alpha: 0.0,
             color: [0.0, 0.5, 1.0]
-          },
+          }
         },
 
         trackball: {
@@ -196,7 +209,9 @@
 
       for (var i = 0; i < spotIds.length; i++) {
         presenter.setSpotVisibility(spotIds[i], true, true);
-        presenter.setSpotColor(spotIds[i], [0.0, 0.5, 1.0, 0.0]);
+        try {
+          presenter.setSpotColor(spotIds[i], [0.0, 0.5, 1.0, 0.0]);
+        } catch (e) {}
       }
 
       presenter.repaint();
@@ -207,7 +222,11 @@
 
       clearHighlights();
       presenter.setSpotVisibility(id, true, true);
-      presenter.setSpotColor(id, [0.0, 0.5, 1.0, 0.65]);
+
+      try {
+        presenter.setSpotColor(id, [0.0, 0.5, 1.0, 0.65]);
+      } catch (e) {}
+
       presenter.repaint();
     }
 
