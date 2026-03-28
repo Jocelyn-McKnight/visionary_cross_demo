@@ -3,27 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Model</title>
-
+    <title>Bewcastle</title>
     <link rel="stylesheet" href="../../main.css">
     <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
-
-    <!-- 3DHOP stylesheet -->
-    <link type="text/css" rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css"/>
-
-    <!-- 3DHOP scripts -->
-    <script type="text/javascript" src="../../3dhop/js/spidergl.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/jquery.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/presenter.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/nexus.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/ply.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/trackball_sphere.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/trackball_turntable.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/trackball_turntable_pan.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/trackball_pantilt.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/init.js"></script>
 </head>
-
+    
 <body>
 <header class="header">
   <!-- Hamburger menu toggle -->
@@ -88,44 +72,95 @@
           </table>
         </div>
 
-
         <canvas id="draw-canvas"></canvas>
       </div>
     </div>
 
-    <aside id="infoPanel" aria-live="polite">
+    <aside id="infoPanel">
       <h2>Explore the Bewcastle Cross</h2>
-      <p>Click a panel on the cross to learn more.</p>
-      <p class="hint">Double click to focus in on a spot.</p>
+
+      <section class="panel-section">
+        <h3>Directionality</h3>
+        <ul class="direction-list">
+          <li><button type="button" onclick="faceDirection('front')">Front</button></li>
+          <li><button type="button" onclick="faceDirection('back')">Back</button></li>
+          <li><button type="button" onclick="faceDirection('left')">Left</button></li>
+          <li><button type="button" onclick="faceDirection('right')">Right</button></li>
+        </ul>
+      </section>
+
+      <section class="panel-section">
+        <h3>Explore the Panels</h3>
+        <div class="panel-links">
+
+          <div class="panel-item">
+            <button type="button" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">Baby</button>
+            <a href="panels/baby.html">Learn more</a>
+          </div>
+
+          <div class="panel-item">
+            <button type="button" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">jesus</button>
+            <a href="panels/archer.html">Learn more</a>
+          </div>
+
+          <div class="panel-item">
+            <button type="button" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">raven</button>
+            <a href="panels/bottom.html">Learn more</a>
+          </div>
+
+        </div>
+      </section>
     </aside>
   </div>
 
   <script>
     var presenter = null;
+    var activeSpot = null;
 
-    const INFO = {
-      TBD:             { title: "TBD ",  html: `<p><strong>TBD:</strong> Add your description here.</p>` },
-    };
-
-    function setInfoPanel(title, html) {
-      const panel = document.getElementById("infoPanel");
-      panel.innerHTML = `
-        <h2>${title}</h2>
-        ${html}
-        <p class="hint">Click another area on the cross to keep exploring.</p>
-      `;
-    }
+    var spotIds = [
+      "baby",
+      "jesus",
+      "raven",
+    ];
 
     function setup3dhop() {
       presenter = new Presenter("draw-canvas");
 
       presenter.setScene({
         meshes: {
-          bewcastle:           { url: "assets/models/bewcastle.nxz" },
+          bewcastle:        { url: "assets/models/bewcastle.nxz" },
+          baby:          { url: "assets/models/baby.nxz" },
+          jesus:          { url: "assets/models/jesus.nxz" },
+          raven:          { url: "assets/models/raven.nxz" }
         },
 
         modelInstances: {
-          bewcastle: { mesh: "bewcastle", color: [0.8, 0.7, 0.75], visible: true }
+          ruthwell: {
+            mesh: "bewcastle",
+            color: [0.8, 0.7, 0.75],
+            visible: true
+          }
+        },
+
+        spots: {
+          angels: {
+            mesh: "baby",
+            visible: true,
+            alpha: 0.0,
+            color: [0.0, 0.5, 1.0]
+          },
+          archer: {
+            mesh: "jesus",
+            visible: true,
+            alpha: 0.0,
+            color: [0.0, 0.5, 1.0]
+          },
+          bottom: {
+            mesh: "raven",
+            visible: true,
+            alpha: 0.0,
+            color: [0.0, 0.5, 1.0]
+          },
         },
 
         trackball: {
@@ -151,30 +186,94 @@
       presenter._onPickedSpot = onPickedSpot;
 
       presenter.resetTrackball();
-      setTimeout(() => presenter.repaint(), 120);
+      setTimeout(function () {
+        presenter.repaint();
+      }, 120);
+    }
 
-      setInfoPanel("Explore the Bewcastle Cross", `<p>Click a panel on the cross to learn more.</p>`);
+    function clearHighlights() {
+      if (!presenter) return;
+
+      for (var i = 0; i < spotIds.length; i++) {
+        presenter.setSpotVisibility(spotIds[i], true, true);
+        presenter.setSpotColor(spotIds[i], [0.0, 0.5, 1.0, 0.0]);
+      }
+
+      presenter.repaint();
+    }
+
+    function showHighlight(id) {
+      if (!presenter) return;
+
+      clearHighlights();
+      presenter.setSpotVisibility(id, true, true);
+      presenter.setSpotColor(id, [0.0, 0.5, 1.0, 0.65]);
+      presenter.repaint();
+    }
+
+    function highlightPanel(id) {
+      activeSpot = id;
+      showHighlight(id);
+    }
+
+    function hoverPanel(id) {
+      showHighlight(id);
+    }
+
+    function unhoverPanel() {
+      if (activeSpot) {
+        showHighlight(activeSpot);
+      } else {
+        clearHighlights();
+      }
     }
 
     function onPickedSpot(id) {
-      if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
-      else setInfoPanel("Info", `<p>Clicked: <code>${id}</code></p>`);
+      highlightPanel(id);
+    }
+
+    function faceDirection(direction) {
+      if (!presenter) return;
+
+      var my_pos = presenter.getTrackballPosition();
+
+      switch (direction) {
+        case "front":
+          my_pos[0] = 0;
+          break;
+        case "right":
+          my_pos[0] = 90;
+          break;
+        case "back":
+          my_pos[0] = 180;
+          break;
+        case "left":
+          my_pos[0] = -90;
+          break;
+      }
+
+      presenter.animateToTrackballPosition(my_pos);
     }
 
     function actionsToolbar(action) {
       if (!presenter) return;
 
-      if (action === 'home') presenter.resetTrackball();
-      else if (action === 'zoomin') presenter.zoomIn();
-      else if (action === 'zoomout') presenter.zoomOut();
-      else if (action === 'light') presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
-      else if (action === 'screenshot') presenter.saveScreenshot();
-      else if (action === 'full') presenter.fullscreen();
-
-      else if (action === 'move_up' || action === 'move_down' || action === 'move_left' || action === 'move_right') step(action);
+      if (action === "home") presenter.resetTrackball();
+      else if (action === "zoomin") presenter.zoomIn();
+      else if (action === "zoomout") presenter.zoomOut();
+      else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+      else if (action === "screenshot") presenter.saveScreenshot();
+      else if (action === "full") presenter.fullscreen();
+      else if (
+        action === "move_up" ||
+        action === "move_down" ||
+        action === "move_left" ||
+        action === "move_right"
+      ) {
+        step(action);
+      }
     }
 
-    // ✅ Up/down fixed
     function step(action) {
       if (!presenter) return;
 
@@ -183,44 +282,43 @@
       var hstep = 0.10;
 
       switch (action) {
-        case 'move_up':
+        case "move_up":
           my_pos[3] += vstep;
           presenter.animateToTrackballPosition(my_pos);
           break;
 
-        case 'move_down':
+        case "move_down":
           my_pos[3] -= vstep;
           presenter.animateToTrackballPosition(my_pos);
           break;
 
-        case 'move_right': {
-          var gr = Math.PI * my_pos[0] / 180;
-          my_pos[2] -= hstep * Math.cos(gr);
-          my_pos[4] += hstep * Math.sin(gr);
+        case "move_right":
+          var gr1 = Math.PI * my_pos[0] / 180;
+          my_pos[2] -= hstep * Math.cos(gr1);
+          my_pos[4] += hstep * Math.sin(gr1);
           presenter.animateToTrackballPosition(my_pos);
           break;
-        }
 
-        case 'move_left': {
-          var gr = Math.PI * my_pos[0] / 180;
-          my_pos[2] += hstep * Math.cos(gr);
-          my_pos[4] -= hstep * Math.sin(gr);
+        case "move_left":
+          var gr2 = Math.PI * my_pos[0] / 180;
+          my_pos[2] += hstep * Math.cos(gr2);
+          my_pos[4] -= hstep * Math.sin(gr2);
           presenter.animateToTrackballPosition(my_pos);
           break;
-        }
       }
     }
 
     function hookMovePad() {
-      const bind = (id) => {
-        const el = document.getElementById(id);
+      function bind(id) {
+        var el = document.getElementById(id);
         if (!el) return;
-        el.addEventListener("click", (e) => {
+
+        el.addEventListener("click", function (e) {
           e.preventDefault();
           e.stopPropagation();
           actionsToolbar(id);
         });
-      };
+      }
 
       bind("move_up");
       bind("move_down");

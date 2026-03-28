@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="../../main.css" />
   <link rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css" />
+  <link rel="stylesheet" href="model.css" />
   <link rel="icon" type="image/x-icon" href="../../img/cross.ico" />
 
   <script src="../../3dhop/js/spidergl.js"></script>
@@ -21,62 +22,6 @@
   <script src="../../3dhop/js/trackball_pantilt.js"></script>
 
   <script src="../../3dhop/js/init.js"></script>
-
-  <style>
-    #infoPanel {
-      padding: 1.5rem;
-      overflow-y: auto;
-    }
-
-    #infoPanel h2 {
-      margin-top: 0;
-      margin-bottom: 1rem;
-    }
-
-    .panel-section {
-      margin-bottom: 2rem;
-    }
-
-    .panel-section h3 {
-      margin-bottom: 0.75rem;
-    }
-
-    .direction-list,
-    .panel-links {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .direction-list li,
-    .panel-item {
-      margin-bottom: 0.75rem;
-    }
-
-    .direction-list button,
-    .panel-item button {
-      background: none;
-      border: none;
-      padding: 0;
-      font: inherit;
-      cursor: pointer;
-      text-align: left;
-      color: inherit;
-    }
-
-    .direction-list button:hover,
-    .panel-item button:hover,
-    .panel-item a:hover {
-      color: #2f80ed;
-    }
-
-    .panel-item a {
-      display: block;
-      font-size: 0.9rem;
-      margin-top: 0.2rem;
-      text-decoration: none;
-    }
-  </style>
 </head>
 
 <body>
@@ -164,42 +109,42 @@
         <div class="panel-links">
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('angels')">Angels</button>
+            <button type="button" onclick="highlightPanel('angels')" onmouseover="hoverPanel('angels')" onmouseout="unhoverPanel()">Angels</button>
             <a href="panels/angels.html">Learn more</a>
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('archer')">Archer</button>
+            <button type="button" onclick="highlightPanel('archer')" onmouseover="hoverPanel('archer')" onmouseout="unhoverPanel()">Archer</button>
             <a href="panels/archer.html">Learn more</a>
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('bottom')">Bottom Panel</button>
+            <button type="button" onclick="highlightPanel('bottom')" onmouseover="hoverPanel('bottom')" onmouseout="unhoverPanel()">Bottom Panel</button>
             <a href="panels/bottom.html">Learn more</a>
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('lamb')">Lamb</button>
+            <button type="button" onclick="highlightPanel('lamb')" onmouseover="hoverPanel('lamb')" onmouseout="unhoverPanel()">Lamb</button>
             <a href="panels/lamb.html">Learn more</a>
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('left_side')">Left Side</button>
+            <button type="button" onclick="highlightPanel('left_side')" onmouseover="hoverPanel('left_side')" onmouseout="unhoverPanel()">Left Side</button>
             <a href="panels/left_side.html">Learn more</a>
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('magdalene')">Magdalene</button>
+            <button type="button" onclick="highlightPanel('magdalene')" onmouseover="hoverPanel('magdalene')" onmouseout="unhoverPanel()">Magdalene</button>
             <a href="panels/magdalene.html">Learn more</a>
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('raven')">Raven</button>
+            <button type="button" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">Raven</button>
             <a href="panels/raven.html">Learn more</a>
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('right_cross_bar')">Right Cross Bar</button>
+            <button type="button" onclick="highlightPanel('right_cross_bar')" onmouseover="hoverPanel('right_cross_bar')" onmouseout="unhoverPanel()">Right Cross Bar</button>
             <a href="panels/right_cross_bar.html">Learn more</a>
           </div>
 
@@ -334,19 +279,33 @@
         presenter.setSpotColor(spotIds[i], [0.0, 0.5, 1.0, 0.0]);
       }
 
-      activeSpot = null;
       presenter.repaint();
     }
 
-    function highlightPanel(id) {
+    function showHighlight(id) {
       if (!presenter) return;
 
       clearHighlights();
       presenter.setSpotVisibility(id, true, true);
       presenter.setSpotColor(id, [0.0, 0.5, 1.0, 0.65]);
-
-      activeSpot = id;
       presenter.repaint();
+    }
+
+    function highlightPanel(id) {
+      activeSpot = id;
+      showHighlight(id);
+    }
+
+    function hoverPanel(id) {
+      showHighlight(id);
+    }
+
+    function unhoverPanel() {
+      if (activeSpot) {
+        showHighlight(activeSpot);
+      } else {
+        clearHighlights();
+      }
     }
 
     function onPickedSpot(id) {
