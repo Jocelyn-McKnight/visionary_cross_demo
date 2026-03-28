@@ -21,6 +21,62 @@
   <script src="../../3dhop/js/trackball_pantilt.js"></script>
 
   <script src="../../3dhop/js/init.js"></script>
+
+  <style>
+    #infoPanel {
+      padding: 1.5rem;
+      overflow-y: auto;
+    }
+
+    #infoPanel h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .panel-section {
+      margin-bottom: 2rem;
+    }
+
+    .panel-section h3 {
+      margin-bottom: 0.75rem;
+    }
+
+    .direction-list,
+    .panel-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .direction-list li,
+    .panel-item {
+      margin-bottom: 0.75rem;
+    }
+
+    .direction-list button,
+    .panel-item button {
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      cursor: pointer;
+      text-align: left;
+      color: inherit;
+    }
+
+    .direction-list button:hover,
+    .panel-item button:hover,
+    .panel-item a:hover {
+      color: #2f80ed;
+    }
+
+    .panel-item a {
+      display: block;
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+      text-decoration: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -86,78 +142,160 @@
           </table>
         </div>
 
-
         <canvas id="draw-canvas"></canvas>
       </div>
     </div>
 
-    <aside id="infoPanel" aria-live="polite">
-      <h2>Explore the Ruthwell Cross</h2>
-      <p>Click a panel on the cross to learn more.</p>
-      <p class="hint">Once everything is stable, we’ll add clickable hotspots that update this panel.</p>
+    <aside id="infoPanel">
+      <h2>Explore the Visionary Cross Project</h2>
+
+      <section class="panel-section">
+        <h3>Directionality</h3>
+        <ul class="direction-list">
+          <li><button type="button" onclick="faceDirection('front')">Front</button></li>
+          <li><button type="button" onclick="faceDirection('back')">Back</button></li>
+          <li><button type="button" onclick="faceDirection('left')">Left</button></li>
+          <li><button type="button" onclick="faceDirection('right')">Right</button></li>
+        </ul>
+      </section>
+
+      <section class="panel-section">
+        <h3>Explore the Panels</h3>
+        <div class="panel-links">
+
+          <div class="panel-item">
+            <button type="button" onclick="highlightPanel('angels')">Angels</button>
+            <a href="panels/angels.html">Learn more</a>
+          </div>
+
+          <div class="panel-item">
+            <button type="button" onclick="highlightPanel('archer')">Archer</button>
+            <a href="panels/archer.html">Learn more</a>
+          </div>
+
+          <div class="panel-item">
+            <button type="button" onclick="highlightPanel('bottom')">Bottom Panel</button>
+            <a href="panels/bottom.html">Learn more</a>
+          </div>
+
+          <div class="panel-item">
+            <button type="button" onclick="highlightPanel('lamb')">Lamb</button>
+            <a href="panels/lamb.html">Learn more</a>
+          </div>
+
+          <div class="panel-item">
+            <button type="button" onclick="highlightPanel('left_side')">Left Side</button>
+            <a href="panels/left_side.html">Learn more</a>
+          </div>
+
+          <div class="panel-item">
+            <button type="button" onclick="highlightPanel('magdalene')">Magdalene</button>
+            <a href="panels/magdalene.html">Learn more</a>
+          </div>
+
+          <div class="panel-item">
+            <button type="button" onclick="highlightPanel('raven')">Raven</button>
+            <a href="panels/raven.html">Learn more</a>
+          </div>
+
+          <div class="panel-item">
+            <button type="button" onclick="highlightPanel('right_cross_bar')">Right Cross Bar</button>
+            <a href="panels/right_cross_bar.html">Learn more</a>
+          </div>
+
+        </div>
+      </section>
     </aside>
   </div>
 
   <script>
     var presenter = null;
+    var activeSpot = null;
 
-    const INFO = {
-      angels:             { title: "Angels Section",  html: `<p><strong>Angels:</strong> Add your description here.</p>` },
-      archer:             { title: "Archer Panel",    html: `<p><strong>Archer:</strong> Add your description here.</p>` },
-      bottom:             { title: "Bottom Section",  html: `<p><strong>Bottom:</strong> Add your description here.</p>` },
-      bottom_back:        { title: "bottom back Section",  html: `<p><strong>Bottom Back:</strong> Add your description here.</p>` },
-      centre:             { title: "Centre Section",  html: `<p><strong>Centre:</strong> Add your description here.</p>` },
-      giving:             { title: "Giving Panel",    html: `<p><strong>Giving:</strong> Add your description here.</p>` },
-      jesus:              { title: "Jesus Section",  html: `<p><strong>Jesus:</strong> Add your description here.</p>` },
-      jesus_and_guy:      { title: "Jesus and Guy Section",  html: `<p><strong>Jesus and Guy:</strong> Add your description here.</p>` },
-      lamb:               { title: "lamb Section",  html: `<p><strong>lamb:</strong> Add your description here.</p>` },
-      left_cross_bar:     { title: "Left Cross Bar Section",  html: `<p><strong>Left Cross Bar:</strong> Add your description here.</p>` },
-      left_side:          { title: "Left Side Section",  html: `<p><strong>Left Side:</strong> Add your description here.</p>` },
-      magdalene:          { title: "magdalene Section",  html: `<p><strong>magdalene:</strong> Add your description here.</p>` },
-      raven:              { title: "raven Section",  html: `<p><strong>raven:</strong> Add your description here.</p>` },
-      right_cross_bar:    { title: "Right Cross Bar Section",  html: `<p><strong>Right Cross Bar:</strong> Add your description here.</p>` },
-      right_side:         { title: "Right Side Section",  html: `<p><strong>Right Side :</strong> Add your description here.</p>` },
-      two_people:         { title: "Two People Section",  html: `<p><strong>Two People:</strong> Add your description here.</p>` },
-      two_people_back:    { title: "Two people Back Section",  html: `<p><strong>Two People Back:</strong> Add your description here.</p>` }
-    };
-
-    function setInfoPanel(title, html) {
-      const panel = document.getElementById("infoPanel");
-      panel.innerHTML = `
-        <h2>${title}</h2>
-        ${html}
-        <p class="hint">Click another area on the cross to keep exploring.</p>
-      `;
-    }
+    var spotIds = [
+      "angels",
+      "archer",
+      "bottom",
+      "lamb",
+      "left_side",
+      "magdalene",
+      "raven",
+      "right_cross_bar"
+    ];
 
     function setup3dhop() {
       presenter = new Presenter("draw-canvas");
 
       presenter.setScene({
         meshes: {
-          ruthwell:           { url: "assets/models/ruthwell_15m_comp.nxz" },
-          angels:             { url: "assets/models/angels_cut.ply" },
-          archer:             { url: "assets/models/archer_cut.ply" },
-          bottom:             { url: "assets/models/bottom_cut.ply" },
-          lamb:               { url: "assets/models/lamb_cut.ply" },
-          left_side:          { url: "assets/models/left_side_cut.ply" },
-          magdalene:          { url: "assets/models/magdalene_cut.ply" },
-          raven:              { url: "assets/models/raven_cut.ply" },
-          right_cross_bar:    { url: "assets/models/right_cross_bar_cut.ply" },
+          ruthwell:        { url: "assets/models/ruthwell_15m_comp.nxz" },
+          angels:          { url: "assets/models/angels_cut.ply" },
+          archer:          { url: "assets/models/archer_cut.ply" },
+          bottom:          { url: "assets/models/bottom_cut.ply" },
+          lamb:            { url: "assets/models/lamb_cut.ply" },
+          left_side:       { url: "assets/models/left_side_cut.ply" },
+          magdalene:       { url: "assets/models/magdalene_cut.ply" },
+          raven:           { url: "assets/models/raven_cut.ply" },
+          right_cross_bar: { url: "assets/models/right_cross_bar_cut.ply" }
         },
 
         modelInstances: {
-          ruthwell: { mesh: "ruthwell", color: [0.8, 0.7, 0.75], visible: true }
+          ruthwell: {
+            mesh: "ruthwell",
+            color: [0.8, 0.7, 0.75],
+            visible: true
+          }
         },
 
         spots: {
-          angels:          { mesh: "angels",          visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-          archer:          { mesh: "archer",          visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-          bottom:          { mesh: "bottom",          visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-          lamb:            { mesh: "lamb",            visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-          left_side:       { mesh: "left_side",       visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-          magdalene:       { mesh: "magdalene",       visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
-          raven:           { mesh: "raven",           visible: true, alpha: 0.0, color: [0.0, 0.5, 1.0] },
+          angels: {
+            mesh: "angels",
+            visible: true,
+            alpha: 0.0,
+            color: [0.0, 0.5, 1.0]
+          },
+          archer: {
+            mesh: "archer",
+            visible: true,
+            alpha: 0.0,
+            color: [0.0, 0.5, 1.0]
+          },
+          bottom: {
+            mesh: "bottom",
+            visible: true,
+            alpha: 0.0,
+            color: [0.0, 0.5, 1.0]
+          },
+          lamb: {
+            mesh: "lamb",
+            visible: true,
+            alpha: 0.0,
+            color: [0.0, 0.5, 1.0]
+          },
+          left_side: {
+            mesh: "left_side",
+            visible: true,
+            alpha: 0.0,
+            color: [0.0, 0.5, 1.0]
+          },
+          magdalene: {
+            mesh: "magdalene",
+            visible: true,
+            alpha: 0.0,
+            color: [0.0, 0.5, 1.0]
+          },
+          raven: {
+            mesh: "raven",
+            visible: true,
+            alpha: 0.0,
+            color: [0.0, 0.5, 1.0]
+          },
+          right_cross_bar: {
+            mesh: "right_cross_bar",
+            visible: true,
+            alpha: 0.0,
+            color: [0.0, 0.5, 1.0]
+          }
         },
 
         trackball: {
@@ -183,30 +321,80 @@
       presenter._onPickedSpot = onPickedSpot;
 
       presenter.resetTrackball();
-      setTimeout(() => presenter.repaint(), 120);
+      setTimeout(function () {
+        presenter.repaint();
+      }, 120);
+    }
 
-      setInfoPanel("Explore the Ruthwell Cross", `<p>Click a panel on the cross to learn more.</p>`);
+    function clearHighlights() {
+      if (!presenter) return;
+
+      for (var i = 0; i < spotIds.length; i++) {
+        presenter.setSpotVisibility(spotIds[i], true, true);
+        presenter.setSpotColor(spotIds[i], [0.0, 0.5, 1.0, 0.0]);
+      }
+
+      activeSpot = null;
+      presenter.repaint();
+    }
+
+    function highlightPanel(id) {
+      if (!presenter) return;
+
+      clearHighlights();
+      presenter.setSpotVisibility(id, true, true);
+      presenter.setSpotColor(id, [0.0, 0.5, 1.0, 0.65]);
+
+      activeSpot = id;
+      presenter.repaint();
     }
 
     function onPickedSpot(id) {
-      if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
-      else setInfoPanel("Info", `<p>Clicked: <code>${id}</code></p>`);
+      highlightPanel(id);
+    }
+
+    function faceDirection(direction) {
+      if (!presenter) return;
+
+      var my_pos = presenter.getTrackballPosition();
+
+      switch (direction) {
+        case "front":
+          my_pos[0] = 0;
+          break;
+        case "right":
+          my_pos[0] = 90;
+          break;
+        case "back":
+          my_pos[0] = 180;
+          break;
+        case "left":
+          my_pos[0] = -90;
+          break;
+      }
+
+      presenter.animateToTrackballPosition(my_pos);
     }
 
     function actionsToolbar(action) {
       if (!presenter) return;
 
-      if (action === 'home') presenter.resetTrackball();
-      else if (action === 'zoomin') presenter.zoomIn();
-      else if (action === 'zoomout') presenter.zoomOut();
-      else if (action === 'light') presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
-      else if (action === 'screenshot') presenter.saveScreenshot();
-      else if (action === 'full') presenter.fullscreen();
-
-      else if (action === 'move_up' || action === 'move_down' || action === 'move_left' || action === 'move_right') step(action);
+      if (action === "home") presenter.resetTrackball();
+      else if (action === "zoomin") presenter.zoomIn();
+      else if (action === "zoomout") presenter.zoomOut();
+      else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+      else if (action === "screenshot") presenter.saveScreenshot();
+      else if (action === "full") presenter.fullscreen();
+      else if (
+        action === "move_up" ||
+        action === "move_down" ||
+        action === "move_left" ||
+        action === "move_right"
+      ) {
+        step(action);
+      }
     }
 
-    // ✅ Up/down fixed
     function step(action) {
       if (!presenter) return;
 
@@ -215,44 +403,43 @@
       var hstep = 0.10;
 
       switch (action) {
-        case 'move_up':
+        case "move_up":
           my_pos[3] += vstep;
           presenter.animateToTrackballPosition(my_pos);
           break;
 
-        case 'move_down':
+        case "move_down":
           my_pos[3] -= vstep;
           presenter.animateToTrackballPosition(my_pos);
           break;
 
-        case 'move_right': {
-          var gr = Math.PI * my_pos[0] / 180;
-          my_pos[2] -= hstep * Math.cos(gr);
-          my_pos[4] += hstep * Math.sin(gr);
+        case "move_right":
+          var gr1 = Math.PI * my_pos[0] / 180;
+          my_pos[2] -= hstep * Math.cos(gr1);
+          my_pos[4] += hstep * Math.sin(gr1);
           presenter.animateToTrackballPosition(my_pos);
           break;
-        }
 
-        case 'move_left': {
-          var gr = Math.PI * my_pos[0] / 180;
-          my_pos[2] += hstep * Math.cos(gr);
-          my_pos[4] -= hstep * Math.sin(gr);
+        case "move_left":
+          var gr2 = Math.PI * my_pos[0] / 180;
+          my_pos[2] += hstep * Math.cos(gr2);
+          my_pos[4] -= hstep * Math.sin(gr2);
           presenter.animateToTrackballPosition(my_pos);
           break;
-        }
       }
     }
 
     function hookMovePad() {
-      const bind = (id) => {
-        const el = document.getElementById(id);
+      function bind(id) {
+        var el = document.getElementById(id);
         if (!el) return;
-        el.addEventListener("click", (e) => {
+
+        el.addEventListener("click", function (e) {
           e.preventDefault();
           e.stopPropagation();
           actionsToolbar(id);
         });
-      };
+      }
 
       bind("move_up");
       bind("move_down");
