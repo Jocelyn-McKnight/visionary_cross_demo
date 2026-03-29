@@ -68,6 +68,13 @@
           <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
         </div>
 
+        <div id="loadingOverlay">
+          <div class="loading-box">
+            <div class="spinner"></div>
+            <p id="loadingText">Loading model…</p>
+          </div>
+        </div>
+
         <div id="movePad" aria-label="Move view">
           <table id="mvc_table">
             <tbody>
@@ -327,6 +334,18 @@
       }
     }
 
+    function showLoading(message) {
+      var overlay = document.getElementById("loadingOverlay");
+      var text = document.getElementById("loadingText");
+      if (text && message) text.textContent = message;
+      if (overlay) overlay.style.display = "flex";
+    }
+
+    function hideLoading() {
+      var overlay = document.getElementById("loadingOverlay");
+      if (overlay) overlay.style.display = "none";
+    }
+
     function hookMovePad() {
       function bind(id) {
         var el = document.getElementById(id);
@@ -344,9 +363,14 @@
     }
 
     $(document).ready(function () {
+      showLoading("Loading model...");
       init3dhop();
       setup3dhop();
       hookMovePad();
+
+      setTimeout(function () {
+        hideLoading();
+      }, 1800);
     });
 
     window.addEventListener("resize", function () {
