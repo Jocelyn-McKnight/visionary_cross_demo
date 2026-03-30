@@ -24,7 +24,8 @@ h1{ text-align: center; }
 }
 .header img{
   width: 100%;
-  height: auto;
+  max-height: 120px;
+  object-fit: cover;
   display: block;
 }
 .header::before{
@@ -37,10 +38,10 @@ h1{ text-align: center; }
 }
 .header .header-text{
   position: absolute;
-  top: 10px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  font-size: 75px;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
   font-family: "Times New Roman", serif;
   color: white;
   text-align: center;
@@ -347,6 +348,28 @@ main{ display:block; }
   #infoPanel{ height:auto; min-height:0; flex: 1 1 auto; }
 }
 
+/* -------- Fullscreen button -------- */
+#fullscreen-btn{
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  z-index: 10;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  border-radius: 8px;
+  padding: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#fullscreen-btn:hover{
+  background: rgba(0,0,0,0.8);
+}
+#fullscreen-btn img{
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
 /* -------- Move pad -------- */
 #movePad{
   position:absolute;
@@ -459,13 +482,14 @@ main{ display:block; }
   .left, .right{ width: 100%; height: auto; }
 
   .header img{
-    max-height: 200px;
+    max-height: 80px;
     object-fit: cover;
   }
 
   .header .header-text{
-    font-size: 24px;
-    top: 5px;
+    font-size: 20px;
+    top: 50%;
+    transform: translate(-50%, -50%);
     padding: 0 10px;
     white-space: nowrap;
   }
