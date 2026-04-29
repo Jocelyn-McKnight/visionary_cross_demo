@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruthwell</title>
-    <link rel="stylesheet" href="../../main.css">
-    <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ruthwell</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../main.css">
+  <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
 </head>
-    
-<body>
-<header class="header">
+
+<body class="landing-page">
+
+  <header class="landing-header">
+    <a href="../../content/frontmatter/home.html" class="landing-title-link">
+      <div class="landing-title">Visionary Cross Project</div>
+    </a>
+
     <input type="checkbox" id="menu-toggle" class="menu-toggle">
 
     <nav class="landing-nav" aria-label="Main navigation">
-      <a href="content/ruthwell/model.html">Ruthwell</a>
-      <a href="content/bewcastle/model.html">Bewcastle</a>
-      <a href="content/brussels/model.html">Brussels</a>
+      <a href="../../content/ruthwell/model.html">Ruthwell</a>
+      <a href="../../content/bewcastle/model.html">Bewcastle</a>
+      <a href="../../content/brussels/model.html">Brussels</a>
 
       <label for="menu-toggle" class="menu-link">
         Menu ☰
@@ -28,11 +36,11 @@
         <input type="checkbox" id="frontmatter-toggle" class="submenu-toggle">
         <label for="frontmatter-toggle" class="submenu-label">Frontmatter</label>
         <div class="submenu">
-          <a href="content/frontmatter/home.html">Home</a>
-          <a href="content/frontmatter/history.html">History of the Project</a>
-          <a href="content/frontmatter/scan_ruth.html">Scanning Ruthwell</a>
-          <a href="content/frontmatter/scan_bew.html">Scanning Bewcastle</a>
-          <a href="content/frontmatter/scan_brus.html">Scanning Brussels</a>
+          <a href="../../content/frontmatter/home.html">Home</a>
+          <a href="../../content/frontmatter/history.html">History of the Project</a>
+          <a href="../../content/frontmatter/scan_ruth.html">Scanning Ruthwell</a>
+          <a href="../../content/frontmatter/scan_bew.html">Scanning Bewcastle</a>
+          <a href="../../content/frontmatter/scan_brus.html">Scanning Brussels</a>
         </div>
       </section>
 
@@ -40,8 +48,8 @@
         <input type="checkbox" id="ruthwell-toggle" class="submenu-toggle">
         <label for="ruthwell-toggle" class="submenu-label">Ruthwell</label>
         <div class="submenu">
-          <a href="content/ruthwell/model.html">Model</a>
-          <a href="content/ruthwell/intro.html">Background Information</a>
+          <a href="../../content/ruthwell/model.html">Model</a>
+          <a href="../../content/ruthwell/intro.html">Background Information</a>
         </div>
       </section>
 
@@ -49,8 +57,8 @@
         <input type="checkbox" id="bewcastle-toggle" class="submenu-toggle">
         <label for="bewcastle-toggle" class="submenu-label">Bewcastle</label>
         <div class="submenu">
-          <a href="content/bewcastle/model.html">Model</a>
-          <a href="content/bewcastle/intro.html">Background Information</a>
+          <a href="../../content/bewcastle/model.html">Model</a>
+          <a href="../../content/bewcastle/intro.html">Background Information</a>
         </div>
       </section>
 
@@ -58,8 +66,8 @@
         <input type="checkbox" id="brussels-toggle" class="submenu-toggle">
         <label for="brussels-toggle" class="submenu-label">Brussels</label>
         <div class="submenu">
-          <a href="content/brussels/model.html">Model</a>
-          <a href="content/brussels/intro.html">Background Information</a>
+          <a href="../../content/brussels/model.html">Model</a>
+          <a href="../../content/brussels/intro.html">Background Information</a>
         </div>
       </section>
 
@@ -67,43 +75,39 @@
         <input type="checkbox" id="backmatter-toggle" class="submenu-toggle">
         <label for="backmatter-toggle" class="submenu-label">Backmatter</label>
         <div class="submenu">
-          <a href="content/backmatter/table.html">Table of Contents</a>
-          <a href="content/backmatter/glossary.html">Glossary</a>
-          <a href="content/backmatter/contact.html">Contact</a>
+          <a href="../../content/backmatter/table.html">Table of Contents</a>
+          <a href="../../content/backmatter/glossary.html">Glossary</a>
+          <a href="../../content/backmatter/contact.html">Contact</a>
         </div>
       </section>
 
     </nav>
   </header>
-    
-    <!-- Main Container for Left and Right Columns -->
-    <div class="container">
-        <div class="left">       
-            <!--https://www.flickr.com/photos/71629876@N08/7096195421/-->
-            <img src="../../img/church.jpg" alt="Project Image">
-        </div>
-        <p></p>
 
-        <!-- Right Column always information -->
-        <div class="right">
-            <div class="info">
-                <h1>Preface</h1>
-<p>Visionary Cross: a multimedia edition and archive is a critical edition, scholarly study, and textual archive of the Old English Visionary Cross Tradition. The Visionary Cross project is an international, multidisciplinary research project whose principle objective is the development of a new kind of digital archive and edition of texts and objects associated with the Visionary Cross tradition in Anglo-Saxon England.</p>
-
-<p>ISTI-CNR collaborated with the partners of the project in two main activities: the acquisition and processing of the 3D representation of two important stone crosses (Ruthwell and Bewcastle), and the creation of a web accessible "digital edition" of the Cross, available to both the genarl public and the scholars.</p>
-            </div>
-        </div>
+  <main class="container">
+    <div class="left">
+      <img src="../../img/church.jpg" alt="Church exterior">
     </div>
-<p></p>
 
-<div class="footer">
+    <div class="right">
+      <div class="info">
+        <h1>Preface</h1>
+
+        <p>Visionary Cross: a multimedia edition and archive is a critical edition, scholarly study, and textual archive of the Old English Visionary Cross Tradition. The Visionary Cross project is an international, multidisciplinary research project whose principal objective is the development of a new kind of digital archive and edition of texts and objects associated with the Visionary Cross tradition in Old English England.</p>
+
+        <p>ISTI-CNR collaborated with the partners of the project in two main activities: the acquisition and processing of the 3D representation of two important stone crosses, Ruthwell and Bewcastle, and the creation of a web-accessible digital edition of the crosses, available to both the general public and scholars.</p>
+      </div>
+    </div>
+  </main>
+
+  <div class="footer">
     <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
     <nav>
-        <a href="../frontmatter/history.html">Us</a> |
-        <a href="../backmattercontact.html">Contact</a> |
-        <a href="privacy.html">Privacy Policy</a>
+      <a href="../../content/frontmatter/history.html">About</a> |
+      <a href="../../content/backmatter/contact.html">Contact</a> |
+      <a href="../../content/backmatter/privacy.html">Privacy Policy</a>
     </nav>
-</div>
-    
+  </div>
+
 </body>
 </html>
