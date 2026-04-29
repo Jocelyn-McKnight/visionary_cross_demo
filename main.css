@@ -112,7 +112,7 @@ h3 {
   top: 4rem;
   left: 1rem;
   z-index: 1000;
-  width: min(620px, calc(100vw - 2rem));
+  width: min(420px, calc(100vw - 2rem));
   padding: 1rem;
   background: #000;
   border-radius: 8px;
