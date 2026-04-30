@@ -493,6 +493,10 @@ h3 {
    3DHOP VIEWER + SIDE PANEL
    ========================================================= */
 
+/* =========================================================
+   3DHOP VIEWER + SIDE PANEL
+   ========================================================= */
+
 main {
   display: block;
 }
@@ -507,11 +511,11 @@ main {
   margin: 2rem auto;
   padding: 0;
 
-  background: #1f1f1f;
-  border: 1px solid rgba(222, 128, 35, 0.7);
-  border-radius: 12px;
+  background: #f8f8f8;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 #viewerWrap {
@@ -520,8 +524,8 @@ main {
   height: 78vh;
   min-height: 600px;
   position: relative;
-  background: #222;
-  border-right: 1px solid rgba(222, 128, 35, 0.7);
+  background: #d8d8d8;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 #3dhop.tdhop {
@@ -542,45 +546,24 @@ main {
 }
 
 #infoPanel {
-  flex: 0 0 380px;
-  max-width: 460px;
+  flex: 0 0 390px;
+  max-width: 480px;
   height: 78vh;
   min-height: 600px;
   overflow-y: auto;
 
   padding: 0;
-  background: #222;
-  color: #f7f2ea;
+  background: #f8f8f8;
+  color: #111;
   font-family: var(--font-body);
-
-  border-left: 1px solid rgba(222, 128, 35, 0.7);
-}
-
-#infoPanel h2 {
-  margin: 0 0 1rem;
-  color: #de8023;
-  font-size: 1.35rem;
-}
-
-#infoPanel h3 {
-  margin: 0 0 0.6rem;
-  color: #f7f2ea;
-  font-size: 1rem;
-  border-bottom: 1px solid rgba(222, 128, 35, 0.45);
-  padding-bottom: 0.35rem;
-}
-
-#infoPanel p {
-  margin: 0 0 10px 0;
-  line-height: 1.45;
 }
 
 /* ---------- Sidebar tabs ---------- */
 
 .side-tabs {
   display: flex;
-  border-bottom: 1px solid rgba(222, 128, 35, 0.7);
-  background: #2b2b2b;
+  background: #f8f8f8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   position: sticky;
   top: 0;
   z-index: 5;
@@ -588,14 +571,20 @@ main {
 
 .tab-button {
   flex: 1;
-  padding: 0.85rem 1rem;
-  border-right: 1px solid rgba(222, 128, 35, 0.45);
-  background: #333;
-  color: #eee;
-  font-weight: 700;
+  padding: 1rem;
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  background: #f8f8f8;
+  color: #111;
+
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   text-align: center;
-  text-decoration: none;
-  letter-spacing: 0.03em;
+
+  cursor: pointer;
 }
 
 .tab-button:last-child {
@@ -604,16 +593,61 @@ main {
 
 .tab-button:hover,
 .tab-button.active {
-  background: #de8023;
-  color: #111;
+  background: #111;
+  color: #fff;
 }
 
-/* ---------- Direction selector ---------- */
+/* ---------- Tab content ---------- */
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* ---------- Sidebar text ---------- */
+
+.panel-section {
+  padding: 1.4rem;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.panel-section h2 {
+  margin: 0 0 0.75rem;
+  color: #111;
+
+  font-family: var(--font-title);
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.panel-section h3 {
+  margin: 0 0 0.9rem;
+  color: #111;
+
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.panel-intro {
+  margin: 0 0 1rem;
+  color: #555;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ---------- Direction buttons ---------- */
 
 .direction-row {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.45rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
 }
 
 .direction-card {
@@ -622,70 +656,111 @@ main {
   align-items: center;
   justify-content: center;
 
-  min-height: 72px;
-  padding: 0.5rem 0.25rem;
+  min-height: 70px;
+  padding: 0.55rem 0.35rem;
 
-  border: 1px solid rgba(222, 128, 35, 0.45);
-  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 10px;
 
-  background: #303030;
-  color: #f7f2ea;
+  background: #fff;
+  color: #111;
 
-  font-size: 0.78rem;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
+
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.direction-card:hover,
+.direction-card:hover {
+  border-color: #b87945;
+  color: #8d552b;
+}
+
 .direction-card.active {
-  background: #de8023;
-  color: #111;
-  border-color: #de8023;
+  background: #b87945;
+  border-color: #b87945;
+  color: #fff;
 }
 
 .side-icon {
   display: block;
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   line-height: 1;
   margin-bottom: 0.35rem;
 }
 
-/* ---------- Panel lists ---------- */
-
-.panel-section {
-  padding: 1rem;
-  margin-bottom: 0.75rem;
-}
+/* ---------- Panel list ---------- */
 
 .panel-links {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.75rem;
 }
 
 .panel-item {
   margin: 0;
+  padding: 0.85rem 0.9rem;
+
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-left: 4px solid transparent;
+  border-radius: 10px;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.panel-item:hover {
+  border-color: rgba(184, 121, 69, 0.55);
+}
+
+.panel-item.active {
+  border-left-color: #b87945;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.panel-name {
+  display: block;
+  width: 100%;
+
+  margin: 0 0 0.25rem;
+  padding: 0;
+
+  border: none;
+  background: transparent;
+  color: #111;
+
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.panel-name:hover {
+  color: #8d552b;
+}
+
+.panel-item p {
+  margin: 0;
+  color: #555;
+  font-size: 0.88rem;
+  line-height: 1.45;
 }
 
 .panel-item a {
-  display: block;
-  padding: 0.65rem 0.75rem;
-
-  border: 1px solid rgba(222, 128, 35, 0.35);
-  border-radius: 8px;
-
-  background: #2e2e2e;
-  color: #f7f2ea;
-
-  font-size: 0.95rem;
-  font-weight: 700;
+  color: #8d552b;
+  font-weight: 600;
   text-decoration: none;
 }
 
 .panel-item a:hover {
-  color: #de8023;
-  border-color: #de8023;
+  text-decoration: underline;
 }
 
 /* ---------- Small helper text ---------- */

@@ -140,96 +140,136 @@
 
     <aside id="infoPanel">
       <div class="side-tabs">
-        <a class="tab-button active" href="model.html">▦ Panels</a>
-        <a class="tab-button" href="poem.html">📖 Poem</a>
+        <button class="tab-button active" type="button" onclick="openInfoTab('panels')">
+          Panels
+        </button>
+
+        <button class="tab-button" type="button" onclick="openInfoTab('poem')">
+          Poem
+        </button>
       </div>
 
-      <section class="panel-section">
-        <h2>Explore the Panels</h2>
+      <div id="panels-content" class="tab-content active">
+        <section class="panel-section">
+          <h2>Explore the Ruthwell Cross</h2>
 
-        <div class="direction-row">
-          <a class="direction-card active" href="model.html">
-            <span class="side-icon">✣</span>
-            <span>All</span>
-          </a>
+          <p class="panel-intro">
+            Select a direction to turn the model. Select a panel name to highlight it on the cross.
+          </p>
 
-          <a class="direction-card" href="front.html">
-            <span class="side-icon">▥</span>
-            <span>Front</span>
-          </a>
+          <div class="direction-row">
+            <button class="direction-card active" type="button" data-direction="front" onclick="setActiveDirection('front')">
+              <span class="side-icon">▥</span>
+              <span>Front</span>
+            </button>
 
-          <a class="direction-card" href="back.html">
-            <span class="side-icon">▥</span>
-            <span>Back</span>
-          </a>
+            <button class="direction-card" type="button" data-direction="back" onclick="setActiveDirection('back')">
+              <span class="side-icon">▥</span>
+              <span>Back</span>
+            </button>
 
-          <a class="direction-card" href="left.html">
-            <span class="side-icon">▥</span>
-            <span>Left</span>
-          </a>
+            <button class="direction-card" type="button" data-direction="left" onclick="setActiveDirection('left')">
+              <span class="side-icon">▥</span>
+              <span>Left</span>
+            </button>
 
-          <a class="direction-card" href="right.html">
-            <span class="side-icon">▥</span>
-            <span>Right</span>
-          </a>
-        </div>
-      </section>
-
-      <section class="panel-section">
-        <h3>Front Panels:</h3>
-
-        <div class="panel-links">
-          <div class="panel-item">
-            <a href="panels/angels.html">Angels</a>
+            <button class="direction-card" type="button" data-direction="right" onclick="setActiveDirection('right')">
+              <span class="side-icon">▥</span>
+              <span>Right</span>
+            </button>
           </div>
+        </section>
 
-          <div class="panel-item">
-            <a href="panels/archer.html">Archer</a>
+        <section class="panel-section">
+          <h3>Front Panels</h3>
+
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="angels">
+              <button type="button" class="panel-name" onclick="highlightPanel('angels')" onmouseover="hoverPanel('angels')" onmouseout="unhoverPanel()">
+                Angels
+              </button>
+              <p>Click <a href="panels/angels.html">here</a> to view in detail.</p>
+            </div>
+
+            <div class="panel-item" data-panel-id="archer">
+              <button type="button" class="panel-name" onclick="highlightPanel('archer')" onmouseover="hoverPanel('archer')" onmouseout="unhoverPanel()">
+                Archer
+              </button>
+              <p>Click <a href="panels/archer.html">here</a> to view in detail.</p>
+            </div>
+
+            <div class="panel-item" data-panel-id="bottom">
+              <button type="button" class="panel-name" onclick="highlightPanel('bottom')" onmouseover="hoverPanel('bottom')" onmouseout="unhoverPanel()">
+                Bottom Panel
+              </button>
+              <p>Click <a href="panels/bottom.html">here</a> to view in detail.</p>
+            </div>
+
+            <div class="panel-item" data-panel-id="magdalene">
+              <button type="button" class="panel-name" onclick="highlightPanel('magdalene')" onmouseover="hoverPanel('magdalene')" onmouseout="unhoverPanel()">
+                Magdalene
+              </button>
+              <p>Click <a href="panels/magdalene.html">here</a> to view in detail.</p>
+            </div>
           </div>
+        </section>
 
-          <div class="panel-item">
-            <a href="panels/bottom.html">Bottom Panel</a>
+        <section class="panel-section">
+          <h3>Back Panels</h3>
+
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="lamb">
+              <button type="button" class="panel-name" onclick="highlightPanel('lamb')" onmouseover="hoverPanel('lamb')" onmouseout="unhoverPanel()">
+                Lamb
+              </button>
+              <p>Click <a href="panels/lamb.html">here</a> to view in detail.</p>
+            </div>
+
+            <div class="panel-item" data-panel-id="raven">
+              <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+                Raven
+              </button>
+              <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+            </div>
           </div>
+        </section>
 
-          <div class="panel-item">
-            <a href="panels/magdalene.html">Magdalene</a>
+        <section class="panel-section">
+          <h3>Left Panels</h3>
+
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="left_side">
+              <button type="button" class="panel-name" onclick="highlightPanel('left_side')" onmouseover="hoverPanel('left_side')" onmouseout="unhoverPanel()">
+                Left Side Panel
+              </button>
+              <p>Click <a href="panels/left_side.html">here</a> to view in detail.</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="panel-section">
-        <h3>Back Panels:</h3>
+        <section class="panel-section">
+          <h3>Right Panels</h3>
 
-        <div class="panel-links">
-          <div class="panel-item">
-            <a href="panels/lamb.html">Lamb</a>
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="right_cross_bar">
+              <button type="button" class="panel-name" onclick="highlightPanel('right_cross_bar')" onmouseover="hoverPanel('right_cross_bar')" onmouseout="unhoverPanel()">
+                Right Cross Bar
+              </button>
+              <p>Click <a href="panels/right_cross_bar.html">here</a> to view in detail.</p>
+            </div>
           </div>
+        </section>
+      </div>
 
-          <div class="panel-item">
-            <a href="panels/raven.html">Raven</a>
-          </div>
-        </div>
-      </section>
+      <div id="poem-content" class="tab-content">
+        <section class="panel-section">
+          <h2>The Poem</h2>
 
-      <section class="panel-section">
-        <h3>Left Panels:</h3>
-
-        <div class="panel-links">
-          <div class="panel-item">
-            <a href="panels/left_side.html">Left Side Panel</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel-section">
-        <h3>Right Panels:</h3>
-
-        <div class="panel-links">
-          <div class="panel-item">
-            <a href="panels/right_cross_bar.html">Right Cross Bar</a>
-          </div>
-        </div>
-      </section>
+          <p>
+            This section can contain the poetic inscription, transcription, translation, or commentary.
+          </p>
+        </section>
+      </div>
     </aside>
   </div>
 
@@ -374,6 +414,7 @@
     function highlightPanel(id) {
       activeSpot = id;
       showHighlight(id);
+      setActivePanelItem(id);
     }
 
     function hoverPanel(id) {
@@ -494,6 +535,57 @@
 
       bind("move_up");
       bind("move_down");
+    }
+
+    function openInfoTab(tabName) {
+      var tabs = document.querySelectorAll(".tab-button");
+      var contents = document.querySelectorAll(".tab-content");
+
+      tabs.forEach(function (tab) {
+        tab.classList.remove("active");
+      });
+
+      contents.forEach(function (content) {
+        content.classList.remove("active");
+      });
+
+      if (tabName === "poem") {
+        document.querySelector(".tab-button:nth-child(2)").classList.add("active");
+        document.getElementById("poem-content").classList.add("active");
+      } else {
+        document.querySelector(".tab-button:nth-child(1)").classList.add("active");
+        document.getElementById("panels-content").classList.add("active");
+      }
+    }
+
+    function setActiveDirection(direction) {
+      var directionButtons = document.querySelectorAll(".direction-card");
+
+      directionButtons.forEach(function (button) {
+        button.classList.remove("active");
+      });
+
+      var activeButton = document.querySelector('[data-direction="' + direction + '"]');
+
+      if (activeButton) {
+        activeButton.classList.add("active");
+      }
+
+      faceDirection(direction);
+    }
+
+    function setActivePanelItem(id) {
+      var panelItems = document.querySelectorAll(".panel-item");
+
+      panelItems.forEach(function (item) {
+        item.classList.remove("active");
+      });
+
+      var activeItem = document.querySelector('[data-panel-id="' + id + '"]');
+
+      if (activeItem) {
+        activeItem.classList.add("active");
+      }
     }
 
     $(document).ready(function () {
