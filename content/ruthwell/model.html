@@ -391,25 +391,29 @@
       }, 120);
     }
 
-    function clearHighlights() {
-      if (!presenter) return;
+function clearHighlights() {
+  if (!presenter) return;
 
-      for (var i = 0; i < spotIds.length; i++) {
-        presenter.setSpotVisibility(spotIds[i], true, true);
-        presenter.setSpotColor(spotIds[i], [0.0, 0.5, 1.0, 0.0]);
-      }
+  for (var i = 0; i < spotIds.length; i++) {
+    presenter.setSpotVisibility(spotIds[i], true, false);
+    presenter.setSpotColor(spotIds[i], [0.72, 0.47, 0.27]);
+    presenter.setSpotAlpha(spotIds[i], 0.0);
+  }
 
-      presenter.repaint();
-    }
+  presenter.repaint();
+}
 
-    function showHighlight(id) {
-      if (!presenter) return;
+function showHighlight(id) {
+  if (!presenter) return;
 
-      clearHighlights();
-      presenter.setSpotVisibility(id, true, true);
-      presenter.setSpotColor(id, [0.0, 0.5, 1.0, 0.65]);
-      presenter.repaint();
-    }
+  clearHighlights();
+
+  presenter.setSpotVisibility(id, true, false);
+  presenter.setSpotColor(id, [0.72, 0.47, 0.27]);
+  presenter.setSpotAlpha(id, 0.65);
+
+  presenter.repaint();
+}
 
     function highlightPanel(id) {
       activeSpot = id;
