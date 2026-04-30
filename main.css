@@ -50,7 +50,7 @@ h3 {
 
 .header {
   position: relative;
-  height: 160px;
+  height: 100px;
   overflow: hidden;
   background: #000;
 
@@ -731,7 +731,7 @@ main {
   }
 
   .header {
-    height: 200px;
+    height: 100px;
   }
 
   .header .header-text {
