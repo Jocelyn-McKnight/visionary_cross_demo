@@ -7,7 +7,6 @@
 
   <link rel="stylesheet" href="../../main.css" />
   <link rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css" />
-  <link rel="stylesheet" href="model.css" />
   <link rel="icon" type="image/x-icon" href="../../img/cross.ico" />
 
   <script src="../../3dhop/js/spidergl.js"></script>
@@ -312,56 +311,56 @@
           }
         },
 
-        spots: {
-          angels: {
-            mesh: "angels",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          archer: {
-            mesh: "archer",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          bottom: {
-            mesh: "bottom",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          lamb: {
-            mesh: "lamb",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          left_side: {
-            mesh: "left_side",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          magdalene: {
-            mesh: "magdalene",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          raven: {
-            mesh: "raven",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          right_cross_bar: {
-            mesh: "right_cross_bar",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          }
+      spots: {
+        angels: {
+          mesh: "angels",
+          visible: false,
+          alpha: 0.65,
+          color: [0.72, 0.47, 0.27]
         },
+        archer: {
+          mesh: "archer",
+          visible: false,
+          alpha: 0.65,
+          color: [0.72, 0.47, 0.27]
+        },
+        bottom: {
+          mesh: "bottom",
+          visible: false,
+          alpha: 0.65,
+          color: [0.72, 0.47, 0.27]
+        },
+        lamb: {
+          mesh: "lamb",
+          visible: false,
+          alpha: 0.65,
+          color: [0.72, 0.47, 0.27]
+        },
+        left_side: {
+          mesh: "left_side",
+          visible: false,
+          alpha: 0.65,
+          color: [0.72, 0.47, 0.27]
+        },
+        magdalene: {
+          mesh: "magdalene",
+          visible: false,
+          alpha: 0.65,
+          color: [0.72, 0.47, 0.27]
+        },
+        raven: {
+          mesh: "raven",
+          visible: false,
+          alpha: 0.65,
+          color: [0.72, 0.47, 0.27]
+        },
+        right_cross_bar: {
+          mesh: "right_cross_bar",
+          visible: false,
+          alpha: 0.65,
+          color: [0.72, 0.47, 0.27]
+        }
+      },
 
         trackball: {
           type: TurntablePanTrackball,
@@ -395,9 +394,7 @@ function clearHighlights() {
   if (!presenter) return;
 
   for (var i = 0; i < spotIds.length; i++) {
-    presenter.setSpotVisibility(spotIds[i], true, false);
-    presenter.setSpotColor(spotIds[i], [0.72, 0.47, 0.27]);
-    presenter.setSpotAlpha(spotIds[i], 0.0);
+    presenter.setSpotVisibility(spotIds[i], false, true);
   }
 
   presenter.repaint();
@@ -408,10 +405,7 @@ function showHighlight(id) {
 
   clearHighlights();
 
-  presenter.setSpotVisibility(id, true, false);
-  presenter.setSpotColor(id, [0.72, 0.47, 0.27]);
-  presenter.setSpotAlpha(id, 0.65);
-
+  presenter.setSpotVisibility(id, true, true);
   presenter.repaint();
 }
 
