@@ -499,25 +499,35 @@ main {
 
 .viewer-layout {
   display: flex;
-  gap: 16px;
+  flex-direction: row;
+  gap: 0;
   align-items: stretch;
-  width: 100%;
-  padding: 16px;
+
+  width: min(1500px, calc(100% - 2rem));
+  margin: 2rem auto;
+  padding: 0;
+
+  background: #1f1f1f;
+  border: 1px solid rgba(222, 128, 35, 0.7);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 #viewerWrap {
   flex: 1 1 auto;
   min-width: 0;
-  height: 70vh;
-  min-height: 520px;
+  height: 78vh;
+  min-height: 600px;
   position: relative;
+  background: #222;
+  border-right: 1px solid rgba(222, 128, 35, 0.7);
 }
 
 #3dhop.tdhop {
   width: 100%;
   height: 100%;
   position: relative;
-  border-radius: 12px;
   overflow: hidden;
   background: #ddd;
 }
@@ -532,21 +542,32 @@ main {
 }
 
 #infoPanel {
-  flex: 0 0 360px;
+  flex: 0 0 380px;
   max-width: 460px;
-  height: 70vh;
-  min-height: 520px;
-  overflow: auto;
-  padding: 1.5rem;
-  border-radius: 12px;
-  border: 1px solid rgba(0,0,0,0.15);
-  background: rgba(0,0,0,0.04);
+  height: 78vh;
+  min-height: 600px;
+  overflow-y: auto;
+
+  padding: 0;
+  background: #222;
+  color: #f7f2ea;
   font-family: var(--font-body);
+
+  border-left: 1px solid rgba(222, 128, 35, 0.7);
 }
 
 #infoPanel h2 {
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
+  color: #de8023;
+  font-size: 1.35rem;
+}
+
+#infoPanel h3 {
+  margin: 0 0 0.6rem;
+  color: #f7f2ea;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(222, 128, 35, 0.45);
+  padding-bottom: 0.35rem;
 }
 
 #infoPanel p {
@@ -554,53 +575,124 @@ main {
   line-height: 1.45;
 }
 
-#infoPanel .hint {
-  font-size: 13px;
-  opacity: 0.8;
+/* ---------- Sidebar tabs ---------- */
+
+.side-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(222, 128, 35, 0.7);
+  background: #2b2b2b;
+  position: sticky;
+  top: 0;
+  z-index: 5;
 }
+
+.tab-button {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  border-right: 1px solid rgba(222, 128, 35, 0.45);
+  background: #333;
+  color: #eee;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+
+.tab-button:last-child {
+  border-right: none;
+}
+
+.tab-button:hover,
+.tab-button.active {
+  background: #de8023;
+  color: #111;
+}
+
+/* ---------- Direction selector ---------- */
+
+.direction-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.45rem;
+}
+
+.direction-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 72px;
+  padding: 0.5rem 0.25rem;
+
+  border: 1px solid rgba(222, 128, 35, 0.45);
+  border-radius: 8px;
+
+  background: #303030;
+  color: #f7f2ea;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.direction-card:hover,
+.direction-card.active {
+  background: #de8023;
+  color: #111;
+  border-color: #de8023;
+}
+
+.side-icon {
+  display: block;
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+
+/* ---------- Panel lists ---------- */
 
 .panel-section {
-  margin-bottom: 2rem;
-}
-
-.panel-section h3 {
+  padding: 1rem;
   margin-bottom: 0.75rem;
 }
 
-.direction-list,
 .panel-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
-.direction-list li,
 .panel-item {
-  margin-bottom: 0.75rem;
-}
-
-.direction-list button,
-.panel-item button {
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  text-align: left;
-  color: inherit;
-}
-
-.direction-list button:hover,
-.panel-item button:hover,
-.panel-item a:hover {
-  color: #2f80ed;
+  margin: 0;
 }
 
 .panel-item a {
   display: block;
-  font-size: 0.9rem;
-  margin-top: 0.2rem;
+  padding: 0.65rem 0.75rem;
+
+  border: 1px solid rgba(222, 128, 35, 0.35);
+  border-radius: 8px;
+
+  background: #2e2e2e;
+  color: #f7f2ea;
+
+  font-size: 0.95rem;
+  font-weight: 700;
   text-decoration: none;
+}
+
+.panel-item a:hover {
+  color: #de8023;
+  border-color: #de8023;
+}
+
+/* ---------- Small helper text ---------- */
+
+#infoPanel .hint {
+  font-size: 13px;
+  opacity: 0.8;
 }
 
 /* =========================================================

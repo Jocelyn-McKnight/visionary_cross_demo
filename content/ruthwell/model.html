@@ -139,62 +139,95 @@
     </div>
 
     <aside id="infoPanel">
-      <h2>Explore the Visionary Cross Project</h2>
+      <div class="side-tabs">
+        <a class="tab-button active" href="model.html">▦ Panels</a>
+        <a class="tab-button" href="poem.html">📖 Poem</a>
+      </div>
 
       <section class="panel-section">
-        <h3>Directionality</h3>
-        <ul class="direction-list">
-          <li><button type="button" onclick="faceDirection('front')">Front</button></li>
-          <li><button type="button" onclick="faceDirection('back')">Back</button></li>
-          <li><button type="button" onclick="faceDirection('left')">Left</button></li>
-          <li><button type="button" onclick="faceDirection('right')">Right</button></li>
-        </ul>
+        <h2>Explore the Panels</h2>
+
+        <div class="direction-row">
+          <a class="direction-card active" href="model.html">
+            <span class="side-icon">✣</span>
+            <span>All</span>
+          </a>
+
+          <a class="direction-card" href="front.html">
+            <span class="side-icon">▥</span>
+            <span>Front</span>
+          </a>
+
+          <a class="direction-card" href="back.html">
+            <span class="side-icon">▥</span>
+            <span>Back</span>
+          </a>
+
+          <a class="direction-card" href="left.html">
+            <span class="side-icon">▥</span>
+            <span>Left</span>
+          </a>
+
+          <a class="direction-card" href="right.html">
+            <span class="side-icon">▥</span>
+            <span>Right</span>
+          </a>
+        </div>
       </section>
 
       <section class="panel-section">
-        <h3>Explore the Panels</h3>
+        <h3>Front Panels:</h3>
+
         <div class="panel-links">
-
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('angels')" onmouseover="hoverPanel('angels')" onmouseout="unhoverPanel()">Angels</button>
-            <a href="panels/angels.html">Learn more</a>
+            <a href="panels/angels.html">Angels</a>
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('archer')" onmouseover="hoverPanel('archer')" onmouseout="unhoverPanel()">Archer</button>
-            <a href="panels/archer.html">Learn more</a>
+            <a href="panels/archer.html">Archer</a>
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('bottom')" onmouseover="hoverPanel('bottom')" onmouseout="unhoverPanel()">Bottom Panel</button>
-            <a href="panels/bottom.html">Learn more</a>
+            <a href="panels/bottom.html">Bottom Panel</a>
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('lamb')" onmouseover="hoverPanel('lamb')" onmouseout="unhoverPanel()">Lamb</button>
-            <a href="panels/lamb.html">Learn more</a>
+            <a href="panels/magdalene.html">Magdalene</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-section">
+        <h3>Back Panels:</h3>
+
+        <div class="panel-links">
+          <div class="panel-item">
+            <a href="panels/lamb.html">Lamb</a>
           </div>
 
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('left_side')" onmouseover="hoverPanel('left_side')" onmouseout="unhoverPanel()">Left Side</button>
-            <a href="panels/left_side.html">Learn more</a>
+            <a href="panels/raven.html">Raven</a>
           </div>
+        </div>
+      </section>
 
+      <section class="panel-section">
+        <h3>Left Panels:</h3>
+
+        <div class="panel-links">
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('magdalene')" onmouseover="hoverPanel('magdalene')" onmouseout="unhoverPanel()">Magdalene</button>
-            <a href="panels/magdalene.html">Learn more</a>
+            <a href="panels/left_side.html">Left Side Panel</a>
           </div>
+        </div>
+      </section>
 
+      <section class="panel-section">
+        <h3>Right Panels:</h3>
+
+        <div class="panel-links">
           <div class="panel-item">
-            <button type="button" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">Raven</button>
-            <a href="panels/raven.html">Learn more</a>
+            <a href="panels/right_cross_bar.html">Right Cross Bar</a>
           </div>
-
-          <div class="panel-item">
-            <button type="button" onclick="highlightPanel('right_cross_bar')" onmouseover="hoverPanel('right_cross_bar')" onmouseout="unhoverPanel()">Right Cross Bar</button>
-            <a href="panels/right_cross_bar.html">Learn more</a>
-          </div>
-
         </div>
       </section>
     </aside>
