@@ -160,28 +160,34 @@
 
           <div class="direction-row">
             <button class="direction-card active" type="button" data-direction="front" onclick="setActiveDirection('front')">
-              <span class="side-icon">▥</span>
               <span>Front</span>
             </button>
 
             <button class="direction-card" type="button" data-direction="back" onclick="setActiveDirection('back')">
-              <span class="side-icon">▥</span>
               <span>Back</span>
             </button>
 
             <button class="direction-card" type="button" data-direction="left" onclick="setActiveDirection('left')">
-              <span class="side-icon">▥</span>
               <span>Left</span>
             </button>
 
             <button class="direction-card" type="button" data-direction="right" onclick="setActiveDirection('right')">
-              <span class="side-icon">▥</span>
               <span>Right</span>
             </button>
           </div>
         </section>
 
         <section class="panel-section">
+          
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="none">
+              <button type="button" class="panel-name" onclick="clearPanelSelection()">
+                None
+              </button>
+              <p>Clear the selected highlight.</p>
+            </div>
+          </div>
+
           <h3>Front Panels</h3>
 
           <div class="panel-links">
@@ -385,6 +391,8 @@
 
       presenter.enableOnHover(true);
       presenter._onPickedSpot = onPickedSpot;
+      presenter._onEnterSpot = onEnterSpot;
+      presenter._onLeaveSpot = onLeaveSpot;
 
       presenter.resetTrackball();
       setTimeout(function () {
@@ -392,7 +400,21 @@
       }, 120);
     }
 
-function clearHighlights() {
+    function onEnterSpot(id) {
+      setActivePanelItem(id);
+    }
+
+    function onLeaveSpot(id) {
+      unhoverPanel();
+
+      if (activeSpot) {
+        setActivePanelItem(activeSpot);
+      } else {
+        clearActivePanelItem();
+      }
+    }
+
+    function clearHighlights() {
   if (!presenter) return;
 
   for (var i = 0; i < spotIds.length; i++) {
@@ -432,6 +454,20 @@ function showHighlight(id) {
 
     function onPickedSpot(id) {
       highlightPanel(id);
+    }
+
+    function clearPanelSelection() {
+      activeSpot = null;
+      clearHighlights();
+      clearActivePanelItem();
+    }
+
+    function clearActivePanelItem() {
+      var panelItems = document.querySelectorAll(".panel-item");
+
+      panelItems.forEach(function (item) {
+        item.classList.remove("active");
+      });
     }
 
     function faceDirection(direction) {
@@ -576,11 +612,7 @@ function showHighlight(id) {
     }
 
     function setActivePanelItem(id) {
-      var panelItems = document.querySelectorAll(".panel-item");
-
-      panelItems.forEach(function (item) {
-        item.classList.remove("active");
-      });
+      clearActivePanelItem();
 
       var activeItem = document.querySelector('[data-panel-id="' + id + '"]');
 
