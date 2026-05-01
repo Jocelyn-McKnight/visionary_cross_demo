@@ -26,7 +26,7 @@
 <body>
   <header class="header">
     <a href="../../content/frontmatter/home.html">
-      <img src="assets/img/header.jpg" alt="">
+      <img src="assets/img/head.jpg" alt="">
       <div class="header-text">Bewcastle</div>
     </a>
   </header>
@@ -140,39 +140,89 @@
     </div>
 
     <aside id="infoPanel">
-      <h2>Explore the Bewcastle Cross</h2>
+      <div class="side-tabs">
+        <button class="tab-button active" type="button" onclick="openInfoTab('panels')">
+          Panels
+        </button>
 
-      <section class="panel-section">
-        <h3>Directionality</h3>
-        <ul class="direction-list">
-          <li><button type="button" onclick="faceDirection('front')">Front</button></li>
-          <li><button type="button" onclick="faceDirection('back')">Back</button></li>
-          <li><button type="button" onclick="faceDirection('left')">Left</button></li>
-          <li><button type="button" onclick="faceDirection('right')">Right</button></li>
-        </ul>
-      </section>
+        <button class="tab-button" type="button" onclick="openInfoTab('poem')">
+          Poem
+        </button>
+      </div>
 
-      <section class="panel-section">
-        <h3>Explore the Panels</h3>
-        <div class="panel-links">
+      <div id="panels-content" class="tab-content active">
+        <section class="panel-section">
+          <h2>Explore the Bewcastle Cross</h2>
 
-          <div class="panel-item">
-            <button type="button" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">Baby</button>
-            <a href="panels/baby.html">Learn more</a>
+          <p class="panel-intro">
+            Select a direction to turn the model. Select a panel name to highlight it on the cross.
+          </p>
+
+          <div class="direction-row">
+            <button class="direction-card active" type="button" data-direction="front" onclick="setActiveDirection('front')">
+              <span>Front</span>
+            </button>
+
+            <button class="direction-card" type="button" data-direction="back" onclick="setActiveDirection('back')">
+              <span>Back</span>
+            </button>
+
+            <button class="direction-card" type="button" data-direction="left" onclick="setActiveDirection('left')">
+              <span>Left</span>
+            </button>
+
+            <button class="direction-card" type="button" data-direction="right" onclick="setActiveDirection('right')">
+              <span>Right</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="panel-section">
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="none">
+              <button type="button" class="panel-name" onclick="clearPanelSelection()">
+                None
+              </button>
+              <p>Clear the selected highlight.</p>
+            </div>
           </div>
 
-          <div class="panel-item">
-            <button type="button" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">Jesus</button>
-            <a href="panels/jesus.html">Learn more</a>
-          </div>
+          <h3>Panels</h3>
 
-          <div class="panel-item">
-            <button type="button" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">Raven</button>
-            <a href="panels/raven.html">Learn more</a>
-          </div>
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="baby">
+              <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+                Baby
+              </button>
+              <p>Click <a href="panels/baby.html">here</a> to view in detail.</p>
+            </div>
 
-        </div>
-      </section>
+            <div class="panel-item" data-panel-id="jesus">
+              <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+                Jesus
+              </button>
+              <p>Click <a href="panels/jesus.html">here</a> to view in detail.</p>
+            </div>
+
+            <div class="panel-item" data-panel-id="raven">
+              <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+                Raven
+              </button>
+              <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div id="poem-content" class="tab-content">
+        <section class="panel-section">
+          <h2>The Poem</h2>
+
+          <p>
+            This section can contain the poetic inscription, transcription, translation, or commentary.
+          </p>
+        </section>
+      </div>
     </aside>
   </div>
 
@@ -208,21 +258,21 @@
         spots: {
           baby: {
             mesh: "baby",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
           },
           jesus: {
             mesh: "jesus",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
           },
           raven: {
             mesh: "raven",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
           }
         },
 
@@ -249,6 +299,7 @@
       presenter._onPickedSpot = onPickedSpot;
 
       presenter.resetTrackball();
+
       setTimeout(function () {
         presenter.repaint();
       }, 120);
@@ -258,10 +309,7 @@
       if (!presenter) return;
 
       for (var i = 0; i < spotIds.length; i++) {
-        presenter.setSpotVisibility(spotIds[i], true, true);
-        try {
-          presenter.setSpotColor(spotIds[i], [0.0, 0.5, 1.0, 0.0]);
-        } catch (e) {}
+        presenter.setSpotVisibilityByName(spotIds[i], false, false);
       }
 
       presenter.repaint();
@@ -271,18 +319,16 @@
       if (!presenter) return;
 
       clearHighlights();
-      presenter.setSpotVisibility(id, true, true);
 
-      try {
-        presenter.setSpotColor(id, [0.0, 0.5, 1.0, 0.65]);
-      } catch (e) {}
-
+      presenter.setSpotVisibilityByName(id, true, true);
+      presenter.enableOnHover(true);
       presenter.repaint();
     }
 
     function highlightPanel(id) {
       activeSpot = id;
       showHighlight(id);
+      setActivePanelItem(id);
     }
 
     function hoverPanel(id) {
@@ -299,6 +345,30 @@
 
     function onPickedSpot(id) {
       highlightPanel(id);
+    }
+
+    function clearPanelSelection() {
+      activeSpot = null;
+      clearHighlights();
+      clearActivePanelItem();
+    }
+
+    function clearActivePanelItem() {
+      var panelItems = document.querySelectorAll(".panel-item");
+
+      panelItems.forEach(function (item) {
+        item.classList.remove("active");
+      });
+    }
+
+    function setActivePanelItem(id) {
+      clearActivePanelItem();
+
+      var activeItem = document.querySelector('[data-panel-id="' + id + '"]');
+
+      if (activeItem) {
+        activeItem.classList.add("active");
+      }
     }
 
     function faceDirection(direction) {
@@ -322,6 +392,22 @@
       }
 
       presenter.animateToTrackballPosition(my_pos);
+    }
+
+    function setActiveDirection(direction) {
+      var directionButtons = document.querySelectorAll(".direction-card");
+
+      directionButtons.forEach(function (button) {
+        button.classList.remove("active");
+      });
+
+      var activeButton = document.querySelector('[data-direction="' + direction + '"]');
+
+      if (activeButton) {
+        activeButton.classList.add("active");
+      }
+
+      faceDirection(direction);
     }
 
     function actionsToolbar(action) {
@@ -380,13 +466,22 @@
     function showLoading(message) {
       var overlay = document.getElementById("loadingOverlay");
       var text = document.getElementById("loadingText");
-      if (text && message) text.textContent = message;
-      if (overlay) overlay.style.display = "flex";
+
+      if (text && message) {
+        text.textContent = message;
+      }
+
+      if (overlay) {
+        overlay.style.display = "flex";
+      }
     }
 
     function hideLoading() {
       var overlay = document.getElementById("loadingOverlay");
-      if (overlay) overlay.style.display = "none";
+
+      if (overlay) {
+        overlay.style.display = "none";
+      }
     }
 
     function hookMovePad() {
@@ -403,6 +498,27 @@
 
       bind("move_up");
       bind("move_down");
+    }
+
+    function openInfoTab(tabName) {
+      var tabs = document.querySelectorAll(".tab-button");
+      var contents = document.querySelectorAll(".tab-content");
+
+      tabs.forEach(function (tab) {
+        tab.classList.remove("active");
+      });
+
+      contents.forEach(function (content) {
+        content.classList.remove("active");
+      });
+
+      if (tabName === "poem") {
+        document.querySelector(".tab-button:nth-child(2)").classList.add("active");
+        document.getElementById("poem-content").classList.add("active");
+      } else {
+        document.querySelector(".tab-button:nth-child(1)").classList.add("active");
+        document.getElementById("panels-content").classList.add("active");
+      }
     }
 
     $(document).ready(function () {
