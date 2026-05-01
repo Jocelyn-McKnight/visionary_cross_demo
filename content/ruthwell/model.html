@@ -394,7 +394,7 @@ function clearHighlights() {
   if (!presenter) return;
 
   for (var i = 0; i < spotIds.length; i++) {
-    presenter.setSpotVisibility(spotIds[i], false, true);
+    presenter.setSpotVisibilityByName(spotIds[i], false, false);
   }
 
   presenter.repaint();
@@ -405,7 +405,8 @@ function showHighlight(id) {
 
   clearHighlights();
 
-  presenter.setSpotVisibility(id, true, true);
+  presenter.setSpotVisibilityByName(id, true, true);
+  presenter.enableOnHover(true);
   presenter.repaint();
 }
 
