@@ -25,8 +25,10 @@
 
 <body>
   <header class="header">
-    <img src="assets/img/head.jpg" alt="">
-    <div class="header-text">Brussels</div>
+    <a href="../../content/frontmatter/home.html">
+      <img src="assets/img/header.jpg" alt="">
+      <div class="header-text">Brussels</div>
+    </a>
   </header>
 
     <input type="checkbox" id="menu-toggle" class="menu-toggle">
@@ -95,185 +97,25 @@
   </nav>
 
 <main>
-  <div class="viewer-layout">
-    <div id="viewerWrap">
-      <div id="3dhop" class="tdhop" onmousedown="if (event.preventDefault) event.preventDefault()">
-        <div id="tdhlg"></div>
+  <div class="container">
 
-        <div id="toolbar">
-          <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
-          <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
-          <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
-          <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
-          <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
-          <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
-        </div>
+    <div class="left">       
+      <img src="assets/img/brussels.png" alt="Project Image" class="hover-image">
+    </div>
 
-        <div id="movePad" aria-label="Move view">
-          <table id="mvc_table">
-            <tbody>
-              <tr>
-                <td>
-                  <img class="move_ up" id="move_up" title="Move Up" src="assets/img/Arrow.png" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <img class="move_ down" id="move_down" title="Move Down" src="assets/img/Arrow.png" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="right">
+      <div class="info">
+        <h1>Model of the Brussels Cross</h1>
 
+        <p> 
+          Coming soon! Visit the <a href="https://vcg.isti.cnr.it/activities/visionarycross/crosses/bruxelles.html" target="_blank">model
+          </a> hosted on ISTI CNR while we build.
+        </p>
 
-        <canvas id="draw-canvas"></canvas>
       </div>
     </div>
 
-    <aside id="infoPanel" aria-live="polite">
-      <h2>Explore the Brussels Cross</h2>
-      <p>Click a panel on the cross to learn more.</p>
-      <p class="hint">Once everything is stable, we’ll add clickable hotspots that update this panel.</p>
-    </aside>
   </div>
-
-  <script>
-    var presenter = null;
-
-    const INFO = {
-      TBD:             { title: "TBD",  html: `<p><strong>Angels:</strong> Add your description here.</p>` },
-    };
-
-    function setInfoPanel(title, html) {
-      const panel = document.getElementById("infoPanel");
-      panel.innerHTML = `
-        <h2>${title}</h2>
-        ${html}
-        <p class="hint">Click another area on the cross to keep exploring.</p>
-      `;
-    }
-
-    function setup3dhop() {
-      presenter = new Presenter("draw-canvas");
-
-      presenter.setScene({
-        meshes: {
-          brussels:           { url: "assets/models/brussels.nxz" },
-        },
-
-        modelInstances: {
-          ruthwell: { mesh: "brussels", color: [0.8, 0.7, 0.75], visible: true }
-        },
-
-        trackball: {
-          type: TurntablePanTrackball,
-          trackOptions: {
-            startPhi: 0.0,
-            startTheta: 0.0,
-            startDistance: 2.0,
-            minMaxPhi: [-180, 180],
-            minMaxTheta: [-85.0, 85.0],
-            minMaxDist: [0.005, 140.0],
-            startPanX: 0.0,
-            startPanY: 0.0,
-            startPanZ: 0.0,
-            minMaxPanX: [-5.0, 5.0],
-            minMaxPanY: [-20.0, 20.0],
-            minMaxPanZ: [-5.0, 5.0]
-          }
-        }
-      });
-
-      presenter.enableOnHover(true);
-      presenter._onPickedSpot = onPickedSpot;
-
-      presenter.resetTrackball();
-      setTimeout(() => presenter.repaint(), 120);
-
-      setInfoPanel("Explore the Brussels Cross", `<p>Click a panel on the cross to learn more.</p>`);
-    }
-
-    function onPickedSpot(id) {
-      if (INFO[id]) setInfoPanel(INFO[id].title, INFO[id].html);
-      else setInfoPanel("Info", `<p>Clicked: <code>${id}</code></p>`);
-    }
-
-    function actionsToolbar(action) {
-      if (!presenter) return;
-
-      if (action === 'home') presenter.resetTrackball();
-      else if (action === 'zoomin') presenter.zoomIn();
-      else if (action === 'zoomout') presenter.zoomOut();
-      else if (action === 'light') presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
-      else if (action === 'screenshot') presenter.saveScreenshot();
-      else if (action === 'full') presenter.fullscreen();
-
-      else if (action === 'move_up' || action === 'move_down' || action === 'move_left' || action === 'move_right') step(action);
-    }
-
-    // ✅ Up/down fixed
-    function step(action) {
-      if (!presenter) return;
-
-      var my_pos = presenter.getTrackballPosition();
-      var vstep = 0.10;
-      var hstep = 0.10;
-
-      switch (action) {
-        case 'move_up':
-          my_pos[3] += vstep;
-          presenter.animateToTrackballPosition(my_pos);
-          break;
-
-        case 'move_down':
-          my_pos[3] -= vstep;
-          presenter.animateToTrackballPosition(my_pos);
-          break;
-
-        case 'move_right': {
-          var gr = Math.PI * my_pos[0] / 180;
-          my_pos[2] -= hstep * Math.cos(gr);
-          my_pos[4] += hstep * Math.sin(gr);
-          presenter.animateToTrackballPosition(my_pos);
-          break;
-        }
-
-        case 'move_left': {
-          var gr = Math.PI * my_pos[0] / 180;
-          my_pos[2] += hstep * Math.cos(gr);
-          my_pos[4] -= hstep * Math.sin(gr);
-          presenter.animateToTrackballPosition(my_pos);
-          break;
-        }
-      }
-    }
-
-    function hookMovePad() {
-      const bind = (id) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-        el.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          actionsToolbar(id);
-        });
-      };
-
-      bind("move_up");
-      bind("move_down");
-    }
-
-    $(document).ready(function () {
-      init3dhop();
-      setup3dhop();
-      hookMovePad();
-    });
-
-    window.addEventListener("resize", function () {
-      if (presenter) presenter.repaint();
-    });
-  </script>
 </main>
 
   <div class="footer">
