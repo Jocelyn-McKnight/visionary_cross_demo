@@ -493,9 +493,6 @@ h3 {
    3DHOP VIEWER + SIDE PANEL
    ========================================================= */
 
-/* =========================================================
-   3DHOP VIEWER + SIDE PANEL
-   ========================================================= */
 
 main {
   display: block;
@@ -898,11 +895,11 @@ main {
   }
 
   .header {
-    height: 100px;
+    height: 75px;
   }
 
   .header .header-text {
-    font-size: 24px;
+    font-size: 20px;
     padding: 0 10px;
     white-space: nowrap;
   }
