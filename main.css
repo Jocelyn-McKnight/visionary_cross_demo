@@ -355,8 +355,6 @@ h3 {
 
 /* ---------- Two-column layout ---------- */
 
-/* ---------- Two-column layout ---------- */
-
 .container {
   display: flex;
   flex-direction: row;
@@ -391,6 +389,7 @@ h3 {
 
   display: flex;
   align-items: center;
+  text-align: justify;
 }
 
 /* ---------- Shared image rules ---------- */
@@ -844,6 +843,7 @@ main {
    ========================================================= */
 
 .footer {
+  height: 260px;
   width: 100%;
   background-color: rgb(0, 0, 0);
   color: #fff;
