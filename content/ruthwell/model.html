@@ -305,6 +305,7 @@
     function highlightPanel(id) {
       activeSpot = id;
       showHighlight(id);
+      updateUrlState();
     }
 
     function hoverPanel(id) {
@@ -322,6 +323,9 @@
     function onPickedSpot(id) {
       highlightPanel(id);
     }
+
+    var activeFace = null;
+    var validFaces = ["front", "back", "left", "right"];
 
     function faceDirection(direction) {
       if (!presenter) return;
@@ -341,9 +345,37 @@
         case "left":
           my_pos[0] = -90;
           break;
+        default:
+          return;
       }
 
+      activeFace = direction;
       presenter.animateToTrackballPosition(my_pos);
+      updateUrlState();
+    }
+
+    function updateUrlState() {
+      var parts = [];
+      if (activeFace) parts.push("face=" + encodeURIComponent(activeFace));
+      if (activeSpot) parts.push("panel=" + encodeURIComponent(activeSpot));
+      var hash = parts.length ? "#" + parts.join("&") : "";
+      // replaceState avoids polluting browser history on every click
+      history.replaceState(null, "", location.pathname + location.search + hash);
+    }
+
+    function applyUrlState() {
+      if (!location.hash) return;
+      var params = {};
+      location.hash.replace(/^#/, "").split("&").forEach(function (kv) {
+        var pair = kv.split("=");
+        if (pair[0]) params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
+      });
+      if (params.face && validFaces.indexOf(params.face) !== -1) {
+        faceDirection(params.face);
+      }
+      if (params.panel && spotIds.indexOf(params.panel) !== -1) {
+        highlightPanel(params.panel);
+      }
     }
 
     function toggleFullscreen() {
@@ -449,6 +481,7 @@
 
       setTimeout(function () {
         hideLoading();
+        applyUrlState();
       }, 1800);
     });
 
