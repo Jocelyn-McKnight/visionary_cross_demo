@@ -1,71 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruthwell</title>
-    <link rel="stylesheet" href="../../main.css">
-    <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>VCP -Home</title>
+
+  <link rel="stylesheet" href="../../main.css">
+  <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
 </head>
-    
+
 <body>
 <header class="header">
-  <!-- Hamburger menu toggle -->
-  <input type="checkbox" id="menu-toggle" class="menu-toggle">
-  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
-
-  <!-- Hidden dropdown menu -->
-  <div class="hamburger-menu">
-
-<div class="submenu-wrapper">
-  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
-  <label for="submenu-toggle" class="submenu-label">Frontmatter</label>
-  <div class="submenu">
-    <a href="home.html">Home</a>
-    <a href="history.html">History</a>
-  </div>
-</div>
-      
-    <a href="../ruthwell/intro.html">Ruthwell</a>
-    <a href="../bewcastle/intro.html">Bewcastle</a>
-    <a href="../brussels/intro.html">Brussels</a>
-    <a href="../backmatter/table.html">Table of Contents</a>
-  </div>
-    
-  <a href="../backmatter/table.html">
-    <img src="../../img/head_outside.jpg" alt="Project Image" title="The Visionary Cross Project">
-    <p class="header-text">Visionary Cross Project</p>
+  <a href="../../content/frontmatter/home.html">
+    <img src="../../img/header.jpg" alt="">
+    <div class="header-text">Visionary Cross Project</div>
   </a>
 </header>
-    
-    <!-- Main Container for Left and Right Columns -->
-    <div class="container">
-        <div class="left">       
-            <!--https://www.flickr.com/photos/71629876@N08/7096195421/-->
-            <img src="../../img/church.jpg" alt="Project Image">
-        </div>
-        <p></p>
 
-        <!-- Right Column always information -->
-        <div class="right">
-            <div class="info">
-                <h1>Preface</h1>
-<p>Visionary Cross: a multimedia edition and archive is a critical edition, scholarly study, and textual archive of the Old English Visionary Cross Tradition. The Visionary Cross project is an international, multidisciplinary research project whose principle objective is the development of a new kind of digital archive and edition of texts and objects associated with the Visionary Cross tradition in Anglo-Saxon England.</p>
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
 
-<p>ISTI-CNR collaborated with the partners of the project in two main activities: the acquisition and processing of the 3D representation of two important stone crosses (Ruthwell and Bewcastle), and the creation of a web accessible "digital edition" of the Cross, available to both the genarl public and the scholars.</p>
-            </div>
-        </div>
+<nav class="landing-nav" aria-label="Main navigation">
+    <a href="../../content/ruthwell/model.html">Ruthwell</a>
+     <a href="../../content/bewcastle/model.html">Bewcastle</a>
+    <a href="../../content/brussels/model.html">Brussels</a>
+
+    <label for="menu-toggle" class="menu-link">
+      Menu ☰
+    </label>
+  </nav>
+
+  <nav class="landing-menu" aria-label="Expanded menu">
+
+    <section>
+      <input type="checkbox" id="frontmatter-toggle" class="submenu-toggle">
+      <label for="frontmatter-toggle" class="submenu-label">Frontmatter</label>
+      <div class="submenu">
+        <a href="../../content/frontmatter/home.html">Home</a>
+        <a href="../../content/frontmatter/history.html">History of the Project</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="ruthwell-toggle" class="submenu-toggle">
+      <label for="ruthwell-toggle" class="submenu-label">Ruthwell</label>
+      <div class="submenu">
+        <a href="../../content/ruthwell/intro.html">Introduction</a>
+        <a href="../../content/ruthwell/model.html">Ruthwel Model</a>
+        <a href="../../content/ruthwell/scan.html">Scanning Ruthwell</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="bewcastle-toggle" class="submenu-toggle">
+      <label for="bewcastle-toggle" class="submenu-label">Bewcastle</label>
+      <div class="submenu">
+        <a href="../../content/bewcastle/intro.html">Introduction</a>
+        <a href="../../content/bewcastle/model.html">Bewcastle Model</a>
+        <a href="../../content/bewcastle/scan.html">Scanning Bewcastle</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="brussels-toggle" class="submenu-toggle">
+      <label for="brussels-toggle" class="submenu-label">Brussels</label>
+      <div class="submenu">
+        <a href="../../content/brussels/intro.html">Introduction</a>
+        <a href="../../content/brussels/model.html">Brussels Model</a>
+        <a href="../../content/brussels/scan.html">Scanning Bewcastle</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="backmatter-toggle" class="submenu-toggle">
+      <label for="backmatter-toggle" class="submenu-label">Backmatter</label>
+      <div class="submenu">
+        <a href="../../content/backmatter/table.html">Table of Contents</a>
+        <a href="../../content/backmatter/glossary.html">Glossary</a>
+        <a href="../../content/backmatter/contact.html">Contact</a>
+      </div>
+    </section>
+
+  </nav>
+
+  <main class="container">
+    <div class="left">
+      <img src="../../img/church.jpg" alt="Church exterior">
     </div>
-<p></p>
 
-<div class="footer">
-    <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
+    <div class="right">
+      <div class="info">
+        <h1>Home</h1>
+
+        <p>The Visionary Cross Project began in the early 2010s as a collaborative initiative by Daniel Paul 
+          O’Donnell (University of Lethbridge), Roberto Rosselli Del Turco (University of Turin), Catherine 
+          Karkov (University of Leeds), Martin foys (University of Wisconsin-Madison), and Dot Porter (UPenn Library). 
+          The project emerged from a shared interest in developing a new kind of digital scholarly edition—one that not 
+          only preserved Old English texts but also integrated them meaningfully with cultural artifacts. Specifically, 
+          the project focuses on 3D visualizations of monumental stone crosses from Old English period, such as the 
+          Ruthwell and Bewcastle Crosses. These artifacts are significant not only for their inscriptions and iconography 
+          but also for their connection to Old English religious poetry, particularly the Dream of the Rood, which shares 
+          thematic and visual motifs with the carvings on these crosses. The goal of the Visionary Cross Project is to 
+          move beyond traditional print or static digital editions by linking these 3D models with annotated texts, 
+          translations, and scholarly commentary—creating a multimodal edition that facilitates deeper engagement. 
+          ISTI-CNR (visual computing group at the Italian national research center) collaborated with the partners of the 
+          project in its first main activities: the acquisition and processing of the 3D representation of the Ruthwell 
+          and Bewcastle. 
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <div class="footer">
+    <p>&copy; 2026 Visionary Cross Project. All Rights Reserved.</p>
     <nav>
-        <a href="../frontmatter/history.html">Us</a> |
-        <a href="../backmattercontact.html">Contact</a> |
-        <a href="privacy.html">Privacy Policy</a>
+      <a href="../../content/frontmatter/history.html">About</a> |
+      <a href="../../content/backmatter/contact.html">Contact</a> |
+      <a href="../../content/backmatter/privacy.html">Privacy Policy</a>
     </nav>
-</div>
-    
+  </div>
+
 </body>
 </html>

@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ruthwell Model</title>
+  <title>Ruthwell</title>
 
   <link rel="stylesheet" href="../../main.css" />
   <link rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css" />
-  <link rel="stylesheet" href="model.css" />
   <link rel="icon" type="image/x-icon" href="../../img/cross.ico" />
 
   <script src="../../3dhop/js/spidergl.js"></script>
@@ -25,35 +24,77 @@
 </head>
 
 <body>
-<header class="header">
-  <input type="checkbox" id="menu-toggle" class="menu-toggle">
-  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
+  <header class="header">
+    <a href="../../content/frontmatter/home.html">
+      <img src="assets/img/head.jpg" alt="">
+      <div class="header-text">Ruthwell</div>
+    </a>
+  </header>
 
-  <div class="hamburger-menu">
-    <a href="../frontmatter/home.html">Home</a>
-    <a href="../ruthwell/intro.html">Ruthwell</a>
-    <a href="../bewcastle/intro.html">Bewcastle</a>
-    <a href="../brussels/intro.html">Brussels</a>
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
 
-    <div class="submenu-wrapper">
-      <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
-      <label for="submenu-toggle" class="submenu-label">Chapters</label>
+<nav class="landing-nav" aria-label="Main navigation">
+    <a href="../../content/ruthwell/model.html">Ruthwell</a>
+     <a href="../../content/bewcastle/model.html">Bewcastle</a>
+    <a href="../../content/brussels/model.html">Brussels</a>
+
+    <label for="menu-toggle" class="menu-link">
+      Menu ☰
+    </label>
+  </nav>
+
+  <nav class="landing-menu" aria-label="Expanded menu">
+
+    <section>
+      <input type="checkbox" id="frontmatter-toggle" class="submenu-toggle">
+      <label for="frontmatter-toggle" class="submenu-label">Frontmatter</label>
       <div class="submenu">
-        <a href="intro.html">Introduction</a>
-        <a href="model.html">Model</a>
-        <a href="ch1.html">About the Cross</a>
-        <a href="ch2.html">About the Scan</a>
+        <a href="../../content/frontmatter/home.html">Home</a>
+        <a href="../../content/frontmatter/history.html">History of the Project</a>
       </div>
-    </div>
+    </section>
 
-    <a href="../backmatter/table.html">Table of Contents</a>
-  </div>
+    <section>
+      <input type="checkbox" id="ruthwell-toggle" class="submenu-toggle">
+      <label for="ruthwell-toggle" class="submenu-label">Ruthwell</label>
+      <div class="submenu">
+        <a href="../../content/ruthwell/intro.html">Introduction</a>
+        <a href="../../content/ruthwell/model.html">Ruthwel Model</a>
+        <a href="../../content/ruthwell/scan.html">Scanning Ruthwell</a>
+      </div>
+    </section>
 
-  <a href="../backmatter/table.html">
-    <img src="assets/img/head.jpg" alt="Project Image" title="The Ruthwell Cross">
-    <p class="header-text">Ruthwell</p>
-  </a>
-</header>
+    <section>
+      <input type="checkbox" id="bewcastle-toggle" class="submenu-toggle">
+      <label for="bewcastle-toggle" class="submenu-label">Bewcastle</label>
+      <div class="submenu">
+        <a href="../../content/bewcastle/intro.html">Introduction</a>
+        <a href="../../content/bewcastle/model.html">Bewcastle Model</a>
+        <a href="../../content/bewcastle/scan.html">Scanning Bewcastle</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="brussels-toggle" class="submenu-toggle">
+      <label for="brussels-toggle" class="submenu-label">Brussels</label>
+      <div class="submenu">
+        <a href="../../content/brussels/intro.html">Introduction</a>
+        <a href="../../content/brussels/model.html">Brussels Model</a>
+        <a href="../../content/brussels/scan.html">Scanning Bewcastle</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="backmatter-toggle" class="submenu-toggle">
+      <label for="backmatter-toggle" class="submenu-label">Backmatter</label>
+      <div class="submenu">
+        <a href="../../content/backmatter/table.html">Table of Contents</a>
+        <a href="../../content/backmatter/glossary.html">Glossary</a>
+        <a href="../../content/backmatter/contact.html">Contact</a>
+      </div>
+    </section>
+
+  </nav>
 
 <main>
   <div class="viewer-layout">
@@ -103,64 +144,143 @@
     </div>
 
     <aside id="infoPanel">
-      <h2>Explore the Visionary Cross Project</h2>
+      <div class="side-tabs">
+        <button class="tab-button active" type="button" onclick="openInfoTab('panels')">
+          Panels
+        </button>
 
-      <section class="panel-section">
-        <h3>Directionality</h3>
-        <ul class="direction-list">
-          <li><button type="button" onclick="faceDirection('front')">Front</button></li>
-          <li><button type="button" onclick="faceDirection('back')">Back</button></li>
-          <li><button type="button" onclick="faceDirection('left')">Left</button></li>
-          <li><button type="button" onclick="faceDirection('right')">Right</button></li>
-        </ul>
-      </section>
+        <button class="tab-button" type="button" onclick="openInfoTab('poem')">
+          Poem
+        </button>
+      </div>
 
-      <section class="panel-section">
-        <h3>Explore the Panels</h3>
-        <div class="panel-links">
+      <div id="panels-content" class="tab-content active">
+        <section class="panel-section">
+          <h2>Explore the Ruthwell Cross</h2>
 
-          <div class="panel-item">
-            <button type="button" onclick="highlightPanel('angels')" onmouseover="hoverPanel('angels')" onmouseout="unhoverPanel()">Angels</button>
-            <a href="panels/angels.html">Learn more</a>
+          <p class="panel-intro">
+            Select a direction to turn the model. Select a panel name to highlight it on the cross.
+          </p>
+
+          <div class="direction-row">
+            <button class="direction-card active" type="button" data-direction="front" onclick="setActiveDirection('front')">
+              <span>Front</span>
+            </button>
+
+            <button class="direction-card" type="button" data-direction="back" onclick="setActiveDirection('back')">
+              <span>Back</span>
+            </button>
+
+            <button class="direction-card" type="button" data-direction="left" onclick="setActiveDirection('left')">
+              <span>Left</span>
+            </button>
+
+            <button class="direction-card" type="button" data-direction="right" onclick="setActiveDirection('right')">
+              <span>Right</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="panel-section">
+          
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="none">
+              <button type="button" class="panel-name" onclick="clearPanelSelection()">
+                None
+              </button>
+              <p>Clear the selected highlight.</p>
+            </div>
           </div>
 
-          <div class="panel-item">
-            <button type="button" onclick="highlightPanel('archer')" onmouseover="hoverPanel('archer')" onmouseout="unhoverPanel()">Archer</button>
-            <a href="panels/archer.html">Learn more</a>
-          </div>
+          <h3>Front Panels</h3>
 
-          <div class="panel-item">
-            <button type="button" onclick="highlightPanel('bottom')" onmouseover="hoverPanel('bottom')" onmouseout="unhoverPanel()">Bottom Panel</button>
-            <a href="panels/bottom.html">Learn more</a>
-          </div>
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="angels">
+              <button type="button" class="panel-name" onclick="highlightPanel('angels')" onmouseover="hoverPanel('angels')" onmouseout="unhoverPanel()">
+                Angels
+              </button>
+              <p>Click <a href="panels/angels.html">here</a> to view in detail.</p>
+            </div>
 
-          <div class="panel-item">
-            <button type="button" onclick="highlightPanel('lamb')" onmouseover="hoverPanel('lamb')" onmouseout="unhoverPanel()">Lamb</button>
-            <a href="panels/lamb.html">Learn more</a>
-          </div>
+            <div class="panel-item" data-panel-id="archer">
+              <button type="button" class="panel-name" onclick="highlightPanel('archer')" onmouseover="hoverPanel('archer')" onmouseout="unhoverPanel()">
+                Archer
+              </button>
+              <p>Click <a href="panels/archer.html">here</a> to view in detail.</p>
+            </div>
 
-          <div class="panel-item">
-            <button type="button" onclick="highlightPanel('left_side')" onmouseover="hoverPanel('left_side')" onmouseout="unhoverPanel()">Left Side</button>
-            <a href="panels/left_side.html">Learn more</a>
-          </div>
+            <div class="panel-item" data-panel-id="bottom">
+              <button type="button" class="panel-name" onclick="highlightPanel('bottom')" onmouseover="hoverPanel('bottom')" onmouseout="unhoverPanel()">
+                Bottom Panel
+              </button>
+              <p>Click <a href="panels/bottom.html">here</a> to view in detail.</p>
+            </div>
 
-          <div class="panel-item">
-            <button type="button" onclick="highlightPanel('magdalene')" onmouseover="hoverPanel('magdalene')" onmouseout="unhoverPanel()">Magdalene</button>
-            <a href="panels/magdalene.html">Learn more</a>
+            <div class="panel-item" data-panel-id="magdalene">
+              <button type="button" class="panel-name" onclick="highlightPanel('magdalene')" onmouseover="hoverPanel('magdalene')" onmouseout="unhoverPanel()">
+                Magdalene
+              </button>
+              <p>Click <a href="panels/magdalene.html">here</a> to view in detail.</p>
+            </div>
           </div>
+        </section>
 
-          <div class="panel-item">
-            <button type="button" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">Raven</button>
-            <a href="panels/raven.html">Learn more</a>
+        <section class="panel-section">
+          <h3>Back Panels</h3>
+
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="lamb">
+              <button type="button" class="panel-name" onclick="highlightPanel('lamb')" onmouseover="hoverPanel('lamb')" onmouseout="unhoverPanel()">
+                Lamb
+              </button>
+              <p>Click <a href="panels/lamb.html">here</a> to view in detail.</p>
+            </div>
+
+            <div class="panel-item" data-panel-id="raven">
+              <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+                Raven
+              </button>
+              <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+            </div>
           </div>
+        </section>
 
-          <div class="panel-item">
-            <button type="button" onclick="highlightPanel('right_cross_bar')" onmouseover="hoverPanel('right_cross_bar')" onmouseout="unhoverPanel()">Right Cross Bar</button>
-            <a href="panels/right_cross_bar.html">Learn more</a>
+        <section class="panel-section">
+          <h3>Left Panels</h3>
+
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="left_side">
+              <button type="button" class="panel-name" onclick="highlightPanel('left_side')" onmouseover="hoverPanel('left_side')" onmouseout="unhoverPanel()">
+                Left Side Panel
+              </button>
+              <p>Click <a href="panels/left_side.html">here</a> to view in detail.</p>
+            </div>
           </div>
+        </section>
 
-        </div>
-      </section>
+        <section class="panel-section">
+          <h3>Right Panels</h3>
+
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="right_cross_bar">
+              <button type="button" class="panel-name" onclick="highlightPanel('right_cross_bar')" onmouseover="hoverPanel('right_cross_bar')" onmouseout="unhoverPanel()">
+                Right Cross Bar
+              </button>
+              <p>Click <a href="panels/right_cross_bar.html">here</a> to view in detail.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div id="poem-content" class="tab-content">
+        <section class="panel-section">
+          <h2>The Poem</h2>
+
+          <p>
+            This section can contain the poetic inscription, transcription, translation, or commentary.
+          </p>
+        </section>
+      </div>
     </aside>
   </div>
 
@@ -203,56 +323,56 @@
           }
         },
 
-        spots: {
-          angels: {
-            mesh: "angels",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          archer: {
-            mesh: "archer",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          bottom: {
-            mesh: "bottom",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          lamb: {
-            mesh: "lamb",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          left_side: {
-            mesh: "left_side",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          magdalene: {
-            mesh: "magdalene",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          raven: {
-            mesh: "raven",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          },
-          right_cross_bar: {
-            mesh: "right_cross_bar",
-            visible: true,
-            alpha: 0.0,
-            color: [0.0, 0.5, 1.0]
-          }
+      spots: {
+        angels: {
+          mesh: "angels",
+          visible: false,
+          alpha: 0.65,
+          color: [0.0, 0.25, 1.0]
         },
+        archer: {
+          mesh: "archer",
+          visible: false,
+          alpha: 0.65,
+          color: [0.0, 0.25, 1.0]
+        },
+        bottom: {
+          mesh: "bottom",
+          visible: false,
+          alpha: 0.65,
+          color: [0.0, 0.25, 1.0]
+        },
+        lamb: {
+          mesh: "lamb",
+          visible: false,
+          alpha: 0.65,
+          color: [0.0, 0.25, 1.0]
+        },
+        left_side: {
+          mesh: "left_side",
+          visible: false,
+          alpha: 0.65,
+          color: [0.0, 0.25, 1.0]
+        },
+        magdalene: {
+          mesh: "magdalene",
+          visible: false,
+          alpha: 0.65,
+          color: [0.0, 0.25, 1.0]
+        },
+        raven: {
+          mesh: "raven",
+          visible: false,
+          alpha: 0.65,
+          color: [0.0, 0.25, 1.0]
+        },
+        right_cross_bar: {
+          mesh: "right_cross_bar",
+          visible: false,
+          alpha: 0.65,
+          color: [0.0, 0.25, 1.0]
+        }
+      },
 
         trackball: {
           type: TurntablePanTrackball,
@@ -275,6 +395,8 @@
 
       presenter.enableOnHover(true);
       presenter._onPickedSpot = onPickedSpot;
+      presenter._onEnterSpot = onEnterSpot;
+      presenter._onLeaveSpot = onLeaveSpot;
 
       presenter.resetTrackball();
       setTimeout(function () {
@@ -282,30 +404,45 @@
       }, 120);
     }
 
-    function clearHighlights() {
-      if (!presenter) return;
+    function onEnterSpot(id) {
+      setActivePanelItem(id);
+    }
 
-      for (var i = 0; i < spotIds.length; i++) {
-        presenter.setSpotVisibility(spotIds[i], true, true);
-        presenter.setSpotColor(spotIds[i], [0.0, 0.5, 1.0, 0.0]);
+    function onLeaveSpot(id) {
+      unhoverPanel();
+
+      if (activeSpot) {
+        setActivePanelItem(activeSpot);
+      } else {
+        clearActivePanelItem();
       }
-
-      presenter.repaint();
     }
 
-    function showHighlight(id) {
-      if (!presenter) return;
+    function clearHighlights() {
+  if (!presenter) return;
 
-      clearHighlights();
-      presenter.setSpotVisibility(id, true, true);
-      presenter.setSpotColor(id, [0.0, 0.5, 1.0, 0.65]);
-      presenter.repaint();
-    }
+  for (var i = 0; i < spotIds.length; i++) {
+    presenter.setSpotVisibilityByName(spotIds[i], false, false);
+  }
+
+  presenter.repaint();
+}
+
+function showHighlight(id) {
+  if (!presenter) return;
+
+  clearHighlights();
+
+  presenter.setSpotVisibilityByName(id, true, true);
+  presenter.enableOnHover(true);
+  presenter.repaint();
+}
 
     function highlightPanel(id) {
       activeSpot = id;
       showHighlight(id);
       updateUrlState();
+      setActivePanelItem(id);
     }
 
     function hoverPanel(id) {
@@ -473,6 +610,53 @@
       bind("move_down");
     }
 
+    function openInfoTab(tabName) {
+      var tabs = document.querySelectorAll(".tab-button");
+      var contents = document.querySelectorAll(".tab-content");
+
+      tabs.forEach(function (tab) {
+        tab.classList.remove("active");
+      });
+
+      contents.forEach(function (content) {
+        content.classList.remove("active");
+      });
+
+      if (tabName === "poem") {
+        document.querySelector(".tab-button:nth-child(2)").classList.add("active");
+        document.getElementById("poem-content").classList.add("active");
+      } else {
+        document.querySelector(".tab-button:nth-child(1)").classList.add("active");
+        document.getElementById("panels-content").classList.add("active");
+      }
+    }
+
+    function setActiveDirection(direction) {
+      var directionButtons = document.querySelectorAll(".direction-card");
+
+      directionButtons.forEach(function (button) {
+        button.classList.remove("active");
+      });
+
+      var activeButton = document.querySelector('[data-direction="' + direction + '"]');
+
+      if (activeButton) {
+        activeButton.classList.add("active");
+      }
+
+      faceDirection(direction);
+    }
+
+    function setActivePanelItem(id) {
+      clearActivePanelItem();
+
+      var activeItem = document.querySelector('[data-panel-id="' + id + '"]');
+
+      if (activeItem) {
+        activeItem.classList.add("active");
+      }
+    }
+
     $(document).ready(function () {
       showLoading("Loading model...");
       init3dhop();
@@ -490,5 +674,15 @@
     });
   </script>
 </main>
+
+  <div class="footer">
+    <p>&copy; 2026 Visionary Cross Project. All Rights Reserved.</p>
+    <nav>
+      <a href="../../content/frontmatter/history.html">About</a> |
+      <a href="../../content/backmatter/contact.html">Contact</a> |
+      <a href="../../content/backmatter/privacy.html">Privacy Policy</a>
+    </nav>
+  </div>
+
 </body>
 </html>
