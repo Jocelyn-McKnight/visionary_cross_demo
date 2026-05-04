@@ -135,6 +135,10 @@
           </table>
         </div>
 
+        <button id="fullscreen-btn" title="Toggle Full Screen" onclick="toggleFullscreen()">
+          <img src="../../3dhop/skins/dark/full.png" alt="Full Screen" />
+        </button>
+
         <canvas id="draw-canvas"></canvas>
       </div>
     </div>
@@ -437,6 +441,7 @@ function showHighlight(id) {
     function highlightPanel(id) {
       activeSpot = id;
       showHighlight(id);
+      updateUrlState();
       setActivePanelItem(id);
     }
 
@@ -456,19 +461,8 @@ function showHighlight(id) {
       highlightPanel(id);
     }
 
-    function clearPanelSelection() {
-      activeSpot = null;
-      clearHighlights();
-      clearActivePanelItem();
-    }
-
-    function clearActivePanelItem() {
-      var panelItems = document.querySelectorAll(".panel-item");
-
-      panelItems.forEach(function (item) {
-        item.classList.remove("active");
-      });
-    }
+    var activeFace = null;
+    var validFaces = ["front", "back", "left", "right"];
 
     function faceDirection(direction) {
       if (!presenter) return;
@@ -488,9 +482,51 @@ function showHighlight(id) {
         case "left":
           my_pos[0] = -90;
           break;
+        default:
+          return;
       }
 
+      activeFace = direction;
       presenter.animateToTrackballPosition(my_pos);
+      updateUrlState();
+    }
+
+    function updateUrlState() {
+      var parts = [];
+      if (activeFace) parts.push("face=" + encodeURIComponent(activeFace));
+      if (activeSpot) parts.push("panel=" + encodeURIComponent(activeSpot));
+      var hash = parts.length ? "#" + parts.join("&") : "";
+      // replaceState avoids polluting browser history on every click
+      history.replaceState(null, "", location.pathname + location.search + hash);
+    }
+
+    function applyUrlState() {
+      if (!location.hash) return;
+      var params = {};
+      location.hash.replace(/^#/, "").split("&").forEach(function (kv) {
+        var pair = kv.split("=");
+        if (pair[0]) params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
+      });
+      if (params.face && validFaces.indexOf(params.face) !== -1) {
+        faceDirection(params.face);
+      }
+      if (params.panel && spotIds.indexOf(params.panel) !== -1) {
+        highlightPanel(params.panel);
+      }
+    }
+
+    function toggleFullscreen() {
+      var el = document.getElementById("3dhop");
+      var btn = document.querySelector("#fullscreen-btn img");
+      if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement) {
+        (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen).call(document);
+        btn.src = "../../3dhop/skins/dark/full.png";
+        btn.alt = "Full Screen";
+      } else {
+        (el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen).call(el);
+        btn.src = "../../3dhop/skins/dark/full_on.png";
+        btn.alt = "Exit Full Screen";
+      }
     }
 
     function actionsToolbar(action) {
@@ -629,6 +665,7 @@ function showHighlight(id) {
 
       setTimeout(function () {
         hideLoading();
+        applyUrlState();
       }, 1800);
     });
 
