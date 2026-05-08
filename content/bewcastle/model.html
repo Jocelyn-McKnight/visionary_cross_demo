@@ -31,9 +31,9 @@
     </a>
   </header>
 
-    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
 
-<nav class="landing-nav" aria-label="Main navigation">
+  <nav class="landing-nav" aria-label="Main navigation">
     <a href="../../content/frontmatter/home.html">Home</a>
     <a href="../../content/ruthwell/intro.html">Ruthwell</a>
     <a href="../../content/bewcastle/intro.html">Bewcastle</a>
@@ -44,23 +44,23 @@
     </label>
   </nav>
 
-    <nav class="landing-menu" aria-label="Expanded menu">
+  <nav class="landing-menu" aria-label="Expanded menu">
 
-      <section>
-        <input type="checkbox" id="frontmatter-toggle" class="submenu-toggle">
-        <label for="frontmatter-toggle" class="submenu-label">Frontmatter</label>
-        <div class="submenu">
-          <a href="../../content/frontmatter/home.html">Home</a>
-          <a href="../../content/frontmatter/history.html">History of the Project</a>
-        </div>
-      </section>
+    <section>
+      <input type="checkbox" id="frontmatter-toggle" class="submenu-toggle">
+      <label for="frontmatter-toggle" class="submenu-label">Frontmatter</label>
+      <div class="submenu">
+        <a href="../../content/frontmatter/home.html">Home</a>
+        <a href="../../content/frontmatter/history.html">History of the Project</a>
+      </div>
+    </section>
 
     <section>
       <input type="checkbox" id="ruthwell-toggle" class="submenu-toggle">
       <label for="ruthwell-toggle" class="submenu-label">Ruthwell</label>
       <div class="submenu">
         <a href="../../content/ruthwell/intro.html">Introduction</a>
-        <a href="../../content/ruthwell/model.html">Ruthwel Model</a>
+        <a href="../../content/ruthwell/model.html">Ruthwell Model</a>
         <a href="../../content/ruthwell/scan.html">Scanning Ruthwell</a>
       </div>
     </section>
@@ -81,106 +81,79 @@
       <div class="submenu">
         <a href="../../content/brussels/intro.html">Introduction</a>
         <a href="../../content/brussels/model.html">Brussels Model</a>
-        <a href="../../content/brussels/scan.html">Scanning Bewcastle</a>
+        <a href="../../content/brussels/scan.html">Scanning Brussels</a>
       </div>
     </section>
 
-      <section>
-        <input type="checkbox" id="backmatter-toggle" class="submenu-toggle">
-        <label for="backmatter-toggle" class="submenu-label">Backmatter</label>
-        <div class="submenu">
-          <a href="../../content/backmatter/table.html">Table of Contents</a>
-          <a href="../../content/backmatter/glossary.html">Glossary</a>
-          <a href="../../content/backmatter/contact.html">Contact</a>
-        </div>
-      </section>
-
-    </nav>
-
-<main>
-  <div class="viewer-layout">
-    <div id="viewerWrap">
-      <div id="3dhop" class="tdhop" onmousedown="if (event.preventDefault) event.preventDefault()">
-        <div id="tdhlg"></div>
-
-        <div id="toolbar">
-          <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
-          <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
-          <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
-          <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
-          <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
-          <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
-        </div>
-
-        <div id="loadingOverlay">
-          <div class="loading-box">
-            <div class="spinner"></div>
-            <p id="loadingText">Loading model…</p>
-          </div>
-        </div>
-
-        <div id="movePad" aria-label="Move view">
-          <table id="mvc_table">
-            <tbody>
-              <tr>
-                <td>
-                  <img class="move_ up" id="move_up" title="Move Up" src="assets/img/Arrow.png" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <img class="move_ down" id="move_down" title="Move Down" src="assets/img/Arrow.png" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <button id="fullscreen-btn" title="Toggle Full Screen" onclick="toggleFullscreen()">
-          <img src="../../3dhop/skins/dark/full.png" alt="Full Screen" />
-        </button>
-
-        <canvas id="draw-canvas"></canvas>
+    <section>
+      <input type="checkbox" id="backmatter-toggle" class="submenu-toggle">
+      <label for="backmatter-toggle" class="submenu-label">Backmatter</label>
+      <div class="submenu">
+        <a href="../../content/backmatter/table.html">Table of Contents</a>
+        <a href="../../content/backmatter/glossary.html">Glossary</a>
+        <a href="../../content/backmatter/contact.html">Contact</a>
       </div>
-    </div>
+    </section>
 
-    <aside id="infoPanel">
-      <div class="side-tabs">
-        <button class="tab-button active" type="button" onclick="openInfoTab('panels')">
-          Panels
-        </button>
+  </nav>
 
-        <button class="tab-button" type="button" onclick="openInfoTab('poem')">
-          Runes
-        </button>
+  <main>
+    <div class="viewer-layout">
+      <div id="viewerWrap">
+        <div id="3dhop" class="tdhop" onmousedown="if (event.preventDefault) event.preventDefault()">
+          <div id="tdhlg"></div>
+
+          <div id="toolbar">
+            <img id="home" title="Clear State" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
+            <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
+            <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
+            <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
+            <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
+            <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
+          </div>
+
+          <div id="loadingOverlay">
+            <div class="loading-box">
+              <div class="spinner"></div>
+              <p id="loadingText">Loading model…</p>
+            </div>
+          </div>
+
+          <div id="movePad" aria-label="Move view">
+            <table id="mvc_table">
+              <tbody>
+                <tr>
+                  <td>
+                    <img class="move_ up" id="move_up" title="Move Up" src="assets/img/Arrow.png" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img class="move_ down" id="move_down" title="Move Down" src="assets/img/Arrow.png" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <button id="fullscreen-btn" title="Toggle Full Screen" onclick="toggleFullscreen()">
+            <img src="../../3dhop/skins/dark/full.png" alt="Full Screen" />
+          </button>
+
+          <canvas id="draw-canvas"></canvas>
+        </div>
       </div>
 
-      <div id="panels-content" class="tab-content active">
-        <section class="panel-section">
-          <h2>Explore the Bewcastle Cross</h2>
+      <aside id="infoPanel">
+        <div class="side-tabs">
+          <button class="tab-button active" type="button" onclick="openInfoTab('panels')">
+            Panels
+          </button>
 
-          <p class="panel-intro">
-            Select a direction to turn the model. Select a panel name to highlight it on the cross.
-          </p>
-
-          <div class="direction-row">
-            <button class="direction-card active" type="button" data-direction="front" onclick="setActiveDirection('front')">
-              <span>Front</span>
-            </button>
-
-            <button class="direction-card" type="button" data-direction="back" onclick="setActiveDirection('back')">
-              <span>Back</span>
-            </button>
-
-            <button class="direction-card" type="button" data-direction="left" onclick="setActiveDirection('left')">
-              <span>Left</span>
-            </button>
-
-            <button class="direction-card" type="button" data-direction="right" onclick="setActiveDirection('right')">
-              <span>Right</span>
-            </button>
-          </div>
-        </section>
+          <button class="tab-button" type="button" onclick="openInfoTab('poem')">
+            Runes
+          </button>
+        </div>
 
         <section class="panel-section">
           <div class="panel-links">
@@ -191,355 +164,565 @@
               <p>Clear the selected highlight.</p>
             </div>
           </div>
+        </section>
 
-          <h3>Panels</h3>
+        <section class="panel-section">
+          <h3>South Panels</h3>
 
           <div class="panel-links">
             <div class="panel-item" data-panel-id="baby">
               <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
-                Baby
+                Top Interlace
               </button>
-              <p>Click <a href="panels/baby.html">here</a> to view in detail.</p>
+              <p>Click <a href="panels/south_top_interlace.html">here</a> to view in detail.</p>
             </div>
 
             <div class="panel-item" data-panel-id="jesus">
               <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
-                Jesus
+                Upper Vinescroll and Sundial
               </button>
-              <p>Click <a href="panels/jesus.html">here</a> to view in detail.</p>
+              <p>Click <a href="panels/south_upper_vinescroll_sundial.html">here</a> to view in detail.</p>
             </div>
 
             <div class="panel-item" data-panel-id="raven">
               <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
-                Raven
+                Middle Interlace
               </button>
-              <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+              <p>Click <a href="panels/south_middle_interlace.html">here</a> to view in detail.</p>
+            </div>
+
+            <div class="panel-item" data-panel-id="baby">
+              <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+                Lower Vinescroll
+              </button>
+              <p>Click <a href="panels/south_lower_vinescroll.html">here</a> to view in detail.</p>
+            </div>
+
+            <div class="panel-item" data-panel-id="jesus">
+              <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+                Bottom Interlace
+              </button>
+              <p>Click <a href="panels/south_bottom_interlace.html">here</a> to view in detail.</p>
             </div>
           </div>
         </section>
-      </div>
 
-      <div id="poem-content" class="tab-content">
         <section class="panel-section">
-          <h2>The Poem</h2>
+          <h3>West Panels</h3>
 
-          <p>
-            This section can contain the poetic inscription, transcription, translation, or commentary.
-          </p>
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="baby">
+              <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+                Lamb
+              </button>
+              <p>Click <a href="panels/west_lamb.html">here</a> to view in detail.</p>
+            </div>
+
+            <div class="panel-item" data-panel-id="jesus">
+              <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+                Christ
+              </button>
+              <p>Click <a href="panels/west_christ.html">here</a> to view in detail.</p>
+            </div>
+
+            <div class="panel-item" data-panel-id="raven">
+              <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+                Falconer
+              </button>
+              <p>Click <a href="panels/west_falconer.html">here</a> to view in detail.</p>
+            </div>
+          </div>
         </section>
-      </div>
-    </aside>
-  </div>
 
-  <script>
-    var presenter = null;
-    var activeSpot = null;
+        <section class="panel-section">
+          <h3>North Panels</h3>
 
-    var spotIds = [
-      "baby",
-      "jesus",
-      "raven"
-    ];
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="baby">
+              <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+                Top Vinescroll
+              </button>
+              <p>Click <a href="panels/north_top_vinescroll.html">here</a> to view in detail.</p>
+            </div>
 
-    function setup3dhop() {
-      presenter = new Presenter("draw-canvas");
+            <div class="panel-item" data-panel-id="jesus">
+              <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+                Upper Interlace
+              </button>
+              <p>Click <a href="panels/north_upper_interlace.html">here</a> to view in detail.</p>
+            </div>
 
-      presenter.setScene({
-        meshes: {
-          bewcastle: { url: "assets/models/bewcastle.nxz" },
-          baby:      { url: "assets/models/baby.nxz" },
-          jesus:     { url: "assets/models/jesus.nxz" },
-          raven:     { url: "assets/models/raven.nxz" }
-        },
+            <div class="panel-item" data-panel-id="raven">
+              <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+                Checkers
+              </button>
+              <p>Click <a href="panels/north_checkers.html">here</a> to view in detail.</p>
+            </div>
 
-        modelInstances: {
-          bewcastle: {
-            mesh: "bewcastle",
-            color: [0.8, 0.7, 0.75],
-            visible: true
-          }
-        },
+            <div class="panel-item" data-panel-id="baby">
+              <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+                Lower Interlace
+              </button>
+              <p>Click <a href="panels/north_lower_interlace.html">here</a> to view in detail.</p>
+            </div>
 
-        spots: {
-          baby: {
-            mesh: "baby",
-            visible: false,
-            alpha: 0.65,
-            color: [0.0, 0.25, 1.0]
+            <div class="panel-item" data-panel-id="jesus">
+              <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+                Bottom Vinescroll
+              </button>
+              <p>Click <a href="panels/north_bottom_vinescroll.html">here</a> to view in detail.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-section">
+          <h3>East Panels</h3>
+
+          <div class="panel-links">
+            <div class="panel-item" data-panel-id="raven">
+              <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+                Inhabited Vinescroll
+              </button>
+              <p>Click <a href="panels/east_inhabited_vinescroll.html">here</a> to view in detail.</p>
+            </div>
+          </div>
+        </section>
+
+        <div id="poem-content" class="tab-content">
+          <section class="panel-section">
+            <h2>The Poem</h2>
+
+            <p>
+              This section can contain the poetic inscription, transcription, translation, or commentary.
+            </p>
+          </section>
+        </div>
+      </aside>
+    </div>
+
+    <script>
+      var presenter = null;
+      var activeSpot = null;
+
+      var spotIds = [
+        "baby",
+        "jesus",
+        "raven"
+      ];
+
+      function setup3dhop() {
+        presenter = new Presenter("draw-canvas");
+
+        presenter.setScene({
+          meshes: {
+            bewcastle: { url: "assets/models/bewcastle.nxz" },
+            baby:      { url: "assets/models/baby.nxz" },
+            jesus:     { url: "assets/models/jesus.nxz" },
+            raven:     { url: "assets/models/raven.nxz" }
           },
-          jesus: {
-            mesh: "jesus",
-            visible: false,
-            alpha: 0.65,
-            color: [0.0, 0.25, 1.0]
-          },
-          raven: {
-            mesh: "raven",
-            visible: false,
-            alpha: 0.65,
-            color: [0.0, 0.25, 1.0]
-          }
-        },
 
-        trackball: {
-          type: TurntablePanTrackball,
-          trackOptions: {
-            startPhi: 0.0,
-            startTheta: 0.0,
-            startDistance: 2.0,
-            minMaxPhi: [-180, 180],
-            minMaxTheta: [-85.0, 85.0],
-            minMaxDist: [0.005, 140.0],
-            startPanX: 0.0,
-            startPanY: 0.0,
-            startPanZ: 0.0,
-            minMaxPanX: [-5.0, 5.0],
-            minMaxPanY: [-20.0, 20.0],
-            minMaxPanZ: [-5.0, 5.0]
+          modelInstances: {
+            bewcastle: {
+              mesh: "bewcastle",
+              color: [0.8, 0.7, 0.75],
+              visible: true
+            }
+          },
+
+          spots: {
+            baby: {
+              mesh: "baby",
+              visible: false,
+              alpha: 0.65,
+              color: [0.0, 0.25, 1.0]
+            },
+            jesus: {
+              mesh: "jesus",
+              visible: false,
+              alpha: 0.65,
+              color: [0.0, 0.25, 1.0]
+            },
+            raven: {
+              mesh: "raven",
+              visible: false,
+              alpha: 0.65,
+              color: [0.0, 0.25, 1.0]
+            }
+          },
+
+          trackball: {
+            type: TurntablePanTrackball,
+            trackOptions: {
+              startPhi: 0.0,
+              startTheta: 0.0,
+              startDistance: 2.0,
+              minMaxPhi: [-180, 180],
+              minMaxTheta: [-85.0, 85.0],
+              minMaxDist: [0.005, 140.0],
+              startPanX: 0.0,
+              startPanY: 0.0,
+              startPanZ: 0.0,
+              minMaxPanX: [-5.0, 5.0],
+              minMaxPanY: [-20.0, 20.0],
+              minMaxPanZ: [-5.0, 5.0]
+            }
           }
+        });
+
+        presenter.enableOnHover(true);
+        presenter._onPickedSpot = onPickedSpot;
+        presenter._onEnterSpot = onEnterSpot;
+        presenter._onLeaveSpot = onLeaveSpot;
+
+        presenter.resetTrackball();
+
+        setTimeout(function () {
+          presenter.repaint();
+        }, 120);
+      }
+
+      function onEnterSpot(id) {
+        setActivePanelItem(id);
+      }
+
+      function onLeaveSpot(id) {
+        unhoverPanel();
+
+        if (activeSpot) {
+          setActivePanelItem(activeSpot);
+        } else {
+          clearActivePanelItem();
         }
-      });
+      }
 
-      presenter.enableOnHover(true);
-      presenter._onPickedSpot = onPickedSpot;
+      function clearHighlights() {
+        if (!presenter) return;
 
-      presenter.resetTrackball();
+        for (var i = 0; i < spotIds.length; i++) {
+          presenter.setSpotVisibilityByName(spotIds[i], false, false);
+        }
 
-      setTimeout(function () {
         presenter.repaint();
-      }, 120);
-    }
-
-    function clearHighlights() {
-      if (!presenter) return;
-
-      for (var i = 0; i < spotIds.length; i++) {
-        presenter.setSpotVisibilityByName(spotIds[i], false, false);
       }
 
-      presenter.repaint();
-    }
+      function showHighlight(id) {
+        if (!presenter) return;
 
-    function showHighlight(id) {
-      if (!presenter) return;
-
-      clearHighlights();
-
-      presenter.setSpotVisibilityByName(id, true, true);
-      presenter.enableOnHover(true);
-      presenter.repaint();
-    }
-
-    function highlightPanel(id) {
-      activeSpot = id;
-      showHighlight(id);
-      setActivePanelItem(id);
-    }
-
-    function hoverPanel(id) {
-      showHighlight(id);
-    }
-
-    function unhoverPanel() {
-      if (activeSpot) {
-        showHighlight(activeSpot);
-      } else {
         clearHighlights();
-      }
-    }
 
-    function onPickedSpot(id) {
-      highlightPanel(id);
-    }
-
-    function clearPanelSelection() {
-      activeSpot = null;
-      clearHighlights();
-      clearActivePanelItem();
-    }
-
-    function clearActivePanelItem() {
-      var panelItems = document.querySelectorAll(".panel-item");
-
-      panelItems.forEach(function (item) {
-        item.classList.remove("active");
-      });
-    }
-
-    function setActivePanelItem(id) {
-      clearActivePanelItem();
-
-      var activeItem = document.querySelector('[data-panel-id="' + id + '"]');
-
-      if (activeItem) {
-        activeItem.classList.add("active");
-      }
-    }
-
-    function faceDirection(direction) {
-      if (!presenter) return;
-
-      var my_pos = presenter.getTrackballPosition();
-
-      switch (direction) {
-        case "front":
-          my_pos[0] = 0;
-          break;
-        case "right":
-          my_pos[0] = 90;
-          break;
-        case "back":
-          my_pos[0] = 180;
-          break;
-        case "left":
-          my_pos[0] = -90;
-          break;
+        presenter.setSpotVisibilityByName(id, true, true);
+        presenter.enableOnHover(true);
+        presenter.repaint();
       }
 
-      presenter.animateToTrackballPosition(my_pos);
-    }
+      var panelToFace = {
+        baby: "front",
+        jesus: "front",
+        raven: "back"
+      };
 
-    function toggleFullscreen() {
-      var el = document.getElementById("3dhop");
-      var btn = document.querySelector("#fullscreen-btn img");
-      if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement) {
-        (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen).call(document);
-        btn.src = "../../3dhop/skins/dark/full.png";
-        btn.alt = "Full Screen";
-      } else {
-        (el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen).call(el);
-        btn.src = "../../3dhop/skins/dark/full_on.png";
-        btn.alt = "Exit Full Screen";
-      }
-    }
+      function highlightPanel(id) {
+        activeSpot = id;
+        showHighlight(id);
+        setActivePanelItem(id);
 
-    function actionsToolbar(action) {
-      if (!presenter) return;
+        var face = panelToFace[id];
 
-      if (action === "home") presenter.resetTrackball();
-      else if (action === "zoomin") presenter.zoomIn();
-      else if (action === "zoomout") presenter.zoomOut();
-      else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
-      else if (action === "screenshot") presenter.saveScreenshot();
-      else if (action === "full") presenter.fullscreen();
-      else if (
-        action === "move_up" ||
-        action === "move_down" ||
-        action === "move_left" ||
-        action === "move_right"
-      ) {
-        step(action);
-      }
-    }
-
-    function step(action) {
-      if (!presenter) return;
-
-      var my_pos = presenter.getTrackballPosition();
-      var vstep = 0.10;
-      var hstep = 0.10;
-
-      switch (action) {
-        case "move_up":
-          my_pos[3] += vstep;
-          presenter.animateToTrackballPosition(my_pos);
-          break;
-
-        case "move_down":
-          my_pos[3] -= vstep;
-          presenter.animateToTrackballPosition(my_pos);
-          break;
-
-        case "move_right":
-          var gr1 = Math.PI * my_pos[0] / 180;
-          my_pos[2] -= hstep * Math.cos(gr1);
-          my_pos[4] += hstep * Math.sin(gr1);
-          presenter.animateToTrackballPosition(my_pos);
-          break;
-
-        case "move_left":
-          var gr2 = Math.PI * my_pos[0] / 180;
-          my_pos[2] += hstep * Math.cos(gr2);
-          my_pos[4] -= hstep * Math.sin(gr2);
-          presenter.animateToTrackballPosition(my_pos);
-          break;
-      }
-    }
-
-    function showLoading(message) {
-      var overlay = document.getElementById("loadingOverlay");
-      var text = document.getElementById("loadingText");
-
-      if (text && message) {
-        text.textContent = message;
+        if (face) {
+          setActiveDirection(face);
+        } else {
+          updateUrlState();
+        }
       }
 
-      if (overlay) {
-        overlay.style.display = "flex";
+      function hoverPanel(id) {
+        showHighlight(id);
       }
-    }
 
-    function hideLoading() {
-      var overlay = document.getElementById("loadingOverlay");
-
-      if (overlay) {
-        overlay.style.display = "none";
+      function unhoverPanel() {
+        if (activeSpot) {
+          showHighlight(activeSpot);
+        } else {
+          clearHighlights();
+        }
       }
-    }
 
-    function hookMovePad() {
-      function bind(id) {
-        var el = document.getElementById(id);
-        if (!el) return;
+      function onPickedSpot(id) {
+        highlightPanel(id);
+      }
 
-        el.addEventListener("click", function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          actionsToolbar(id);
+      function clearPanelSelection() {
+        activeSpot = null;
+        clearHighlights();
+        clearActivePanelItem();
+
+        var noneItem = document.querySelector('[data-panel-id="none"]');
+        if (noneItem) noneItem.classList.add("active");
+
+        updateUrlState();
+      }
+
+      function clearActivePanelItem() {
+        var items = document.querySelectorAll(".panel-item");
+
+        items.forEach(function (item) {
+          item.classList.remove("active");
         });
       }
 
-      bind("move_up");
-      bind("move_down");
-    }
+      function setActivePanelItem(id) {
+        clearActivePanelItem();
 
-    function openInfoTab(tabName) {
-      var tabs = document.querySelectorAll(".tab-button");
-      var contents = document.querySelectorAll(".tab-content");
+        var activeItem = document.querySelector('[data-panel-id="' + id + '"]');
 
-      tabs.forEach(function (tab) {
-        tab.classList.remove("active");
-      });
-
-      contents.forEach(function (content) {
-        content.classList.remove("active");
-      });
-
-      if (tabName === "poem") {
-        document.querySelector(".tab-button:nth-child(2)").classList.add("active");
-        document.getElementById("poem-content").classList.add("active");
-      } else {
-        document.querySelector(".tab-button:nth-child(1)").classList.add("active");
-        document.getElementById("panels-content").classList.add("active");
+        if (activeItem) {
+          activeItem.classList.add("active");
+        }
       }
-    }
 
-    $(document).ready(function () {
-      showLoading("Loading model...");
-      init3dhop();
-      setup3dhop();
-      hookMovePad();
+      var activeFace = null;
+      var validFaces = ["front", "back", "left", "right"];
 
-      setTimeout(function () {
-        hideLoading();
-      }, 1800);
-    });
+      function faceDirection(direction) {
+        if (!presenter) return;
 
-    window.addEventListener("resize", function () {
-      if (presenter) presenter.repaint();
-    });
-  </script>
-</main>
+        var my_pos = presenter.getTrackballPosition();
+
+        switch (direction) {
+          case "front":
+            my_pos[0] = 0;
+            break;
+          case "right":
+            my_pos[0] = 90;
+            break;
+          case "back":
+            my_pos[0] = 180;
+            break;
+          case "left":
+            my_pos[0] = -90;
+            break;
+          default:
+            return;
+        }
+
+        activeFace = direction;
+        presenter.animateToTrackballPosition(my_pos);
+        updateUrlState();
+      }
+
+      function setActiveDirection(direction) {
+        var directionButtons = document.querySelectorAll(".direction-card");
+
+        directionButtons.forEach(function (button) {
+          button.classList.remove("active");
+        });
+
+        var activeButton = document.querySelector('[data-direction="' + direction + '"]');
+
+        if (activeButton) {
+          activeButton.classList.add("active");
+        }
+
+        faceDirection(direction);
+      }
+
+      function updateUrlState() {
+        var parts = [];
+
+        if (activeFace) parts.push("face=" + encodeURIComponent(activeFace));
+        if (activeSpot) parts.push("panel=" + encodeURIComponent(activeSpot));
+
+        var hash = parts.length ? "#" + parts.join("&") : "";
+
+        history.replaceState(null, "", location.pathname + location.search + hash);
+      }
+
+      function clearAllState() {
+        activeFace = null;
+        activeSpot = null;
+
+        clearHighlights();
+        clearActivePanelItem();
+
+        var directionButtons = document.querySelectorAll(".direction-card");
+
+        directionButtons.forEach(function (button) {
+          button.classList.remove("active");
+        });
+
+        if (presenter) {
+          presenter.resetTrackball();
+        }
+
+        updateUrlState();
+      }
+
+      function applyUrlState() {
+        if (!location.hash) return;
+
+        var params = {};
+
+        location.hash.replace(/^#/, "").split("&").forEach(function (kv) {
+          var pair = kv.split("=");
+
+          if (pair[0]) {
+            params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
+          }
+        });
+
+        if (params.face && validFaces.indexOf(params.face) !== -1) {
+          faceDirection(params.face);
+        }
+
+        if (params.panel && spotIds.indexOf(params.panel) !== -1) {
+          highlightPanel(params.panel);
+        }
+      }
+
+      function toggleFullscreen() {
+        var el = document.getElementById("3dhop");
+        var btn = document.querySelector("#fullscreen-btn img");
+
+        if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement) {
+          (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen).call(document);
+          btn.src = "../../3dhop/skins/dark/full.png";
+          btn.alt = "Full Screen";
+        } else {
+          (el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen).call(el);
+          btn.src = "../../3dhop/skins/dark/full_on.png";
+          btn.alt = "Exit Full Screen";
+        }
+      }
+
+      function actionsToolbar(action) {
+        if (!presenter) return;
+
+        if (action === "home") clearAllState();
+        else if (action === "zoomin") presenter.zoomIn();
+        else if (action === "zoomout") presenter.zoomOut();
+        else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+        else if (action === "screenshot") presenter.saveScreenshot();
+        else if (action === "full") presenter.fullscreen();
+        else if (
+          action === "move_up" ||
+          action === "move_down" ||
+          action === "move_left" ||
+          action === "move_right"
+        ) {
+          step(action);
+        }
+      }
+
+      function step(action) {
+        if (!presenter) return;
+
+        var my_pos = presenter.getTrackballPosition();
+        var vstep = 0.10;
+        var hstep = 0.10;
+
+        switch (action) {
+          case "move_up":
+            my_pos[3] += vstep;
+            presenter.animateToTrackballPosition(my_pos);
+            break;
+
+          case "move_down":
+            my_pos[3] -= vstep;
+            presenter.animateToTrackballPosition(my_pos);
+            break;
+
+          case "move_right":
+            var gr1 = Math.PI * my_pos[0] / 180;
+            my_pos[2] -= hstep * Math.cos(gr1);
+            my_pos[4] += hstep * Math.sin(gr1);
+            presenter.animateToTrackballPosition(my_pos);
+            break;
+
+          case "move_left":
+            var gr2 = Math.PI * my_pos[0] / 180;
+            my_pos[2] += hstep * Math.cos(gr2);
+            my_pos[4] -= hstep * Math.sin(gr2);
+            presenter.animateToTrackballPosition(my_pos);
+            break;
+        }
+      }
+
+      function showLoading(message) {
+        var overlay = document.getElementById("loadingOverlay");
+        var text = document.getElementById("loadingText");
+
+        if (text && message) {
+          text.textContent = message;
+        }
+
+        if (overlay) {
+          overlay.style.display = "flex";
+        }
+      }
+
+      function hideLoading() {
+        var overlay = document.getElementById("loadingOverlay");
+
+        if (overlay) {
+          overlay.style.display = "none";
+        }
+      }
+
+      function hookMovePad() {
+        function bind(id) {
+          var el = document.getElementById(id);
+          if (!el) return;
+
+          el.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            actionsToolbar(id);
+          });
+        }
+
+        bind("move_up");
+        bind("move_down");
+      }
+
+      function openInfoTab(tabName) {
+        var tabs = document.querySelectorAll(".tab-button");
+        var contents = document.querySelectorAll(".tab-content");
+
+        tabs.forEach(function (tab) {
+          tab.classList.remove("active");
+        });
+
+        contents.forEach(function (content) {
+          content.classList.remove("active");
+        });
+
+        if (tabName === "poem") {
+          document.querySelector(".tab-button:nth-child(2)").classList.add("active");
+          document.getElementById("poem-content").classList.add("active");
+        } else {
+          document.querySelector(".tab-button:nth-child(1)").classList.add("active");
+          document.getElementById("panels-content").classList.add("active");
+        }
+      }
+
+      $(document).ready(function () {
+        showLoading("Loading model...");
+
+        init3dhop();
+        setup3dhop();
+        hookMovePad();
+
+        setTimeout(function () {
+          hideLoading();
+          applyUrlState();
+        }, 1800);
+      });
+
+      window.addEventListener("resize", function () {
+        if (presenter) presenter.repaint();
+      });
+    </script>
+  </main>
 
   <div class="footer">
     <p>&copy; 2026 Visionary Cross Project. All Rights Reserved.</p>
