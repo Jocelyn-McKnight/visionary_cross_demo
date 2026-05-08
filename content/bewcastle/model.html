@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bewcastle</title>
 
-  <link rel="stylesheet" href="../../main.css" />
   <link rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css" />
+  <link rel="stylesheet" href="../../main.css" />
   <link rel="icon" type="image/x-icon" href="../../img/cross.ico" />
 
   <script src="../../3dhop/js/spidergl.js"></script>
@@ -45,7 +45,6 @@
   </nav>
 
   <nav class="landing-menu" aria-label="Expanded menu">
-
     <section>
       <input type="checkbox" id="frontmatter-toggle" class="submenu-toggle">
       <label for="frontmatter-toggle" class="submenu-label">Frontmatter</label>
@@ -94,7 +93,6 @@
         <a href="../../content/backmatter/contact.html">Contact</a>
       </div>
     </section>
-
   </nav>
 
   <main>
@@ -155,138 +153,166 @@
           </button>
         </div>
 
-        <section class="panel-section">
-          <div class="panel-links">
-            <div class="panel-item" data-panel-id="none">
-              <button type="button" class="panel-name" onclick="clearPanelSelection()">
-                None
+        <div id="panels-content" class="tab-content active">
+          <section class="panel-section">
+            <h2>Explore the Bewcastle Cross</h2>
+
+            <p class="panel-intro">
+              Select a direction to turn the model. Select a panel name to highlight it on the cross.
+            </p>
+
+            <div class="direction-row">
+              <button class="direction-card active" type="button" data-direction="front" onclick="setActiveDirection('front')">
+                <span>Front</span>
               </button>
-              <p>Clear the selected highlight.</p>
-            </div>
-          </div>
-        </section>
 
-        <section class="panel-section">
-          <h3>South Panels</h3>
-
-          <div class="panel-links">
-            <div class="panel-item" data-panel-id="baby">
-              <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
-                Top Interlace
+              <button class="direction-card" type="button" data-direction="back" onclick="setActiveDirection('back')">
+                <span>Back</span>
               </button>
-              <p>Click <a href="panels/south_top_interlace.html">here</a> to view in detail.</p>
-            </div>
 
-            <div class="panel-item" data-panel-id="jesus">
-              <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
-                Upper Vinescroll and Sundial
+              <button class="direction-card" type="button" data-direction="left" onclick="setActiveDirection('left')">
+                <span>Left</span>
               </button>
-              <p>Click <a href="panels/south_upper_vinescroll_sundial.html">here</a> to view in detail.</p>
-            </div>
 
-            <div class="panel-item" data-panel-id="raven">
-              <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
-                Middle Interlace
+              <button class="direction-card" type="button" data-direction="right" onclick="setActiveDirection('right')">
+                <span>Right</span>
               </button>
-              <p>Click <a href="panels/south_middle_interlace.html">here</a> to view in detail.</p>
             </div>
+          </section>
 
-            <div class="panel-item" data-panel-id="baby">
-              <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
-                Lower Vinescroll
-              </button>
-              <p>Click <a href="panels/south_lower_vinescroll.html">here</a> to view in detail.</p>
+          <section class="panel-section">
+            <div class="panel-links">
+              <div class="panel-item" data-panel-id="none">
+                <button type="button" class="panel-name" onclick="clearPanelSelection()">
+                  None
+                </button>
+                <p>Clear the selected highlight.</p>
+              </div>
             </div>
+          </section>
 
-            <div class="panel-item" data-panel-id="jesus">
-              <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
-                Bottom Interlace
-              </button>
-              <p>Click <a href="panels/south_bottom_interlace.html">here</a> to view in detail.</p>
+          <section class="panel-section">
+            <h3>South Panels</h3>
+
+            <div class="panel-links">
+              <div class="panel-item" data-panel-id="baby">
+                <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+                  Top Interlace
+                </button>
+                <p>Click <a href="panels/south_top_interlace.html">here</a> to view in detail.</p>
+              </div>
+
+              <div class="panel-item" data-panel-id="jesus">
+                <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+                  Upper Vinescroll and Sundial
+                </button>
+                <p>Click <a href="panels/south_upper_vinescroll_sundial.html">here</a> to view in detail.</p>
+              </div>
+
+              <div class="panel-item" data-panel-id="raven">
+                <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+                  Middle Interlace
+                </button>
+                <p>Click <a href="panels/south_middle_interlace.html">here</a> to view in detail.</p>
+              </div>
+
+              <div class="panel-item" data-panel-id="baby">
+                <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+                  Lower Vinescroll
+                </button>
+                <p>Click <a href="panels/south_lower_vinescroll.html">here</a> to view in detail.</p>
+              </div>
+
+              <div class="panel-item" data-panel-id="jesus">
+                <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+                  Bottom Interlace
+                </button>
+                <p>Click <a href="panels/south_bottom_interlace.html">here</a> to view in detail.</p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section class="panel-section">
-          <h3>West Panels</h3>
+          <section class="panel-section">
+            <h3>West Panels</h3>
 
-          <div class="panel-links">
-            <div class="panel-item" data-panel-id="baby">
-              <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
-                Lamb
-              </button>
-              <p>Click <a href="panels/west_lamb.html">here</a> to view in detail.</p>
+            <div class="panel-links">
+              <div class="panel-item" data-panel-id="baby">
+                <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+                  Lamb
+                </button>
+                <p>Click <a href="panels/west_lamb.html">here</a> to view in detail.</p>
+              </div>
+
+              <div class="panel-item" data-panel-id="jesus">
+                <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+                  Christ
+                </button>
+                <p>Click <a href="panels/west_christ.html">here</a> to view in detail.</p>
+              </div>
+
+              <div class="panel-item" data-panel-id="raven">
+                <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+                  Falconer
+                </button>
+                <p>Click <a href="panels/west_falconer.html">here</a> to view in detail.</p>
+              </div>
             </div>
+          </section>
 
-            <div class="panel-item" data-panel-id="jesus">
-              <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
-                Christ
-              </button>
-              <p>Click <a href="panels/west_christ.html">here</a> to view in detail.</p>
+          <section class="panel-section">
+            <h3>North Panels</h3>
+
+            <div class="panel-links">
+              <div class="panel-item" data-panel-id="baby">
+                <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+                  Top Vinescroll
+                </button>
+                <p>Click <a href="panels/north_top_vinescroll.html">here</a> to view in detail.</p>
+              </div>
+
+              <div class="panel-item" data-panel-id="jesus">
+                <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+                  Upper Interlace
+                </button>
+                <p>Click <a href="panels/north_upper_interlace.html">here</a> to view in detail.</p>
+              </div>
+
+              <div class="panel-item" data-panel-id="raven">
+                <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+                  Checkers
+                </button>
+                <p>Click <a href="panels/north_checkers.html">here</a> to view in detail.</p>
+              </div>
+
+              <div class="panel-item" data-panel-id="baby">
+                <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+                  Lower Interlace
+                </button>
+                <p>Click <a href="panels/north_lower_interlace.html">here</a> to view in detail.</p>
+              </div>
+
+              <div class="panel-item" data-panel-id="jesus">
+                <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+                  Bottom Vinescroll
+                </button>
+                <p>Click <a href="panels/north_bottom_vinescroll.html">here</a> to view in detail.</p>
+              </div>
             </div>
+          </section>
 
-            <div class="panel-item" data-panel-id="raven">
-              <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
-                Falconer
-              </button>
-              <p>Click <a href="panels/west_falconer.html">here</a> to view in detail.</p>
+          <section class="panel-section">
+            <h3>East Panels</h3>
+
+            <div class="panel-links">
+              <div class="panel-item" data-panel-id="raven">
+                <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+                  Inhabited Vinescroll
+                </button>
+                <p>Click <a href="panels/east_inhabited_vinescroll.html">here</a> to view in detail.</p>
+              </div>
             </div>
-          </div>
-        </section>
-
-        <section class="panel-section">
-          <h3>North Panels</h3>
-
-          <div class="panel-links">
-            <div class="panel-item" data-panel-id="baby">
-              <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
-                Top Vinescroll
-              </button>
-              <p>Click <a href="panels/north_top_vinescroll.html">here</a> to view in detail.</p>
-            </div>
-
-            <div class="panel-item" data-panel-id="jesus">
-              <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
-                Upper Interlace
-              </button>
-              <p>Click <a href="panels/north_upper_interlace.html">here</a> to view in detail.</p>
-            </div>
-
-            <div class="panel-item" data-panel-id="raven">
-              <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
-                Checkers
-              </button>
-              <p>Click <a href="panels/north_checkers.html">here</a> to view in detail.</p>
-            </div>
-
-            <div class="panel-item" data-panel-id="baby">
-              <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
-                Lower Interlace
-              </button>
-              <p>Click <a href="panels/north_lower_interlace.html">here</a> to view in detail.</p>
-            </div>
-
-            <div class="panel-item" data-panel-id="jesus">
-              <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
-                Bottom Vinescroll
-              </button>
-              <p>Click <a href="panels/north_bottom_vinescroll.html">here</a> to view in detail.</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="panel-section">
-          <h3>East Panels</h3>
-
-          <div class="panel-links">
-            <div class="panel-item" data-panel-id="raven">
-              <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
-                Inhabited Vinescroll
-              </button>
-              <p>Click <a href="panels/east_inhabited_vinescroll.html">here</a> to view in detail.</p>
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
         <div id="poem-content" class="tab-content">
           <section class="panel-section">
