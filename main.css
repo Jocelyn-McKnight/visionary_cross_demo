@@ -611,6 +611,201 @@ main {
   font-family: var(--font-body);
 }
 
+/* ---------- Sidebar tabs ---------- */
+
+.side-tabs {
+  display: flex;
+  background: #f8f8f8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  background: #f8f8f8;
+  color: #111;
+
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.tab-button:last-child {
+  border-right: none;
+}
+
+.tab-button:hover,
+.tab-button.active {
+  background: #111;
+  color: #fff;
+}
+
+/* ---------- Tab content ---------- */
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* ---------- Sidebar text ---------- */
+
+.panel-section {
+  padding: 1.4rem;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.panel-section h2 {
+  margin: 0 0 0.75rem;
+  color: #111;
+
+  font-family: var(--font-title);
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.panel-section h3 {
+  margin: 0 0 0.9rem;
+  color: #111;
+
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.panel-intro {
+  margin: 0 0 1rem;
+  color: #555;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ---------- Direction buttons ---------- */
+
+.direction-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.direction-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 70px;
+  padding: 0.55rem 0.35rem;
+
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 10px;
+
+  background: #fff;
+  color: #111;
+
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.direction-card:hover {
+  border-color: #b87945;
+  color: #8d552b;
+}
+
+.direction-card.active {
+  background: #b87945;
+  border-color: #b87945;
+  color: #fff;
+}
+
+/* ---------- Panel list ---------- */
+
+.panel-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.panel-item {
+  margin: 0;
+  padding: 0.85rem 0.9rem;
+
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-left: 4px solid transparent;
+  border-radius: 10px;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.panel-item:hover {
+  border-color: rgba(184, 121, 69, 0.55);
+}
+
+.panel-item.active {
+  border-left-color: #b87945;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.panel-name {
+  display: block;
+  width: 100%;
+
+  margin: 0 0 0.25rem;
+  padding: 0;
+
+  border: none;
+  background: transparent;
+  color: #111;
+
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.panel-name:hover {
+  color: #8d552b;
+}
+
+.panel-item p {
+  margin: 0;
+  color: #555;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.panel-item a {
+  color: #8d552b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.panel-item a:hover {
+  text-decoration: underline;
+}
+
 /* =========================================================
    MOVE PAD
    ========================================================= */
@@ -619,7 +814,7 @@ main {
   position: absolute;
   right: 14px;
   top: 14px;
-  z-index: 50;
+  z-index: 40;
   width: auto;
   height: auto;
   background: rgba(0,0,0,0.35);
