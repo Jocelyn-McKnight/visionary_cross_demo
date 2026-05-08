@@ -144,145 +144,202 @@
       </div>
     </div>
 
-    <aside id="infoPanel">
-      <div class="side-tabs">
-        <button class="tab-button active" type="button" onclick="openInfoTab('panels')">
-          Panels
+<aside id="infoPanel">
+  <div class="side-tabs">
+    <button class="tab-button active" type="button" onclick="openInfoTab('panels')">
+      Panels
+    </button>
+
+    <button class="tab-button" type="button" onclick="openInfoTab('poem')">
+      Runes
+    </button>
+  </div>
+
+  <div id="panels-content" class="tab-content active">
+    <section class="panel-section">
+      <h2>Explore the Bewcastle Cross</h2>
+
+      <p class="panel-intro">
+        Select a direction to turn the model. Select a panel name to highlight it on the cross.
+      </p>
+
+      <div class="direction-row">
+        <button class="direction-card active" type="button" data-direction="front" onclick="setActiveDirection('front')">
+          <span>Front</span>
         </button>
 
-        <button class="tab-button" type="button" onclick="openInfoTab('poem')">
-          Poem
+        <button class="direction-card" type="button" data-direction="back" onclick="setActiveDirection('back')">
+          <span>Back</span>
+        </button>
+
+        <button class="direction-card" type="button" data-direction="left" onclick="setActiveDirection('left')">
+          <span>Left</span>
+        </button>
+
+        <button class="direction-card" type="button" data-direction="right" onclick="setActiveDirection('right')">
+          <span>Right</span>
         </button>
       </div>
+    </section>
 
-      <div id="panels-content" class="tab-content active">
-        <section class="panel-section">
-          <h2>Explore the Ruthwell Cross</h2>
-
-          <p class="panel-intro">
-            Select a direction to turn the model. Select a panel name to highlight it on the cross.
-          </p>
-
-          <div class="direction-row">
-            <button class="direction-card active" type="button" data-direction="front" onclick="setActiveDirection('front')">
-              <span>Front</span>
-            </button>
-
-            <button class="direction-card" type="button" data-direction="back" onclick="setActiveDirection('back')">
-              <span>Back</span>
-            </button>
-
-            <button class="direction-card" type="button" data-direction="left" onclick="setActiveDirection('left')">
-              <span>Left</span>
-            </button>
-
-            <button class="direction-card" type="button" data-direction="right" onclick="setActiveDirection('right')">
-              <span>Right</span>
-            </button>
-          </div>
-        </section>
-
-        <section class="panel-section">
-          
-          <div class="panel-links">
-            <div class="panel-item" data-panel-id="none">
-              <button type="button" class="panel-name" onclick="clearPanelSelection()">
-                None
-              </button>
-              <p>Clear the selected highlight.</p>
-            </div>
-          </div>
-
-          <h3>Front Panels</h3>
-
-          <div class="panel-links">
-            <div class="panel-item" data-panel-id="angels">
-              <button type="button" class="panel-name" onclick="highlightPanel('angels')" onmouseover="hoverPanel('angels')" onmouseout="unhoverPanel()">
-                Angels
-              </button>
-              <p>Click <a href="panels/angels.html">here</a> to view in detail.</p>
-            </div>
-
-            <div class="panel-item" data-panel-id="archer">
-              <button type="button" class="panel-name" onclick="highlightPanel('archer')" onmouseover="hoverPanel('archer')" onmouseout="unhoverPanel()">
-                Archer
-              </button>
-              <p>Click <a href="panels/archer.html">here</a> to view in detail.</p>
-            </div>
-
-            <div class="panel-item" data-panel-id="bottom">
-              <button type="button" class="panel-name" onclick="highlightPanel('bottom')" onmouseover="hoverPanel('bottom')" onmouseout="unhoverPanel()">
-                Bottom Panel
-              </button>
-              <p>Click <a href="panels/bottom.html">here</a> to view in detail.</p>
-            </div>
-
-            <div class="panel-item" data-panel-id="magdalene">
-              <button type="button" class="panel-name" onclick="highlightPanel('magdalene')" onmouseover="hoverPanel('magdalene')" onmouseout="unhoverPanel()">
-                Magdalene
-              </button>
-              <p>Click <a href="panels/magdalene.html">here</a> to view in detail.</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="panel-section">
-          <h3>Back Panels</h3>
-
-          <div class="panel-links">
-            <div class="panel-item" data-panel-id="lamb">
-              <button type="button" class="panel-name" onclick="highlightPanel('lamb')" onmouseover="hoverPanel('lamb')" onmouseout="unhoverPanel()">
-                Lamb
-              </button>
-              <p>Click <a href="panels/lamb.html">here</a> to view in detail.</p>
-            </div>
-
-            <div class="panel-item" data-panel-id="raven">
-              <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
-                Raven
-              </button>
-              <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="panel-section">
-          <h3>Left Panels</h3>
-
-          <div class="panel-links">
-            <div class="panel-item" data-panel-id="left_side">
-              <button type="button" class="panel-name" onclick="highlightPanel('left_side')" onmouseover="hoverPanel('left_side')" onmouseout="unhoverPanel()">
-                Left Side Panel
-              </button>
-              <p>Click <a href="panels/left_side.html">here</a> to view in detail.</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="panel-section">
-          <h3>Right Panels</h3>
-
-          <div class="panel-links">
-            <div class="panel-item" data-panel-id="right_cross_bar">
-              <button type="button" class="panel-name" onclick="highlightPanel('right_cross_bar')" onmouseover="hoverPanel('right_cross_bar')" onmouseout="unhoverPanel()">
-                Right Cross Bar
-              </button>
-              <p>Click <a href="panels/right_cross_bar.html">here</a> to view in detail.</p>
-            </div>
-          </div>
-        </section>
+    <section class="panel-section">
+      <div class="panel-links">
+        <div class="panel-item" data-panel-id="none">
+          <button type="button" class="panel-name" onclick="clearPanelSelection()">
+            None
+          </button>
+          <p>Clear the selected highlight.</p>
+        </div>
       </div>
+    </section>
 
-      <div id="poem-content" class="tab-content">
-        <section class="panel-section">
-          <h2>The Poem</h2>
+    <section class="panel-section">
+      <h3>South Panels</h3>
 
-          <p>
-            This section can contain the poetic inscription, transcription, translation, or commentary.
-          </p>
-        </section>
+      <div class="panel-links">
+        <div class="panel-item" data-panel-id="angels">
+          <button type="button" class="panel-name" onclick="highlightPanel('angels')" onmouseover="hoverPanel('angels')" onmouseout="unhoverPanel()">
+            St. John with Eagle
+          </button>
+          <p>Click <a href="panels/angels.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="archer">
+          <button type="button" class="panel-name" onclick="highlightPanel('archer')" onmouseover="hoverPanel('archer')" onmouseout="unhoverPanel()">
+            Archer
+          </button>
+          <p>Click <a href="panels/archer.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="bottom">
+          <button type="button" class="panel-name" onclick="highlightPanel('bottom')" onmouseover="hoverPanel('bottom')" onmouseout="unhoverPanel()">
+            Visitation
+          </button>
+          <p>Click <a href="panels/bottom.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="magdalene">
+          <button type="button" class="panel-name" onclick="highlightPanel('magdalene')" onmouseover="hoverPanel('magdalene')" onmouseout="unhoverPanel()">
+            Magdalene
+          </button>
+          <p>Click <a href="panels/magdalene.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="magdalene">
+          <button type="button" class="panel-name" onclick="highlightPanel('magdalene')" onmouseover="hoverPanel('magdalene')" onmouseout="unhoverPanel()">
+            Man Born Blind
+          </button>
+          <p>Click <a href="panels/magdalene.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="magdalene">
+          <button type="button" class="panel-name" onclick="highlightPanel('magdalene')" onmouseover="hoverPanel('magdalene')" onmouseout="unhoverPanel()">
+            Annunciation
+          </button>
+          <p>Click <a href="panels/magdalene.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="magdalene">
+          <button type="button" class="panel-name" onclick="highlightPanel('magdalene')" onmouseover="hoverPanel('magdalene')" onmouseout="unhoverPanel()">
+            Crucifixion
+          </button>
+          <p>Click <a href="panels/magdalene.html">here</a> to view in detail.</p>
+        </div>
       </div>
-    </aside>
+    </section>
+
+    <section class="panel-section">
+      <h3>West Panels</h3>
+
+      <div class="panel-links">
+        <div class="panel-item" data-panel-id="right_cross_bar">
+          <button type="button" class="panel-name" onclick="highlightPanel('right_cross_bar')" onmouseover="hoverPanel('right_cross_bar')" onmouseout="unhoverPanel()">
+            Left Vinescroll
+          </button>
+          <p>Click <a href="panels/left_cross_bar.html">here</a> to view in detail.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-section">
+      <h3>North Panels</h3>
+
+      <div class="panel-links">
+        <div class="panel-item" data-panel-id="lamb">
+          <button type="button" class="panel-name" onclick="highlightPanel('lamb')" onmouseover="hoverPanel('lamb')" onmouseout="unhoverPanel()">
+            Eagle
+          </button>
+          <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="raven">
+          <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+            St. Matthew and Angel
+          </button>
+          <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="raven">
+          <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+            St. John the Baptist
+          </button>
+          <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="raven">
+          <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+            Christ in Glory
+          </button>
+          <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="raven">
+          <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+            St. Paul and St. Antony
+          </button>
+          <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="raven">
+          <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+            Flight into Egypt: Matthew
+          </button>
+          <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="raven">
+          <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+            Nativity
+          </button>
+          <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-section">
+      <h3>East Panels</h3>
+
+      <div class="panel-links">
+        <div class="panel-item" data-panel-id="left_side">
+          <button type="button" class="panel-name" onclick="highlightPanel('left_side')" onmouseover="hoverPanel('left_side')" onmouseout="unhoverPanel()">
+            East Vinescroll
+          </button>
+          <p>Click <a href="panels/right_side.html">here</a> to view in detail.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="poem-content" class="tab-content">
+    <section class="panel-section">
+      <h2>The Poem</h2>
+
+      <p>
+        This section can contain the poetic inscription, transcription, translation, or commentary.
+      </p>
+    </section>
+  </div>
+</aside>
   </div>
 
   <script>

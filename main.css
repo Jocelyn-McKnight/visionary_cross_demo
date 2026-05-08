@@ -548,11 +548,15 @@ main {
   background: #ddd;
 }
 
-/* Keep the 3DHOP canvas filling the viewer */
 #draw-canvas {
   width: 100%;
   height: 100%;
   display: block;
+
+  background-image: url("3dhop/skins/backgrounds/light.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 /* Make the 3DHOP toolbar float over the canvas */
