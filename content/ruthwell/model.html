@@ -235,22 +235,25 @@
           <p>Click <a href="panels/magdalene.html">here</a> to view in detail.</p>
         </div>
 
-        <div class="panel-item" data-panel-id="magdalene">
-<button type="button" class="panel-name" disabled>            Man Born Blind
+        <div class="panel-item" data-panel-id="blind">
+          <button type="button" class="panel-name" onclick="highlightPanel('blind')" onmouseover="hoverPanel('blind')" onmouseout="unhoverPanel()">
+            Man Born Blind
           </button>
-          <p>Click <a href="panels/magdalene.html">here</a> to view in detail.</p>
+          <p>Click <a href="panels/blind.html">here</a> to view in detail.</p>
         </div>
 
         <div class="panel-item" data-panel-id="magdalene">
-<button type="button" class="panel-name" disabled>            Annunciation
+          <button type="button" class="panel-name" onclick="highlightPanel('annunciation')" onmouseover="hoverPanel('annunciation')" onmouseout="unhoverPanel()">
+            Annunciation
           </button>
-          <p>Click <a href="panels/magdalene.html">here</a> to view in detail.</p>
+          <p>Click <a href="panels/annunciation.html">here</a> to view in detail.</p>
         </div>
 
         <div class="panel-item" data-panel-id="magdalene">
-<button type="button" class="panel-name" disabled>            Crucifixion
+          <button type="button" class="panel-name" onclick="highlightPanel('crucifixion')" onmouseover="hoverPanel('crucifixion')" onmouseout="unhoverPanel()">
+            Crucifixion
           </button>
-          <p>Click <a href="panels/magdalene.html">here</a> to view in detail.</p>
+          <p>Click <a href="panels/crucifixion.html">here</a> to view in detail.</p>
         </div>
       </div>
     </section>
@@ -296,22 +299,25 @@
           <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
         </div>
 
-        <div class="panel-item" data-panel-id="raven">
-<button type="button" class="panel-name" disabled>            St. John the Baptist
+        <div class="panel-item" data-panel-id="john">
+          <button type="button" class="panel-name" onclick="highlightPanel('john')" onmouseover="hoverPanel('john')" onmouseout="unhoverPanel()">
+            St. John the Baptist
           </button>
-          <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+          <p>Click <a href="panels/john.html">here</a> to view in detail.</p>
         </div>
 
-        <div class="panel-item" data-panel-id="raven">
-<button type="button" class="panel-name" disabled>            Christ in Glory
+        <div class="panel-item" data-panel-id="christ">
+          <button type="button" class="panel-name" onclick="highlightPanel('christ')" onmouseover="hoverPanel('christ')" onmouseout="unhoverPanel()">
+            Christ in Glory
           </button>
-          <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+          <p>Click <a href="panels/christ.html">here</a> to view in detail.</p>
         </div>
 
-        <div class="panel-item" data-panel-id="raven">
-<button type="button" class="panel-name" disabled>            St. Paul and St. Antony
+        <div class="panel-item" data-panel-id="paul_antony">
+          <button type="button" class="panel-name" onclick="highlightPanel('paul_antony')" onmouseover="hoverPanel('paul_antony')" onmouseout="unhoverPanel()">
+            St. Paul and St. Antony
           </button>
-          <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+          <p>Click <a href="panels/paul_antony.html">here</a> to view in detail.</p>
         </div>
 
         <div class="panel-item" data-panel-id="raven">
@@ -320,10 +326,11 @@
           <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
         </div>
 
-        <div class="panel-item" data-panel-id="raven">
-<button type="button" class="panel-name" disabled>            Nativity
+        <div class="panel-item" data-panel-id="nativity">
+          <button type="button" class="panel-name" onclick="highlightPanel('nativity')" onmouseover="hoverPanel('nativity')" onmouseout="unhoverPanel()">
+            Nativity
           </button>
-          <p>Click <a href="panels/raven.html">here</a> to view in detail.</p>
+          <p>Click <a href="panels/nativity.html">here</a> to view in detail.</p>
         </div>
       </div>
     </section>
@@ -357,98 +364,185 @@
     var presenter = null;
     var activeSpot = null;
 
-  var spotIds = [
-    "eagle",
-    "john_eagle"
-  ];
+var presenter = null;
+var activeSpot = null;
 
-    function setup3dhop() {
-      presenter = new Presenter("draw-canvas");
+var spotIds = [
+  "annunciation",
+  "blind",
+  "christ",
+  "crucifixion",
+  "eagle",
+  "john",
+  "john_eagle",
+  "nativity",
+  "paul_antony"
+];
 
-      presenter.setScene({
-        meshes: {
-          ruthwell: {
-            url: "assets/models/ruthwell.nxz"
-          },
+function setup3dhop() {
+  presenter = new Presenter("draw-canvas");
 
-          eagle: {
-            url: "assets/models/eagle_cut.nxz"
-          },
+  presenter.setScene({
+    meshes: {
+      ruthwell: {
+        url: "assets/models/ruthwell.nxz"
+      },
 
-          john_eagle: {
-            url: "assets/models/john_eagle_cut.nxz"
-          }
-        },
+      annunciation: {
+        url: "assets/models/annunciation_cut.nxz"
+      },
 
-        modelInstances: {
-          ruthwell: {
-            mesh: "ruthwell",
-            color: [0.8, 0.7, 0.75],
-            visible: true
-          }
-        },
+      blind: {
+        url: "assets/models/blind_cut.nxz"
+      },
 
-        spots: {
-          eagle: {
-            mesh: "eagle",
-            visible: false,
-            alpha: 0.65,
-            color: [0.0, 0.25, 1.0]
-          },
+      christ: {
+        url: "assets/models/christ_cut.nxz"
+      },
 
-          john_eagle: {
-            mesh: "john_eagle",
-            visible: false,
-            alpha: 0.65,
-            color: [0.0, 0.25, 1.0]
-          }
-        },
+      crucifixion: {
+        url: "assets/models/crucifixion_cut.nxz"
+      },
 
-        trackball: {
-          type: TurntablePanTrackball,
-          trackOptions: {
-            startPhi: 0.0,
-            startTheta: 0.0,
-            startDistance: 2.0,
-            minMaxPhi: [-180, 180],
-            minMaxTheta: [-85.0, 85.0],
-            minMaxDist: [0.005, 140.0],
-            startPanX: 0.0,
-            startPanY: 0.0,
-            startPanZ: 0.0,
-            minMaxPanX: [-5.0, 5.0],
-            minMaxPanY: [-20.0, 20.0],
-            minMaxPanZ: [-5.0, 5.0]
-          }
-        }
-      });
+      eagle: {
+        url: "assets/models/eagle_cut.nxz"
+      },
 
-      presenter.enableOnHover(true);
-      presenter._onPickedSpot = onPickedSpot;
-      presenter._onEnterSpot = onEnterSpot;
-      presenter._onLeaveSpot = onLeaveSpot;
+      john: {
+        url: "assets/models/john_cut.nxz"
+      },
 
-      presenter.resetTrackball();
-      setTimeout(function () {
-        presenter.repaint();
-      }, 120);
-    }
+      john_eagle: {
+        url: "assets/models/john_eagle_cut.nxz"
+      },
 
-    function onEnterSpot(id) {
-      setActivePanelItem(id);
-    }
+      nativity: {
+        url: "assets/models/nativity_cut.nxz"
+      },
 
-    function onLeaveSpot(id) {
-      unhoverPanel();
+      paul_antony: {
+        url: "assets/models/paul_antony_cut.nxz"
+      }
+    },
 
-      if (activeSpot) {
-        setActivePanelItem(activeSpot);
-      } else {
-        clearActivePanelItem();
+    modelInstances: {
+      ruthwell: {
+        mesh: "ruthwell",
+        color: [0.8, 0.7, 0.75],
+        visible: true
+      }
+    },
+
+    spots: {
+      annunciation: {
+        mesh: "annunciation",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      blind: {
+        mesh: "blind",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      christ: {
+        mesh: "christ",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      crucifixion: {
+        mesh: "crucifixion",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      eagle: {
+        mesh: "eagle",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      john: {
+        mesh: "john",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      john_eagle: {
+        mesh: "john_eagle",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      nativity: {
+        mesh: "nativity",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      paul_antony: {
+        mesh: "paul_antony",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      }
+    },
+
+    trackball: {
+      type: TurntablePanTrackball,
+      trackOptions: {
+        startPhi: 0.0,
+        startTheta: 0.0,
+        startDistance: 2.0,
+        minMaxPhi: [-180, 180],
+        minMaxTheta: [-85.0, 85.0],
+        minMaxDist: [0.005, 140.0],
+        startPanX: 0.0,
+        startPanY: 0.0,
+        startPanZ: 0.0,
+        minMaxPanX: [-5.0, 5.0],
+        minMaxPanY: [-20.0, 20.0],
+        minMaxPanZ: [-5.0, 5.0]
       }
     }
+  });
 
-    function clearHighlights() {
+  presenter.enableOnHover(true);
+  presenter._onPickedSpot = onPickedSpot;
+  presenter._onEnterSpot = onEnterSpot;
+  presenter._onLeaveSpot = onLeaveSpot;
+
+  presenter.resetTrackball();
+  setTimeout(function () {
+    presenter.repaint();
+  }, 120);
+}
+
+function onEnterSpot(id) {
+  setActivePanelItem(id);
+}
+
+function onLeaveSpot(id) {
+  unhoverPanel();
+
+  if (activeSpot) {
+    setActivePanelItem(activeSpot);
+  } else {
+    clearActivePanelItem();
+  }
+}
+
+function clearHighlights() {
   if (!presenter) return;
 
   for (var i = 0; i < spotIds.length; i++) {
@@ -468,10 +562,18 @@ function showHighlight(id) {
   presenter.repaint();
 }
 
-    var panelToFace = {
-      john_eagle: "front",
-      eagle: "back"
-    };
+var panelToFace = {
+  john_eagle: "front",
+  blind: "front",
+  annunciation: "front",
+  crucifixion: "front",
+
+  eagle: "back",
+  john: "back",
+  christ: "back",
+  paul_antony: "back",
+  nativity: "back"
+};
 
     function highlightPanel(id) {
       activeSpot = id;
