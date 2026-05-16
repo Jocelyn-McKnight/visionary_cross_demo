@@ -198,36 +198,36 @@
             <h3>South Panels</h3>
 
             <div class="panel-links">
-              <div class="panel-item" data-panel-id="baby">
-                <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="south_top_inter">
+                <button type="button" class="panel-name" onclick="highlightPanel('south_top_inter')" onmouseover="hoverPanel('south_top_inter')" onmouseout="unhoverPanel()">
                   Top Interlace
                 </button>
                 <p>Click <a href="panels/south_top_interlace.html">here</a> to view in detail.</p>
               </div>
 
-              <div class="panel-item" data-panel-id="jesus">
-                <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="south_sundial">
+                <button type="button" class="panel-name" onclick="highlightPanel('south_sundial')" onmouseover="hoverPanel('south_sundial')" onmouseout="unhoverPanel()">
                   Upper Vinescroll and Sundial
                 </button>
                 <p>Click <a href="panels/south_upper_vinescroll_sundial.html">here</a> to view in detail.</p>
               </div>
 
-              <div class="panel-item" data-panel-id="raven">
-                <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="south_mid_inter">
+                <button type="button" class="panel-name" onclick="highlightPanel('south_mid_inter')" onmouseover="hoverPanel('south_mid_inter')" onmouseout="unhoverPanel()">
                   Middle Interlace
                 </button>
                 <p>Click <a href="panels/south_middle_interlace.html">here</a> to view in detail.</p>
               </div>
 
-              <div class="panel-item" data-panel-id="baby">
-                <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="south_low_vine">
+                <button type="button" class="panel-name" onclick="highlightPanel('south_low_vine')" onmouseover="hoverPanel('south_low_vine')" onmouseout="unhoverPanel()">
                   Lower Vinescroll
                 </button>
                 <p>Click <a href="panels/south_lower_vinescroll.html">here</a> to view in detail.</p>
               </div>
 
-              <div class="panel-item" data-panel-id="jesus">
-                <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="south_bot_inter">
+                <button type="button" class="panel-name" onclick="highlightPanel('south_bot_inter')" onmouseover="hoverPanel('south_bot_inter')" onmouseout="unhoverPanel()">
                   Bottom Interlace
                 </button>
                 <p>Click <a href="panels/south_bottom_interlace.html">here</a> to view in detail.</p>
@@ -239,22 +239,22 @@
             <h3>West Panels</h3>
 
             <div class="panel-links">
-              <div class="panel-item" data-panel-id="baby">
-                <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
-                  Lamb
+              <div class="panel-item" data-panel-id="agnus">
+                <button type="button" class="panel-name" onclick="highlightPanel('agnus')" onmouseover="hoverPanel('agnus')" onmouseout="unhoverPanel()">
+                  Agnus Dei
                 </button>
                 <p>Click <a href="panels/west_lamb.html">here</a> to view in detail.</p>
               </div>
 
-              <div class="panel-item" data-panel-id="jesus">
-                <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="christ">
+                <button type="button" class="panel-name" onclick="highlightPanel('christ')" onmouseover="hoverPanel('christ')" onmouseout="unhoverPanel()">
                   Christ
                 </button>
                 <p>Click <a href="panels/west_christ.html">here</a> to view in detail.</p>
               </div>
 
-              <div class="panel-item" data-panel-id="raven">
-                <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="falconer">
+                <button type="button" class="panel-name" onclick="highlightPanel('falconer')" onmouseover="hoverPanel('falconer')" onmouseout="unhoverPanel()">
                   Falconer
                 </button>
                 <p>Click <a href="panels/west_falconer.html">here</a> to view in detail.</p>
@@ -333,11 +333,21 @@
       var presenter = null;
       var activeSpot = null;
 
-      var spotIds = [
-        "baby",
-        "jesus",
-        "raven"
-      ];
+    var spotIds = [
+      "south_top_inter",
+      "south_sundial",
+      "south_mid_inter",
+      "south_low_vine",
+      "south_bot_inter",
+
+      "agnus",
+      "christ",
+      "falconer",
+
+      "baby",
+      "jesus",
+      "raven"
+    ];
 
       function setup3dhop() {
         presenter = new Presenter("draw-canvas");
@@ -345,9 +355,20 @@
         presenter.setScene({
           meshes: {
             bewcastle: { url: "assets/models/bewcastle.nxz" },
-            baby:      { url: "assets/models/baby.nxz" },
-            jesus:     { url: "assets/models/jesus.nxz" },
-            raven:     { url: "assets/models/raven.nxz" }
+
+            south_top_inter: { url: "assets/models/south_top_inter.nxz" },
+            south_sundial:   { url: "assets/models/south_sundial.nxz" },
+            south_mid_inter: { url: "assets/models/south_mid_inter.nxz" },
+            south_low_vine:  { url: "assets/models/south_low_vine.nxz" },
+            south_bot_inter: { url: "assets/models/south_bot_inter.nxz" },
+
+            agnus:    { url: "assets/models/agnus.nxz" },
+            christ:   { url: "assets/models/christ.nxz" },
+            falconer: { url: "assets/models/falconer.nxz" },
+
+            baby:  { url: "assets/models/baby.nxz" },
+            jesus: { url: "assets/models/jesus.nxz" },
+            raven: { url: "assets/models/raven.nxz" }
           },
 
           modelInstances: {
@@ -359,18 +380,76 @@
           },
 
           spots: {
+            south_top_inter: {
+              mesh: "south_top_inter",
+              visible: false,
+              alpha: 0.65,
+              color: [0.0, 0.25, 1.0]
+            },
+
+            south_sundial: {
+              mesh: "south_sundial",
+              visible: false,
+              alpha: 0.65,
+              color: [0.0, 0.25, 1.0]
+            },
+
+            south_mid_inter: {
+              mesh: "south_mid_inter",
+              visible: false,
+              alpha: 0.65,
+              color: [0.0, 0.25, 1.0]
+            },
+
+            south_low_vine: {
+              mesh: "south_low_vine",
+              visible: false,
+              alpha: 0.65,
+              color: [0.0, 0.25, 1.0]
+            },
+
+            south_bot_inter: {
+              mesh: "south_bot_inter",
+              visible: false,
+              alpha: 0.65,
+              color: [0.0, 0.25, 1.0]
+            },
+
+            agnus: {
+              mesh: "agnus",
+              visible: false,
+              alpha: 0.65,
+              color: [0.0, 0.25, 1.0]
+            },
+
+            christ: {
+              mesh: "christ",
+              visible: false,
+              alpha: 0.65,
+              color: [0.0, 0.25, 1.0]
+            },
+
+            falconer: {
+              mesh: "falconer",
+              visible: false,
+              alpha: 0.65,
+              color: [0.0, 0.25, 1.0]
+            },
+
             baby: {
               mesh: "baby",
               visible: false,
               alpha: 0.65,
               color: [0.0, 0.25, 1.0]
             },
+
             jesus: {
               mesh: "jesus",
               visible: false,
               alpha: 0.65,
               color: [0.0, 0.25, 1.0]
             },
+
             raven: {
               mesh: "raven",
               visible: false,
@@ -445,9 +524,19 @@
       }
 
       var panelToFace = {
-        baby: "front",
-        jesus: "front",
-        raven: "back"
+        south_top_inter: "front",
+        south_sundial: "front",
+        south_mid_inter: "front",
+        south_low_vine: "front",
+        south_bot_inter: "front",
+
+        agnus: "right",
+        christ: "right",
+        falconer: "right",
+
+        baby: "right",
+        jesus: "right",
+        raven: "right"
       };
 
       function highlightPanel(id) {
