@@ -266,36 +266,36 @@
             <h3>North Panels</h3>
 
             <div class="panel-links">
-              <div class="panel-item" data-panel-id="baby">
-                <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="north_top_vine">
+                <button type="button" class="panel-name" onclick="highlightPanel('north_top_vine')" onmouseover="hoverPanel('north_top_vine')" onmouseout="unhoverPanel()">
                   Top Vinescroll
                 </button>
                 <p>Click <a href="panels/north_top_vinescroll.html">here</a> to view in detail.</p>
               </div>
 
-              <div class="panel-item" data-panel-id="jesus">
-                <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="north_upper_inter">
+                <button type="button" class="panel-name" onclick="highlightPanel('north_upper_inter')" onmouseover="hoverPanel('north_upper_inter')" onmouseout="unhoverPanel()">
                   Upper Interlace
                 </button>
                 <p>Click <a href="panels/north_upper_interlace.html">here</a> to view in detail.</p>
               </div>
 
-              <div class="panel-item" data-panel-id="raven">
-                <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="north_checkers">
+                <button type="button" class="panel-name" onclick="highlightPanel('north_checkers')" onmouseover="hoverPanel('north_checkers')" onmouseout="unhoverPanel()">
                   Checkers
                 </button>
                 <p>Click <a href="panels/north_checkers.html">here</a> to view in detail.</p>
               </div>
 
-              <div class="panel-item" data-panel-id="baby">
-                <button type="button" class="panel-name" onclick="highlightPanel('baby')" onmouseover="hoverPanel('baby')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="north_lower_inter">
+                <button type="button" class="panel-name" onclick="highlightPanel('north_lower_inter')" onmouseover="hoverPanel('north_lower_inter')" onmouseout="unhoverPanel()">
                   Lower Interlace
                 </button>
                 <p>Click <a href="panels/north_lower_interlace.html">here</a> to view in detail.</p>
               </div>
 
-              <div class="panel-item" data-panel-id="jesus">
-                <button type="button" class="panel-name" onclick="highlightPanel('jesus')" onmouseover="hoverPanel('jesus')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="north_bot_vine">
+                <button type="button" class="panel-name" onclick="highlightPanel('north_bot_vine')" onmouseover="hoverPanel('north_bot_vine')" onmouseout="unhoverPanel()">
                   Bottom Vinescroll
                 </button>
                 <p>Click <a href="panels/north_bottom_vinescroll.html">here</a> to view in detail.</p>
@@ -307,8 +307,8 @@
             <h3>East Panels</h3>
 
             <div class="panel-links">
-              <div class="panel-item" data-panel-id="raven">
-                <button type="button" class="panel-name" onclick="highlightPanel('raven')" onmouseover="hoverPanel('raven')" onmouseout="unhoverPanel()">
+              <div class="panel-item" data-panel-id="vine_cut">
+                <button type="button" class="panel-name" onclick="highlightPanel('vine_cut')" onmouseover="hoverPanel('vine_cut')" onmouseout="unhoverPanel()">
                   Inhabited Vinescroll
                 </button>
                 <p>Click <a href="panels/east_inhabited_vinescroll.html">here</a> to view in detail.</p>
@@ -333,21 +333,25 @@
       var presenter = null;
       var activeSpot = null;
 
-    var spotIds = [
-      "south_top_inter",
-      "south_sundial",
-      "south_mid_inter",
-      "south_low_vine",
-      "south_bot_inter",
+      var spotIds = [
+        "south_top_inter",
+        "south_sundial",
+        "south_mid_inter",
+        "south_low_vine",
+        "south_bot_inter",
 
-      "agnus",
-      "christ",
-      "falconer",
+        "agnus",
+        "christ",
+        "falconer",
 
-      "baby",
-      "jesus",
-      "raven"
-    ];
+        "north_top_vine",
+        "north_upper_inter",
+        "north_checkers",
+        "north_lower_inter",
+        "north_bot_vine",
+
+        "vine_cut"
+      ];
 
       function setup3dhop() {
         presenter = new Presenter("draw-canvas");
@@ -366,9 +370,13 @@
             christ:   { url: "assets/models/christ_cut.nxz" },
             falconer: { url: "assets/models/falconer_cut.nxz" },
 
-            baby:  { url: "assets/models/baby.nxz" },
-            jesus: { url: "assets/models/jesus.nxz" },
-            raven: { url: "assets/models/raven.nxz" }
+            north_top_vine:  { url: "assets/models/north_top_vine_cut.nxz" },
+            north_upper_inter: { url: "assets/models/north_upper_inter_cut.nxz" },
+            north_checkers: { url: "assets/models/north_checkers_cut.nxz" },
+            north_lower_inter: { url: "assets/models/north_lower_inter_cut.nxz" },
+            north_bot_vine:    { url: "assets/models/north_bot_vine_cut.nxz" },
+
+            vine_cut: { url: "assets/models/vine_cut.nxz" }
           },
 
           modelInstances: {
@@ -379,84 +387,105 @@
             }
           },
 
-          spots: {
-            south_top_inter: {
-              mesh: "south_top_inter",
-              visible: false,
-              alpha: 0.65,
-              color: [0.0, 0.25, 1.0]
-            },
-
-            south_sundial: {
-              mesh: "south_sundial",
-              visible: false,
-              alpha: 0.65,
-              color: [0.0, 0.25, 1.0]
-            },
-
-            south_mid_inter: {
-              mesh: "south_mid_inter",
-              visible: false,
-              alpha: 0.65,
-              color: [0.0, 0.25, 1.0]
-            },
-
-            south_low_vine: {
-              mesh: "south_low_vine",
-              visible: false,
-              alpha: 0.65,
-              color: [0.0, 0.25, 1.0]
-            },
-
-            south_bot_inter: {
-              mesh: "south_bot_inter",
-              visible: false,
-              alpha: 0.65,
-              color: [0.0, 0.25, 1.0]
-            },
-
-            agnus: {
-              mesh: "agnus",
-              visible: false,
-              alpha: 0.65,
-              color: [0.0, 0.25, 1.0]
-            },
-
-            christ: {
-              mesh: "christ",
-              visible: false,
-              alpha: 0.65,
-              color: [0.0, 0.25, 1.0]
-            },
-
-            falconer: {
-              mesh: "falconer",
-              visible: false,
-              alpha: 0.65,
-              color: [0.0, 0.25, 1.0]
-            },
-
-            baby: {
-              mesh: "baby",
-              visible: false,
-              alpha: 0.65,
-              color: [0.0, 0.25, 1.0]
-            },
-
-            jesus: {
-              mesh: "jesus",
-              visible: false,
-              alpha: 0.65,
-              color: [0.0, 0.25, 1.0]
-            },
-
-            raven: {
-              mesh: "raven",
-              visible: false,
-              alpha: 0.65,
-              color: [0.0, 0.25, 1.0]
-            }
+        spots: {
+          south_top_inter: {
+            mesh: "south_top_inter",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
           },
+
+          south_sundial: {
+            mesh: "south_sundial",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          },
+
+          south_mid_inter: {
+            mesh: "south_mid_inter",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          },
+
+          south_low_vine: {
+            mesh: "south_low_vine",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          },
+
+          south_bot_inter: {
+            mesh: "south_bot_inter",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          },
+
+          agnus: {
+            mesh: "agnus",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          },
+
+          christ: {
+            mesh: "christ",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          },
+
+          falconer: {
+            mesh: "falconer",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          },
+
+          north_top_vine: {
+            mesh: "north_top_vine",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          },
+
+          north_upper_inter: {
+            mesh: "north_upper_inter",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          },
+
+          north_checkers: {
+            mesh: "north_checkers",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          },
+
+          north_lower_inter: {
+            mesh: "north_lower_inter",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          },
+
+          north_bot_vine: {
+            mesh: "north_bot_vine",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          },
+
+          vine_cut: {
+            mesh: "vine_cut",
+            visible: false,
+            alpha: 0.65,
+            color: [0.0, 0.25, 1.0]
+          }
+        },
 
           trackball: {
             type: TurntablePanTrackball,
@@ -530,13 +559,17 @@
         south_low_vine: "front",
         south_bot_inter: "front",
 
-        agnus: "right",
-        christ: "right",
-        falconer: "right",
+        agnus: "left",
+        christ: "left",
+        falconer: "left",
 
-        baby: "right",
-        jesus: "right",
-        raven: "right"
+        north_top_vine: "back",
+        north_upper_inter: "back",
+        north_checkers: "back",
+        north_lower_inter: "back",
+        north_bot_vine: "back",
+
+        vine_cut: "right"
       };
 
       function highlightPanel(id) {
