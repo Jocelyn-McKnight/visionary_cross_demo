@@ -189,7 +189,7 @@
           },
  
           modelInstances: {
-            Ruthwell: {
+            ruthwell: {
               mesh: "Ruthwell",
               color: [0.8, 0.7, 0.75],
               visible: true
@@ -251,8 +251,8 @@
 
         setTimeout(function () {
             var my_pos = presenter.getTrackballPosition();
-            my_pos[2] = PANEL_ZOOM;   // distance
-            my_pos[4] = PANEL_PAN_Y;  // vertical pan
+            my_pos[2] = PANEL_ZOOM; 0.5
+            my_pos[4] = PANEL_PAN_Y; 2.5
             presenter.animateToTrackballPosition(my_pos);
         }, 400);
 
