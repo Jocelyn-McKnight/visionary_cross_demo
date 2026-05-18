@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>St. John with Eagle — Ruthwell</title>
+  <title>Archer — Ruthwell</title>
  
   <link rel="stylesheet" href="../../../main.css" />
   <link rel="stylesheet" href="../../../3dhop/stylesheet/3dhop.css" />
@@ -134,35 +134,30 @@
             <a href="../model.html" class="back-link">← Back to Ruthwell Model</a>
           </nav>
  
-          <h2>St. John with Eagle</h2>
+          <h2>Archer</h2>
           <p class="panel-location"><em>South Face</em></p>
  
           <div class="panel-description">
             <p>
-              John the Evangelist with his symbol: The Evangelist and his symbol, the eagle, face each other. Their 
-              pose, as well as the large size of the eagle in comparison to the evangelist, is intended to convey 
-              the divine inspiration passed to the human evangelist through his symbol. John appears to be seated. 
-              He reaches out towards his symbol with his left hand, which possibly supports a scroll or book. Traces 
-              of an inscription survive. The letters INP run upwards within the left border of the panel, while the 
-              letters BVM run downwards in the lower corner of the right border. They can most likely be reconstructed 
-              as the beginning and end of the Latin phrase ‘In principio erat verbum’ (In the beginning was the word), 
-              the opening line of John’s gospel.
-            </p>
-            <p>
-	          This panel originally faced the other way, capping the west face of the Cross. It was placed back 
-              to front when the cross was reconstructed by the Rev Henry Duncan in 1823.
+              The lower arm of the cross-head contains an archer drawing back his bow, possibly firing an arrow at 
+              the eagle originally positioned at the top of this face of the cross (see west face). A square pouch 
+              hangs from a strap below his right arm. It may be meant to represent a quiver, though it has also been 
+              suggested that it is a book satchel and that the archer should be understood as firing arrows of 
+              scripture. The archer’s cloak flies out behind him emphasizing his dynamic pose and the force of his 
+              movement. The panel may relate to the words of the poem inscribed on the left border of the south face, 
+              where the cross describes itself as ‘wounded with arrows’.
             </p>
           </div>
  
             <nav class="panel-nav-bottom" aria-label="Panel navigation">
-            <a href="east.html" class="panel-nav-card prev-link">
+            <a href="crossbar.html" class="panel-nav-card prev-link">
                 <span class="panel-nav-label">Previous Panel</span>
-                <span class="panel-nav-title">← East Vinescroll</span>
+                <span class="panel-nav-title">← Crossbar</span>
             </a>
 
-            <a href="crossbar.html" class="panel-nav-card next-link">
+            <a href="visitation.html" class="panel-nav-card next-link">
                 <span class="panel-nav-label">Next Panel</span>
-                <span class="panel-nav-title">Cross Bar →</span>
+                <span class="panel-nav-title">Visitation →</span>
             </a>
             </nav>
         </section>
@@ -172,10 +167,8 @@
     <script>
       var presenter = null;
 
-      var PANEL_ID = "john_eagle";
+      var PANEL_ID = "visitation";
       var PANEL_FACE = "front";
-      var PANEL_PAN_Y = 0.0;  // tune per panel: positive = pan up toward top of cross
-      var PANEL_ZOOM = 0.6;   // lower = closer
  
       function setup3dhop() {
         presenter = new Presenter("draw-canvas");
@@ -184,12 +177,12 @@
           meshes: {
             Ruthwell: { url: "../assets/models/ruthwell.nxz" },
  
-            john_eagle: { url: "../assets/models/john_eagle_cut.nxz" },
+            john_eagle: { url: "../assets/models/visitation_cut.nxz" },
 
           },
  
           modelInstances: {
-            Ruthwell: {
+            bewcastle: {
               mesh: "Ruthwell",
               color: [0.8, 0.7, 0.75],
               visible: true
@@ -197,7 +190,7 @@
           },
  
           spots: {
-            john_eagle: { mesh: "john_eagle", visible: false, alpha: 0.85, color: [0.0, 0.25, 1.0] }
+            john_eagle:   { mesh: "visitation",   visible: false, alpha: 0.65, color: [0.0, 0.25, 1.0] }
           },
  
           trackball: {
@@ -243,21 +236,22 @@
         presenter.animateToTrackballPosition(my_pos);
       }
  
-        function highlightThisPanel() {
+      // Highlight this panel's hotspot and zoom in
+      function highlightThisPanel() {
         if (!presenter) return;
-
+ 
         presenter.setSpotVisibilityByName(PANEL_ID, true, true);
         faceDirection(PANEL_FACE);
-
+ 
+        // Zoom in on the highlighted spot
         setTimeout(function () {
-            var my_pos = presenter.getTrackballPosition();
-            my_pos[2] = PANEL_ZOOM;   // distance
-            my_pos[4] = PANEL_PAN_Y;  // vertical pan
-            presenter.animateToTrackballPosition(my_pos);
+          var my_pos = presenter.getTrackballPosition();
+          my_pos[5] = 0.6;  // distance — lower number = closer zoom
+          presenter.animateToTrackballPosition(my_pos);
         }, 400);
-
+ 
         presenter.repaint();
-        }
+      }
  
       function toggleFullscreen() {
         var el = document.getElementById("3dhop");
