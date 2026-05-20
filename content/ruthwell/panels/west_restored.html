@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Annunciation — Ruthwell</title>
+  <title>West Restored — Ruthwell</title>
 
   <link rel="stylesheet" href="../../../main.css" />
   <link rel="stylesheet" href="../../../3dhop/stylesheet/3dhop.css" />
@@ -134,34 +134,27 @@
             <a href="../model.html" class="back-link">← Back to Ruthwell Model</a>
           </nav>
 
-          <h2>Annunciation</h2>
-          <p class="panel-location"><em>South Face</em></p>
+          <h2>West Restored</h2>
+          <p class="panel-location"><em>West Face</em></p>
 
           <div class="panel-description">
             <p>
-              (Luke 1:28) The archangel Gabriel seems to be entering at the left of the panel from a space outside the cross. The lower part of 
-              his robe flutters behind him, and both it and his right foot appear to overlap the panel’s left border. On the right, the Virgin 
-              Mary, facing out at us, holds on to her robe with her right hand as she shrinks slightly away from the angel in humility. Both 
-              figures are tall, elegant and finely carved, making this one of the most classicizing of the cross’s panels. The hole in the centre 
-              of the panel may be a relic cavity (perhaps for a relic of the True Cross), or it may have been made at some point during the 
-              toppling of the cross, or during its restoration and reconstruction.
-            </p>
-            <p>
-	            All that remains of the inscription in the border are the letters ‘+ INGRESSVS ANG’ (across the top border), and ‘TE […] BE 
-              (down the left border). It has been reconstructed as ‘Ingressus angelus ad eam dixit ave gratia plena dominus tecum benedicta tu 
-              in mulieribus’ (Entering the angel said to her: “Hail full of grace, the Lord is with you; blessed are you among women”.)
+              Two branches of inhabited vine-scroll (symbolic of the faithful partaking of the eucharist) spiral to enclose a squirrel-like creature at 
+              top and a bird at bottom. The inhabited vine-scroll is symbolic of both the tree-of-life and of the faithful partaking of the eucharist. 
+              The two blocks beneath this stone were added during reconstruction. There appears to have been an inscription in the border of this 
+              section of the shaft, but it is no longer legible.
             </p>
           </div>
 
             <nav class="panel-nav-bottom" aria-label="Panel navigation">
-            <a href="blind.html" class="panel-nav-card prev-link">
+            <a href="west.html" class="panel-nav-card prev-link">
                 <span class="panel-nav-label">Previous Panel</span>
-                <span class="panel-nav-title">← Man Born Blind</span>
+                <span class="panel-nav-title">← West Vinescroll</span>
             </a>
 
-            <a href="crucifixion.html" class="panel-nav-card next-link">
+            <a href="eagle.html" class="panel-nav-card next-link">
                 <span class="panel-nav-label">Next Panel</span>
-                <span class="panel-nav-title">Crucifixion →</span>
+                <span class="panel-nav-title">Eagle →</span>
             </a>
             </nav>
         </section>
@@ -171,8 +164,8 @@
     <script>
       var presenter = null;
 
-      var PANEL_ID = "annunciation";
-      var PANEL_FACE = "front";
+      var PANEL_ID = "west";
+      var PANEL_FACE = "left";
 
       function setup3dhop() {
         presenter = new Presenter("draw-canvas");
@@ -181,7 +174,7 @@
           meshes: {
             Ruthwell: { url: "../assets/models/ruthwell.nxz" },
 
-            annunciation: { url: "../assets/models/annunciation_cut.nxz" },
+            west: { url: "../assets/models/west_cut.nxz" },
 
           },
 
@@ -194,7 +187,7 @@
           },
 
           spots: {
-            annunciation: { mesh: "annunciation", visible: false, alpha: 0.85, color: [0.0, 0.25, 1.0] }
+            west: { mesh: "west", visible: false, alpha: 0.85, color: [0.0, 0.25, 1.0] }
           },
 
           trackball: {
