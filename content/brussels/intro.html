@@ -9,75 +9,133 @@
 </head>
     
 <body>
-<header class="header">
-  <!-- Hamburger menu toggle -->
-  <input type="checkbox" id="menu-toggle" class="menu-toggle">
-  <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
-
-  <!-- Hidden dropdown menu -->
-  <div class="hamburger-menu">
-    <a href="../frontmatter/home.html">Home</a>
-    <a href="../ruthwell/intro.html">Ruthwell</a>
-    <a href="../bewcastle/intro.html">Bewcastle</a>
-
-<div class="submenu-wrapper">
-  <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
-  <label for="submenu-toggle" class="submenu-label">Brussels</label>
-  <div class="submenu">
-    <a href="intro.html">Introduction</a>
-    <a href="model.html">Model</a>
-    <a href="ch1.html">About the Cross</a>
-    <a href="ch2.html">About the Scan</a>
-  </div>
-</div>
-      
-    <a href="../backmatter/table.html">Table of Contents</a>
-  </div>
-    
-  <a href="../backmatter/table.html">
-    <img src="assests/img/head.jpg" alt="Project Image" title="The Brussels Cross">
-    <p class="header-text">Brussels</p>
-  </a>
-
-</header>
-    
-    <!-- Main Container for Left and Right Columns -->
-    <div class="container"> 
-    <div class="left">
-        <a href="https://vcg.isti.cnr.it/activities/visionarycross/crosses/bruxelles.html" target="_blank" class="image-container">
-          <img src="assests/img/brussels.png" alt="Project Image" class="hover-image">
-        <span class="hover-text">Visit 3D model</span>
+  <header class="header">
+    <a href="../../content/frontmatter/home.html">
+      <img src="assets/img/head.jpg" alt="">
+      <div class="header-text">Brussels</div>
     </a>
+  </header>
+
+  <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+<nav class="landing-nav" aria-label="Main navigation">
+    <a href="../../content/frontmatter/home.html">Home</a>
+    <a href="../../content/ruthwell/intro.html">Ruthwell</a>
+    <a href="../../content/bewcastle/intro.html">Bewcastle</a>
+    <a href="../../content/brussels/intro.html">Brussels</a>
+
+    <label for="menu-toggle" class="menu-link">
+      Menu ☰
+    </label>
+  </nav>
+
+  <nav class="landing-menu" aria-label="Expanded menu">
+
+    <section>
+      <input type="checkbox" id="frontmatter-toggle" class="submenu-toggle">
+      <label for="frontmatter-toggle" class="submenu-label">Frontmatter</label>
+      <div class="submenu">
+        <a href="../../content/frontmatter/home.html">Home</a>
+        <a href="../../content/frontmatter/history.html">History of the Project</a>
+        <a href="../../content/frontmatter/connections.html">Connections Between Crosses</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="ruthwell-toggle" class="submenu-toggle">
+      <label for="ruthwell-toggle" class="submenu-label">Ruthwell</label>
+      <div class="submenu">
+        <a href="../../content/ruthwell/intro.html">Introduction</a>
+        <a href="../../content/ruthwell/model.html">Ruthwell Model</a>
+        <a href="../../content/ruthwell/history.html">History of The Ruthwell Cross</a>
+        <a href="../../content/ruthwell/iconography.html">Iconography of the Ruthwell Cross</a>
+        <a href="../../content/ruthwell/scan.html">Scanning Ruthwell</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="bewcastle-toggle" class="submenu-toggle">
+      <label for="bewcastle-toggle" class="submenu-label">Bewcastle</label>
+      <div class="submenu">
+        <a href="../../content/bewcastle/intro.html">Introduction</a>
+        <a href="../../content/bewcastle/model.html">Bewcastle Model</a>
+        <a href="../../content/bewcastle/scan.html">Scanning Bewcastle</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="brussels-toggle" class="submenu-toggle">
+      <label for="brussels-toggle" class="submenu-label">Brussels</label>
+      <div class="submenu">
+        <a href="../../content/brussels/intro.html">Introduction</a>
+        <a href="../../content/brussels/model.html">Brussels Model</a>
+        <a href="../../content/brussels/scan.html">Scanning Brussels</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="backmatter-toggle" class="submenu-toggle">
+      <label for="backmatter-toggle" class="submenu-label">Backmatter</label>
+      <div class="submenu">
+        <a href="../../content/backmatter/table.html">Table of Contents</a>
+        <a href="../../content/backmatter/research.html">Research &amp; Media</a>
+        <a href="../../content/backmatter/glossary.html">Glossary</a>
+        <a href="../../content/backmatter/contact.html">Contact</a>
+      </div>
+    </section>
+
+  </nav>
+
+  <main>
+  <div class="container">
+
+    <div class="left">       
+      <a href="https://vcg.isti.cnr.it/activities/visionarycross/crosses/bruxelles.html" target="_blank" class="image-container">
+        <img src="assets/img/brussels.png" alt="Brussels Cross model" class="hover-image">
+        <span class="hover-text">Visit 3D model</span>
+      </a>
     </div>
 
-        <!-- Right Section for Navigation and Project Info -->
-        <div class="right">
-                <h1>Brussels Cross</h1>
-                <p>This is a beta version of 
-                    <a href="https://vcg.isti.cnr.it/activities/visionarycross/crosses/bruxelles.html" target="_blank">The Brussels Cross</a> edition published by the Visionary Cross project by means of the 3DHOP viewer. This edition is intended for use by students, teachers, and members of the public who are interested in exploring the cross and learning more about it. The final version will contain tools required for more advanced applications. Should you encounter any bugs, glitches, lack of functionality, or other problems on the website, please let us know immediately by writing an email to visionarycrossproject@gmail.com. Your help in this regard is greatly appreciated.</p>
-                
-                <p><strong>CREDITS</strong></p>
-                <p>Project direction<br>
-                Prof. Daniel Paul O'Donnell, University of Lethbridge<br>
-                Prof. Roberto Rosselli Del Turco, University of Torino</p>
-                
-                <p><strong>ISTI research support</strong><br>
-                Marco Callieri, CNR/ISTI</p>
+    <div class="right">
+      <div class="info">
+        <h1>Brussels Cross</h1>
 
-                <p><strong>3DHOP customization</strong><br>
-                Jurgen Memaj, University of Pisa</p>
-            </div>
-        </div>
+        <p> 
+          A large version of <a href="https://vcg.isti.cnr.it/activities/visionarycross/crosses/bruxelles.html" target="_blank">The Brussels Cross</a> 
+          is hosted by ISTI CNR through 3DHOP viewer. This model is intended for use by students, teachers, 
+          and members of the public who are interested in exploring the cross and learning more about it. Should you 
+          encounter any bugs, glitches, lack of functionality, or other problems on the website, please let us know 
+          immediately by writing an email to jocelyn.mcknight@uleth.ca. Your help in this regard is greatly appreciated.
+        </p>
+                      
+        <h2>Credits</h2>
+
+        <p>Project direction<br>
+          Prof. Daniel Paul O'Donnell, University of Lethbridge<br>
+          Prof. Roberto Rosselli Del Turco, University of Torino
+        </p>
+
+        <p>Research Assistant<br>
+          Jocelyn McKnight
+        </p>
+              
+        <p>ISTI research support<br>
+          Marco Callieri, CNR/ISTI
+        </p>
+      </div>
     </div>
 
-<div class="footer">
-    <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
+  </div>
+</main>
+
+  <div class="footer">
+    <p>&copy; 2026 Visionary Cross Project. All Rights Reserved.</p>
     <nav>
-        <a href="../frontmatter/history.html">Us</a> |
-        <a href="../backmattercontact.html">Contact</a> |
-        <a href="privacy.html">Privacy Policy</a>
+      <a href="../frontmatter/history.html">About</a> |
+      <a href="../backmatter/contact.html">Contact</a> |
+      <a href="../frontmatter/home.html">Home</a>
     </nav>
-</div>
+  </div>
 
 </body>
 </html>

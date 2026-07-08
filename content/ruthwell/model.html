@@ -1,136 +1,1031 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Model</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruthwell</title>
 
-    <link rel="stylesheet" href="../../main.css">
-    <link rel="icon" type="image/x-icon" href="../../img/cross.ico">
+  <link rel="stylesheet" href="../../main.css" />
+  <link rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css" />
+  <link rel="icon" type="image/x-icon" href="../../img/cross.ico" />
 
-    <!-- 3DHOP stylesheet -->
-    <link type="text/css" rel="stylesheet" href="../../3dhop/stylesheet/3dhop.css"/>
+  <script src="../../3dhop/js/spidergl.js"></script>
+  <script src="../../3dhop/js/jquery.js"></script>
+  <script src="../../3dhop/js/presenter.js"></script>
+  <script src="../../3dhop/js/nexus.js"></script>
+  <script src="../../3dhop/js/ply.js"></script>
 
-    <!-- 3DHOP scripts -->
-    <script type="text/javascript" src="../../3dhop/js/spidergl.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/jquery.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/presenter.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/nexus.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/ply.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/trackball_sphere.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/trackball_turntable.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/trackball_turntable_pan.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/trackball_pantilt.js"></script>
-    <script type="text/javascript" src="../../3dhop/js/init.js"></script>
+  <script src="../../3dhop/js/trackball_sphere.js"></script>
+  <script src="../../3dhop/js/trackball_turntable.js"></script>
+  <script src="../../3dhop/js/trackball_turntable_pan.js"></script>
+  <script src="../../3dhop/js/trackball_pantilt.js"></script>
+
+  <script src="../../3dhop/js/init.js"></script>
 </head>
 
 <body>
+  <header class="header">
+    <a href="../../content/frontmatter/home.html">
+      <img src="assets/img/head.jpg" alt="">
+      <div class="header-text">Ruthwell</div>
+    </a>
+  </header>
 
-<header class="header">
     <input type="checkbox" id="menu-toggle" class="menu-toggle">
-    <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
 
-    <div class="hamburger-menu">
-        <a href="../frontmatter/home.html">Home</a>
+<nav class="landing-nav" aria-label="Main navigation">
+    <a href="../../content/frontmatter/home.html">Home</a>
+    <a href="../../content/ruthwell/intro.html">Ruthwell</a>
+    <a href="../../content/bewcastle/intro.html">Bewcastle</a>
+    <a href="../../content/brussels/intro.html">Brussels</a>
 
-        <div class="submenu-wrapper">
-            <input type="checkbox" id="submenu-toggle" class="submenu-toggle">
-            <label for="submenu-toggle" class="submenu-label">Ruthwell</label>
-            <div class="submenu">
-                <a href="intro.html">Introduction</a>
-                <a href="model.html">Model</a>
-                <a href="ch1.html">About the Cross</a>
-                <a href="ch2.html">About the Scan</a>
-            </div>
+    <label for="menu-toggle" class="menu-link">
+      Menu ☰
+    </label>
+  </nav>
+
+  <nav class="landing-menu" aria-label="Expanded menu">
+
+    <section>
+      <input type="checkbox" id="frontmatter-toggle" class="submenu-toggle">
+      <label for="frontmatter-toggle" class="submenu-label">Frontmatter</label>
+      <div class="submenu">
+        <a href="../../content/frontmatter/home.html">Home</a>
+        <a href="../../content/frontmatter/history.html">History of the Project</a>
+        <a href="../../content/frontmatter/connections.html">Connections Between Crosses</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="ruthwell-toggle" class="submenu-toggle">
+      <label for="ruthwell-toggle" class="submenu-label">Ruthwell</label>
+      <div class="submenu">
+        <a href="../../content/ruthwell/intro.html">Introduction</a>
+        <a href="../../content/ruthwell/model.html">Ruthwell Model</a>
+        <a href="../../content/ruthwell/history.html">History of The Ruthwell Cross</a>
+        <a href="../../content/ruthwell/iconography.html">Iconography of the Ruthwell Cross</a>
+        <a href="../../content/ruthwell/scan.html">Scanning Ruthwell</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="bewcastle-toggle" class="submenu-toggle">
+      <label for="bewcastle-toggle" class="submenu-label">Bewcastle</label>
+      <div class="submenu">
+        <a href="../../content/bewcastle/intro.html">Introduction</a>
+        <a href="../../content/bewcastle/model.html">Bewcastle Model</a>
+        <a href="../../content/bewcastle/scan.html">Scanning Bewcastle</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="brussels-toggle" class="submenu-toggle">
+      <label for="brussels-toggle" class="submenu-label">Brussels</label>
+      <div class="submenu">
+        <a href="../../content/brussels/intro.html">Introduction</a>
+        <a href="../../content/brussels/model.html">Brussels Model</a>
+        <a href="../../content/brussels/scan.html">Scanning Brussels</a>
+      </div>
+    </section>
+
+    <section>
+      <input type="checkbox" id="backmatter-toggle" class="submenu-toggle">
+      <label for="backmatter-toggle" class="submenu-label">Backmatter</label>
+      <div class="submenu">
+        <a href="../../content/backmatter/table.html">Table of Contents</a>
+        <a href="../../content/backmatter/research.html">Research &amp; Media</a>
+        <a href="../../content/backmatter/glossary.html">Glossary</a>
+        <a href="../../content/backmatter/contact.html">Contact</a>
+      </div>
+    </section>
+
+  </nav>
+
+<main>
+  <div class="viewer-layout">
+    <div id="viewerWrap">
+      <div id="3dhop" class="tdhop" onmousedown="if (event.preventDefault) event.preventDefault()">
+        <div id="tdhlg"></div>
+
+        <div id="toolbar">
+          <img id="home" title="Clear State" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
+          <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
+          <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
+          <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
+          <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
+          <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
         </div>
 
-        <a href="../bewcastle/intro.html">Bewcastle</a>
-        <a href="../brussels/intro.html">Brussels</a>
-        <a href="../backmatter/table.html">Table of Contents</a>
+        <div id="loadingOverlay">
+          <div class="loading-box">
+            <div class="spinner"></div>
+            <p id="loadingText">Loading model…</p>
+          </div>
+        </div>
+
+        <div id="movePad" aria-label="Move view">
+          <table id="mvc_table">
+            <tbody>
+              <tr>
+                <td>
+                  <img class="move_ up" id="move_up" title="Move Up" src="assets/img/Arrow.png" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img class="move_ down" id="move_down" title="Move Down" src="assets/img/Arrow.png" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <button id="fullscreen-btn" title="Toggle Full Screen" onclick="toggleFullscreen()">
+          <img src="../../3dhop/skins/dark/full.png" alt="Full Screen" />
+        </button>
+
+        <canvas id="draw-canvas"></canvas>
+      </div>
     </div>
 
-    <a href="../backmatter/table.html">
-        <img src="assets/img/head.jpg" alt="Project Image" title="The Ruthwell Cross">
-        <p class="header-text">Ruthwell</p>
-    </a>
-</header>
+<aside id="infoPanel">
+  <div class="side-tabs">
+    <button class="tab-button active" type="button" onclick="openInfoTab('panels')">
+      Panels
+    </button>
 
-<div id="3dhop" class="tdhop">
-    <div id="tdhlg"></div>
+    <button class="tab-button" type="button" onclick="openInfoTab('poem')">
+      Runes
+    </button>
+  </div>
 
-    <div id="toolbar">
-        <img id="home" title="Home" src="../../3dhop/skins/dark/home.png" onclick="actionsToolbar('home')" /><br/>
-        <img id="zoomin" title="Zoom In" src="../../3dhop/skins/dark/zoomin.png" onclick="actionsToolbar('zoomin')" /><br/>
-        <img id="zoomout" title="Zoom Out" src="../../3dhop/skins/dark/zoomout.png" onclick="actionsToolbar('zoomout')" /><br/>
-        <img id="light" title="Enable Light Control" src="../../3dhop/skins/dark/lightcontrol.png" onclick="actionsToolbar('light')" /><br/>
-        <img id="screenshot" title="Save Screenshot" src="../../3dhop/skins/dark/screenshot.png" onclick="actionsToolbar('screenshot')" /><br/>
-        <img id="full" title="Full Screen" src="../../3dhop/skins/dark/full.png" onclick="actionsToolbar('full')" />
-    </div>
+  <div id="panels-content" class="tab-content active">
+    <section class="panel-section">
+      <h2>Ruthwell Cross</h2>
 
-    <canvas id="draw-canvas"
-        style="width: 100%; height: 100%; background-image: url(../../3dhop/skins/backgrounds/light.jpg)">
-    </canvas>
-</div>
+      <p class="panel-intro">
+        Select a direction to turn the model. Select a panel name to highlight it on the cross.
+      </p>
 
-<script type="text/javascript">
-  var presenter = null;
+      <div class="direction-row">
+        <button class="direction-card active" type="button" data-direction="front" onclick="setActiveDirection('front')">
+          <span>Front</span>
+        </button>
 
-  async function setup3dhop() {
-    presenter = new Presenter("draw-canvas");
+        <button class="direction-card" type="button" data-direction="back" onclick="setActiveDirection('back')">
+          <span>Back</span>
+        </button>
 
-    const zenodoUrl = "https://zenodo.org/records/17794756/files/Raven_Ruthwell_Cross_small.nxs";
+        <button class="direction-card" type="button" data-direction="left" onclick="setActiveDirection('left')">
+          <span>Left</span>
+        </button>
 
-    const response = await fetch(zenodoUrl, { mode: "no-cors" });
-    const blob = await response.blob();
-    const localUrl = URL.createObjectURL(blob);
+        <button class="direction-card" type="button" data-direction="right" onclick="setActiveDirection('right')">
+          <span>Right</span>
+        </button>
+      </div>
+    </section>
 
-    presenter.setScene({
-      meshes: {
-        "mesh_1": { url: localUrl }
+    <section class="panel-section">
+      <div class="panel-links">
+        <div class="panel-item" data-panel-id="none">
+          <button type="button" class="panel-name" onclick="clearPanelSelection()">
+            None
+          </button>
+          <p>Clear the selected highlight.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-section">
+      <h3>South Panels</h3>
+
+      <div class="panel-links">
+        <div class="panel-item" data-panel-id="john_eagle">
+          <button type="button" class="panel-name" onclick="highlightPanel('john_eagle')" onmouseover="hoverPanel('john_eagle')" onmouseout="unhoverPanel()">
+            St. John with Eagle
+          </button>
+          <p>Click <a href="panels/john_eagle.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="whale">
+          <button type="button" class="panel-name" onclick="highlightPanel('whale')" onmouseover="hoverPanel('whale')" onmouseout="unhoverPanel()">
+            Whale
+          </button>
+          <p>Click <a href="panels/crossbar.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="snake">
+          <button type="button" class="panel-name" onclick="highlightPanel('snake')" onmouseover="hoverPanel('snake')" onmouseout="unhoverPanel()">
+            Snake with Wings
+          </button>
+          <p>Click <a href="panels/crossbar.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="archer">
+          <button type="button" class="panel-name" onclick="highlightPanel('archer')" onmouseover="hoverPanel('archer')" onmouseout="unhoverPanel()">
+            Archer
+          </button>
+          <p>Click <a href="panels/archer.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="visitation">
+          <button type="button" class="panel-name" onclick="highlightPanel('visitation')" onmouseover="hoverPanel('visitation')" onmouseout="unhoverPanel()">
+            Visitation
+          </button>
+          <p>Click <a href="panels/visitation.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="magdalene">
+          <button type="button" class="panel-name" onclick="highlightPanel('magdalene')" onmouseover="hoverPanel('magdalene')" onmouseout="unhoverPanel()">
+            Magdalene
+          </button>
+          <p>Click <a href="panels/magdalene.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="blind">
+          <button type="button" class="panel-name" onclick="highlightPanel('blind')" onmouseover="hoverPanel('blind')" onmouseout="unhoverPanel()">
+            Man Born Blind
+          </button>
+          <p>Click <a href="panels/blind.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="annunciation">
+          <button type="button" class="panel-name" onclick="highlightPanel('annunciation')" onmouseover="hoverPanel('annunciation')" onmouseout="unhoverPanel()">
+            Annunciation
+          </button>
+          <p>Click <a href="panels/annunciation.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="crucifixion">
+          <button type="button" class="panel-name" onclick="highlightPanel('crucifixion')" onmouseover="hoverPanel('crucifixion')" onmouseout="unhoverPanel()">
+            Crucifixion
+          </button>
+          <p>Click <a href="panels/crucifixion.html">here</a> to view in detail.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-section">
+      <h3>West Panels</h3>
+
+      <div class="panel-links">
+        <div class="panel-item" data-panel-id="west">
+          <button type="button" class="panel-name" onclick="highlightPanel('west')" onmouseover="hoverPanel('west')" onmouseout="unhoverPanel()">
+            West Vinescroll
+          </button>
+          <p>Click <a href="panels/west.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="west">
+          <button type="button" class="panel-name" onclick="highlightPanel('west')" onmouseover="hoverPanel('west')" onmouseout="unhoverPanel()">
+            West Restored
+          </button>
+          <p>Click <a href="panels/west_restored.html">here</a> to view in detail.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-section">
+      <h3>North Panels</h3>
+
+      <div class="panel-links">
+        <div class="panel-item" data-panel-id="eagle">
+          <button type="button" class="panel-name" onclick="highlightPanel('eagle')" onmouseover="hoverPanel('eagle')" onmouseout="unhoverPanel()">
+            Eagle
+          </button>
+          <p>Click <a href="panels/eagle.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="rooster">
+          <button type="button" class="panel-name" onclick="highlightPanel('rooster')" onmouseover="hoverPanel('rooster')" onmouseout="unhoverPanel()">
+            Rooster
+          </button>
+          <p>Click <a href="panels/crossbar.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="lamb">
+          <button type="button" class="panel-name" onclick="highlightPanel('lamb')" onmouseover="hoverPanel('lamb')" onmouseout="unhoverPanel()">
+            Lamb
+          </button>
+          <p>Click <a href="panels/crossbar.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="matthew">
+          <button type="button" class="panel-name" onclick="highlightPanel('matthew')" onmouseover="hoverPanel('matthew')" onmouseout="unhoverPanel()">
+            St. Matthew and Angel
+          </button>
+          <p>Click <a href="panels/matthew.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="john">
+          <button type="button" class="panel-name" onclick="highlightPanel('john')" onmouseover="hoverPanel('john')" onmouseout="unhoverPanel()">
+            St. John the Baptist
+          </button>
+          <p>Click <a href="panels/john.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="christ">
+          <button type="button" class="panel-name" onclick="highlightPanel('christ')" onmouseover="hoverPanel('christ')" onmouseout="unhoverPanel()">
+            Christ in Glory
+          </button>
+          <p>Click <a href="panels/christ.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="paul_antony">
+          <button type="button" class="panel-name" onclick="highlightPanel('paul_antony')" onmouseover="hoverPanel('paul_antony')" onmouseout="unhoverPanel()">
+            St. Paul and St. Antony
+          </button>
+          <p>Click <a href="panels/paul_antony.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="egypt">
+          <button type="button" class="panel-name" onclick="highlightPanel('egypt')" onmouseover="hoverPanel('egypt')" onmouseout="unhoverPanel()">
+            Flight into Egypt: Matthew
+          </button>
+          <p>Click <a href="panels/egypt_cut.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="nativity">
+          <button type="button" class="panel-name" onclick="highlightPanel('nativity')" onmouseover="hoverPanel('nativity')" onmouseout="unhoverPanel()">
+            Nativity
+          </button>
+          <p>Click <a href="panels/nativity.html">here</a> to view in detail.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel-section">
+      <h3>East Panels</h3>
+
+      <div class="panel-links">
+        <div class="panel-item" data-panel-id="east">
+          <button type="button" class="panel-name" onclick="highlightPanel('east')" onmouseover="hoverPanel('east')" onmouseout="unhoverPanel()">
+            East Vinescroll
+          </button>
+          <p>Click <a href="panels/east.html">here</a> to view in detail.</p>
+        </div>
+
+        <div class="panel-item" data-panel-id="east">
+          <button type="button" class="panel-name" onclick="highlightPanel('east')" onmouseover="hoverPanel('east')" onmouseout="unhoverPanel()">
+            East Restored
+          </button>
+          <p>Click <a href="panels/east_restored.html">here</a> to view in detail.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="poem-content" class="tab-content">
+    <section class="panel-section">
+      <h2>The Poem</h2>
+
+      <p>
+        This section can contain the poetic inscription, transcription, translation, or commentary.
+      </p>
+    </section>
+  </div>
+</aside>
+  </div>
+
+  <script>
+    var presenter = null;
+    var activeSpot = null;
+
+    var spotIds = [
+      "annunciation",
+      "archer",
+      "blind",
+      "christ",
+      "crucifixion",
+      "eagle",
+      "east",
+      "egypt",
+      "john",
+      "john_eagle",
+      "lamb",
+      "magdalene",
+      "matthew",
+      "nativity",
+      "paul_antony",
+      "rooster",
+      "snake",
+      "visitation",
+      "west",
+      "whale"
+    ];
+
+function setup3dhop() {
+  presenter = new Presenter("draw-canvas");
+
+  presenter.setScene({
+    meshes: {
+      ruthwell: {
+        url: "assets/models/ruthwell.nxz"
       },
-      modelInstances: {
-        "model_1": {
-          mesh: "mesh_1",
-          color: [1.0, 1.0, 1.0]
-        }
+
+      annunciation: {
+        url: "assets/models/annunciation_cut.nxz"
       },
-      trackball: {
-        type: TurnTableTrackball,
-        trackOptions: {
-          startDistance: 3.0,
-          minMaxDist: [1.0, 5.0],
-          minMaxPhi: [-180, 180],
-          minMaxTheta: [-30.0, 70.0]
-        }
+
+      archer: {
+        url: "assets/models/archer_cut.nxz"
+      },
+
+      blind: {
+        url: "assets/models/blind_cut.nxz"
+      },
+
+      christ: {
+        url: "assets/models/christ_cut.nxz"
+      },
+
+      crucifixion: {
+        url: "assets/models/crucifixion_cut.nxz"
+      },
+
+      eagle: {
+        url: "assets/models/eagle_cut.nxz"
+      },
+
+      east: {
+        url: "assets/models/east_cut.nxz"
+      },
+
+      egypt: {
+        url: "assets/models/egypt_cut.nxz"
+      },
+
+      john: {
+        url: "assets/models/john_cut.nxz"
+      },
+
+      john_eagle: {
+        url: "assets/models/john_eagle_cut.nxz"
+      },
+
+      lamb: {
+        url: "assets/models/lamb_cut.nxz"
+      },
+
+      magdalene: {
+        url: "assets/models/magdalene_cut.nxz"
+      },
+
+      matthew: {
+        url: "assets/models/matthew_cut.nxz"
+      },
+
+      nativity: {
+        url: "assets/models/nativity_cut.nxz"
+      },
+
+      paul_antony: {
+        url: "assets/models/paul_antony_cut.nxz"
+      },
+
+      rooster: {
+        url: "assets/models/rooster_cut.nxz"
+      },
+
+      snake: {
+        url: "assets/models/snake_cut.nxz"
+      },
+
+      visitation: {
+        url: "assets/models/visitation_cut.nxz"
+      },
+
+      west: {
+        url: "assets/models/west_cut.nxz"
+      },
+
+      whale: {
+        url: "assets/models/whale_cut.nxz"
       }
+    },
+
+    modelInstances: {
+      ruthwell: {
+        mesh: "ruthwell",
+        color: [0.8, 0.7, 0.75],
+        visible: true
+      }
+    },
+
+    spots: {
+      annunciation: {
+        mesh: "annunciation",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      archer: {
+        mesh: "archer",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      blind: {
+        mesh: "blind",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      christ: {
+        mesh: "christ",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      crucifixion: {
+        mesh: "crucifixion",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      eagle: {
+        mesh: "eagle",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      east: {
+        mesh: "east",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      egypt: {
+        mesh: "egypt",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      john: {
+        mesh: "john",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      john_eagle: {
+        mesh: "john_eagle",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      lamb: {
+        mesh: "lamb",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      magdalene: {
+        mesh: "magdalene",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      matthew: {
+        mesh: "matthew",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      nativity: {
+        mesh: "nativity",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      paul_antony: {
+        mesh: "paul_antony",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      rooster: {
+        mesh: "rooster",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      snake: {
+        mesh: "snake",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      visitation: {
+        mesh: "visitation",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      west: {
+        mesh: "west",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      },
+
+      whale: {
+        mesh: "whale",
+        visible: false,
+        alpha: 0.65,
+        color: [0.0, 0.25, 1.0]
+      }
+    },
+
+    trackball: {
+      type: TurntablePanTrackball,
+      trackOptions: {
+        startPhi: 0.0,
+        startTheta: 0.0,
+        startDistance: 2.0,
+        minMaxPhi: [-180, 180],
+        minMaxTheta: [-85.0, 85.0],
+        minMaxDist: [0.005, 140.0],
+        startPanX: 0.0,
+        startPanY: 0.0,
+        startPanZ: 0.0,
+        minMaxPanX: [-5.0, 5.0],
+        minMaxPanY: [-20.0, 20.0],
+        minMaxPanZ: [-5.0, 5.0]
+      }
+    }
+  });
+
+  presenter.enableOnHover(true);
+  presenter._onPickedSpot = onPickedSpot;
+  presenter._onEnterSpot = onEnterSpot;
+  presenter._onLeaveSpot = onLeaveSpot;
+
+  presenter.resetTrackball();
+  setTimeout(function () {
+    presenter.repaint();
+  }, 120);
+}
+
+function onEnterSpot(id) {
+  setActivePanelItem(id);
+}
+
+function onLeaveSpot(id) {
+  unhoverPanel();
+
+  if (activeSpot) {
+    setActivePanelItem(activeSpot);
+  } else {
+    clearActivePanelItem();
+  }
+}
+
+function clearHighlights() {
+  if (!presenter) return;
+
+  for (var i = 0; i < spotIds.length; i++) {
+    presenter.setSpotVisibilityByName(spotIds[i], false, false);
+  }
+
+  presenter.repaint();
+}
+
+function showHighlight(id) {
+  if (!presenter) return;
+
+  clearHighlights();
+
+  presenter.setSpotVisibilityByName(id, true, true);
+  presenter.enableOnHover(true);
+  presenter.repaint();
+}
+
+var panelToFace = {
+  john_eagle: "front",
+  whale: "front",
+  snake: "front",
+  archer: "front",
+  visitation: "front",
+  magdalene: "front",
+  blind: "front",
+  annunciation: "front",
+  crucifixion: "front",
+
+  west: "left",
+
+  eagle: "back",
+  rooster: "back",
+  lamb: "back",
+  matthew: "back",
+  john: "back",
+  christ: "back",
+  paul_antony: "back",
+  egypt: "back",
+  nativity: "back",
+
+  east: "right"
+};
+
+    function highlightPanel(id) {
+      activeSpot = id;
+      showHighlight(id);
+      setActivePanelItem(id);
+
+      var face = panelToFace[id];
+      if (face) {
+        // setActiveDirection rotates the model and writes the URL hash
+        setActiveDirection(face);
+      } else {
+        updateUrlState();
+      }
+    }
+
+    function clearPanelSelection() {
+      activeSpot = null;
+      clearHighlights();
+      clearActivePanelItem();
+
+      var noneItem = document.querySelector('[data-panel-id="none"]');
+      if (noneItem) noneItem.classList.add("active");
+
+      updateUrlState();
+    }
+
+    function clearActivePanelItem() {
+      var items = document.querySelectorAll(".panel-item");
+      items.forEach(function (item) {
+        item.classList.remove("active");
+      });
+    }
+
+    function hoverPanel(id) {
+      showHighlight(id);
+    }
+
+    function unhoverPanel() {
+      if (activeSpot) {
+        showHighlight(activeSpot);
+      } else {
+        clearHighlights();
+      }
+    }
+
+    function onPickedSpot(id) {
+      highlightPanel(id);
+    }
+
+    var activeFace = null;
+    var validFaces = ["front", "back", "left", "right"];
+
+    function faceDirection(direction) {
+      if (!presenter) return;
+
+      var my_pos = presenter.getTrackballPosition();
+
+      switch (direction) {
+        case "front":
+          my_pos[0] = 0;
+          break;
+        case "right":
+          my_pos[0] = 90;
+          break;
+        case "back":
+          my_pos[0] = 180;
+          break;
+        case "left":
+          my_pos[0] = -90;
+          break;
+        default:
+          return;
+      }
+
+      activeFace = direction;
+      presenter.animateToTrackballPosition(my_pos);
+      updateUrlState();
+    }
+
+    function updateUrlState() {
+      var parts = [];
+      if (activeFace) parts.push("face=" + encodeURIComponent(activeFace));
+      if (activeSpot) parts.push("panel=" + encodeURIComponent(activeSpot));
+      var hash = parts.length ? "#" + parts.join("&") : "";
+      // replaceState avoids polluting browser history on every click
+      history.replaceState(null, "", location.pathname + location.search + hash);
+    }
+
+    function clearAllState() {
+      activeFace = null;
+      activeSpot = null;
+      clearHighlights();
+      clearActivePanelItem();
+      var directionButtons = document.querySelectorAll(".direction-card");
+      directionButtons.forEach(function (b) { b.classList.remove("active"); });
+      if (presenter) presenter.resetTrackball();
+      updateUrlState();
+    }
+
+    function applyUrlState() {
+      if (!location.hash) return;
+      var params = {};
+      location.hash.replace(/^#/, "").split("&").forEach(function (kv) {
+        var pair = kv.split("=");
+        if (pair[0]) params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
+      });
+      if (params.face && validFaces.indexOf(params.face) !== -1) {
+        faceDirection(params.face);
+      }
+      if (params.panel && spotIds.indexOf(params.panel) !== -1) {
+        highlightPanel(params.panel);
+      }
+    }
+
+    function toggleFullscreen() {
+      var el = document.getElementById("3dhop");
+      var btn = document.querySelector("#fullscreen-btn img");
+      if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement) {
+        (document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen).call(document);
+        btn.src = "../../3dhop/skins/dark/full.png";
+        btn.alt = "Full Screen";
+      } else {
+        (el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen).call(el);
+        btn.src = "../../3dhop/skins/dark/full_on.png";
+        btn.alt = "Exit Full Screen";
+      }
+    }
+
+    function actionsToolbar(action) {
+      if (!presenter) return;
+
+      if (action === "home") clearAllState();
+      else if (action === "zoomin") presenter.zoomIn();
+      else if (action === "zoomout") presenter.zoomOut();
+      else if (action === "light") presenter.enableLightTrackball(!presenter.isLightTrackballEnabled());
+      else if (action === "screenshot") presenter.saveScreenshot();
+      else if (action === "full") presenter.fullscreen();
+      else if (
+        action === "move_up" ||
+        action === "move_down" ||
+        action === "move_left" ||
+        action === "move_right"
+      ) {
+        step(action);
+      }
+    }
+
+    function step(action) {
+      if (!presenter) return;
+
+      var my_pos = presenter.getTrackballPosition();
+      var vstep = 0.10;
+      var hstep = 0.10;
+
+      switch (action) {
+        case "move_up":
+          my_pos[3] += vstep;
+          presenter.animateToTrackballPosition(my_pos);
+          break;
+
+        case "move_down":
+          my_pos[3] -= vstep;
+          presenter.animateToTrackballPosition(my_pos);
+          break;
+
+        case "move_right":
+          var gr1 = Math.PI * my_pos[0] / 180;
+          my_pos[2] -= hstep * Math.cos(gr1);
+          my_pos[4] += hstep * Math.sin(gr1);
+          presenter.animateToTrackballPosition(my_pos);
+          break;
+
+        case "move_left":
+          var gr2 = Math.PI * my_pos[0] / 180;
+          my_pos[2] += hstep * Math.cos(gr2);
+          my_pos[4] -= hstep * Math.sin(gr2);
+          presenter.animateToTrackballPosition(my_pos);
+          break;
+      }
+    }
+
+    function showLoading(message) {
+      var overlay = document.getElementById("loadingOverlay");
+      var text = document.getElementById("loadingText");
+      if (text && message) text.textContent = message;
+      if (overlay) overlay.style.display = "flex";
+    }
+
+    function hideLoading() {
+      var overlay = document.getElementById("loadingOverlay");
+      if (overlay) overlay.style.display = "none";
+    }
+
+    function hookMovePad() {
+      function bind(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+
+        el.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          actionsToolbar(id);
+        });
+      }
+
+      bind("move_up");
+      bind("move_down");
+    }
+
+    function openInfoTab(tabName) {
+      var tabs = document.querySelectorAll(".tab-button");
+      var contents = document.querySelectorAll(".tab-content");
+
+      tabs.forEach(function (tab) {
+        tab.classList.remove("active");
+      });
+
+      contents.forEach(function (content) {
+        content.classList.remove("active");
+      });
+
+      if (tabName === "poem") {
+        document.querySelector(".tab-button:nth-child(2)").classList.add("active");
+        document.getElementById("poem-content").classList.add("active");
+      } else {
+        document.querySelector(".tab-button:nth-child(1)").classList.add("active");
+        document.getElementById("panels-content").classList.add("active");
+      }
+    }
+
+    function setActiveDirection(direction) {
+      var directionButtons = document.querySelectorAll(".direction-card");
+
+      directionButtons.forEach(function (button) {
+        button.classList.remove("active");
+      });
+
+      var activeButton = document.querySelector('[data-direction="' + direction + '"]');
+
+      if (activeButton) {
+        activeButton.classList.add("active");
+      }
+
+      faceDirection(direction);
+    }
+
+    function setActivePanelItem(id) {
+      clearActivePanelItem();
+
+      var activeItem = document.querySelector('[data-panel-id="' + id + '"]');
+
+      if (activeItem) {
+        activeItem.classList.add("active");
+      }
+    }
+
+    $(document).ready(function () {
+      showLoading("Loading model...");
+      init3dhop();
+      setup3dhop();
+      hookMovePad();
+
+      setTimeout(function () {
+        hideLoading();
+        applyUrlState();
+      }, 1800);
     });
 
-    presenter.enableLightTrackball(true);
-    presenter.resetTrackball();
-  }
+    window.addEventListener("resize", function () {
+      if (presenter) presenter.repaint();
+    });
+  </script>
+</main>
 
-  function actionsToolbar(action) {
-    if(action == 'home') presenter.resetTrackball();
-    else if(action == 'zoomin') presenter.zoomIn();
-    else if(action == 'zoomout') presenter.zoomOut();
-    else if(action == 'light') { presenter.enableLightTrackball(!presenter.isLightTrackballEnabled()); }
-    else if(action == 'screenshot') presenter.saveScreenshot();
-    else if(action == 'full') presenter.fullscreen();
-  }
-
-  $(document).ready(function(){
-    init3dhop();
-    setup3dhop();
-  });
-</script>
-<div class="footer">
-    <p>&copy; 2025 Visionary Cross Project. All Rights Reserved.</p>
+  <div class="footer">
+    <p>&copy; 2026 Visionary Cross Project. All Rights Reserved.</p>
     <nav>
-        <a href="../frontmatter/history.html">Us</a> |
-        <a href="../backmattercontact.html">Contact</a> |
-        <a href="privacy.html">Privacy Policy</a>
+      <a href="../frontmatter/history.html">About</a> |
+      <a href="../backmatter/contact.html">Contact</a> |
+      <a href="../frontmatter/home.html">Home</a>
     </nav>
-</div>
+  </div>
 
 </body>
 </html>

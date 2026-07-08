@@ -1,379 +1,1371 @@
-.header {
-    position: relative;
-    text-align: center;
+/* =========================================================
+   MAIN.CSS — Visionary Cross Project
+   ========================================================= */
+
+/* ---------- Font system ---------- */
+:root {
+  --font-title: "Cormorant Garamond", serif;
+  --font-body: "Montserrat", sans-serif;
 }
 
-.header img {
-    width: 100%;
-    height: auto;
+/* ---------- Reset / base ---------- */
+* {
+  box-sizing: border-box;
 }
 
-/* Gray overlay. */
-.header::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Adjust the alpha value for the desired opacity */
-    z-index: 1;
-    pointer-events: none;
-
-}
-
-.header .header-text {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 75px;
-    font-family: 'Times New Roman', serif;
-    color: white; /* Adjust color based on visibility over the image */
-    text-align: center;
-    white-space: nowrap;
-    z-index: 2;
-}
-
-/* Completely hide checkbox */
-.menu-toggle {
-  display: none;
-}
-
-/* Make header overlay clickable */
-.header::before {
-  pointer-events: none;
-}
-
-/* Hamburger icon style */
-.hamburger-icon {
-  font-size: 30px;
-  color: white;
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 0.5rem;
-  border-radius: 5px;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 1001;
-}
-
-/* Dropdown menu styling */
-.hamburger-menu {
-  display: none;
-  position: absolute;
-  top: 3.5rem;
-  left: 1rem;
-  background-color: black;
-  padding: 1rem;
-  border-radius: 8px;
-  z-index: 1000;
-  width: 250px;
-}
-
-/* Show menu when checkbox is checked */
-.menu-toggle:checked + .hamburger-icon + .hamburger-menu {
-  display: block;
-}
-
-/* Link styling */
-.hamburger-menu a {
-  display: block;
-  color: white;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  margin-bottom: 0.5rem;
-  border: 1px solid white;
-  border-radius: 5px;
-  font-family: 'Times New Roman', serif;
-  background-color: black;
-}
-
-.hamburger-menu a:hover {
-  background-color: white;
-  color: black;
-}
-
-/* Hide the submenu checkbox */
-.submenu-toggle {
-  display: none !important;
-}
-
-/* Style the "Chapters" toggle label */
-.submenu-label {
-  display: block;
-  color: white;
-  background-color: black;
-  padding: 0.5rem 1rem;
-  border: 1px solid white;
-  border-radius: 5px;
-  font-family: 'Times New Roman', serif;
-  cursor: pointer;
-  margin-bottom: 0.3rem;
-  position: relative;
-}
-
-/* Add arrow after label */
-.submenu-label::after {
-  content: " ▾";
-  float: right;
-}
-
-/* Change arrow when submenu is open */
-.submenu-toggle:checked + .submenu-label::after {
-  content: " ▴";
-}
-
-/* Submenu is hidden by default */
-.submenu {
-  display: none;
-  margin-left: 1rem;
-}
-
-/* Show submenu when toggle is checked */
-.submenu-toggle:checked + .submenu-label + .submenu {
-  display: block;
-}
-
-/* Submenu link styling */
-.submenu a {
-  display: block;
-  padding: 0.5rem 1rem;
-  margin-bottom: 0.3rem;
-  background-color: black;
-  color: white;
-  border: 1px solid white;
-  border-radius: 5px;
-  font-family: 'Times New Roman', serif;
-  text-decoration: none;
-}
-
-.submenu a:hover {
-  background-color: white;
-  color: black;
+html,
+body {
+  height: auto;
+  min-height: 100%;
 }
 
 body {
-    font-family: 'Times New Roman', serif;
-    border: 5px solid black; /* Adds a black border around the whole webpage. Makes it look very nice in the mobile form */
-    margin: 0; /* Removes any default margin around the body */
-    padding: 0; /* Removes any default padding around the body */
-    box-sizing: border-box;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background: #efefef;
+  line-height: 1.6;
 }
 
-/* Center all h1 elements. Used for big titles at top of page only*/
 h1 {
-    text-align: center;
+  font-family: var(--font-title);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
 }
+
+h2 {
+  font-family: var(--font-title);
+}
+
+h3 {
+  font-family: var(--font-title);
+}
+
+/* =========================================================
+   STANDARD HEADER
+   ========================================================= */
+
+.header {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  overflow: hidden;
+  background: #000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.header a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  color: inherit;
+  text-decoration: none;
+  z-index: 2;
+}
+
+.header a:hover .header-text {
+  color: #ddd;
+}
+
+.header img {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+
+  z-index: 0;
+
+  /* zooms in slightly to hide the black edges in header.jpg */
+  transform: scale(1.18);
+  transform-origin: center center;
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.header .header-text {
+  position: relative;
+  z-index: 3;
+
+  color: #fff;
+  text-align: center;
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1;
+
+  padding: 0 1rem;
+}
+
+/* =========================================================
+   SHARED HAMBURGER MENU
+   ========================================================= */
+
+.menu-toggle,
+.submenu-toggle {
+  display: none;
+}
+
+.menu-link {
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 1.4rem 2.4rem;
+  cursor: pointer;
+}
+
+.landing-menu {
+  display: none;
+  background: #000;
+  padding: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+
+.menu-toggle:checked ~ .landing-menu {
+  display: block;
+}
+
+.landing-menu section {
+  max-width: 900px;
+  margin: 0 auto 1rem;
+}
+
+.landing-menu .submenu-label {
+  display: block;
+  color: #fff;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  border-radius: 0;
+  padding: 1rem 0;
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.landing-menu .submenu-label::after {
+  content: " +";
+  float: right;
+}
+
+.landing-menu .submenu-toggle:checked + .submenu-label::after {
+  content: " −";
+}
+
+.landing-menu .submenu {
+  display: none;
+  padding: 1rem 0 1rem 2rem;
+}
+
+.landing-menu .submenu-toggle:checked + .submenu-label + .submenu {
+  display: block;
+}
+
+.landing-menu .submenu a {
+  display: block;
+  color: #ccc;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.45rem 0;
+}
+
+.landing-menu .submenu a:hover {
+  color: #fff;
+}
+
+/* =========================================================
+   LANDING PAGE — Louvre-inspired layout
+   ========================================================= */
+
+.landing-page {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-body);
+}
+
+.landing-header {
+  background: #000;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+
+.landing-title {
+  text-align: center;
+  font-family: var(--font-title);
+  font-size: 3.5rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 2rem 1rem 1.5rem;
+}
+
+.landing-title-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.landing-title-link:hover .landing-title {
+  color: #ccc;
+}
+
+.landing-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.18);
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+  background: #000;
+}
+
+.landing-nav a,
+.menu-link {
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 1.4rem 2.4rem;
+  cursor: pointer;
+}
+
+.landing-nav a:hover,
+.menu-link:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.landing-hero {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.landing-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1;
+}
+
+.landing-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  max-width: 800px;
+  width: 90%;
+  text-align: center;
+  color: white;
+}
+
+.landing-kicker {
+  font-family: var(--font-body);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: #ddd;
+  margin-bottom: 1rem;
+}
+
+.landing-overlay h1 {
+  font-family: var(--font-title);
+  font-size: 4.8rem;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+
+.landing-description {
+  color: #ddd;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.hero-button {
+  display: inline-block;
+  color: #000;
+  background: #fff;
+  text-decoration: none;
+  padding: 0.85rem 2.2rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-button:hover {
+  background: #000;
+  color: #fff;
+  outline: 1px solid #fff;
+}
+
+/* =========================================================
+   GENERAL PAGE CONTENT
+   ========================================================= */
 
 .content {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem 2rem;
-  box-sizing: border-box;
+  padding: 2rem;
 }
 
-.3dhop-container {
-    position: relative; /* Ensures it positions correctly */
-    width: 100%; /* Consider making this smaller*/
-    height: 1000px; /* Adjust this height as needed */
-    background-color: #f0f0f0; /* Optional: Background color for better contrast */
-    box-sizing: border-box; /* Ensure padding and borders are included in height */
-}
+/* ---------- Two-column layout ---------- */
 
-/* For the Toc in the backmatter section. Inspried from the Caedmon's hymn toc. Some of that is unnecessary. Clean it up*/
-.table-of-contents {
-    font-family: 'Times New Roman', serif; /* Classic font style */
-    line-height: 1.6; /* Adjust spacing */
-    margin: 20px;
-}
-
-.table-of-contents h1 {
-    font-size: 2rem; /* Larger font for title */
-    text-align: center; /* Center the title */
-    margin-bottom: 10px;
-}
-
-.table-of-contents h2 {
-    font-size: 1.5rem; /* Slightly smaller subtitle */
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.table-of-contents ul {
-    list-style-type: disc; /* Standard bullet points */
-    margin-left: 20px; /* Indent for hierarchy */
-    padding-left: 10px;
-}
-
-.table-of-contents ul ul {
-    list-style-type: circle; /* Subsection bullets */
-    margin-left: 20px;
-}
-
-.table-of-contents ul ul ul {
-    list-style-type: square; /* Nested subsection bullets */
-    margin-left: 20px;
-}
-
-.table-of-contents a {
-    text-decoration: none; /* Remove underline */
-}
-
-.table-of-contents a:hover {
-    text-decoration: underline; /* Add underline on hover */
-    color: red; /* Change color on hover */
-}
-
-/* Container for left and right columns */
 .container {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: flex-start; /* Aligns left and right columns to the top */
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  align-items: stretch;
+
+  width: min(1200px, calc(100% - 6rem));
+  margin: 3rem auto;
+
+  background: #f8f8f8;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* Left column */
 .left {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Aligns left navbar to the start */
-    justify-content: flex-start;
-    width: 50%; /* Take 50% of the page */
-    background-color: #f5f5f5; /* I thought this was a great idea and I will die on this hill*/
-    padding: 20px 20px 0 20px;
-    box-sizing: border-box;
-    min-height: 400px; /* Thise was probably mainly put in for the 1.0 version and might be unnecessary now */
+  flex: 1;
+  width: 50%;
+  background: #d8d8d8;
+  padding: 0;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
 }
+
+.right {
+  flex: 1;
+  width: 50%;
+  background: #f8f8f8;
+  padding: 4rem 5rem;
+
+  display: flex;
+  align-items: center;
+  text-align: justify;
+}
+
+/* ---------- Shared image rules ---------- */
 
 .left img {
-    width: 100%;
-    height: auto;
-    margin-top: 0;
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
 }
+
+/* ---------- Hover image helper ---------- */
 
 .image-container {
-        position: relative;
-        display: inline-block;
+  position: relative;
+
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-/* Inspired from the Balsignanomodugno project http://www.casaledibalsignano.it */
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .hover-image {
-        transition: filter 0.3s ease; /* Smooth grayscale transition */
+  transition: filter 0.3s ease;
 }
 
-.hover-image:hover {
-        filter: grayscale(100%); /* Apply grayscale effect */
+.image-container:hover .hover-image {
+  filter: grayscale(100%);
 }
 
 .hover-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-family: 'Times New Roman', serif;
-        font-size: 50px;
-        font-weight: bold;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none; /* why */
-        text-align: center;
-        width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 100%;
+  transform: translate(-50%, -50%);
+
+  color: white;
+  font-family: var(--font-title);
+  font-size: 50px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  text-align: center;
 }
 
 .image-container:hover .hover-text {
-        opacity: 1; /* Show text on hover */
+  opacity: 1;
 }
 
-/* Right column */
-.right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Aligns right navbar to the start */
-    justify-content: flex-start;
-    width: 50%; /* Take 50% of the page */
-    padding: 20px; /* Adjust padding to align with navbar */
-    box-sizing: border-box;
+/* =========================================================
+   ARTICLE / TEXT-ONLY PAGE
+   Used for long scholarly text pages without left column
+   ========================================================= */
+
+.article-page {
+  width: min(1200px, calc(100% - 6rem));
+  margin: 3rem auto;
+  padding: 4rem 5rem;
+
+  background: #f8f8f8;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  text-align: justify;
 }
+
+.article-page h1 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.article-page h2 {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.article-page h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.article-page p {
+  margin: 0 0 1rem;
+}
+
+.article-page sup a {
+  color: #8d552b;
+  text-decoration: none;
+}
+
+.article-page sup a:hover {
+  text-decoration: underline;
+}
+
+.article-page .footnotes {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
+
+  font-size: 0.92rem;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.article-page .footnotes p,
+.article-page .footnotes li {
+  margin-bottom: 0.85rem;
+}
+
+.article-page .footnotes ol {
+  padding-left: 1.5rem;
+}
+
+/* =========================================================
+   LOADING OVERLAY
+   ========================================================= */
+
+#viewerWrap {
+  position: relative;
+}
+
+#loadingOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.loading-box {
+  text-align: center;
+  font-family: var(--font-body);
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px auto;
+  border: 5px solid #d9d9d9;
+  border-top: 5px solid #4a6fa5;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+#loadingText {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   3DHOP VIEWER + SIDE PANEL
+   ========================================================= */
+
+main {
+  display: block;
+}
+
+.viewer-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  align-items: stretch;
+
+  width: min(1500px, calc(100% - 2rem));
+  margin: 2rem auto;
+  padding: 0;
+
+  background: #f8f8f8;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+#viewerWrap {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 78vh;
+  min-height: 600px;
+  position: relative;
+  background: #d8d8d8;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+#3dhop.tdhop {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #ddd;
+}
+
+#draw-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  background-image: url("3dhop/skins/backgrounds/light.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Make the 3DHOP toolbar float over the canvas */
+#toolbar {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 50;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* Stop toolbar icons from becoming weirdly large */
+#toolbar img {
+  width: 44px;
+  height: 44px;
+  max-width: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Fullscreen button */
+#fullscreen-btn {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  padding: 6px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+#fullscreen-btn img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  max-width: none;
+}
+
+#infoPanel {
+  flex: 0 0 390px;
+  max-width: 480px;
+  height: 78vh;
+  min-height: 600px;
+  overflow-y: auto;
+
+  padding: 0;
+  background: #f8f8f8;
+  color: #111;
+  font-family: var(--font-body);
+}
+
+/* ---------- Sidebar tabs ---------- */
+
+.side-tabs {
+  display: flex;
+  background: #f8f8f8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  background: #f8f8f8;
+  color: #111;
+
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.tab-button:last-child {
+  border-right: none;
+}
+
+.tab-button:hover,
+.tab-button.active {
+  background: #111;
+  color: #fff;
+}
+
+/* ---------- Tab content ---------- */
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* ---------- Sidebar text ---------- */
+
+.panel-section {
+  padding: 1.4rem;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.panel-section h2 {
+  margin: 0 0 0.75rem;
+  color: #111;
+
+  font-family: var(--font-title);
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.panel-section h3 {
+  margin: 0 0 0.9rem;
+  color: #111;
+
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.panel-intro {
+  margin: 0 0 1rem;
+  color: #555;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ---------- Direction buttons ---------- */
+
+.direction-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.direction-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 70px;
+  padding: 0.55rem 0.35rem;
+
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 10px;
+
+  background: #fff;
+  color: #111;
+
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.direction-card:hover {
+  border-color: #b87945;
+  color: #8d552b;
+}
+
+.direction-card.active {
+  background: #b87945;
+  border-color: #b87945;
+  color: #fff;
+}
+
+/* ---------- Panel list ---------- */
+
+.panel-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.panel-item {
+  margin: 0;
+  padding: 0.85rem 0.9rem;
+
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-left: 4px solid transparent;
+  border-radius: 10px;
+
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.panel-item:hover {
+  border-color: rgba(184, 121, 69, 0.55);
+}
+
+.panel-item.active {
+  border-left-color: #b87945;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.panel-name {
+  display: block;
+  width: 100%;
+
+  margin: 0 0 0.25rem;
+  padding: 0;
+
+  border: none;
+  background: transparent;
+  color: #111;
+
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.panel-name:hover {
+  color: #8d552b;
+}
+
+.panel-item p {
+  margin: 0;
+  color: #555;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.panel-item a {
+  color: #8d552b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.panel-item a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   MOVE PAD
+   ========================================================= */
+
+#movePad {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  z-index: 40;
+  width: auto;
+  height: auto;
+  background: rgba(0,0,0,0.35);
+  border-radius: 12px;
+  padding: 10px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+#mvc_table {
+  width: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: center;
+}
+
+#mvc_table td {
+  padding: 6px;
+  line-height: 0;
+}
+
+.move_ {
+  width: 44px;
+  height: 44px;
+  display: block;
+  cursor: pointer;
+  object-fit: contain;
+  border-radius: 8px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+  transform: rotate(var(--r, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.move_:hover {
+  filter: brightness(1.15) drop-shadow(0 3px 10px rgba(0,0,0,0.35));
+}
+
+.move_:active {
+  transform: translateY(1px) rotate(var(--r, 0deg));
+}
+
+/* rotations — assuming Arrow.png points RIGHT by default */
+.up {
+  --r: -90deg;
+}
+
+.down {
+  --r: 90deg;
+}
+
+/* remove TOP button entirely */
+#Top {
+  display: none !important;
+}
+
+/* Panel detail page navigation */
+
+.panel-nav-top {
+  margin-bottom: 1.5rem;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent, #b9915d);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.back-link:hover {
+  border-bottom-color: currentColor;
+}
+
+.panel-nav-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--accent-pale, #efe3d1);
+}
+
+.panel-nav-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--accent-pale, #efe3d1);
+  background: var(--bg-soft, #fbfaf7);
+  color: var(--text, #111111);
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.panel-nav-card:hover {
+  background: var(--accent-pale, #efe3d1);
+  border-color: var(--accent, #b9915d);
+  transform: translateY(-2px);
+}
+
+.panel-nav-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted, #555555);
+}
+
+.panel-nav-title {
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+
+.next-link {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.panel-nav-branching {
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+.panel-next-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.panel-next-heading {
+  display: block;
+  margin-bottom: 0.1rem;
+  text-align: right;
+}
+
+.panel-next-options .panel-nav-card {
+  width: 100%;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 .footer {
-    width: 100%;
-    background-color: Gray; /* Consider changing this colout */
-    color: #fff;
-    text-align: center; /* Center text horizontally */
-    padding: 20px 0; /* Adjust padding for spacing */
-    position: relative; /* Adjusts position */
-    bottom: 0;
-    display: flex; /* Use flexbox for vertical centering */
-    flex-direction: column; /* Stack content vertically */
-    align-items: center; /* Center content horizontally */
-    justify-content: center; /* Center content vertically if needed */
-    box-sizing: border-box; /* Prevent overflow issues */
+  height: 130px;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer nav a {
-    color: #ccc;
-    text-decoration: none;
-    margin: 0 10px;
+  color: #ccc;
+  text-decoration: none;
+  margin: 0 10px;
 }
 
 .footer nav a:hover {
-    color: #fff;
+  color: #fff;
 }
 
-/* I don't think it needs to say media every time. Combine them all */
-/* Mobile layout: Stack columns on top of each other */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column; /* Stack on top of each other */
-    }
+/* =========================================================
+   TABLE OF CONTENTS PAGE
+   Styled card + nested list for backmatter/table.html
+   ========================================================= */
+
+.table-of-contents {
+  width: min(1000px, calc(100% - 6rem));
+  margin: 3rem auto;
+  padding: 3rem 4rem;
+
+  background: #f8f8f8;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.table-of-contents h1 {
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+}
+
+.table-of-contents > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: grid;
+  gap: 1.75rem;
+}
+
+/* top-level section labels (Front matter, Ruthwell Cross, …) */
+.table-of-contents > ul > li {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: #111;
+
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.table-of-contents ul ul {
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+
+  display: grid;
+  gap: 0.4rem;
+}
+
+.table-of-contents ul ul li {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+.table-of-contents a {
+  color: #444;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.table-of-contents a:hover {
+  color: #8d552b;
+  border-bottom-color: #8d552b;
+}
+
+/* =========================================================
+   GLOSSARY PAGE
+   Styled card + definition list for backmatter/glossary.html
+   ========================================================= */
+
+.glossary {
+  width: min(900px, calc(100% - 6rem));
+  margin: 3rem auto;
+  padding: 3rem 4rem;
+
+  background: #f8f8f8;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.glossary h1 {
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+}
+
+.glossary dl {
+  margin: 0;
+}
+
+.glossary dt {
+  margin-top: 1.75rem;
+
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #111;
+}
+
+.glossary dt:first-of-type {
+  margin-top: 0;
+}
+
+.glossary dd {
+  margin: 0.35rem 0 0;
+  padding: 0 0 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  color: #444;
+  font-size: 0.97rem;
+}
+
+.glossary dl dd:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* =========================================================
+   RESEARCH / PUBLICATIONS PAGE
+   Bibliography listing for backmatter/research.html
+   (uses the .article-page card as its outer wrapper)
+   ========================================================= */
+
+.publication-intro {
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.pub-group {
+  margin-top: 2.5rem;
+}
+
+.pub-group > h2 {
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.publication-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: grid;
+  gap: 1.25rem;
+}
+
+.publication {
+  padding: 1.4rem 1.6rem;
+
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-left: 4px solid #b87945;
+  border-radius: 10px;
+
+  text-align: left;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.publication:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.pub-title {
+  margin: 0 0 0.4rem;
+
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  color: #111;
+}
+
+.pub-authors {
+  margin: 0 0 0.3rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.pub-meta {
+  margin: 0 0 0.6rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #666;
+}
+
+.pub-links {
+  margin: 0;
+}
+
+.pub-links a {
+  display: inline-block;
+  margin-right: 1.25rem;
+
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8d552b;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.pub-links a:hover {
+  border-bottom-color: #8d552b;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .viewer-layout {
+    flex-direction: column;
+  }
+
+  #viewerWrap {
+    height: 60vh;
+    min-height: 360px;
+  }
+
+  #infoPanel {
+    height: auto;
+    min-height: 0;
+    flex: 1 1 auto;
+  }
+}
 
 @media (max-width: 768px) {
-    .header img {
-        max-height: 200px; /* Reduce max-height for mobile */
-    }
+  .container {
+    flex-direction: column;
+    width: calc(100% - 2rem);
+    margin: 2rem auto;
+  }
 
-@media (max-width: 768px) {
-    #draw-canvas {
-        height: 400px; /* Reduced height for smaller screens */
-    }
+  .left {
+    display: none;
+  }
 
-    .right,
-    .left {
-        width: 100%;
-        height: auto;
-    }
-    
-/* Mobile-specific styling */
-@media (max-width: 768px) {
-    .header .header-text {
-        font-size: 24px; /* Further scale down font size on smaller screens */
-        top: 5px; /* Adjust top positioning for mobile */
-        white-space: nowrap; /* Allow text wrapping */
-        padding: 0 10px; /* Add padding to prevent edge overflow */
-    }
+  .right {
+    width: 100%;
+    height: auto;
+  }
 
-@media only screen and (max-width: 992px) {
- .checkbtn {
- display: block;
- font-size: 5rem;
- position: absolute;
- top: 30px;
- left: 40px;
- }
-    
-.nav-mobile {
- top: 160px;
- width: 100%;
- }
-    
-.nav-mobile a {
- font-size: 2rem;
- padding: 2rem 3rem;
- }
-    
+  .article-page {
+    width: calc(100% - 2rem);
+    margin: 2rem auto;
+    padding: 2rem 1.25rem;
+    text-align: left;
+  }
+
+  .table-of-contents,
+  .glossary {
+    width: calc(100% - 2rem);
+    margin: 2rem auto;
+    padding: 2rem 1.25rem;
+  }
+
+  .table-of-contents > ul > li {
+    font-size: 1.3rem;
+  }
+
+  .header {
+    height: 75px;
+  }
+
+  .header img {
+    transform: scale(1.25);
+  }
+
+  .header .header-text {
+    font-size: 20px;
+    padding: 0 10px;
+    white-space: nowrap;
+    letter-spacing: 0.14em;
+  }
+
+  .landing-title {
+    font-size: 1.7rem;
+    letter-spacing: 0.1em;
+    padding: 1.7rem 3.5rem 1rem;
+  }
+
+  .landing-nav {
+    flex-wrap: wrap;
+  }
+
+  .landing-nav a,
+  .menu-link {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .landing-title-main {
+    font-size: 2.7rem;
+  }
+  .panel-nav-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .next-link {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+    .panel-nav-branching {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-next-heading {
+    text-align: left;
+  }
 }
