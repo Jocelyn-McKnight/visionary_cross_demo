@@ -8,6 +8,56 @@
   <link rel="stylesheet" href="../../../main.css" />
   <link rel="stylesheet" href="../../../3dhop/stylesheet/3dhop.css" />
   <link rel="icon" type="image/x-icon" href="../../../img/cross.ico" />
+
+  <style>
+    /* Hover affordance: "click to explore" prompt over the hotspot */
+    #explore-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      display: none;
+      z-index: 150;
+      background: rgba(20, 20, 25, 0.82);
+      color: #fff;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* Close button for the fullscreen detail view (mode 2) */
+    #detail-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: none;
+      z-index: 10001;
+      background: rgba(20, 20, 25, 0.82);
+      color: #fff;
+      border: none;
+      padding: 9px 15px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    #detail-close:hover { background: rgba(20, 20, 25, 0.95); }
+
+    /* Detail mode: blow the viewer up to fill the whole viewport */
+    body.detail-mode { overflow: hidden; }
+    body.detail-mode #viewerWrap {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      margin: 0;
+      width: 100vw !important;
+      height: 100vh !important;
+      background: #0e0e12;
+    }
+    body.detail-mode #debug-pose-panel { display: none; }
+  </style>
  
   <script src="../../../3dhop/js/spidergl.js"></script>
   <script src="../../../3dhop/js/jquery.js"></script>
@@ -130,6 +180,10 @@
             <div id="poseLog" style="display: none; white-space: pre; user-select: all; background: #111; padding: 6px 8px; margin-top: 6px; max-width: 380px; border-radius: 3px;"></div>
           </div>
 
+          <div id="explore-hint">Click the panel to explore it in detail</div>
+
+          <button id="detail-close" type="button" onclick="closeDetail()">✕ Close detail view</button>
+
           <canvas id="draw-canvas"></canvas>
         </div>
       </div>
@@ -183,7 +237,20 @@
       // Full trackball pose: [phi, theta, panX, _, panY, distance]
       // Click "Log Current Pose" to capture new values, then paste them here.
       var PANEL_POSE = [0.000, 0.000, 0.001, 0.927, 0.048, 0.146];
- 
+
+      // --- Detail mode (mode 2) ---------------------------------------
+      // Model shown in the fullscreen detail view. Defaults to the same
+      // cut used on the page; point this at a denser export later.
+      var PANEL_DETAIL_MODEL = "../assets/models/john_eagle_cut.nxz";
+      // Camera pose when detail mode opens (a closer zoom than PANEL_POSE).
+      var DETAIL_POSE = [0.000, 0.000, 0.001, 0.927, 0.048, 0.090];
+      var detailOpen = false;
+
+      // The hotspot stays visible so 3DHOP can pick it (an invisible spot
+      // is not pickable); hover just brightens it from REST to HOVER alpha.
+      var REST_ALPHA = 0.35;
+      var HOVER_ALPHA = 0.70;
+
       function setup3dhop() {
         presenter = new Presenter("draw-canvas");
  
@@ -193,18 +260,26 @@
  
             john_eagle: { url: "../assets/models/john_eagle_cut.nxz" },
 
+            john_eagle_detail: { url: PANEL_DETAIL_MODEL },
+
           },
- 
+
           modelInstances: {
             ruthwell: {
               mesh: "Ruthwell",
               color: [0.8, 0.7, 0.75],
               visible: true
+            },
+
+            john_eagle_detail: {
+              mesh: "john_eagle_detail",
+              color: [0.82, 0.76, 0.72],
+              visible: false
             }
           },
  
           spots: {
-            john_eagle: { mesh: "john_eagle", visible: false, alpha: 0.85, color: [0.0, 0.25, 1.0] }
+            john_eagle: { mesh: "john_eagle", visible: true, alpha: 0.35, color: [0.0, 0.35, 1.0] }
           },
  
           trackball: {
@@ -229,6 +304,7 @@
         presenter.enableOnHover(true);
         presenter._onEnterSpot = onEnterSpot;
         presenter._onLeaveSpot = onLeaveSpot;
+        presenter._onPickedSpot = onPickedSpot;
 
         presenter.resetTrackball();
 
@@ -243,17 +319,103 @@
         presenter.repaint();
       }
 
-      // Hover handlers — show the spot only while the mouse is directly over its cut.
+      // Hover handlers — brighten the (always-visible) hotspot and show the
+      // "click to explore" hint while the mouse is over this panel's cut.
       function onEnterSpot(id) {
-        if (!presenter || id !== PANEL_ID) return;
-        presenter.setSpotVisibilityByName(PANEL_ID, true, false);
+        if (!presenter || detailOpen || id !== PANEL_ID) return;
+        setSpotAlpha(HOVER_ALPHA);
+        setHint(true);
+        setCanvasCursor("pointer");
         presenter.repaint();
       }
 
       function onLeaveSpot(id) {
         if (!presenter || id !== PANEL_ID) return;
-        presenter.setSpotVisibilityByName(PANEL_ID, false, false);
+        setSpotAlpha(REST_ALPHA);
+        setHint(false);
+        setCanvasCursor("default");
         presenter.repaint();
+      }
+
+      // Click the hotspot → open the fullscreen detail view (mode 2).
+      function onPickedSpot(id) {
+        if (id === PANEL_ID) openDetail();
+      }
+
+      // Isolate this panel's cut, fill the viewport, and zoom in.
+      function openDetail() {
+        if (!presenter || detailOpen) return;
+        detailOpen = true;
+
+        presenter.setInstanceVisibilityByName("ruthwell", false, false);
+        presenter.setSpotVisibilityByName(PANEL_ID, false, false);
+        presenter.setInstanceVisibilityByName("john_eagle_detail", true, false);
+
+        document.body.classList.add("detail-mode");
+        setHint(false);
+        setCanvasCursor("default");
+        show("detail-close", true);
+
+        resizeViewer();
+        presenter.animateToTrackballPosition(DETAIL_POSE.slice());
+        presenter.repaint();
+      }
+
+      // Return to the in-page overview (mode 1).
+      function closeDetail() {
+        if (!presenter || !detailOpen) return;
+        detailOpen = false;
+
+        presenter.setInstanceVisibilityByName("john_eagle_detail", false, false);
+        presenter.setInstanceVisibilityByName("ruthwell", true, false);
+        presenter.setSpotVisibilityByName(PANEL_ID, true, false);
+        setSpotAlpha(REST_ALPHA);
+
+        document.body.classList.remove("detail-mode");
+        show("detail-close", false);
+
+        resizeViewer();
+        presenter.animateToTrackballPosition(PANEL_POSE.slice());
+        presenter.repaint();
+      }
+
+      // Resize the WebGL canvas to its container (or the full window in
+      // detail mode) so the render stays sharp when the viewer grows.
+      function resizeViewer() {
+        var wrap = document.getElementById("3dhop");
+        var w, h;
+        if (document.body.classList.contains("detail-mode")) {
+          w = window.innerWidth;
+          h = window.innerHeight;
+        } else {
+          w = wrap.parentNode.clientWidth;
+          h = wrap.parentNode.clientHeight;
+        }
+        var canvas = document.getElementById("draw-canvas");
+        canvas.setAttribute("width", w);
+        canvas.setAttribute("height", h);
+        wrap.style.width = w + "px";
+        wrap.style.height = h + "px";
+        if (presenter && presenter.ui) presenter.ui.postDrawEvent();
+      }
+
+      // Small DOM helpers.
+      function setHint(on) {
+        var hint = document.getElementById("explore-hint");
+        if (hint) hint.style.display = on ? "block" : "none";
+      }
+      function setCanvasCursor(cursor) {
+        var canvas = document.getElementById("draw-canvas");
+        if (canvas) canvas.style.cursor = cursor;
+      }
+      // 3DHOP exposes no public spot-alpha setter, so nudge the scene directly.
+      function setSpotAlpha(a) {
+        var spots = presenter && presenter._scene && presenter._scene.spots;
+        if (spots && spots[PANEL_ID]) spots[PANEL_ID].alpha = a;
+      }
+      function show(id, on) {
+        var el = document.getElementById(id);
+        if (el) el.style.display = on ? "block" : "none";
       }
 
       // Debug helper — log the current camera pose so you can tune PANEL_POSE.
@@ -322,7 +484,13 @@
       });
  
       window.addEventListener("resize", function () {
-        if (presenter) presenter.repaint();
+        if (!presenter) return;
+        if (detailOpen) resizeViewer();
+        else presenter.repaint();
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && detailOpen) closeDetail();
       });
     </script>
   </main>
